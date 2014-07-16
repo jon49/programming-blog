@@ -1,0 +1,25 @@
+{
+  "name": "jon.prescottprogrammers.com",
+  "version": "0.0.0",
+  "description": "Coding Blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Nyman",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "gulp": "~3.8.6"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.6",
+    "path": "~0.4.9",
+    "gulp-stylus": "~1.0.5",
+    "gulp-pandoc": "~0.2.0",
+    "gulp-concat": "~2.3.3",
+    "gulp-changed": "~0.4.0",
+    "del": "~0.1.1",
+    "gulp-rename": "~1.2.0",
+    "gulp-wrapper": "~0.1.42"
+  }
+}
