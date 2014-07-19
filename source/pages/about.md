@@ -1,9 +1,6 @@
 ---
-description: "Description of programming blog."
-title: About
+description: Description of programming blog.
 ...
-
-### About
 
 I'm a self-taught programmer looking for some work in Arizona or any
 telecommuting job would be fine too!

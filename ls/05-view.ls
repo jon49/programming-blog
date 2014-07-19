@@ -3,8 +3,7 @@ link = -> m 'a', (class: it.class, href: it.url, title: it.title, config: if (it
 
 #link template for header/footer menu
 links = (items) ->
-   linkList = (items or []).map link 
-   m 'ul' linkList
+   m 'ul' ((items or []).map link) 
 
 head = (head) ->
    link = -> m "link" (rel: "stylesheet", href: it.url)
@@ -20,7 +19,7 @@ head = (head) ->
    )
 
 #header menu
-menu = -> m '.menu', [(links it)]
+menu = -> m '.menu', (links it)
 
 #header image
 header = -> 
@@ -31,7 +30,25 @@ header = ->
    ]
 
 #main article content
-content = -> [ m 'article.content', it.article ]
+content = -> m 'article.content', it.article
+
+#Infinite scroll of posts
+postList = (posts, state, type) ->
+   | type == "archive" =>
+      m "ul", posts.map -> 
+         m "li", it
+   | otherwise => ""
+   #   pageY = state.pageY
+   #   begin = pageY / 31 .|. 0
+   #   end = begin + (state.pageHeight / 31 .|. 0 + 2)
+   #   offset = pageY % 31
+   #   m ".post-list" [
+   #      m "ul", 
+   #      posts
+   #         .slice begin, end 
+   #         .map -> 
+   #            m "li" it.title
+   #   ]
 
 #footer menu e.g., social media, etc.
 footerMenu = -> m '#footer-menu.menu', [(links it)]
@@ -39,22 +56,20 @@ footerMenu = -> m '#footer-menu.menu', [(links it)]
 #footer, e.g., website copyright, tagline, etc.
 footer = -> m 'footer.footer', [(m 'p', it.text)]
 
-#put all content together
-mainContent = (mithHeader, mithContent, mithMenuFooter, mithFooter) ->
-   m '#main', ([mithHeader] ++ [mithContent, mithMenuFooter, mithFooter])
-
 #put all views together
 main = (ctrl) ->
    config = ctrl.config
-   m 'html', [
+   result = m 'html', [
       m 'head', (head config.head)
       m 'body', [
-         menu(config.menuItems)
-         mainContent(
+         menu config.menuItems
+         #put all content together
+         m "\#main" [
             header config.header
             content config.content
+            postList config.posts(), void, config.fileType
             footerMenu config.footerItems
             footer config.footer
-         )
+         ]
       ]
    ]

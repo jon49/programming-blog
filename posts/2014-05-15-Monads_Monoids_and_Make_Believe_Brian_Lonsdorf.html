@@ -1,8 +1,10 @@
-<!-- {"description":"", "title":"Notes on Monads, Monoids, and Make Believe", "subtitle":"with Brian Lonsdorf"} -->
+<!-- {
 
-<h3 id="working-with-objects">Working with Objects</h3>
-<h4 id="the-better-way">the better way</h4>
-<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> SSN = <span class="fu">Constructor</span>(<span class="kw">function</span>(number, current_user){
+"title":"Notes on Monads, Monoids, and Make Believe",
+"subtitle":"with Brian Lonsdorf",
+
+} -->
+<h3 id="working-with-objects">Working with Objects</h3><h4 id="the-better-way">the better way</h4><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> SSN = <span class="fu">Constructor</span>(<span class="kw">function</span>(number, current_user){
     <span class="kw">this</span>.<span class="fu">number</span> = number
     <span class="kw">this</span>.<span class="fu">user</span> = current_user
 })
@@ -18,10 +20,7 @@
 <span class="co">//=&gt; SSN(&#39;123456789&#39;, user)</span>
 
 <span class="ot">social</span>.<span class="fu">fmap</span>(<span class="kw">function</span>(number){<span class="kw">return</span> <span class="ot">number</span>.<span class="fu">reverse</span>()})
-<span class="co">//=&gt; SSN(&#39;1234-56-789&#39;, user)</span></code></pre>
-<h4 id="the-functor-way">the functor way</h4>
-<p>Note: <a href="https://github.com/DrBoolean/Functor/blob/master/functor.js">Functor function defined.</a></p>
-<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> AdminAccess = <span class="fu">Constructor</span>(<span class="kw">function</span>(val, current_user){
+<span class="co">//=&gt; SSN(&#39;1234-56-789&#39;, user)</span></code></pre><h4 id="the-functor-way">the functor way</h4><p>Note: <a href="https://github.com/DrBoolean/Functor/blob/master/functor.js">Functor function defined.</a></p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> AdminAccess = <span class="fu">Constructor</span>(<span class="kw">function</span>(val, current_user){
     <span class="kw">this</span>.<span class="fu">val</span> = val
     <span class="kw">this</span>.<span class="fu">user</span> = current_user
 })
@@ -37,10 +36,7 @@
 <span class="fu">fmap</span>(removeDashes, social)
 <span class="co">//=&gt; AdminAccess(&#39;123456789&#39;, current_user)</span>
 <span class="fu">fmap</span>(validNumber, social)
-<span class="co">//=&gt; AdminAccess(true, current_user)</span></code></pre>
-<p>He then goes into other useful patterns with monads. But I’ll revisit that later after I get a better handle on this!</p>
-<iframe width="560" height="315" src="//www.youtube.com/embed/ww2Z1URx-G0" frameborder="0" allowfullscreen></iframe>
-
+<span class="co">//=&gt; AdminAccess(true, current_user)</span></code></pre><p>He then goes into other useful patterns with monads. But I’ll revisit that later after I get a better handle on this!</p><iframe width="560" height="315" src="//www.youtube.com/embed/ww2Z1URx-G0" frameborder="0" allowfullscreen></iframe>
 <p class="post-meta pure-u-1">
 Posted May 15, 2014
  - 

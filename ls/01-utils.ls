@@ -1,38 +1,11 @@
-#underscore.js - _.isObject
-isObject = (obj) ->
-  type = typeof obj
-  type is 'function' or type is 'object' and !!obj
+replaceAt = (index, char, string) ->
+   | index < 0 =>
+      (string.slice 0, index) + char + (string.slice(index + 1))
+   | otherwise =>
+      (string.slice 0, index) + char + (string.slice(index + 1))
 
-#underscore.js - _.extend
-assign = (obj) ->
-  return obj if not isObject obj
-  source = void
-  prop = void
-  i = 1
-  length = &.length
-  while i < length
-    source = &[i]
-    for k, v of source
-      obj[k] = v
-    i++
-  obj
+isPattern = (regex, string) -> 
+   regex.test string
 
-dirname = (path) -> join path '..'
-
-joinPath = ->
-  parts = []
-  i = 0
-  l = &.length
-  while i < l
-    parts = parts.concat &[i].split '/'
-    i++
-  newParts = []
-  i = -1
-  l = parts.length
-  while i < l
-    i++
-    part = parts[i]
-    continue if not part or part is '.'
-    if part is '..' then newParts.pop! else newParts.push part
-  if parts.0 is '' then newParts.unshift ''
-  (newParts.join '/') or if newParts.length then '/' else '.'
+removeExtension = ->
+   it.slice 0, (it.lastIndexOf ".")

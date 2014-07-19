@@ -1,12 +1,14 @@
-<!-- {"description":"", "title":"", "subtitle":""} -->
+<!-- {
 
-<p>https://github.com/fschaefer/Lambda.js https://github.com/dfellis/lambda-js</p>
-<pre><code>var f = function(func){
+
+
+
+} -->
+<p>https://github.com/fschaefer/Lambda.js https://github.com/dfellis/lambda-js</p><pre><code>var f = function(func){
    var funcArray = func.split(&#39;-&gt;&#39;)
    return   (funcArray.length === 1)
             ? new Function(&#39;x&#39;, &#39;return (&#39; + funcArray[0].trim() + &#39;)&#39;)
             : new Function(funcArray[0].trim(), &#39;return (&#39; + funcArray[1].trim() + &#39;)&#39;)
 }</code></pre>
-
 <p class="post-meta pure-u-1">
 </p>

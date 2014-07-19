@@ -16,12 +16,8 @@ coreConfig = {
   },
   menuItems: [
     {
-      value: "Home",
-      url: "/",
-      title: ""
-    }, {
       value: "Blog",
-      url: "/blog",
+      url: "/",
       title: ""
     }, {
       value: "About",
@@ -53,6 +49,11 @@ coreConfig = {
   footerItems: [
     {
       value: "",
+      url: "http://thisisafiller-jon.tumblr.com/rss",
+      title: "RSS Feed",
+      'class': "fa fa-rss fa-2x"
+    }, {
+      value: "",
       url: "https://github.com/jon49/",
       title: "Personal Github Account",
       'class': "fa fa-github fa-2x"
@@ -61,9 +62,21 @@ coreConfig = {
       url: "https://twitter.com/NymanJon",
       title: "Personal Twitter Account",
       'class': "fa fa-twitter fa-2x"
+    }, {
+      value: "",
+      url: "https://plus.google.com/communities/101170592821781215530",
+      title: "Prescott Developer's Google+ Site",
+      'class': "fa fa-google-plus fa-2x"
+    }, {
+      value: "",
+      url: "http://www.meetup.com/The-Prescott-Software-Developers-Meetup-Group/",
+      title: "Prescott Developer's Meetup.com Site",
+      'class': "fa fa-coffee fa-2x"
     }
   ],
   footer: {
     text: m.trust("&copy; 2014 Jon Nyman<br />nymanjon@gmail.com<br />Still Empty")
-  }
+  },
+  fileType: "",
+  posts: m.prop([])
 };
