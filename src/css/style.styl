@@ -22,12 +22,6 @@ html
    scrollbar-darkshadow-color #940116
    
 
-a[title]:hover
-   content attr(title)
-   color color-background-main
-   background-color color-border
-   border 0px
-
 p.center
    text-align center
 
@@ -48,25 +42,11 @@ p.center
   background color-fireRed
   font-size 80%
 
-.navlinks
-  font-size 120%
-  padding 2em 0 4em 0
-
-.navlinks-prev
-  width 45%
-  float left
-
-.navlinks-next
-  width 45%
-  float right
-  text-align right
-
 //The content `<div>` is where all your content goes.
 .content 
    margin 0 auto
    padding 0 2em
    max-width max-content-width
-   margin-bottom 50px
    line-height 1.6em
    
 .content a:link
@@ -109,6 +89,18 @@ p.center
    text-align center
    padding 1em 0
    color #CCC
+
+.footer-menu
+   margin-top 50px
+
+.pure-menu.pure-menu-open
+   background color-background-main
+   border 0px
+
+.menu a:hover
+   color color-fireRed
+   background-color color-border
+
 //fancy subtitle   
 .header h2
    margin 0 0 2em 0
@@ -139,32 +131,6 @@ p.center
    left 100%
    margin-left 15px
    
-//The `#menu` `<div>` is the parent `<div>` that contains the `.pure-menu` that appears on the left side of the page.
-
-//By using the combination of `position fixed top 0 bottom 0`, we can make the menu have 100% height and be fixed on the page as the rest of it scrolls.
-.menu 
-   left 100%
-   height 35 px
-   font-size 16px
-   text-align center
-   background-color color-background-highlight
-   
-.menu ul
-   height auto
-   padding 8px 0px
-   margin 0px
-
-.menu a
-   text-decoration none
-   color color-font-body
-   padding 8px
-   display inline
-   padding 10px
-   
-.menu a:hover
-   color #FFF
-   background-color color-font-main
-
 #footer-menu
    background-color color-background-main
 

@@ -21,6 +21,7 @@ Mithril = m = new function app(window) {
 		if (classes.length > 0) cell.attrs[classAttrName] = classes.join(" ")
 		
 		cell.children = hasAttrs ? args[2] : args[1]
+		
 		for (var attrName in attrs) {
 			if (attrName == classAttrName) cell.attrs[attrName] = (cell.attrs[attrName] || "") + " " + attrs[attrName]
 			else cell.attrs[attrName] = attrs[attrName]
@@ -46,6 +47,7 @@ Mithril = m = new function app(window) {
 		}
 
 		if (dataType == "[object Array]") {
+			data = flatten(data)
 			var nodes = [], intact = cached.length === data.length, subArrayCount = 0
 			
 			var DELETION = 1, INSERTION = 2 , MOVE = 3
@@ -68,7 +70,7 @@ Mithril = m = new function app(window) {
 					}
 				}
 				var actions = Object.keys(existing).map(function(key) {return existing[key]})
-				var changes = actions.sort(function(a, b) {return a.action - b.action || b.index - a.index})
+				var changes = actions.sort(function(a, b) {return a.action - b.action || a.index - b.index})
 				var newCached = cached.slice()
 				
 				for (var i = 0, change; change = changes[i]; i++) {
@@ -78,7 +80,7 @@ Mithril = m = new function app(window) {
 					}
 					if (change.action == INSERTION) {
 						var dummy = window.document.createElement("div")
-						dummy.key = data[change.index].attrs.key.toString()
+						dummy.key = data[change.index].attrs.key
 						parentElement.insertBefore(dummy, parentElement.childNodes[change.index])
 						newCached.splice(change.index, 0, {attrs: {key: data[change.index].attrs.key}, nodes: [dummy]})
 					}
@@ -239,7 +241,7 @@ Mithril = m = new function app(window) {
 				if (cached[i]) unload(cached[i])
 			}
 		}
-		nodes.length = 0
+		if (nodes.length != 0) nodes.length = 0
 	}
 	function unload(cached) {
 		if (cached.configContext && typeof cached.configContext.onunload == "function") cached.configContext.onunload()
@@ -267,6 +269,15 @@ Mithril = m = new function app(window) {
 			index++
 		}
 		return nodes
+	}
+	function flatten(data) {
+		var flattened = []
+		for (var i = 0; i < data.length; i++) {
+			var item = data[i]
+			if (item instanceof Array) flattened.push.apply(flattened, flatten(item))
+			else flattened.push(item)
+		}
+		return flattened
 	}
 	function autoredraw(callback, object, group) {
 		return function(e) {

@@ -2,6 +2,7 @@
 pagePattern = new RegExp "/(\\w+)" 
 
 postPattern = new RegExp "/(\\d{4})/(\\d{2})/(\\d{2})/(.+)"
+postUglyPattern = new RegExp "(\\d{4})-(\\d{2})-(\\d{2})-(.+)"
 
 postLinkPattern = new RegExp "(\\d{4})-(\\d{2})-(\\d{2})-(.+)"
 
@@ -20,11 +21,11 @@ filterPosts = ->
    isPattern postLinkPattern, it
 
 getUrl = (route) -> 
-   | isPattern pagePattern, route =>
-      route.replace pagePattern, withPageUrl
    | isPattern postPattern, route =>
       route.replace postPattern, withPostUrl
-   | otherwise => "/pages/index.html"
+   | isPattern pagePattern, route =>
+      route.replace pagePattern, withPageUrl
+   | _ => "/pages/index.html"
 
 //--- html preprocessing ---//
 extractObject = -> 
@@ -36,7 +37,7 @@ extractObject = ->
 parseDocument = ->
    | it.length == 1 => 
       JSON.stringify article: (it[0].replace /"/g,"\\\"" .replace /\//g,"\\\/" .replace /\n/g, "") 
-   | otherwise => 
+   | _ => 
       left = (extractObject it[0]).slice 0, -1
       right = it[1].replace(/"/g,"\\\"").replace(/\//g,"\\\/").replace(/\n/g, "\\n")
       result = "#left, \"article\": \"#right\"}"
@@ -44,7 +45,7 @@ parseDocument = ->
 extractDocument = -> 
    | it.responseText isnt "Not found\n" =>
       parseDocument (it.responseText.split "-->")
-   | otherwise => 
+   | _ => 
       JSON.stringify do
          title: "404" 
          subtitle: "You've Been 404ed"

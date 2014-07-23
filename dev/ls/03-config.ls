@@ -8,12 +8,12 @@ coreConfig =
          * url: "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
          * url: "/css/style.css"
    menuItems: 
-      * value: "Blog" url: "/" title: ""
+      * value: "Archive" url: "/" title: ""
       * value: "About" url: "/about" title: ""
    header: 
       url: "/" 
       class: ""
-      src: "./images/fire.png"
+      src: "/images/fire.png"
       title: "This is a Filler"
       subtitle: "Filling Up"
    content: 
@@ -51,4 +51,21 @@ coreConfig =
    footer: 
       text: m.trust "&copy; 2014 Jon Nyman<br />nymanjon@gmail.com<br />Still Empty"
    fileType: ""   
-   posts: m.prop [] # {friendlyUrl: "/2014/07/18/My_Post_Name", title: "My Post Name", description: "This post is about..."
+   posts: m.prop []
+   postMetadata: do ->
+      postMetadata =
+         method: "GET"
+         url: "/posts/metadata.json"
+      m.request postMetadata 
+
+propDo = (prop, fn, value) !-->
+   prop (fn.call null, value)
+
+postList =
+   method: "GET"
+   url: "/posts/posts.json"
+
+m.request postList 
+   .then propDo coreConfig.posts, -> 
+      (uglyUrl) <- it.posts.map
+      uglyUrl.replace postUglyPattern, withFriendlyPostUrl 
