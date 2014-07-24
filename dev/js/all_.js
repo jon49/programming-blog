@@ -1,4 +1,4 @@
-var replaceAt, isPattern, removeExtension, pagePattern, postPattern, postUglyPattern, postLinkPattern, withPostUrl, withFriendlyPostUrl, withPageUrl, filterPosts, getUrl, extractObject, parseDocument, extractDocument, toConfigStyle, coreConfig, propDo, postList, infiniteScroll, link, links, head, menu, header, content, postsView, footerMenu, footer, main, app;
+var replaceAt, isPattern, removeExtension, pagePattern, postPattern, postUglyPattern, postLinkPattern, withPostUrl, withFriendlyPostUrl, withPostDate, withPageUrl, filterPosts, isPost, postDate, getUrl, extractObject, parseDocument, extractDocument, toConfigStyle, coreConfig, propDo, postList, infiniteScroll, link, links, head, menu, header, content, tagView, postsView, nextPostView, previousPostView, navLinksView, footerMenu, footer, main, app;
 replaceAt = function(index, char, string){
   switch (false) {
   case !(index < 0):
@@ -26,6 +26,9 @@ withFriendlyPostUrl = function(match_, year, month, day, postName){
   postName_ = removeExtension(postName);
   return "/" + year + "/" + month + "/" + day + "/" + postName_;
 };
+withPostDate = function(match_, year, month, day){
+  return new Date(year, month - 1, day);
+};
 withPageUrl = function(match_, pageName){
   return "/pages/" + pageName + ".html";
 };
@@ -33,6 +36,12 @@ filterPosts = function(it){
   return it.filter(function(it){
     return isPattern(postLinkPattern, it);
   });
+};
+isPost = function(){
+  return isPattern(postPattern, m.route());
+};
+postDate = function(){
+  return new Date(m.route().replace(postPattern, withPostDate));
 };
 getUrl = function(route){
   switch (false) {
@@ -68,8 +77,8 @@ parseDocument = function(it){
       article: it[0].replace(/"/g, "\\\"").replace(/\//g, "\\/").replace(/\n/g, "")
     });
   default:
-    left = extractObject(it[0]).slice(0, -1);
-    right = it[1].replace(/"/g, "\\\"").replace(/\//g, "\\/").replace(/\n/g, "\\n");
+    left = extractObject(it[0]).slice(0, -1).replace(/,]/g, "]");
+    right = it[1].replace(/\\/g, '\\\\').replace(/"/g, "\\\"").replace(/\//g, "\\/").replace(/\n/g, "\\n");
     return result = left + ", \"article\": \"" + right + "\"}";
   }
 };
@@ -95,6 +104,7 @@ toConfigStyle = function(it){
   (x.header || (x.header = {})).title = it.title;
   (x.header || (x.header = {})).subtitle = it.subtitle;
   x.fileType = it.type;
+  x.tags = it.tags;
   return x;
 };
 coreConfig = {
@@ -210,12 +220,17 @@ link = function(it){
     'class': it['class'] || '',
     href: it.url,
     title: it.title || '',
-    config: it.url.indexOf(":") === -1 ? m.route : ""
+    config: (it.url || (it.url = [])).indexOf(":") === -1 ? m.route : ""
   }, it.value);
 };
 links = function(items){
   return m('ul', (items || []).map(function(it){
-    return m('li', [link(it)]);
+    switch (false) {
+    case !_.isEmpty(it):
+      return '';
+    default:
+      return m('li', [link(it)]);
+    }
   }));
 };
 head = function(head){
@@ -249,18 +264,36 @@ head = function(head){
 menu = function(it){
   return m('.pure-menu.pure-menu-open.pure-menu-horizontal.menu', links(it));
 };
-header = function(it){
-  return m('.header', [
-    m('a', {
-      href: it.url,
-      'class': it['class']
-    }, [m('img', {
-      src: it.src
-    })]), m('h1', it.title), m('h2.subtitle.fancy', m('span', it.subtitle))
-  ]);
+header = function(type, config){
+  return m('.header', [m('a', {
+    href: config.url,
+    'class': config['class']
+  }, [m('img', {
+    src: config.src
+  })])].concat((function(){
+    switch (type) {
+    case 'page':
+    case 'archive':
+      return [m('h1', config.title), m('h2', m('span', config.subtitle))];
+    default:
+      return [];
+    }
+  }())));
 };
 content = function(it){
   return m('article.content', it.article);
+};
+tagView = function(type, tags){
+  var attach;
+  switch (false) {
+  case !isPost():
+    attach = tags.length > 0 ? ' - ' : '';
+    return m('p.post-meta.pure-u-1', [m('span', 'Posted ' + postDate().toDateString() + attach)].concat(tags.map(function(tag){
+      return m('span.post-tag', tag);
+    })));
+  default:
+    return '';
+  }
 };
 postsView = function(posts, metadata, type){
   var i;
@@ -283,6 +316,50 @@ postsView = function(posts, metadata, type){
     return '';
   }
 };
+nextPostView = function(posts, metadata, index){
+  var linkIndex, post, meta;
+  switch (linkIndex = index + 1) {
+  case posts.length || metadata.length:
+    return '';
+  default:
+    post = posts[linkIndex];
+    meta = metadata[linkIndex];
+    return {
+      'class': 'navlinks-next',
+      url: post,
+      title: 'Next Post: ' + meta.title,
+      value: m.trust(meta.title + ' &raquo;')
+    };
+  }
+};
+previousPostView = function(posts, metadata, index){
+  var linkIndex, post, meta;
+  switch (linkIndex = index - 1) {
+  case -1:
+    return '';
+  default:
+    post = posts[linkIndex];
+    meta = metadata[linkIndex];
+    return {
+      'class': 'navlinks-prev',
+      url: post,
+      title: 'Previous Post: ' + meta.title,
+      value: m.trust('&laquo; ' + meta.title)
+    };
+  }
+};
+navLinksView = function(posts, metadata){
+  var index, previousPost, nextPost;
+  switch (false) {
+  case !isPost():
+    index = posts.indexOf(m.route());
+    previousPost = previousPostView(posts, metadata, index);
+    nextPost = nextPostView(posts, metadata, index);
+    return m('.pure-menu.pure-menu-open.pure-menu-horizontal.menu', links([previousPost, nextPost]));
+  default:
+    return '';
+  }
+};
 footerMenu = function(it){
   return m('#footer-menu.pure-menu.pure-menu-open.pure-menu-horizontal.menu', [links(it)]);
 };
@@ -292,7 +369,7 @@ footer = function(it){
 main = function(ctrl){
   var config, result;
   config = ctrl.config;
-  return result = m('html', [m('head', head(config.head)), m('body', [m('#main', [menu(config.menuItems), header(config.header), content(config.content), postsView(config.posts(), config.postMetadata(), config.fileType), footerMenu(config.footerItems), footer(config.footer)])])]);
+  return result = m('html', [m('head', head(config.head)), m('body', [m('#main', [menu(config.menuItems), header(config.fileType, config.header), content(config.content), tagView(config.fileType, config.tags), navLinksView(config.posts(), config.postMetadata()), postsView(config.posts(), config.postMetadata(), config.fileType), footerMenu(config.footerItems), footer(config.footer)])])]);
 };
 function Controller(){
   var self, document, orCreate404Config, createNewConfig;

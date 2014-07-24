@@ -8,6 +8,9 @@ tags:
 date: May 15, 2014
 ---
 
+# Notes on Monads, Monoids, and Make Believe
+## with Brian Lonsdorf
+
 ### Working with Objects
 
 #### the better way

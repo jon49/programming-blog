@@ -1,10 +1,12 @@
 <!-- {
-
 "title":"bilby.js &amp; lenses",
 
 
+"date":"July 1, 2014",
+"tags":["bilby.js","immutability","javascript","functional programming",],
+
 } -->
-<p>In JavaScript nearly everything is <a href="http://en.wikipedia.org/wiki/Mutable">mutable</a>. This can cause problems in your code when you think you have a new object or variable but instead you are operating on the referenced object. So, we create patterns to alleviate this problem. Or we use libraries like <a href="http://underscorejs.org/">underscore.js</a> or <a href="http://lodash.com/docs">lodash.js</a> which incorporate the functional concepts. Unfortunately they don’t always use immutable objects either.</p><p>Bilby.js solves the mutability problem by using <a href="http://bilby.brianmckenna.org/#lenses">lenses</a>. Using the <a href="http://en.wikipedia.org/wiki/Bidirectional_transformation">lenses</a> pattern one can access and change one’s objects in a safe and immutable manner.</p><p>Let’s say we have the <code>Person</code> object.</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">Person</span>(){
+<h1 id="bilby.js-lenses">bilby.js &amp; lenses</h1><p>In JavaScript nearly everything is <a href="http://en.wikipedia.org/wiki/Mutable">mutable</a>. This can cause problems in your code when you think you have a new object or variable but instead you are operating on the referenced object. So, we create patterns to alleviate this problem. Or we use libraries like <a href="http://underscorejs.org/">underscore.js</a> or <a href="http://lodash.com/docs">lodash.js</a> which incorporate the functional concepts. Unfortunately they don’t always use immutable objects either.</p><p>Bilby.js solves the mutability problem by using <a href="http://bilby.brianmckenna.org/#lenses">lenses</a>. Using the <a href="http://en.wikipedia.org/wiki/Bidirectional_transformation">lenses</a> pattern one can access and change one’s objects in a safe and immutable manner.</p><p>Let’s say we have the <code>Person</code> object.</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">Person</span>(){
    <span class="kw">this</span>.<span class="fu">name</span> = {<span class="dt">first</span>: <span class="st">&#39;George&#39;</span>, <span class="dt">last</span>: <span class="st">&#39;Stanza&#39;</span>}
    <span class="kw">this</span>.<span class="fu">id</span> = <span class="dv">0</span>
 }</code></pre><p>We use bilby.js lenses by first creating lens objects.</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> nameLens = <span class="ot">bilby</span>.<span class="fu">objectLens</span>(<span class="st">&#39;name&#39;</span>)
@@ -33,11 +35,3 @@
 <span class="kw">var</span> fred = <span class="fu">set</span>(<span class="ot">firstLens</span>.<span class="fu">compose</span>(nameLens), george, <span class="st">&#39;Fred&#39;</span>)
 <span class="co">// Person {name: {first:&#39;Fred&#39;, last: &#39;Stanza&#39;}, id: 0}</span></code></pre><p>Now we need to remember that these new objects are not deep clones, only shallow clones, which helps with performance but, if we leave our design pattern we could get in trouble, so be careful!</p><p>Note that in <a href="https://github.com/fantasyland/fantasy-lenses">Fantasy Land lenses</a> the naming convetion is different <code>setter</code> and <code>getter</code> drop the <code>ter</code> and <code>compose</code> is dropped in favor of <code>andThen</code> making it so you can switch the order of your lenses.</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> deborah = <span class="ot">nameLens</span>.<span class="fu">andThen</span>(firstLens).<span class="fu">run</span>(george).<span class="fu">set</span>(<span class="st">&#39;Deborah&#39;</span>)
 <span class="co">// Object {name: {first: &#39;Deborah&#39;, last: &#39;Stanza&#39;}, id: 0}</span></code></pre><p>If you want to play around with these concepts in jsFiddle you can use lodash.js’ <code>_.assign</code> method. I’ve set up the <a href="http://jsfiddle.net/jon49/3xRNT/">jsFiddle here.</a></p>
-<p class="post-meta pure-u-1">
-Posted July 1, 2014
- - 
-<span class="post-tag">bilby.js</span>
-<span class="post-tag">immutability</span>
-<span class="post-tag">javascript</span>
-<span class="post-tag">functional programming</span>
-</p>

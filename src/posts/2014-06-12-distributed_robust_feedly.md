@@ -6,6 +6,8 @@ tags:
 date: June 12, 2014
 ...
 
+# A Distributed & Robust Feedly
+
 In light of the recent attack on [Feedly.com](http://feedly.com/) I thought it might be interesting to see other ways we could propogate data accross the Interent without being succeptible to attacks, or, at least less accessible.
 
 With the approach outlined below we need to use an actual app instead of being able to use a browser (there might be a way to use a browser also, not sure how it would work though).

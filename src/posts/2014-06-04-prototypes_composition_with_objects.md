@@ -7,6 +7,8 @@ tags:
 date: June 6, 2014
 ...
 
+# Prototypes & Compositions with Objects
+
 I was trying to figure out the best way to have functions be both compatible with an object oriented paradigm and a functional oriented paradigm when working on objects. My implementations are probably naive, but instructive nevertheless. It seems that [lo-dash](http://lodash.com/) and other libraries have done a good job bridging those worlds.
 
 Let's say you have an object `O` such that

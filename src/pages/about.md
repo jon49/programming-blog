@@ -1,5 +1,6 @@
 ---
 description: Description of programming blog.
+type: page
 ...
 
 I'm a self-taught programmer looking for some work in Arizona or any

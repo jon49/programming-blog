@@ -1,10 +1,12 @@
 <!-- {
-
 "title":"Notes On Functional Programming",
 "subtitle":"Patterns for the Non-Mathematician with Brian Lonsdorf",
 
+"date":"May 13, 2014",
+"tags":["functional programming","maybe","either","functor","lenses",],
+
 } -->
-<h3 id="lenses">Lenses</h3><p>Using lenses for composable/polymorphic model manipulation.</p><p>E.g.,</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> user = {<span class="dt">id</span>:<span class="dv">1</span>, <span class="dt">name</span>:{<span class="dt">first</span>:<span class="st">&#39;doris&#39;</span>, <span class="dt">last</span>:<span class="st">&#39;day&#39;</span>}}
+<h1 id="notes-on-functional-programming">Notes On Functional Programming</h1><h2 id="patterns-for-the-non-mathematician-with-brian-lonsdorf">Patterns for the Non-Mathematician with Brian Lonsdorf</h2><h3 id="lenses">Lenses</h3><p>Using lenses for composable/polymorphic model manipulation.</p><p>E.g.,</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> user = {<span class="dt">id</span>:<span class="dv">1</span>, <span class="dt">name</span>:{<span class="dt">first</span>:<span class="st">&#39;doris&#39;</span>, <span class="dt">last</span>:<span class="st">&#39;day&#39;</span>}}
 <span class="kw">var</span> L = <span class="fu">makeLenses</span>([<span class="st">&#39;name&#39;</span>, <span class="st">&#39;first&#39;</span>])
 <span class="kw">var</span> firstNameChar = <span class="fu">compose</span>(<span class="ot">L</span>.<span class="fu">name</span>, <span class="ot">L</span>.<span class="fu">first</span>, _1)
 <span class="fu">over</span>(firstNameChar, toUpperCase, user)
@@ -51,12 +53,3 @@
 <span class="kw">var</span> result = <span class="fu">progr</span>(<span class="st">&#39; blah &#39;</span>)
 <span class="fu">log</span>(result)
 <span class="co">//=&gt; Right(&#39;The count is: 1&#39;)</span></code></pre><p><strong>These notes came from the video below:</strong></p><p><a href="https://github.com/DrBoolean/patterns_talk">The full slides are also available.</a></p><iframe width="560" height="315" src="//www.youtube.com/embed/AvgwKjTPMmM" frameborder="0" allowfullscreen></iframe>
-<p class="post-meta pure-u-1">
-Posted May 13, 2014
- - 
-<span class="post-tag">functional programming</span>
-<span class="post-tag">maybe</span>
-<span class="post-tag">either</span>
-<span class="post-tag">functor</span>
-<span class="post-tag">lenses</span>
-</p>

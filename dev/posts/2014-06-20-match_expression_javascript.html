@@ -1,10 +1,12 @@
 <!-- {
-
 "title":"Match Expression for JavaScript?",
 
 
+"date":"June 20, 2014",
+"tags":["functional programming","match expressions","ternary","design patterns",],
+
 } -->
-<p>Sometimes (or rather most of the time) it would be nice to have more concise code in JavaScript. I was working with a function that needed quite a bit of <code>if</code> statements. <code>if</code> was awfully cluttered. I had looked at <a href="http://bilby.brianmckenna.org/examples/validation.htm">bilby.js examples</a> and hadn’t realized that you can do multiple <code>ternary expressions</code> in a row.</p><p>So, instead of,</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">if</span> (<span class="dv">0</span>){
+<h1 id="match-expression-for-javascript">Match Expression for JavaScript?</h1><p>Sometimes (or rather most of the time) it would be nice to have more concise code in JavaScript. I was working with a function that needed quite a bit of <code>if</code> statements. <code>if</code> was awfully cluttered. I had looked at <a href="http://bilby.brianmckenna.org/examples/validation.htm">bilby.js examples</a> and hadn’t realized that you can do multiple <code>ternary expressions</code> in a row.</p><p>So, instead of,</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">if</span> (<span class="dv">0</span>){
   <span class="kw">return</span> <span class="dv">0</span>
 }
 <span class="kw">else</span> <span class="kw">if</span> (<span class="dv">1</span>){
@@ -61,11 +63,3 @@
     : fraction + value
   <span class="co">// Index is out of bounds return original value</span>
   : value</code></pre>
-<p class="post-meta pure-u-1">
-Posted June 20, 2014
- - 
-<span class="post-tag">functional programming</span>
-<span class="post-tag">match expressions</span>
-<span class="post-tag">ternary</span>
-<span class="post-tag">design patterns</span>
-</p>

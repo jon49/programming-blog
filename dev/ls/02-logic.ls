@@ -13,12 +13,21 @@ withFriendlyPostUrl = (match_, year, month, day, postName) ->
    postName_ = removeExtension postName
    "/#year/#month/#day/#postName_"
 
+withPostDate = (match_, year, month, day) ->
+   new Date year, (month - 1), day
+
 withPageUrl = (match_, pageName) -> 
    "/pages/#pageName.html"
 
 filterPosts = ->
    <- it.filter
    isPattern postLinkPattern, it
+
+isPost = ->
+   isPattern postPattern, m.route()
+
+postDate = ->
+   new Date(m.route().replace postPattern, withPostDate)
 
 getUrl = (route) -> 
    | isPattern postPattern, route =>
@@ -38,8 +47,8 @@ parseDocument = ->
    | it.length == 1 => 
       JSON.stringify article: (it[0].replace /"/g,"\\\"" .replace /\//g,"\\\/" .replace /\n/g, "") 
    | _ => 
-      left = (extractObject it[0]).slice 0, -1
-      right = it[1].replace(/"/g,"\\\"").replace(/\//g,"\\\/").replace(/\n/g, "\\n")
+      left = ((extractObject it[0]).slice 0, -1).replace(/,]/g,"]")
+      right = it[1].replace(/\\/g, '\\\\').replace(/"/g,"\\\"").replace(/\//g,"\\\/").replace(/\n/g, "\\n")
       result = "#left, \"article\": \"#right\"}"
 
 extractDocument = -> 
@@ -62,4 +71,5 @@ toConfigStyle = ->
    x.{}header.title = it.title
    x.{}header.subtitle = it.subtitle
    x.fileType = it.type
+   x.tags = it.tags
    x

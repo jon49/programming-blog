@@ -1,10 +1,12 @@
 <!-- {
-
 "title":"Notes on Monads, Monoids, and Make Believe",
 "subtitle":"with Brian Lonsdorf",
 
+"date":"May 15, 2014",
+"tags":["functional programming","functor","design patterns",],
+
 } -->
-<h3 id="working-with-objects">Working with Objects</h3><h4 id="the-better-way">the better way</h4><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> SSN = <span class="fu">Constructor</span>(<span class="kw">function</span>(number, current_user){
+<h1 id="notes-on-monads-monoids-and-make-believe">Notes on Monads, Monoids, and Make Believe</h1><h2 id="with-brian-lonsdorf">with Brian Lonsdorf</h2><h3 id="working-with-objects">Working with Objects</h3><h4 id="the-better-way">the better way</h4><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> SSN = <span class="fu">Constructor</span>(<span class="kw">function</span>(number, current_user){
     <span class="kw">this</span>.<span class="fu">number</span> = number
     <span class="kw">this</span>.<span class="fu">user</span> = current_user
 })
@@ -37,10 +39,3 @@
 <span class="co">//=&gt; AdminAccess(&#39;123456789&#39;, current_user)</span>
 <span class="fu">fmap</span>(validNumber, social)
 <span class="co">//=&gt; AdminAccess(true, current_user)</span></code></pre><p>He then goes into other useful patterns with monads. But I’ll revisit that later after I get a better handle on this!</p><iframe width="560" height="315" src="//www.youtube.com/embed/ww2Z1URx-G0" frameborder="0" allowfullscreen></iframe>
-<p class="post-meta pure-u-1">
-Posted May 15, 2014
- - 
-<span class="post-tag">functional programming</span>
-<span class="post-tag">functor</span>
-<span class="post-tag">design patterns</span>
-</p>

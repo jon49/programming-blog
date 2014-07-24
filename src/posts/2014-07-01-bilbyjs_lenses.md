@@ -8,6 +8,8 @@ tags:
 date: July 1, 2014
 ...
 
+# bilby.js & lenses
+
 In JavaScript nearly everything is [mutable](http://en.wikipedia.org/wiki/Mutable). This can cause problems in your code when you think you have a new object or variable but instead you are operating on the referenced object. So, we create patterns to alleviate this problem. Or we use libraries like [underscore.js](http://underscorejs.org/) or [lodash.js](http://lodash.com/docs) which incorporate the functional concepts. Unfortunately they don't always use immutable objects either.
 
 Bilby.js solves the mutability problem by using [lenses](http://bilby.brianmckenna.org/#lenses). Using the [lenses](http://en.wikipedia.org/wiki/Bidirectional_transformation) pattern one can access and change one's objects in a safe and immutable manner.

@@ -1,9 +1,12 @@
 #single link template
-link = -> result = m 'a', (class: it.class or '', href: it.url, title: it.title or '', config: if (it.url.indexOf ":") == -1 then m.route else ""), it.value
+link = -> result = m 'a', (class: it.class or '', href: it.url, title: it.title or '', config: if (it.[]url.indexOf ":") == -1 then m.route else ""), it.value
 
 #link template for header/footer menu
 links = (items) ->
-   m 'ul' ((items or []).map -> m 'li' [link it]) 
+   m 'ul' ((items or []).map -> 
+      | _.isEmpty it =>
+         ''
+      | _ => m 'li' [link it]) 
 
 head = (head) ->
    link = -> m "link" (rel: "stylesheet", href: it.url)
@@ -22,15 +25,27 @@ head = (head) ->
 menu = -> m '.pure-menu.pure-menu-open.pure-menu-horizontal.menu', (links it)
 
 #header image
-header = -> 
+header = (type, config) -> 
    m '.header' [
-      m 'a', (href: it.url, class: it.class), [(m 'img', (src: it.src))]
-      m 'h1', it.title
-      m 'h2.subtitle.fancy', (m 'span' it.subtitle)
-   ]
+      m 'a', (href: config.url, class: config.class), [(m 'img', (src: config.src))]
+   ] ++ switch type
+   | 'page' 'archive' =>
+      * m 'h1', config.title
+        m 'h2', (m 'span' config.subtitle)
+   | _ => []
 
 #main article content
 content = -> m 'article.content', it.article
+
+tagView = (type, tags) ->
+   | isPost() =>
+      attach = (if tags.length > 0 then ' - ' else '')
+      m 'p.post-meta.pure-u-1',
+      [m 'span', 'Posted ' + postDate().toDateString() + attach] ++ (
+      (tag) <- tags.map
+      m 'span.post-tag', tag
+      )
+   | _ => ''
 
 #Infinite scroll of posts
 postsView = (posts, metadata, type) ->
@@ -47,6 +62,40 @@ postsView = (posts, metadata, type) ->
       
    | _ => ''
 
+nextPostView = (posts, metadata, index) ->
+   switch (linkIndex = index + 1)
+   | posts.length || metadata.length => ''
+   | _ =>
+      post = posts[linkIndex]
+      meta = metadata[linkIndex]
+      (
+         class: 'navlinks-next'
+         url: post
+         title: ('Next Post: ' + meta.title)
+         value: m.trust(meta.title + ' &raquo;')
+      )
+
+previousPostView = (posts, metadata, index) ->
+   switch (linkIndex = index - 1)
+   | -1 => ''
+   | _ =>
+      post = posts[linkIndex]
+      meta = metadata[linkIndex]
+      (
+         class: 'navlinks-prev'
+         url: post
+         title: ('Previous Post: ' + meta.title)
+         value: m.trust('&laquo; ' + meta.title)
+      )
+
+navLinksView = (posts, metadata) ->
+   | isPost() =>
+      index = posts.indexOf m.route()
+      previousPost = previousPostView posts, metadata, index
+      nextPost = nextPostView posts, metadata, index
+      m  '.pure-menu.pure-menu-open.pure-menu-horizontal.menu', links [previousPost, nextPost]
+   | _ => ''
+
 #footer menu e.g., social media, etc.
 footerMenu = -> m '#footer-menu.pure-menu.pure-menu-open.pure-menu-horizontal.menu', [(links it)]
 
@@ -61,12 +110,31 @@ main = (ctrl) ->
       m 'body', [
          #put all content together
          m '#main' [
+
+            # menu
             menu config.menuItems
-            header config.header
+
+            # header pic/title/subtitle (for pages)
+            header config.fileType, config.header 
+
+            # main article content
             content config.content
+
+            # Show date of post & its tags
+            tagView config.fileType, config.tags
+            
+            # Show next and previous post
+            navLinksView config.posts(), config.postMetadata()
+            
+            # Show archive of posts
             postsView config.posts(), config.postMetadata(), config.fileType
+
+            # menu social media
             footerMenu config.footerItems
+
+            # copyright, e-mail, etc.
             footer config.footer
          ]
       ]
    ]
+

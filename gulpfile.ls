@@ -120,11 +120,11 @@ gulp.task 'css', ['js'], ->
   devDest = './dev/css'
   distDest = './dist/css'
   gulp.src './src/css/*.styl'
-     .pipe stylus!
+     .pipe stylus()
      .pipe gulp.dest devDest
      .pipe gulp.dest distDest
 
-gulp.task 'watch', -> gulp.watch './dev/ls/*.ls', ['ls', 'js']
+# gulp.task 'watch', -> gulp.watch './dev/ls/*.ls', ['ls', 'js']
 
 gulp.task 'default', [
   'js'
@@ -136,5 +136,5 @@ gulp.task 'default', [
   'pages'
   'js'
   'css'
-  'watch'
+#  'watch'
 ]

@@ -95,7 +95,4 @@ gulp.task('css', ['js'], function(){
   distDest = './dist/css';
   return gulp.src('./src/css/*.styl').pipe(stylus()).pipe(gulp.dest(devDest)).pipe(gulp.dest(distDest));
 });
-gulp.task('watch', function(){
-  return gulp.watch('./dev/ls/*.ls', ['ls', 'js']);
-});
-gulp.task('default', ['js', 'clean', 'postMeta', 'posts', 'json', 'moveJSON', 'pages', 'js', 'css', 'watch']);
+gulp.task('default', ['js', 'clean', 'postMeta', 'posts', 'json', 'moveJSON', 'pages', 'js', 'css']);

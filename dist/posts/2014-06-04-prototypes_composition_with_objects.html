@@ -1,10 +1,12 @@
 <!-- {
-
 "title":"Prototypes &amp; Compositions with Objects",
 
 
+"date":"June 6, 2014",
+"tags":["functional programming","design patterns","lenses",],
+
 } -->
-<p>I was trying to figure out the best way to have functions be both compatible with an object oriented paradigm and a functional oriented paradigm when working on objects. My implementations are probably naive, but instructive nevertheless. It seems that <a href="http://lodash.com/">lo-dash</a> and other libraries have done a good job bridging those worlds.</p><p>Let’s say you have an object <code>O</code> such that</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">O</span>(a, b){
+<h1 id="prototypes-compositions-with-objects">Prototypes &amp; Compositions with Objects</h1><p>I was trying to figure out the best way to have functions be both compatible with an object oriented paradigm and a functional oriented paradigm when working on objects. My implementations are probably naive, but instructive nevertheless. It seems that <a href="http://lodash.com/">lo-dash</a> and other libraries have done a good job bridging those worlds.</p><p>Let’s say you have an object <code>O</code> such that</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">O</span>(a, b){
   <span class="kw">this</span>.<span class="fu">a</span> = a
   <span class="kw">this</span>.<span class="fu">b</span> = b
 }
@@ -45,10 +47,3 @@
   }
 }</code></pre><p>Now we can set property to:</p><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> changeA = <span class="ot">_</span>.<span class="fu">partial</span>(change
               , <span class="ot">_</span>.<span class="fu">partial</span>(set, <span class="st">&#39;a&#39;</span>))</code></pre>
-<p class="post-meta pure-u-1">
-Posted June 6, 2014
- - 
-<span class="post-tag">functional programming</span>
-<span class="post-tag">design patterns</span>
-<span class="post-tag">lenses</span>
-</p>

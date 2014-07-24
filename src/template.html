@@ -1,18 +1,9 @@
 <!-- {
-$if(description)$"description":"$description$",$endif$
 $if(title)$"title":"$title$",$endif$
 $if(subtitle)$"subtitle":"$subtitle$",$endif$
+$if(description)$"description":"$description$",$endif$
+$if(date)$"date":"$date$",$endif$
+$if(tags)$"tags":[$for(tags)$"$tags$",$endfor$],$endif$
 $if(type)$"type":"$type$",$endif$
 } -->
 $body$
-<p class="post-meta pure-u-1">
-$if(date)$
-Posted $date$
-$endif$
-$if(tags)$
- - 
-$for(tags)$
-<span class="post-tag">$tags$</span>
-$endfor$
-$endif$
-</p>

@@ -6,6 +6,8 @@ tags:
 date: May 13, 2014
 ...
 
+bilby.js & functional programming
+
 I've been learning functional programming for quite some time and like the programming paradigm. But, it can be difficult sometimes. Some libraries like lodash.js can be easy to start learning, but others like bilby.js require that you understand more of the functional approach. So, here are some videos that have helped me understand bilby.js better.
 
 ---

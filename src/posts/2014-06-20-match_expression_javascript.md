@@ -8,6 +8,8 @@ tags:
 date: June 20, 2014
 ...
 
+# Match Expression for JavaScript?
+
 Sometimes (or rather most of the time) it would be nice to have more concise code in JavaScript. I was working with a function that needed quite a bit of `if` statements. `if` was awfully cluttered. I had looked at [bilby.js examples](http://bilby.brianmckenna.org/examples/validation.htm) and hadn't realized that you can do multiple `ternary expressions` in a row.
 
 So, instead of,

@@ -10,6 +10,10 @@ tags:
 date: May 13, 2014
 ---
 
+# Notes On Functional Programming
+
+## Patterns for the Non-Mathematician with Brian Lonsdorf
+
 ### Lenses
 
 Using lenses for composable/polymorphic model manipulation.

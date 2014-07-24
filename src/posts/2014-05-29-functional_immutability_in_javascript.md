@@ -6,6 +6,8 @@ tags:
 date: May 29, 2014
 ---
 
+# Functional Immutability in JavaScript
+
 This is taken from Michael Fogus' book *Functional JavaScript* in the chapter *Purity, Immutability, and Policies for Change*.
 
 Immutability is impossible to achieve in JavaScript without using `Object.freeze` but it only performs makes the object immutable shallowing, you have to roll your own `deepFreeze` if you would like to make the object truly immutable.
