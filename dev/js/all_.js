@@ -1,4 +1,4 @@
-var replaceAt, isPattern, removeExtension, pagePattern, postPattern, postUglyPattern, postLinkPattern, withPostUrl, withFriendlyPostUrl, withPostDate, withPageUrl, filterPosts, isPost, postDate, getUrl, extractObject, parseDocument, extractDocument, toConfigStyle, coreConfig, propDo, postList, infiniteScroll, link, links, head, menu, header, content, tagView, postsView, nextPostView, previousPostView, navLinksView, footerMenu, footer, main, app;
+var replaceAt, isPattern, removeExtension, pagePattern, postPattern, postUglyPattern, postLinkPattern, withPostUrl, withFriendlyPostUrl, withPostDate, withPageUrl, filterPosts, isPost, postDate, getUrl, extractObject, parseDocument, extractDocument, toConfigStyle, coreConfig, propDo, postList, infiniteScroll, link, menuLinks, headView, menuView, headerView, contentView, tagView, archiveView, nextPostView, previousPostView, navLinksView, footerMenuView, footerView, main, app;
 replaceAt = function(index, char, string){
   switch (false) {
   case !(index < 0):
@@ -84,13 +84,14 @@ parseDocument = function(it){
 };
 extractDocument = function(it){
   switch (false) {
-  case it.responseText === "Not found\n":
+  case !(it.responseText.indexOf('-->') > 0):
     return parseDocument(it.responseText.split("-->"));
   default:
     return JSON.stringify({
       title: "404",
       subtitle: "You've Been 404ed",
-      article: "Oops! I couldn't find that page!"
+      article: "Oops! I couldn't find that page!",
+      type: 'page'
     });
   }
 };
@@ -223,7 +224,7 @@ link = function(it){
     config: (it.url || (it.url = [])).indexOf(":") === -1 ? m.route : ""
   }, it.value);
 };
-links = function(items){
+menuLinks = function(items){
   return m('ul', (items || []).map(function(it){
     switch (false) {
     case !_.isEmpty(it):
@@ -233,7 +234,7 @@ links = function(items){
     }
   }));
 };
-head = function(head){
+headView = function(head){
   var link, stylesheets;
   link = function(it){
     return m("link", {
@@ -261,16 +262,16 @@ head = function(head){
     href: "./favicon.ico"
   })));
 };
-menu = function(it){
-  return m('.pure-menu.pure-menu-open.pure-menu-horizontal.menu', links(it));
+menuView = function(it){
+  return m('.pure-menu.pure-menu-open.pure-menu-horizontal.menu', menuLinks(it));
 };
-header = function(type, config){
+headerView = function(type, config){
   return m('.header', [m('a', {
     href: config.url,
     'class': config['class']
-  }, [m('img', {
+  }, m('img', {
     src: config.src
-  })])].concat((function(){
+  }))].concat((function(){
     switch (type) {
     case 'page':
     case 'archive':
@@ -280,7 +281,7 @@ header = function(type, config){
     }
   }())));
 };
-content = function(it){
+contentView = function(it){
   return m('article.content', it.article);
 };
 tagView = function(type, tags){
@@ -295,12 +296,12 @@ tagView = function(type, tags){
     return '';
   }
 };
-postsView = function(posts, metadata, type){
+archiveView = function(posts, metadata, type){
   var i;
   switch (type) {
   case 'archive':
     return m('.pure-menu.pure-menu-open.menu', [
-      m('.pure-menu-heading', 'Archive'), links((function(){
+      m('.pure-menu-heading', 'Archive'), menuLinks((function(){
         var i$, results$ = [];
         for (i$ = metadata.length - 1; i$ >= 0; --i$) {
           i = i$;
@@ -355,21 +356,21 @@ navLinksView = function(posts, metadata){
     index = posts.indexOf(m.route());
     previousPost = previousPostView(posts, metadata, index);
     nextPost = nextPostView(posts, metadata, index);
-    return m('.pure-menu.pure-menu-open.pure-menu-horizontal.menu', links([previousPost, nextPost]));
+    return m('.pure-menu.pure-menu-open.pure-menu-horizontal.menu', menuLinks([previousPost, nextPost]));
   default:
     return '';
   }
 };
-footerMenu = function(it){
-  return m('#footer-menu.pure-menu.pure-menu-open.pure-menu-horizontal.menu', [links(it)]);
+footerMenuView = function(it){
+  return m('#footer-menu.pure-menu.pure-menu-open.pure-menu-horizontal.menu', [menuLinks(it)]);
 };
-footer = function(it){
+footerView = function(it){
   return m('footer.footer', [m('p', it.text)]);
 };
 main = function(ctrl){
   var config, result;
   config = ctrl.config;
-  return result = m('html', [m('head', head(config.head)), m('body', [m('#main', [menu(config.menuItems), header(config.fileType, config.header), content(config.content), tagView(config.fileType, config.tags), navLinksView(config.posts(), config.postMetadata()), postsView(config.posts(), config.postMetadata(), config.fileType), footerMenu(config.footerItems), footer(config.footer)])])]);
+  return result = m('html', [m('head', headView(config.head)), m('body', [m('#main', [menuView(config.menuItems), headerView(config.fileType, config.header), contentView(config.content), tagView(config.fileType, config.tags), navLinksView(config.posts(), config.postMetadata()), archiveView(config.posts(), config.postMetadata(), config.fileType), footerMenuView(config.footerItems), footerView(config.footer)])])]);
 };
 function Controller(){
   var self, document, orCreate404Config, createNewConfig;

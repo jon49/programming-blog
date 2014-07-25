@@ -11,6 +11,8 @@ filter = require 'gulp-filter'
 replace = require 'gulp-regex-replace'
 livescript = require 'gulp-livescript'
 uglify = require 'gulp-uglify'
+# convert = require 'gulp-convert'
+# yaml = require 'gulp-yaml'
 
 pandocSettings = {
   from: 'markdown'
@@ -36,9 +38,19 @@ postMetadata = {
 
 posted = (file) -> //\d{4}//.test file.path
 
-gulp.task 'ls', ->
+gulp.task 'clean' ->
+  del [
+    './dist/**'
+    './dev/pages/*'
+    './dev/posts/*'
+    './src/ls/*.js'
+    './dev/js/all.js'
+    './dev/js/all_.js'
+  ], ->
+
+gulp.task 'ls', ['clean'] ->
   devDest = './dev/js/'
-  gulp.src './dev/ls/*.ls'
+  gulp.src './src/ls/*.ls'
      .pipe concat 'all_.ls'
      .pipe (livescript {bare: true}).on 'error', (e) -> throw e
      .pipe gulp.dest devDest
@@ -46,7 +58,6 @@ gulp.task 'ls', ->
 gulp.task 'js', ['ls'], ->
    devDest = './dev/js/'
    distDest = './dist/js/'
-   #del ["./dev/js/all.js"], (err) -> console.log 'Didn\'t delete'
    result = gulp.src './dev/js/*.js'
       .pipe concat 'all.js'
       .pipe wrapper (
@@ -54,17 +65,9 @@ gulp.task 'js', ['ls'], ->
          footer: '\n})()'
       ) 
       .pipe gulp.dest devDest
-      #.pipe uglify!
+      .pipe uglify!
       .pipe gulp.dest distDest
-   #del ["./dev/ls/*.js"], ->
    result
-
-gulp.task 'clean', ['js'], ->
-  del [
-    './dist/**'
-    './dev/pages/*'
-    './dev/posts/*'
-  ], ->
 
 gulp.task 'postMeta', ['js'], ->
   devDest = './dev/posts'

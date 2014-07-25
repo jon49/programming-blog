@@ -20,6 +20,7 @@ p.center {
 }
 img {
   max-width: 100%;
+  text-align: center;
 }
 .post-tag {
   margin: 0 0.1em;
@@ -62,6 +63,9 @@ h2 {
   overflow: hidden;
   margin: 0 0 2em 0;
 }
+.menu {
+  text-align: center;
+}
 .footer {
   font-size: 60%;
   text-align: center;
@@ -94,9 +98,6 @@ h2 {
   font-size: 1em;
   float: left;
   visibility: hidden;
-}
-pre {
-  background-color: #fdf6e3;
 }
 .sourceCode .kw {
   color: #268bd2;

@@ -52,13 +52,14 @@ parseDocument = ->
       result = "#left, \"article\": \"#right\"}"
 
 extractDocument = -> 
-   | it.responseText isnt "Not found\n" =>
+   | (it.responseText.indexOf '-->') > 0 =>
       parseDocument (it.responseText.split "-->")
    | _ => 
       JSON.stringify do
          title: "404" 
          subtitle: "You've Been 404ed"
          article: "Oops! I couldn't find that page!"
+         type: 'page'
 
 //--- config object preprocessing --//
 

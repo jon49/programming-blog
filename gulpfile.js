@@ -28,10 +28,13 @@ postMetadata = {
 posted = function(file){
   return /\d{4}/.test(file.path);
 };
-gulp.task('ls', function(){
+gulp.task('clean', function(){
+  return del(['./dist/**', './dev/pages/*', './dev/posts/*', './src/ls/*.js', './dev/js/all.js', './dev/js/all_.js'], function(){});
+});
+gulp.task('ls', ['clean'], function(){
   var devDest;
   devDest = './dev/js/';
-  return gulp.src('./dev/ls/*.ls').pipe(concat('all_.ls')).pipe(livescript({
+  return gulp.src('./src/ls/*.ls').pipe(concat('all_.ls')).pipe(livescript({
     bare: true
   }).on('error', function(e){
     throw e;
@@ -44,11 +47,8 @@ gulp.task('js', ['ls'], function(){
   result = gulp.src('./dev/js/*.js').pipe(concat('all.js')).pipe(wrapper({
     header: ';(function(){\n',
     footer: '\n})()'
-  })).pipe(gulp.dest(devDest)).pipe(gulp.dest(distDest));
+  })).pipe(gulp.dest(devDest)).pipe(uglify()).pipe(gulp.dest(distDest));
   return result;
-});
-gulp.task('clean', ['js'], function(){
-  return del(['./dist/**', './dev/pages/*', './dev/posts/*'], function(){});
 });
 gulp.task('postMeta', ['js'], function(){
   var devDest, distDest;

@@ -18,8 +18,6 @@ On the back end all feedly would need to do is periodically update the feeds and
 
 It will be nice when the internet will catch up with the distributed model of doing things.
 
-![A Simple Outline of How to Set Up a Distributed Feedly](https://dl.dropboxusercontent.com/u/74660436/FeedlyApp.png)
+[![A Simple Outline of How to Set Up a Distributed Feedly](/images/small/FeedlyApp.png)](/images/FeedlyApp.png)
 
-**A Simple Outline of How to Set Up a Distributed Feedly.** 
-
-*To view larger, click on image and select* `open image in new tab`.
+A Simple Outline of How to Set Up a Distributed Feedly
