@@ -6,6 +6,8 @@ postUglyPattern = new RegExp "(\\d{4})-(\\d{2})-(\\d{2})-(.+)"
 
 postLinkPattern = new RegExp "(\\d{4})-(\\d{2})-(\\d{2})-(.+)"
 
+redirectPattern = '#!/'
+
 withPostUrl = (match_, year, month, day, postName) -> 
    "/posts/#year-#month-#day-#postName.html"
 
@@ -30,10 +32,15 @@ postDate = ->
    new Date(m.route().replace postPattern, withPostDate)
 
 getUrl = (route) -> 
-   | isPattern postPattern, route =>
-      route.replace postPattern, withPostUrl
-   | isPattern pagePattern, route =>
-      route.replace pagePattern, withPageUrl
+   href = document.location.href
+   route_ = switch (redirectIndex = href.indexOf redirectPattern)
+            | -1 => route
+            | _ => href.slice (redirectIndex + redirectPattern.length - 1)
+   switch
+   | isPattern postPattern, route_ =>
+      route_.replace postPattern, withPostUrl
+   | isPattern pagePattern, route_ =>
+      route_.replace pagePattern, withPageUrl
    | _ => "/pages/index.html"
 
 //--- html preprocessing ---//

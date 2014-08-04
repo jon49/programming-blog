@@ -1,4 +1,4 @@
-var replaceAt, isPattern, removeExtension, pagePattern, postPattern, postUglyPattern, postLinkPattern, withPostUrl, withFriendlyPostUrl, withPostDate, withPageUrl, filterPosts, isPost, postDate, getUrl, extractObject, parseDocument, extractDocument, toConfigStyle, coreConfig, propDo, postList, infiniteScroll, link, menuLinks, headView, menuView, headerView, contentView, tagView, archiveView, nextPostView, previousPostView, navLinksView, footerMenuView, footerView, main, app;
+var replaceAt, isPattern, removeExtension, pagePattern, postPattern, postUglyPattern, postLinkPattern, redirectPattern, withPostUrl, withFriendlyPostUrl, withPostDate, withPageUrl, filterPosts, isPost, postDate, getUrl, extractObject, parseDocument, extractDocument, toConfigStyle, coreConfig, propDo, postList, infiniteScroll, link, menuLinks, headView, menuView, headerView, contentView, tagView, archiveView, nextPostView, previousPostView, navLinksView, footerMenuView, footerView, main, app;
 replaceAt = function(index, char, string){
   switch (false) {
   case !(index < 0):
@@ -18,6 +18,7 @@ pagePattern = new RegExp("/(\\w+)");
 postPattern = new RegExp("/(\\d{4})/(\\d{2})/(\\d{2})/(.+)");
 postUglyPattern = new RegExp("(\\d{4})-(\\d{2})-(\\d{2})-(.+)");
 postLinkPattern = new RegExp("(\\d{4})-(\\d{2})-(\\d{2})-(.+)");
+redirectPattern = '#!/';
 withPostUrl = function(match_, year, month, day, postName){
   return "/posts/" + year + "-" + month + "-" + day + "-" + postName + ".html";
 };
@@ -44,11 +45,21 @@ postDate = function(){
   return new Date(m.route().replace(postPattern, withPostDate));
 };
 getUrl = function(route){
+  var href, route_, redirectIndex;
+  href = document.location.href;
+  route_ = (function(){
+    switch (redirectIndex = href.indexOf(redirectPattern)) {
+    case -1:
+      return route;
+    default:
+      return href.slice(redirectIndex + redirectPattern.length - 1);
+    }
+  }());
   switch (false) {
-  case !isPattern(postPattern, route):
-    return route.replace(postPattern, withPostUrl);
-  case !isPattern(pagePattern, route):
-    return route.replace(pagePattern, withPageUrl);
+  case !isPattern(postPattern, route_):
+    return route_.replace(postPattern, withPostUrl);
+  case !isPattern(pagePattern, route_):
+    return route_.replace(pagePattern, withPageUrl);
   default:
     return "/pages/index.html";
   }
@@ -373,7 +384,7 @@ main = function(ctrl){
   return result = m('html', [m('head', headView(config.head)), m('body', [m('#main', [menuView(config.menuItems), headerView(config.fileType, config.header), contentView(config.content), tagView(config.fileType, config.tags), navLinksView(config.posts(), config.postMetadata()), archiveView(config.posts(), config.postMetadata(), config.fileType), footerMenuView(config.footerItems), footerView(config.footer)])])]);
 };
 function Controller(){
-  var self, document, orCreate404Config, createNewConfig;
+  var self, document, createNewConfig, orCreate404Config;
   self = this;
   this.config = coreConfig;
   document = {
@@ -381,7 +392,7 @@ function Controller(){
     url: getUrl(m.route()),
     extract: extractDocument
   };
-  orCreate404Config = createNewConfig = function(it){
+  createNewConfig = orCreate404Config = function(it){
     var it_, newConfig;
     it_ = toConfigStyle(it);
     it_.content.article = m.trust(it_.content.article);

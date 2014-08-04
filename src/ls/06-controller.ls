@@ -8,7 +8,7 @@
       url: getUrl m.route()
       extract: extractDocument
 
-   orCreate404Config = createNewConfig = !-> 
+   createNewConfig = orCreate404Config = !-> 
       it_ = toConfigStyle it
       it_.content.article = m.trust it_.content.article
       newConfig = _.merge {}, coreConfig, it_
