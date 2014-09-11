@@ -44,7 +44,7 @@ coreConfig = {
   footerItems: [
     {
       value: "",
-      url: "http://thisisafiller-jon.tumblr.com/rss",
+      url: 'http://jon.prescottprogrammers.com/feed.xml',
       title: "RSS Feed",
       'class': "fa fa-rss fa-2x"
     }, {
