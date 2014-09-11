@@ -4,7 +4,7 @@ tags:
    - feedly
    - ideas
 date: June 12, 2014
-...
+---
 
 # A Distributed & Robust Feedly
 

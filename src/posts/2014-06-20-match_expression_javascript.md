@@ -6,7 +6,7 @@ tags:
    - ternary
    - design patterns
 date: June 20, 2014
-...
+---
 
 # Match Expression for JavaScript?
 

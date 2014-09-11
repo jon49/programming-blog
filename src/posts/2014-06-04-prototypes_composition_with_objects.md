@@ -5,7 +5,7 @@ tags:
    - design patterns
    - lenses
 date: June 6, 2014
-...
+---
 
 # Prototypes & Compositions with Objects
 

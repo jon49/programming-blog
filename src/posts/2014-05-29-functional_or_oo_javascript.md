@@ -5,7 +5,7 @@ tags:
    - michael fogus
    - fun
 date: May 29, 2014
-...
+---
 
 # Functional or Object Oriented JavaScript?
 

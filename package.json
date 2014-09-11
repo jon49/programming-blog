@@ -9,24 +9,40 @@
   "author": "Jon Nyman",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "gulp": "~3.8.6"
+    "gulp": "~3.8.6",
+    "mithril": "^0.1.21"
+  },
+  "browserify": {
+    "transform": [
+      "liveify"
+    ]
   },
   "devDependencies": {
-    "gulp": "~3.8.6",
-    "path": "~0.4.9",
-    "gulp-stylus": "~1.0.5",
-    "gulp-pandoc": "~0.2.0",
-    "gulp-concat": "~2.3.3",
-    "gulp-changed": "~0.4.0",
+    "browserify": "^5.11.1",
     "del": "~0.1.1",
-    "gulp-rename": "~1.2.0",
-    "gulp-wrapper": "~0.1.42",
-    "gulp-regex-replace": "~0.2.2",
+    "event-stream": "~3.1.7",
+    "gulp": "~3.8.6",
+    "gulp-changed": "~0.4.0",
+    "gulp-concat": "~2.3.3",
+    "gulp-convert": "~0.1.0",
+    "gulp-data": "^1.0.2",
     "gulp-debug": "~0.3.0",
     "gulp-filter": "~0.5.0",
+    "gulp-front-matter": "~1.0.0",
     "gulp-livescript": "~1.0.3",
+    "gulp-pandoc": "^0.2.0",
+    "gulp-pluck": "0.0.1",
+    "gulp-regex-replace": "~0.2.2",
+    "gulp-rename": "~1.2.0",
+    "gulp-ssg": "~0.4.5",
+    "gulp-stylus": "~1.0.5",
     "gulp-uglify": "~0.3.1",
-    "gulp-convert": "~0.1.0",
-    "gulp-yaml": "0.0.3"
+    "gulp-wrapper": "~0.1.42",
+    "gulp-yaml": "0.0.3",
+    "liveify": "^0.4.0",
+    "lodash": "~2.4.1",
+    "pdc": "^0.2.1",
+    "stream-reduce": "~1.0.3",
+    "vinyl-source-stream": "^0.1.1"
   }
 }

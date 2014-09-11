@@ -6,7 +6,7 @@ tags:
    - javascript
    - functional programming
 date: July 1, 2014
-...
+---
 
 # bilby.js & lenses
 

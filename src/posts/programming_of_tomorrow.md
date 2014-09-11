@@ -1,6 +1,6 @@
 ---
 title: The Programming of Tommorrow
-...
+---
 
 This is awesome.
 
