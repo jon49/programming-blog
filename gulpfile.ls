@@ -5,9 +5,12 @@ require! <[
    lodash
    browserify
    pdc
+   feed
+   gulp-sitemap
 ]>
 
 λ = lodash
+sitemap = gulp-sitemap
 
 stylus = require 'gulp-stylus'
 manifest = require 'gulp-asset-manifest'
@@ -102,6 +105,35 @@ gulp.task 'html', ['js'], ->
       .pipe rename toUrlStylePath
       .pipe gulp.dest distDest
 
+gulp.task 'sitemap', ['html'], ->
+   distDest = './dist'
+   gulp.src './dist/**/*.html', {read: false}
+      .pipe sitemap {siteUrl: 'http://jon.prescottprogrammers.com'}
+      .pipe gulp.dest distDest
+
+feedData =
+   title:         'Jon\'s Programming Blog Feed'
+   description:   'A blog on programming concepts, etc.'
+   link:          'http://jon.prescottprogrammers.com'
+   image:         'http://jon.prescottprogrammers.com/images/fire.png'
+   copyright:     'Copyright © 2014 Jon Nyman. Link back to this blog if using info from this blog.'
+   author:
+      name:       'Jon Nyman'
+      email:      'nymanjon@gmail.com'
+      link:       'https://github.com/jon49'
+
+create-feed = (meta) ->
+   feed_ = new feed feedData
+   meta.forEach !->
+      | ///\d{4}/\d{2}/\d{2}//.test it.url =>
+         feed_.addItem(
+            title: it.title
+            link: "http://jon.prescottprogrammers.com#{it.url}"
+            description: it.contents
+            date: new Date it.date
+         )
+   feed_
+
 gulp.task 'json', ['html'], ->
    distDest = './dist'
    gulp.src './src/**/*.md'
@@ -117,8 +149,13 @@ gulp.task 'json', ['html'], ->
       # create json file of post metadata
       .pipe pluck 'meta', 'data.json'
       .pipe data (file) !->
-         meta = λ.sortBy file.meta, 'url' .reverse!
-         file.contents = new Buffer JSON.stringify meta
+         file.meta = λ.sortBy file.meta, 'url' .reverse!
+         file.contents = new Buffer JSON.stringify file.meta
+      .pipe gulp.dest distDest
+      .pipe data (file) !->
+         file.feed = create-feed file.meta
+         file.contents = new Buffer file.feed.render 'atom-1.0'
+         file.path = path.join (path.dirname file.path), 'feed.xml'
       .pipe gulp.dest distDest
 
 gulp.task 'css', ['js'], ->
@@ -134,6 +171,7 @@ gulp.task 'default', [
   'images'
   'js'
   'html'
+  'sitemap'
   'json'
   'js'
   'css'
