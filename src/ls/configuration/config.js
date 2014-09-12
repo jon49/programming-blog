@@ -49,6 +49,11 @@ coreConfig = {
       'class': "fa fa-rss fa-2x"
     }, {
       value: "",
+      url: '/signup/',
+      title: 'Get e-mails of new posts!',
+      'class': "fa fa-envelope fa-2x"
+    }, {
+      value: "",
       url: "https://github.com/jon49/",
       title: "Personal Github Account",
       'class': "fa fa-github fa-2x"
