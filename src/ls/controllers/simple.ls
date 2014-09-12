@@ -1,12 +1,12 @@
 m = require 'mithril'
 config = require './../configuration/config'
-λ = require './../../js/custom-lodash'
+_ = require './../../js/custom-lodash'
 
 //--- html preprocessing ---//
 parseDocument = -> JSON.stringify article: it.contents
 
 extractDocument = -> 
-   | λ.isPlainObject it => # found json file get contents
+   | _.isPlainObject it => # found json file get contents
       parseDocument it
    | otherwise =>          # couldn't find json file
       JSON.stringify do
@@ -39,9 +39,9 @@ toConfigStyle = ->
       url: '/data.json'
 
    createNewConfig = orCreate404Config = !-> 
-      data = toConfigStyle λ.find config.data, url: m.route!
+      data = toConfigStyle _.find config.data, url: m.route!
       data.content.article = m.trust data.content.article
-      self.config = λ.merge {}, config, data
+      self.config = _.merge {}, config, data
 
    setConfig = !->
       config.data = it

@@ -1,7 +1,7 @@
 m = require 'mithril'
 menuLinks = require './common' .menuLinks
 isPost = require './../utilities/special' .isPost
-λ = require './../../js/custom-lodash'
+_ = require './../../js/custom-lodash'
 s = require './../utilities/special'
 
 # links to the later post in list
@@ -33,7 +33,7 @@ previousPost = (data, index) ->
 # puts links together when it is a post.
 navLinks = (data) ->
    | isPost m.route! =>
-      index = λ.findIndex data, -> it.url is m.route!
+      index = _.findIndex data, -> it.url is m.route!
       previousPost_ = previousPost data, index
       nextPost_ = nextPost data, index
       m  '.pure-menu.pure-menu-open.pure-menu-horizontal.menu',

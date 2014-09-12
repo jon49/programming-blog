@@ -1,6 +1,6 @@
 /* run this css file if no javascript is enabled. */
 article:before {
-  content: '\a For full site functionality enable JavaScript! \a' url("/images/fire.png");
+  content: '\a For full site functionality enable JavaScript!\aFor a list of posts visit:\ahttp://jon.prescottprogrammers.com/sitemap.xml' url("/images/fire.png");
   display: block;
   white-space: pre;
   text-align: center;

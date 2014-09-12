@@ -2,73 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>http://jon.prescottprogrammers.com/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/about/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>http://jon.prescottprogrammers.com/signup/</loc>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/04/15/filler/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/05/13/bilby_functional_programming/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/05/13/functional_programming_for_non_mathematicians/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/05/15/monads_monoids_and_make_believe_brian_lonsdorf/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/05/29/functional_immutability_in_javascript/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/05/29/functional_or_oo_javascript/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/06/04/prototypes_composition_with_objects/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/06/12/distributed_robust_feedly/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/06/20/match_expression_javascript/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>http://jon.prescottprogrammers.com/2014/07/01/bilbyjs_lenses/</loc>
-        <lastmod>2014-09-11T23:01:25.000Z</lastmod>
+        <lastmod>2014-09-12T00:54:32.000Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
