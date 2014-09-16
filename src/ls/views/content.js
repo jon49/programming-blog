@@ -2,6 +2,6 @@
 var m, content;
 m = require('mithril');
 content = function(it){
-  return m('article.content.animated.flip', it.article);
+  return m('article.content.animated.fadeIn', it.article);
 };
 module.exports = content;

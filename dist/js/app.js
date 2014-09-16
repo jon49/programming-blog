@@ -1172,7 +1172,7 @@ module.exports = {
 var m, content;
 m = require('mithril');
 content = function(it){
-  return m('article.content.animated.flip', it.article);
+  return m('article.content.animated.fadeIn', it.article);
 };
 module.exports = content;
 },{"mithril":2}],14:[function(require,module,exports){
