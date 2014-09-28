@@ -10,9 +10,23 @@ date: July 1, 2014
 
 # bilby.js & lenses
 
-In JavaScript nearly everything is [mutable](http://en.wikipedia.org/wiki/Mutable). This can cause problems in your code when you think you have a new object or variable but instead you are operating on the referenced object. So, we create patterns to alleviate this problem. Or we use libraries like [underscore.js](http://underscorejs.org/) or [lodash.js](http://lodash.com/docs) which incorporate the functional concepts. Unfortunately they don't always use immutable objects either.
+In JavaScript nearly everything is [mutable][]. This can cause problems
+in your code when you think you have a new object or variable but
+instead you are operating on the referenced object. So, we create
+patterns to alleviate this problem. Or we use libraries like
+[underscore.js][] or [lodash.js][] which incorporate the functional
+concepts. Unfortunately they don't always use immutable objects either.
 
-Bilby.js solves the mutability problem by using [lenses](http://bilby.brianmckenna.org/#lenses). Using the [lenses](http://en.wikipedia.org/wiki/Bidirectional_transformation) pattern one can access and change one's objects in a safe and immutable manner.
+  [mutable]: http://en.wikipedia.org/wiki/Mutable
+  [underscore.js]: http://underscorejs.org/
+  [lodash.js]: http://lodash.com/docs
+
+Bilby.js solves the mutability problem by using [lenses][]. Using the
+[lenses][1] pattern one can access and change one's objects in a safe
+and immutable manner.
+
+  [lenses]: http://bilby.brianmckenna.org/#lenses
+  [1]: http://en.wikipedia.org/wiki/Bidirectional_transformation
 
 Let's say we have the `Person` object.
 
@@ -63,7 +77,20 @@ var susan = firstLens.compose(nameLens).run(george).setter('Susan')
 // Object {name: {first:'Susan', last: 'Stanza'}, id: 0}
 ```
 
-Hhhhmmm...there's a problem there. `susan` is no longer a `Person` she's only an `Object`. We don't want to objectify her do we? I worked around this problem by creating my own `set` function.
+**Update**
+
+The below code is strongly discouraged by [Mozilla Developer Network][].
+Also, the correct method would be `Object.getPrototypeOf(object)` and
+`Object.setPrototypeOf(object)` instead of `__proto__`. I've since
+switched to using plain objects with commonjs modules instead.
+
+  [Mozilla Developer Network]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
+
+**End Update**
+
+Hhhhmmm...there's a problem there. `susan` is no longer a `Person` she's
+only an `Object`. We don't want to objectify her do we? I worked around
+this problem by creating my own `set` function.
 
 ```javascript
 var set = function(lens, object, value){
@@ -78,9 +105,15 @@ var fred = set(firstLens.compose(nameLens), george, 'Fred')
 
 ```
 
-Now we need to remember that these new objects are not deep clones, only shallow clones, which helps with performance but, if we leave our design pattern we could get in trouble, so be careful!
+Now we need to remember that these new objects are not deep clones, only
+shallow clones, which helps with performance but, if we leave our design
+pattern we could get in trouble, so be careful!
 
-Note that in [Fantasy Land lenses](https://github.com/fantasyland/fantasy-lenses) the naming convetion is different `setter` and `getter` drop the `ter` and `compose` is dropped in favor of `andThen` making it so you can switch the order of your lenses.
+Note that in [Fantasy Land lenses][] the naming convetion is different
+`setter` and `getter` drop the `ter` and `compose` is dropped in favor
+of `andThen` making it so you can switch the order of your lenses.
+
+  [Fantasy Land lenses]: https://github.com/fantasyland/fantasy-lenses
 
 ```javascript
 var deborah = nameLens.andThen(firstLens).run(george).set('Deborah')

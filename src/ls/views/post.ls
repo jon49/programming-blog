@@ -1,18 +1,17 @@
 require! <[
    mithril
-   ./head
-   ./menu
-   ./header
-   ./content
-   ./tags
-   ./nav-links
-   ./archive
-   ./footer-menu
-   ./footer
+   ./components/head
+   ./components/menu
+   ./components/header
+   ./components/content
+   ./components/tags
+   ./components/nav-links
+   ./components/footer-menu
+   ./components/footer
 ]>
 
 #put all views together
-main = (ctrl) ->
+post = (ctrl) ->
    config = ctrl.config
    result = m 'html', [
       m 'head', (head config.head)
@@ -35,9 +34,6 @@ main = (ctrl) ->
             # Show next and previous post
             nav-links config.data
             
-            # Show archive of posts
-            archive config.data, config.fileType
-
             # menu social media
             footer-menu config.footerItems
 
@@ -47,4 +43,4 @@ main = (ctrl) ->
       ]
    ]
 
-module.exports = main
+module.exports = post

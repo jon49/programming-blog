@@ -1,19 +1,19 @@
 require! <[
    mithril
-   ./controllers/archive
-   ./controllers/post
-   ./controllers/page
-   ./views/main
+   ./controllers/controller
+   ./views/archive
+   ./views/post
+   ./views/page
 ]>
 
-app = ->
-   view: main
-   controller: it
+app = (view, controller) ->
+   view: view
+   controller: controller
 
 m.route.mode = "pathname"
  
 m.route document, "/", (
-   "/": app archive
-   "/:date.../:post": app post
-   "/:page": app page
+   "/": app archive, controller
+   "/:date.../:post": app post, controller
+   "/:page": app page, controller
 )

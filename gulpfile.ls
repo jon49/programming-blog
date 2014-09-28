@@ -95,6 +95,13 @@ gulp.task 'js', ['images'] ->
    .pipe source 'app.js'
    .pipe gulp.dest distDest
 
+gulp.task 'ugly', ['js'] ->
+   distDest = './dist/js'
+   gulp.src './dist/js/app.js'
+      .pipe uglify!
+      .pipe rename 'app-min.js'
+      .pipe gulp.dest distDest
+
 gulp.task 'html', ['js'], ->
    distDest = './dist'
    gulp.src './src/**/*.md'
@@ -175,5 +182,6 @@ gulp.task 'default', [
   'json'
   'js'
   'css'
+  'ugly'
 #  'watch'
 ]

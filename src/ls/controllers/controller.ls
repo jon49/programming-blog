@@ -34,6 +34,8 @@ toConfigStyle = ->
    self = @
    @config = config
 
+   #m.redraw.strategy 'diff'
+
    json-data = 
       method: "GET"
       url: '/data.json'

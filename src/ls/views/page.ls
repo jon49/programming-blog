@@ -4,7 +4,6 @@ require! <[
    ./components/menu
    ./components/header
    ./components/content
-   ./components/archive
    ./components/footer-menu
    ./components/footer
 ]>
@@ -26,9 +25,6 @@ main = (ctrl) ->
 
             # main article content
             content config.content
-
-            # Show archive of posts
-            archive config.data, config.fileType
 
             # menu social media
             footer-menu config.footerItems
