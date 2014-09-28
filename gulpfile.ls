@@ -73,7 +73,7 @@ gulp.task 'clean' ->
   del [
     './dist/**'
     './dev/**'
-    './src/ls/*.js'
+    './src/ls/**/*.js'
   ], ->
 
 gulp.task 'images', ['clean'] ->

@@ -74,7 +74,7 @@ toUrlStylePath = function(file){
   file.ext = '.html';
 };
 gulp.task('clean', function(){
-  return del(['./dist/**', './dev/**', './src/ls/*.js'], function(){});
+  return del(['./dist/**', './dev/**', './src/ls/**/*.js'], function(){});
 });
 gulp.task('images', ['clean'], function(){
   var distDest;
