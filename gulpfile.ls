@@ -9,7 +9,7 @@ require! <[
    gulp-sitemap
 ]>
 
-λ = lodash
+_ = lodash
 sitemap = gulp-sitemap
 
 stylus = require 'gulp-stylus'
@@ -24,7 +24,6 @@ uglify = require 'gulp-uglify'
 front-matter = require 'gulp-front-matter'
 ssg = require 'gulp-ssg'
 es = require 'event-stream'
-# reduce = require 'stream-reduce'
 pluck = require 'gulp-pluck'
 data = require 'gulp-data'
 source = require 'vinyl-source-stream'
@@ -36,7 +35,7 @@ toHtml =
    ext: '.html'
    args:
       * '--smart'
-        '--template=/home/jon/Documents/Source/Repos/Websites/jon.prescottprogrammers.com/src/template.html'
+        '--template=/home/jon/Documents/source/repos/websites/jon.prescottprogrammers.com/src/template.html'
         '--no-wrap'
 
 toSimpleHtml =
@@ -156,7 +155,7 @@ gulp.task 'json', ['html'], ->
       # create json file of post metadata
       .pipe pluck 'meta', 'data.json'
       .pipe data (file) !->
-         file.meta = λ.sortBy file.meta, 'url' .reverse!
+         file.meta = _.sortBy file.meta, 'url' .reverse!
          file.contents = new Buffer JSON.stringify file.meta
       .pipe gulp.dest distDest
       .pipe data (file) !->

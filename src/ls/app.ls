@@ -10,10 +10,10 @@ app = (view, controller) ->
    view: view
    controller: controller
 
-m.route.mode = "pathname"
+m.route.mode = 'pathname'
  
-m.route document, "/", (
-   "/": app archive, controller
-   "/:date.../:post": app post, controller
-   "/:page": app page, controller
+m.route document, '/', (
+   '/': app archive, controller
+   '/:date.../:post': app post, controller
+   '/:page': app page, controller
 )
