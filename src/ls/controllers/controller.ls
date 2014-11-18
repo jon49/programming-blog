@@ -44,26 +44,35 @@ toConfigStyle = ->
 
     set-metadata = !->
         config.data = it
+        self.config.data = it
 
     set-content = !->
         config.cachedContent[m.route!] = it
         createNewConfig!
 
+    get-article-from-html = ->
+        el = document.createElement 'div'
+        el.innerHTML = it
+        el.getElementsByTagName 'article' .0.innerHTML 
+        |> m.trust
+
     get-content =
         method: 'GET'
         url: m.route!
-        deserialize: ->
-            el = document.createElement 'div'
-            el.innerHTML = it
-            el.getElementsByTagName 'article' .0.innerHTML 
-            |> m.trust
+        deserialize: get-article-from-html
 
     json-data = 
         method: "GET"
         url: '/data.json'
 
     request-content = !->
-        m.request get-content .then set-content, orCreate404Config
+        | config.cachedContent[m.route!] =>
+            createNewConfig!
+        | m.route! == location.pathname =>
+            get-article-from-html document.body.innerHTML
+            |> set-content
+        | otherwise =>
+            m.request get-content .then set-content, orCreate404Config
 
     do !->
         | config.data is void =>
