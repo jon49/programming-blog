@@ -46,7 +46,7 @@ toConfigStyle = ->
         config.data = it
 
     set-content = !->
-        config.cachedContent[m.route!] = m.trust it
+        config.cachedContent[m.route!] = it
         createNewConfig!
 
     get-content =
@@ -55,7 +55,8 @@ toConfigStyle = ->
         deserialize: ->
             el = document.createElement 'div'
             el.innerHTML = it
-            ((el.getElementsByTagName 'article')[0]).innerHTML
+            el.getElementsByTagName 'article' .0.innerHTML 
+            |> m.trust
 
     json-data = 
         method: "GET"

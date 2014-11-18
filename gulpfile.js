@@ -143,7 +143,6 @@ gulp.task('json', ['html'], function(){
     property: 'meta'
   })).pipe(pandoc(toSimpleHtml)).pipe(data(function(file){
     file.meta.url = toUrlPath(path.basename(file.relative));
-    file.meta.contents = file.contents.toString();
   })).pipe(pluck('meta', 'data.json')).pipe(data(function(file){
     file.meta = _.sortBy(file.meta, 'url').reverse();
     file.contents = new Buffer(JSON.stringify(file.meta));

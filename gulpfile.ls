@@ -150,7 +150,6 @@ gulp.task 'json', ['html'], ->
       # place metadata url information
       .pipe data (file) !->
          file.meta.url = toUrlPath path.basename file.relative
-         file.meta.contents = file.contents.toString!
 
       # create json file of post metadata
       .pipe pluck 'meta', 'data.json'
