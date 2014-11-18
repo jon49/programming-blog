@@ -17,8 +17,7 @@ coreConfig =
       src: "/images/fire.png"
       title: "This is a Filler"
       subtitle: "Filling Up"
-   content: 
-      article: "Loading..."
+   article: "Loading..."
    tags: []
    previousPost: 
       value: ""
@@ -57,5 +56,6 @@ coreConfig =
       text: m.trust '&copy; 2014 Jon Nyman<br />nymanjon@gmail.com<br />Still Empty'
    fileType: ''
    data: void
+   cachedContent: {}
 
 module.exports = coreConfig

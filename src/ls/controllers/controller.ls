@@ -19,40 +19,58 @@ extractDocument = ->
 
 # If property exists then put in config style
 toConfigStyle = ->
-   x = {}
-   x.{}head.description = it.description
-   x.{}head.title = it.title
-   x.{}content.article = it.contents
-   x.{}header.title = it.title
-   x.{}header.subtitle = it.subtitle
-   x.fileType = it.type
-   x.tags = it.tags
-   x
+    x = {}
+    x.{}head.description = it.description
+    x.{}head.title = it.title
+    x.{}content.article = it.contents
+    x.{}header.title = it.title
+    x.{}header.subtitle = it.subtitle
+    x.fileType = it.type
+    x.tags = it.tags
+    x
 
 # Controller used with mithril
 !function Controller
-   self = @
-   @config = config
+    self = @
+    @config = config
 
-   #m.redraw.strategy 'diff'
+    #m.redraw.strategy 'diff'
 
-   json-data = 
-      method: "GET"
-      url: '/data.json'
+    createNewConfig = orCreate404Config = !-> 
+        # data = toConfigStyle _.find config.data, url: m.route!
+        content = {}
+        content.article = config.cachedContent[m.route!]
+        self.config = _.merge {}, config, content
 
-   createNewConfig = orCreate404Config = !-> 
-      data = toConfigStyle _.find config.data, url: m.route!
-      data.content.article = m.trust data.content.article
-      self.config = _.merge {}, config, data
+    set-metadata = !->
+        config.data = it
 
-   setConfig = !->
-      config.data = it
-      createNewConfig!
+    set-content = !->
+        config.cachedContent[m.route!] = m.trust it
+        createNewConfig!
 
-   do !->
-      | config.data is void =>
-         m.request json-data .then setConfig, orCreate404Config
-      | _ => 
-         createNewConfig!
+    get-content =
+        method: 'GET'
+        url: m.route!
+        deserialize: ->
+            el = document.createElement 'div'
+            el.innerHTML = it
+            ((el.getElementsByTagName 'article')[0]).innerHTML
+
+    json-data = 
+        method: "GET"
+        url: '/data.json'
+
+    request-content = !->
+        m.request get-content .then set-content, orCreate404Config
+
+    do !->
+        | config.data is void =>
+            m.request json-data .then set-metadata, orCreate404Config
+            request-content!
+        | config.cachedContent[m.route!] is void =>
+            request-content!
+        | _ => 
+            createNewConfig!
 
 module.exports = Controller

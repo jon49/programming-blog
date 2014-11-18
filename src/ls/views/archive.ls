@@ -25,7 +25,7 @@ main = (ctrl) ->
             header config.fileType, config.header 
 
             # main article content
-            content config.content
+            content config.article
 
             # Show archive of posts
             archive config.data, config.fileType

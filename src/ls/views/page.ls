@@ -24,7 +24,7 @@ main = (ctrl) ->
             header config.fileType, config.header 
 
             # main article content
-            content config.content
+            content config.article
 
             # menu social media
             footer-menu config.footerItems

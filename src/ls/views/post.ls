@@ -26,7 +26,7 @@ post = (ctrl) ->
             header config.fileType, config.header 
 
             # main article content
-            content config.content
+            content config.article
 
             # Show date of post & its tags
             tags config.fileType, config.tags
