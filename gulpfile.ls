@@ -12,22 +12,24 @@ require! <[
 _ = lodash
 sitemap = gulp-sitemap
 
-stylus = require 'gulp-stylus'
-manifest = require 'gulp-asset-manifest'
-concat = require 'gulp-concat'
-rename = require 'gulp-rename'
-wrapper = require 'gulp-wrapper'
-filter = require 'gulp-filter'
-replace = require 'gulp-regex-replace'
-livescript = require 'gulp-livescript'
-uglify = require 'gulp-uglify'
-front-matter = require 'gulp-front-matter'
-ssg = require 'gulp-ssg'
-es = require 'event-stream'
-pluck = require 'gulp-pluck'
-data = require 'gulp-data'
-source = require 'vinyl-source-stream'
-pandoc = require 'gulp-pandoc'
+require! {
+  stylus:      'gulp-stylus'
+  manifest:    'gulp-asset-manifest'
+  concat:      'gulp-concat'
+  rename:      'gulp-rename'
+  wrapper:     'gulp-wrapper'
+  filter:      'gulp-filter'
+  replace:     'gulp-regex-replace'
+  livescript:  'gulp-livescript'
+  uglify:      'gulp-uglify'
+  front-matter:'gulp-front-matter'
+  ssg:         'gulp-ssg'
+  es:          'event-stream'
+  pluck:       'gulp-pluck'
+  data:        'gulp-data'
+  source:      'vinyl-source-stream'
+  pandoc:      'gulp-pandoc'
+  }
 
 toHtml =
    from: 'markdown'
@@ -174,7 +176,6 @@ gulp.task 'css', ['js'], ->
 gulp.task 'default', [
   'clean'
   'images'
-  'js'
   'html'
   'sitemap'
   'json'

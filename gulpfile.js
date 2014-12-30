@@ -157,4 +157,4 @@ gulp.task('css', ['js'], function(){
   distDest = './dist/css';
   return gulp.src('./src/css/*.styl').pipe(stylus()).pipe(gulp.dest(distDest));
 });
-gulp.task('default', ['clean', 'images', 'js', 'html', 'sitemap', 'json', 'js', 'css', 'ugly']);
+gulp.task('default', ['clean', 'images', 'html', 'sitemap', 'json', 'js', 'css', 'ugly']);

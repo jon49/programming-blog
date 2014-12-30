@@ -1,0 +1,64 @@
+<head>
+
+<style>
+
+/* structure */
+/* Give the media object a shape, add */
+/* padding just to make it look nice. */
+.media {
+  padding: 10px;
+  width: 300px;
+}
+/* clearfix */
+.media::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.media > * {
+  padding: 0;
+  margin: 0;
+}
+.media > *:first-child {
+  float: left;
+}
+/* Make all content be past the picture. */
+.media > *:last-child {
+  margin-left: 110px;
+}
+/* The following is just to make */
+/* the paragraphs look nice. */
+.media > *:last-child > * {
+  margin: 0 0 10px 0;
+}
+.media > *:last-child > *:last-child {
+  margin-bottom: 0;
+}
+
+/* style */
+.media {
+  background-color: #777;
+  color: #ddd;
+}
+
+.img {
+  height: 100px;
+  width: 100px;
+  background-color: lightgreen;
+}
+</style>
+
+</head>
+
+<div class="media">
+  <div class="img"></div>
+  <div>
+    <p>Some written content in the media object.</p>
+    <p>
+      Look, another paragraph in the media object!
+      That is really long so that you can see it
+      stays on the right! See, it stayed!
+    </p>
+  </div>
+</div>
+
