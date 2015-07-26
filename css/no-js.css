@@ -1,0 +1,7 @@
+/* run this css file if no javascript is enabled. */
+article:before {
+  content: '\a For full site functionality enable JavaScript! \a For a list of posts visit: \a http://jon.prescottprogrammers.com/sitemap.xml \a' url("/images/fire.png");
+  display: block;
+  white-space: pre;
+  text-align: center;
+}

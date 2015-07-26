@@ -1,0 +1,37 @@
+<!DOCTYPE html> <link rel='stylesheet' type='text/css' href='/css/style.css'> <link rel='stylesheet' type='text/css' href='/css/no-js.css'> <article><h1 id="css-media-object">CSS Media Object</h1><p>I just finished attending the RockIt Bootcamp (12 week program). It’s a program that teaches the LAMP full stack development (Linux, Apache, mySQL, PHP). In the next little while I will be going over some of the things which I learned.</p><p>The <em>css media object</em> was first coined by <a href="http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/">Nicole Sullivan</a> in 2010. It is still one of the most basic constructs to learn and understand in created good CSS content.</p><p>The <em>media object</em> is basically a box with two other boxes side by side in the main box. Typically the box to the left is a picture and the box to the right is content, but can be anything.</p><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;media&quot;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;/images/my-cool-mug.png&quot;</span><span class="ot"> alt=</span><span class="st">&quot;A pic of me&quot;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;div&gt;</span>
+    <span class="kw">&lt;p&gt;</span>Some written content in the media object.<span class="kw">&lt;/p&gt;</span>
+    <span class="kw">&lt;p&gt;</span>Look, another paragraph in the media object!<span class="kw">&lt;/p&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre><p>The <em>media object</em> css gives padding and margins to the objects that make them look nice and make the picture fit correctly. It also does a clearfix so the outside box doesn’t collapse to a smaller area than its content.</p><p>Some of the code I made specifically for this example, but in practice you would not put everything in the <code>media</code> class. E.g., the <code>width</code> of the media element would be decided somewhere else, make the <code>media</code> class more reusable.</p><pre class="sourceCode css"><code class="sourceCode css"><span class="co">/* Give the media object a shape. Add */</span>
+<span class="co">/* padding just to make it look nice. */</span>
+<span class="fl">.media</span> <span class="kw">{</span>
+  <span class="kw">padding:</span> <span class="dt">10px</span><span class="kw">;</span>
+  <span class="kw">width:</span> <span class="dt">300px</span><span class="kw">;</span>
+<span class="kw">}</span>
+<span class="co">/* clearfix */</span>
+<span class="fl">.media</span><span class="dv">::after</span> <span class="kw">{</span>
+  <span class="kw">content:</span> <span class="st">&#39;&#39;</span><span class="kw">;</span>
+  <span class="kw">display:</span> <span class="dt">block</span><span class="kw">;</span>
+  <span class="kw">clear:</span> <span class="dt">both</span><span class="kw">;</span>
+<span class="kw">}</span>
+<span class="fl">.media</span> &gt; * <span class="kw">{</span>
+  <span class="kw">padding:</span> <span class="dt">0</span><span class="kw">;</span>
+  <span class="kw">margin:</span> <span class="dt">0</span><span class="kw">;</span>
+<span class="kw">}</span>
+<span class="fl">.media</span> &gt; *<span class="dv">:first-child</span> <span class="kw">{</span>
+  <span class="kw">float:</span> <span class="dt">left</span><span class="kw">;</span>
+<span class="kw">}</span>
+<span class="co">/* Make all content be past the picture. */</span>
+<span class="fl">.media</span> &gt; *<span class="dv">:last-child</span> <span class="kw">{</span>
+  <span class="kw">margin-left:</span> <span class="dt">110px</span><span class="kw">;</span>
+<span class="kw">}</span>
+<span class="co">/* The following is just to make */</span>
+<span class="co">/* the paragraphs look nice. */</span>
+<span class="fl">.media</span> &gt; *<span class="dv">:last-child</span> &gt; * <span class="kw">{</span>
+  <span class="kw">margin:</span> <span class="dt">0</span> <span class="dt">0</span> <span class="dt">10px</span> <span class="dt">0</span><span class="kw">;</span>
+<span class="kw">}</span>
+<span class="fl">.media</span> &gt; *<span class="dv">:last-child</span> &gt; *<span class="dv">:last-child</span> <span class="kw">{</span>
+  <span class="kw">margin-bottom:</span> <span class="dt">0</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></article> <script src="/js/app.js"></script>
