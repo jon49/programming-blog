@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Extensions on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/extensions/</link>
+    <description>Recent content in Extensions on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Apr 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/extensions/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Lambda Expressions</title>
+      <link>http://localhost:1313/2012/04/14/lambda_expressions_an_introduction/</link>
+      <pubDate>Sat, 14 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/04/14/lambda_expressions_an_introduction/</guid>
+      <description>&lt;p&gt;Another thing that I like about programming in .NET beyond &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/11/linq-an-introduction/&#34;&gt;LINQ&lt;/a&gt; and &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/&#34;&gt;Extensions&lt;/a&gt; is &lt;a href=&#34;http://msdn.microsoft.com/en-us/magazine/cc163362.aspx&#34;&gt;lambda expressions&lt;/a&gt;. (It should be noted that LINQ, Extensions, and lambda expressions are all related). Lambda expressions are &amp;ldquo;are callable entities that are defined within a function, you can return a lambda expression from a function and you can pass lambda expressions to other functions.&amp;rdquo; Lambda expressions come with the System.Core library, so no need to add a reference nor Imports at the top of your class.&lt;/p&gt;
+
+&lt;p&gt;Lambda expressions simplify your code by allowing you to call internal functions within functions, even create &amp;ldquo;function variables.&amp;rdquo; To get a full overview read the link on &lt;a href=&#34;http://msdn.microsoft.com/en-us/magazine/cc163362.aspx&#34;&gt;lambda expressions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take the &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/&#34;&gt;extension examples&lt;/a&gt; I used before, but simplify it with lambda expressions. Before I had to create multiple private functions to accommodate different comparison types (e.g., String, Double, Object, etc). But with lambda expressions I can create local functions that take care of this, which lessons the amount of code and makes the code cleaner.&lt;/p&gt;
+
+&lt;p&gt;So let’s dive into some code. First I needed to create a delegate function which accepts multiple types of input and returns an integer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Delegate Function MoreLessOrEqual(Of T)(ByVal element As T) As Integer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I then created a pointer function which determines which internal function I should use depending on what type of data is received. Notice the lambda expressions written as &lt;code&gt;Function(a As Object)….&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&amp;lt;Extension()&amp;gt;
+Public Function FindIndex2DSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer
+
+    If TypeOf oWhat Is Double Then  &#39;Use double type comparison.
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndex2DSortedLambda(oaArray, Function(a As Object) If(CDbl(a) &amp;gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)) _
+                                , iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  &#39;Use string type comparison.
+        Dim sWhat As String = oWhat.ToString
+        Return FindIndex2DSortedLambda(oaArray, Function(a As Object) String.Compare(CStr(a), sWhat, eStringCompare) _
+                                , iSearchIndex)
+    Else    &#39;Not set up for other types of data.
+        Return -1
+    End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this private function I call the lambda expressions as defined in the function parameters as &lt;code&gt;IsEqual.&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private Function FindIndex2DSortedLambda(ByVal oaArray As Object(,), ByVal IsEqual As MoreLessOrEqual(Of Object) _
+                            , ByVal iSearchIndex As Integer) As Integer                                                            
+
+    Dim i As Integer, lUpperSearch As Integer, lLowerSearch As Integer, lPrevious As Integer, lNext As Integer
+
+    lUpperSearch = oaArray.GetUpperBound(0) : lLowerSearch = 0 : lPrevious = -1
+
+    If IsEqual(oaArray(0, iSearchIndex)) &amp;lt; 0 Then &#39;If value is the less than the first index then skip
+        Return -1
+    ElseIf IsEqual(oaArray(lUpperSearch, iSearchIndex)) &amp;gt; 0 Then &#39;If it is greater than the last index then skip
+        Return -3
+    Else
+        i = -1
+    End If
+
+    &#39;Find start indexes
+    Dim iResult As Integer
+    Do While i = -1
+        lNext = (lUpperSearch + lLowerSearch) \ 2 &#39;Get new search location
+        iResult = IsEqual(oaArray(lNext, iSearchIndex))
+        If iResult &amp;gt; 0 Then &#39;Get new lower search location
+            lLowerSearch = lNext
+        ElseIf iResult &amp;lt; 0 Then &#39;Get new upper search location
+            lUpperSearch = lNext
+        Else &#39;If equal find first instance of item
+            i = lNext - 1
+            Do While IsEqual(oaArray(i, iSearchIndex)) = 0
+                i -= 1
+            Loop
+            i += 1
+        End If
+        If lPrevious = lNext Then &#39;Get first item
+            For i = lLowerSearch To lUpperSearch
+                If IsEqual(oaArray(i, iSearchIndex)) = 0 Then
+                    Return i
+                End If
+            Next
+            Return -2
+        Else
+            lPrevious = lNext
+        End If
+    Loop
+
+    Return i
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that I could make the private function the a public extension. By doing that I could then easily create more elaborate searches, e.g., I could search for the index of a string with the first three letters equal to “ABC” like below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Dim sWhat As String = oWhat.ToString.Substring(0, 3)
+Return FindIndex2DSortedLambda(oaArray, Function(a As Object) String.Compare(a.ToString.Substring(0, 3), sWhat, eStringCompare) _
+    , iSearchIndex)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Extensions in VB.NET</title>
+      <link>http://localhost:1313/2012/04/05/extensions_in_vb_net/</link>
+      <pubDate>Thu, 05 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/04/05/extensions_in_vb_net/</guid>
+      <description>&lt;p&gt;Learning how to use VB.NET can be quite the leap from VBA, but once you start learning VB.NET and have much more control it’s difficult to want to go back to VBA.&lt;/p&gt;
+
+&lt;p&gt;One of the things that I like about VB.NET is methods. Extensions allow you to extend data type methods. So, let’s say you have a String data type (Strings in VB.NET are like a class in and of themselves) and you want it to have the method of appending “]” at the end. So you would have an extension method like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&amp;lt;Extension()&amp;gt;
+Public Function AppendCloseBracket(ByRef sString As String) As String
+    Return sString &amp;amp; &amp;quot;]&amp;quot;
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then to use it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private Sub UseAppendMethod()
+
+    Dim sString As String = &amp;quot;Hello&amp;quot;
+
+    Debug.Print(sString.AppendCloseBracket)
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which would result in:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Hello]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to create extionsions you need to import the library:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Imports System.Runtime.CompilerServices
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So, how about a more practical example. Through Linq (which is like extensions but much more powerful) you have many more powerful things you can do, which will probably be the topic of a post in the future. But Linq doesn’t do everything and you need a 1D array. So, in the example below I could have created a 1D array instead and then done it with Linq.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&amp;lt;Extension()&amp;gt;
+Public Function FindIndex2DSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer                              
+
+    If TypeOf oWhat Is Double Then &#39;Find index for double type
+        Return FindIndex2DSortedDouble(oaArray, CDbl(oWhat), iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  &#39;Find index for string type
+        Return FindIndex2DSortedString(oaArray, CStr(oWhat), iSearchIndex, eStringCompare)
+    Else &#39;Find index for object type
+        Return FindIndex2DSortedObject(oaArray, oWhat, iSearchIndex)
+    End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private Function FindIndex2DSortedDouble(ByVal oaArray As Object(,), ByVal dWhat As Double _
+                                         , ByVal iSearchIndex As Integer) As Integer                                        
+
+    Dim i As Integer, lUpperSearch As Integer, lLowerSearch As Integer, lPrevious As Integer, lNext As Integer
+
+    lUpperSearch = oaArray.GetUpperBound(0) : lLowerSearch = 0 : lPrevious = -1
+    If dWhat &amp;lt; CDbl(oaArray(0, iSearchIndex)) Then &#39;If value is the less than the first index then skip
+        Return -1
+    ElseIf dWhat &amp;gt; CDbl(oaArray(lUpperSearch, iSearchIndex)) Then &#39;If it is greater than the last index then skip
+        Return -3
+    Else
+        i = -1
+    End If
+
+    &#39;Find start indexes
+    Do While i = -1
+        lNext = (lUpperSearch + lLowerSearch) \ 2 &#39;Get new search location
+        If CDbl(oaArray(lNext, iSearchIndex)) &amp;lt; dWhat Then &#39;Get new lower search location
+            lLowerSearch = lNext
+        ElseIf CDbl(oaArray(lNext, iSearchIndex)) &amp;gt; dWhat Then &#39;Get new upper search location
+            lUpperSearch = lNext
+        Else &#39;If equal find first instance of item
+            i = lNext - 1
+            Do While CDbl(oaArray(i, iSearchIndex)) = dWhat
+                i -= 1
+            Loop
+            i += 1
+        End If
+        If lPrevious = lNext Then &#39;Get first item
+            For i = lLowerSearch To lUpperSearch
+                If dWhat = CDbl(oaArray(i, iSearchIndex)) Then
+                    Return i
+                End If
+            Next
+            Return -2
+        Else
+            lPrevious = lNext
+        End If
+    Loop
+
+    Return i
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

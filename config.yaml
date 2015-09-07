@@ -1,0 +1,15 @@
+---
+languageCode: en-us
+baseurl: http://jnyman.com/
+title: Hamsters Byte
+theme: nofancy
+author:
+  name: Jon Nyman
+  github: jon49
+  linkedin: eenyman
+  twitter: NymanJon
+
+permalinks:
+  post: /:year/:month/:day/:filename/
+  page: /:filename/
+---

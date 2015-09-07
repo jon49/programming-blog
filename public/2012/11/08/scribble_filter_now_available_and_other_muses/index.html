@@ -1,0 +1,180 @@
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>Scribble Filter Now Available and Other Muses</title>
+  <meta name="description" content="Scribble Filter Now Available and Other Muses">
+  <meta name="author" content="Jon Nyman">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.css">
+  
+  
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+  <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/highlight/styles/default.css">
+  
+  <script src="http://localhost:1313/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+
+<div class="header pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="/" class="site-title pure-menu-heading">Hamsters Byte</a>
+            <ul class="pure-menu-list">
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about/" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Hamsters Byte</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2012-11-08</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="http://localhost:1313/tags/marketing">marketing</a> <a href="http://localhost:1313/tags/scribblefilter">scribblefilter</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>Scribble Filter Now Available and Other Muses</h1>
+            </div>
+
+            <div class="post-content">
+                <p>I got the sale software all installed so I can sell the <a href="http://www.spreadsheetbudget.com/products/scribble-filter/">Scribble
+Filter</a>.
+There’s still a few changes I wanted to make with it. I wasn’t entirely
+thinking when I added the ability to filter ranges directly when I add
+(among others). I should have made it <a href="http://office.microsoft.com/en-us/excel-help/using-structured-references-with-excel-tables-HA010155686.aspx#BMstructured_reference_syntax_rules">more compliant to what Microsoft
+does</a>.
+I’ll be working on changing that around now. It will probably be a
+little while before I incorporate all of that into the filter. If the
+sales do well then I’ll make it more powerful otherwise I won’t be able
+to justify the time.</p>
+
+<p>On a side note. It is interesting how long this project took. I spent
+over 225 hours working on it. Of course, if I were to do it again I
+could probably slice that time down. So, that will take quite a bit of
+money to make this project worth it! For a programmer marketing can be
+the most difficult part and it is also the most important part. You can
+make the best program in the world, but if you can’t market it, it might
+as well not even exist!</p>
+
+<p>I’ll try and get the trial version out in the next week or so. Wife is
+about to have a baby so it might take a little longer.</p>
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="pure-menu pure-menu-horizontal footer-content">
+            <ul>
+                <li class="pure-menu-heading" id="foot-name">Jon Nyman:</li>
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://github.com/jon49" class="pure-menu-link">GitHub</a>
+                </li>
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://www.linkedin.com/in/eenyman" class="pure-menu-link">LinkedIn</a>
+                </li>
+                
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://twitter.com/NymanJon" class="pure-menu-link">Twitter</a>
+                </li>
+                
+
+            </ul>
+            <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+        </div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="http://localhost:1313/js/jquery.min.js" type="text/javascript"></script>
+<script src="http://localhost:1313/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+

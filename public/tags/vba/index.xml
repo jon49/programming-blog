@@ -1,0 +1,1008 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vba on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/vba/</link>
+    <description>Recent content in Vba on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 28 Oct 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/vba/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Site Ending</title>
+      <link>http://localhost:1313/2014/10/28/html/</link>
+      <pubDate>Tue, 28 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/10/28/html/</guid>
+      <description>&lt;p&gt;This site will be going the way of the ether come next week. You can
+still see the posts over
+at &lt;a href=&#34;http://spreadsheetbudget.com.s3-website-us-east-1.amazonaws.com/blog/&#34;&gt;http://spreadsheetbudget.com.s3-website-us-east-1.amazonaws.com/blog/&lt;/a&gt;.
+It’s been great. Check out my web development blog over
+at &lt;a href=&#34;http://jon.prescottprogrammers.com/&#34;&gt;http://jon.prescottprogrammers.com/&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bit Torrent Sync &amp; Updating/Installing Programs</title>
+      <link>http://localhost:1313/2013/09/30/bit_torrent_sync_updatinginsstalling_programs/</link>
+      <pubDate>Mon, 30 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/09/30/bit_torrent_sync_updatinginsstalling_programs/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://labs.bittorrent.com/experiments/sync.html&#34;&gt;Bit Torrent Sync&lt;/a&gt; (BT
+Sync) is great software which can be used for syncing files. I use it
+for backing up all my pictures/videos/music/files/mobile computers.
+Well, I did some testing and it looks like it can be used for installing
+and updating software also.&lt;/p&gt;
+
+&lt;p&gt;I tested it with my Windows 8 computer over to my Windows XP computer. I
+created an Excel xla add-in file and I also created an executable file.
+Both worked fine after syncing. The following procedure was used:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create folder for program you would like synced&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://labs.bittorrent.com/experiments/sync/get-started.html&#34;&gt;Create a syncing
+folder&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Copy read only secret
+
+&lt;ul&gt;
+&lt;li&gt;right click on folder to sync in BT Sync “Show folder
+preferences” then copy read only secret&lt;/li&gt;
+&lt;li&gt;Careful not to copy the wrong folder! You don’t want others
+getting your data!&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Give the secret to all those that you would like to have it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;BT Sync could probably work for:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This seems like a good idea for open source projects which are free.&lt;/li&gt;
+&lt;li&gt;It could probably also work for paid products which allow for
+updates for a year or more. For paid products a developer could just
+create a new folder after the latest cutoff period.&lt;/li&gt;
+&lt;li&gt;This might be ideal for corporate wide add-ins also. The main
+problem with that is security of course. So I am not quite sure how
+that would be worked out.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The down side would be that for people which don’t want to install BT
+Sync you would need a back up updater/installer.&lt;/p&gt;
+
+&lt;p&gt;Let me know what you think! It would be interesting to hear other ideas
+on how this could work in the programming environment &lt;a href=&#34;http://blog.bittorrent.com/tag/bittorrent-sync/&#34;&gt;which haven’t
+already been thought
+of&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Zipping Files with VBA and USB Drives</title>
+      <link>http://localhost:1313/2013/08/19/zipping_files_with_vba_and_usb_drives/</link>
+      <pubDate>Mon, 19 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/08/19/zipping_files_with_vba_and_usb_drives/</guid>
+      <description>&lt;p&gt;I used &lt;a href=&#34;http://www.rondebruin.nl/win/s7/win001.htm&#34;&gt;Ron de Bruin&amp;rsquo;s file zipping (and sending) code with Excel&lt;/a&gt;. It works great with a few tweaks. Unfortunately when someone is using a USB drive with their workbook on it it fails to work. So warning: Make sure the users are using it on the main computer when trouble shooting!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SUMIFS vs MATCH &amp; INDEX</title>
+      <link>http://localhost:1313/2013/03/14/sumifs_vs_match_index/</link>
+      <pubDate>Thu, 14 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/03/14/sumifs_vs_match_index/</guid>
+      <description>&lt;p&gt;I have one Time Card template setup with SUMIFS (used for Excel 2007 and
+above templates) and one set up with MATCH/INDEX (used for my 2003 and
+below templates). I tested the calculation speeds for each in Excel 2013
+(preview) on Windows 8.&lt;/p&gt;
+
+&lt;p&gt;Here’s the VBA test code:&lt;/p&gt;
+
+&lt;p&gt;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+| &lt;code&gt;{.vb style=&amp;quot;font-family:monospace;&amp;quot;}                                 |
+| Sub test()                                                               |
+|                                                                          |
+|     Dim dTimer As Double                                                 |
+|     Dim iLoops As Integer, iTotalIterations As Integer                   |
+|     Dim wksStage As Worksheet                                            |
+|                                                                          |
+|     Set wksStage = ThisWorkbook.Worksheets(&amp;quot;Staging Area&amp;quot;)               |
+|     iTotalIterations = 1                                                 |
+|     dTimer = Timer()                                                     |
+|                                                                          |
+|     For iLoops = 0 To iTotalIterations                                   |
+|         wksStage.Calculate                                               |
+|     Next iLoops                                                          |
+|                                                                          |
+|     Debug.Print Timer() - dTimer                                         |
+|                                                                          |
+| End Sub                                                                  |
+|&lt;/code&gt;                                                                      |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
+
+&lt;p&gt;And here’s the results (seconds):&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Iterations
+  SUMIFS
+  MATCH/INDEX&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;1                        50
+  0.20                     3.07
+  0.09                     1.30&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;So where do I go from here? I think I will keep the two separate
+templates for now, even though I could go to one. The reasons?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It is much easier to change SUMIFS than the complicated MATCH/INDEX
+functions.&lt;/li&gt;
+&lt;li&gt;I think I could introduce an error in the MATCH/INDEX functions more
+easily.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I will post the 2003 template for anyone that wishes faster calculation
+times, but it is pretty fast now, so I don’t know if that would be a
+huge issue.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Max Write to Excel (2003) in Array</title>
+      <link>http://localhost:1313/2013/01/01/max_write_to_excel_2003_in_array/</link>
+      <pubDate>Tue, 01 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/01/01/max_write_to_excel_2003_in_array/</guid>
+      <description>&lt;p&gt;I normally don’t deal with very long strings. But I’m working on a
+project that requires storing a text file in Excel that I can later
+access (it would be nice just to embed it but Excel doesn’t like viruses
+– which makes me have to just store it in a worksheet).&lt;/p&gt;
+
+&lt;p&gt;So what is the max string length in an array write to an Excel range?&lt;/p&gt;
+
+&lt;p&gt;911&lt;/p&gt;
+
+&lt;p&gt;Seems kind of random but that is the number. Raise that number to 912
+and you’ll get an error.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>List of Excel Functions - Code To Use List</title>
+      <link>http://localhost:1313/2012/12/05/list_of_excel_functions_code_to_use_list/</link>
+      <pubDate>Wed, 05 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/05/list_of_excel_functions_code_to_use_list/</guid>
+      <description>&lt;p&gt;I saw a few people were downloading &lt;a href=&#34;2012/08/27/list-of-excel-functions/&#34;&gt;my list of Excel functions that I created&lt;/a&gt;. I thought it might be useful show the code that I use to get that data to a manageable format. Although the code is written in VB.NET it should be easily converted to VBA.&lt;/p&gt;
+
+&lt;p&gt;[wpdm_file id=3]&lt;/p&gt;
+
+&lt;p&gt;I use a simple structure (type in VBA) for the data.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    Private Structure ExcelFunctionInfo
+        Dim Name As String
+        Dim Category As String
+        Dim ExcelVersion As Integer
+        Dim Description As String
+        Dim Syntax As String
+        Dim URL As String
+    End Structure
+&lt;/pre&gt;
+
+&lt;p&gt;I then just loop through the data in the string that was gotten from the text file.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    &#39;&#39;&#39; &lt;summary&gt;
+    &#39;&#39;&#39; Takes string of Excel functions and puts it into dictionary.
+    &#39;&#39;&#39; &lt;/summary&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;sExcelFunctions&#34;&gt;String of Excel functions&lt;/param&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;iExcelVersion_Descriptive&#34;&gt;Descriptive version of Excel&lt;/param&gt;
+    &#39;&#39;&#39; &lt;returns&gt;Dictionary of Excel functions.&lt;/returns&gt;
+    &#39;&#39;&#39; &lt;remarks&gt;Jon Nyman 20120920&lt;/remarks&gt;
+    Private Function GetExcelFunctionsFromTextToDictionary(ByVal sExcelFunctions As String _
+                    , ByVal iExcelVersion_Descriptive As Integer) As Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        Dim dicExcelFunctions As New Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        For Each sLine In sExcelFunctions.Split(CChar(vbLf))
+            Dim sEachTab = sLine.Split(CChar(vbTab))
+            Dim xlFuncs As ExcelFunctionInfo
+            If sEachTab.Length = 6 AndAlso CInt(sEachTab(0)) &lt;= iExcelVersion_Descriptive Then
+                xlFuncs.Name = sEachTab(1)
+                xlFuncs.ExcelVersion = CInt(sEachTab(0))
+                xlFuncs.URL = sEachTab(5)
+                xlFuncs.Syntax = sEachTab(4)
+                xlFuncs.Category = sEachTab(2)
+                xlFuncs.Description = sEachTab(3)
+                If Not dicExcelFunctions.ContainsKey(xlFuncs.Name) Then
+                    Dim lst = New List(Of ExcelFunctionInfo)
+                    lst.Add(xlFuncs)
+                    dicExcelFunctions.Add(xlFuncs.Name, lst)
+                Else
+                    Dim lst = dicExcelFunctions(xlFuncs.Name)
+                    lst.Add(xlFuncs)
+                    dicExcelFunctions(xlFuncs.Name) = lst
+                End If
+            End If
+        Next
+
+        Return dicExcelFunctions
+
+    End Function
+&lt;/pre&gt;
+
+&lt;p&gt;This is where I read the text file.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    &#39;&#39;&#39; &lt;summary&gt;
+    &#39;&#39;&#39; Gets excel functions from text document and put it in dictionary.
+    &#39;&#39;&#39; &lt;/summary&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;sxlAppVersion&#34;&gt;Excel app version.&lt;/param&gt;
+    &#39;&#39;&#39; &lt;returns&gt;Dictionary of excel functions list.&lt;/returns&gt;
+    &#39;&#39;&#39; &lt;remarks&gt;Jon Nyman 20120920&lt;/remarks&gt;
+    Private Function LoadExcelFunctions(ByVal sxlAppVersion As String) As Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        Dim sExcelFunctions = My.Resources.ExcelFunctionsListCleaned
+
+        &#39;Excel Functions
+        Return GetExcelFunctionsFromTextToDictionary(sExcelFunctions, CExcel.GetExcelVersion_Descriptive(sxlAppVersion, 11))
+
+    End Function
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sheet Exists</title>
+      <link>http://localhost:1313/2012/09/13/sheet_exists/</link>
+      <pubDate>Thu, 13 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/09/13/sheet_exists/</guid>
+      <description>&lt;p&gt;I was looking at &lt;a href=&#34;http://www.siddharthrout.com&#34;&gt;Siddharth Rout&amp;rsquo;s new blog&lt;/a&gt; (&lt;a href=&#34;http://www.siddharthrout.com/2012/09/10/addingdeleting-sheets-to-the-excel-file/&#34;&gt;Adding/Deleting Sheets to the Excel File&lt;/a&gt;) and realized that I haven&amp;rsquo;t posted my version of sheet exists. Mine probably does too much per &lt;a href=&#34;http://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670/ref=sr_1_1?ie=UTF8&amp;qid=1347565033&amp;sr=8-1&amp;keywords=code+complete&#34;&gt;Code Complete&lt;/a&gt; standards, but it is nice not to have to think of multiple.&lt;/p&gt;
+
+&lt;p&gt;If I were to &lt;a href=&#34;http://en.wikipedia.org/wiki/Refactor&#34;&gt;refactor&lt;/a&gt; this code I would take out the code for the charts and probably just make it work only for checking if the sheet exists and adding a new sheet if it doesn&amp;rsquo;t. I would create a separate function for deleting sheets. But once you have lot&amp;rsquo;s of code written it is difficult to refactor all your code just to change one function (and I use this function quite a bit).&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;&#39;SheetExists
+&#39; --------------------------------------------------------------
+&#39;Comments:  This function returns TRUE if the sheet exists in the
+&#39;           active workbook and adds new sheet if bAddSheet is true.
+&#39;
+&#39;Arguments: sSheetName  Name of sheet.
+&#39;           bAddSheet   If true adds new sheet, if false returns false.
+&#39;
+&#39;Return:    Returns true when sheet exists.
+&#39;
+&#39;Source:    http://www.exceltip.com/st/Determine_if_a_sheet_exists_in_a_workbook_using_VBA_in_Microsoft_Excel/485.html
+&#39;Notes:     This was created for use of Jon Nyman and can be distributed by Paciolan.
+&#39;           Tristates require reference to &#34;Microsoft Scripting Runtime&#34;
+&#39;Date           Developer   History
+&#39;--------------------------------------------------------------
+&#39;01/13/10       Jon Nyman   Initial version
+&#39;11/12/10       Jon Nyman   Changed to use ExistInCollection function, changed all to byref for increased speed.
+&#39;04/30/12       Jon Nyman   Added reference to worksheet, so no need to add it later!
+Public Function SheetExists(ByVal sSheetName As String, Optional ByVal bAddSheet As Boolean = False, _
+    Optional ByVal wkb As Workbook = Nothing, Optional ByVal bCreateChart As Boolean = False _
+    , Optional ByVal bDeleteSheet As Boolean = False, Optional ByRef wks As Object) As Tristate
+    
+    Dim bByRef As Boolean
+    
+    &#39;Get current workbook that function will be working on.
+    bByRef = True
+    If wkb Is Nothing Then
+        If Not ActiveWorkbook Is Nothing Then
+            Set wkb = ActiveWorkbook
+            bByRef = False
+        Else
+            SheetExists = TristateFalse
+            GoTo SheetExists_Exit
+        End If
+    End If
+    &#39;Determine if sheet exists
+    SheetExists = ExistsInCollection(wkb.Sheets, sSheetName)
+    &#39;If sheet exists and delet option is true then delete worksheet without
+    &#39;displaying an alert to the user.
+    If SheetExists And bDeleteSheet Then
+        Application.DisplayAlerts = False
+        With wkb.Sheets(sSheetName)
+            .Visible = True
+            .Delete
+        End With
+        Application.DisplayAlerts = True
+        SheetExists = TristateFalse
+    End If
+    &#39;If the sheet doesn&#39;t exist and the add sheet (or chart) option is checked then
+    &#39;add a new sheet with name given.
+    If Not SheetExists And bAddSheet Then
+        wkb.Activate
+        If Not bCreateChart Then
+            Set wks = wkb.Sheets.Add
+            wks.Name = sSheetName
+        Else
+            Set wks = wkb.Charts.Add
+            wks.Name = sSheetName
+        End If
+        SheetExists = TristateMixed
+    ElseIf SheetExists Then
+        Set wks = wkb.Sheets(sSheetName)
+    End If
+    
+SheetExists_Exit:
+    If Not bByRef Then Set wkb = Nothing
+    
+End Function&lt;/pre&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;&#39;ExistsInCollection
+&#39; --------------------------------------------------------------
+&#39;Comments:  This procedure deletes names in a workbook.
+&#39;
+&#39;Arguments: colObject   Collection object.
+&#39;           sItem       Item that could be in collection.
+&#39;
+&#39;Returns:   True when item is in the collection.
+&#39;
+&#39;Source: Excel 2010: Power Programming with VBA - John Walkenbach - pg. 367
+&#39;Notes: This was created by Jon Nyman and can be distributed by Paciolan.
+&#39;Date           Developer   History
+&#39;--------------------------------------------------------------
+&#39;11/12/2010     Jon Nyman   Initial Version
+&#39;
+Public Function ExistsInCollection(ByRef colObject As Object, ByRef sItem As String) As Boolean
+
+    Dim oObj As Object
+
+    On Error Resume Next
+    Set oObj = colObject(sItem)
+    ExistsInCollection = Not oObj Is Nothing
+
+    Set oObj = Nothing
+
+End Function&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating a Settings Class in VBA</title>
+      <link>http://localhost:1313/2012/02/29/creating_a_settings_class_in_vba/</link>
+      <pubDate>Wed, 29 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/02/29/creating_a_settings_class_in_vba/</guid>
+      <description>&lt;p&gt;In .NET they have a nice settings class you can create using &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/system.configuration.applicationsettingsbase.aspx&#34;&gt;ApplicationSettingsBase base class&lt;/a&gt;. In VBA it takes a bit more work to get it working, but can be fairly elegant if done correctly.&lt;/p&gt;
+
+&lt;p&gt;Some criteria that is needed for a settings class in vba are:
+&lt;ul&gt;
+    &lt;li&gt;Well formed&lt;/li&gt;
+    &lt;li&gt;Fast lookup&lt;/li&gt;
+    &lt;li&gt;Default setting&lt;/li&gt;
+    &lt;li&gt;Single input/output procedures.&lt;/li&gt;
+&lt;/ul&gt;
+To make it well formed I used an &lt;a href=&#34;http://www.cpearson.com/excel/Enums.aspx&#34;&gt;enumeration variable type&lt;/a&gt; to create each setting. I think string constants could accomplish the same thing.&lt;/p&gt;
+
+&lt;p&gt;To have a fast look up I use the &lt;a href=&#34;http://support.microsoft.com/kb/187234&#34;&gt;dictionary object&lt;/a&gt;  which&lt;a href=&#34;http://www.dotnetperls.com/dictionary-vbnet&#34;&gt; can look up values much faster than&lt;/a&gt; the &lt;a href=&#34;http://support.microsoft.com/kb/198465&#34;&gt;collection object&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Doing default settings is interesting. It took me some time to figure out how to do that. But all that is needed is an optional boolean value for the Get and Let procedures.&lt;/p&gt;
+
+&lt;p&gt;A single point to output your values to makes it easy to trouble shoot if something isn&amp;rsquo;t working correctly. Also, the single input is just one procedure that grabs data from where ever you choose to store it and if it isn&amp;rsquo;t stored then it will just grabs the default value.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s an example on how a property would look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;In order to get default value an optional field is needed in the Get and Let procedures.
+Public Property Get _
+    Example(Optional ByVal bReturnDefault As Boolean = False) _
+    As Double
+    
+    &#39;Uses dictionary for look up of value (loads dictionary when creating new settings class.
+    &#39;SettingNames is the enumeration type.
+    If mdicSettings.Exists(SettingNames.Example) _
+        And Not bReturnDefault Then
+    
+        Example = CDbl(mdicSettings(SettingNames.Example))
+    Else
+        Example = 10
+    End If
+End Property
+
+Public Property Let _
+    Example(Optional ByVal bReturnDefault As Boolean = False _
+    , ByVal dValue As Double)
+    
+    &#39;Single point write (all values stored as string).
+    &#39;Note that the key is just the integer from the enumeration.
+    AddSetting SettingNames.Example, CStr(dValue)
+End Property
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AdvancedFilter Class Part 2</title>
+      <link>http://localhost:1313/2012/02/15/advancedfilter_class_part_2_determining_what_options_we_want/</link>
+      <pubDate>Wed, 15 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/02/15/advancedfilter_class_part_2_determining_what_options_we_want/</guid>
+      <description>&lt;p&gt;The first thing we’ll want to do is determine what macro options we would like in the class.&lt;/p&gt;
+
+&lt;p&gt;The options I currently have are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Range to filter (optional – can use current range instead).&lt;/li&gt;
+&lt;li&gt;Filter location (optional – if you are using an add-in then you can place in there, otherwise can put in temporary sheet).&lt;/li&gt;
+&lt;li&gt;Filter action (copy to new range or filter in place (default)).&lt;/li&gt;
+&lt;li&gt;Get unique items from a column (will need to use different method than AdvancedFilter).&lt;/li&gt;
+&lt;li&gt;Copy unique to range.&lt;/li&gt;
+&lt;li&gt;Return  filtered data in variant array.&lt;/li&gt;
+&lt;li&gt;Return  filtered  data as range.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So let’s get started. First we’ll need the properties in the class, I’ll call “Search.” Notice how I’ve left many of the properties as write only, since I’m not anticipating needing to retrieve that data later.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;—————————————————————
+&#39;Class Property Procedures
+&#39;—————————————————————
+Property Set RangeToFilter(ByVal rRangeToFilter As Range)
+
+    Dim iOffset As Integer
+    Dim i As Long
+    Dim vHeaders As Variant
+
+    Set mrOriginal = rRangeToFilter
+    iOffset = mrOriginal.Resize(1, 1).Column – 1
+    &#39;Get headers
+    vHeaders = Application.Transpose(mrOriginal.Resize(1).Value2)
+
+   &#39;    mdicHeaders.RemoveAll: Set mdicHeaders = Nothing
+&#39;    Set mdicHeaders = New Dictionary
+
+    For i = LBound(vHeaders) To UBound(vHeaders)
+        If LenB(vHeaders(i)) &amp;gt; 0 Then
+&#39;            If Not mdicHeaders.Exists(CStr(vHeaders(i))) Then
+&#39;                mdicHeaders.Add CStr(vHeaders(i)), Replace$(RangeAddress(2, i + iOffset), “$”, vbNullString)
+&#39;            End If
+        End If
+    Next i
+
+End Property
+Property Set FilterLocation(ByRef rFilterLocation As Range)
+    Set mrFilterLocation = rFilterLocation
+End Property
+Property Let FilterAction(ByVal xFilterAction As XlFilterAction)
+    mxFilterAction = xFilterAction
+End Property
+Property Let ColumnUnique(ByVal iColumnForUniqueValuesSearch As Integer)
+    miColumnUnique = iColumnForUniqueValuesSearch
+End Property
+Property Get CopyUniqueTo() As Range
+    Set CopyUniqueTo = mrCopyTo
+End Property
+Property Set CopyUniqueTo(ByVal rCopyUniqueValuesToRange As Range)
+    Set mrCopyTo = rCopyUniqueValuesToRange
+End Property
+Property Get IncludeHeaderInResults() As Boolean
+    IncludeHeaderInResults = mbIncludeHeader
+End Property
+Property Let IncludeHeaderInResults(ByVal bHeaderInResults As Boolean)
+    mbIncludeHeader = bHeaderInResults
+End Property
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We also need our module level variables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private mrOriginal As Range             &#39;Range to be filtered.
+Private mrFound As Range                &#39;Filtered Range.
+Private mrFilterLocation As Range       &#39;Filter data location/Range.
+Private mxFilterAction As XlFilterAction    &#39;Desired filter action – default xlFilterInPlace.
+Private miColumnUnique As Integer       &#39;Get unique values of filtered data from single column.
+Private mrCopyTo As Range               &#39;Place unique data in this location.
+Private mbIncludeHeader As Boolean      &#39;Includes the header in the found range.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, we’ll need to initialize and terminate some variables when creating and terminating a class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;Class_Initialize
+&#39; ————————————————————–
+&#39;Comments:  This procedure initializes the class.
+&#39;
+&#39;Date           Developer   History
+&#39;————————————————————–
+&#39;10/21/2010     Jon Nyman   Initial Version
+&#39;
+Private Sub Class_Initialize()
+
+&#39;Set mdicSearchTerms = New Dictionary
+    Set mrOriginal = Selection.CurrentRegion
+    mxFilterAction = xlFilterInPlace
+    miColumnUnique = 0
+    mbIncludeHeader = False
+    &#39;Set mvAndOr = Nothing
+
+End Sub
+
+&#39;Class_Terminate
+&#39; ——————————————————————————————————————
+&#39;Comments:  This procedure closes down the class.
+&#39;
+&#39;Date       Developer   History
+&#39; ——————————————————————————————————————
+&#39;10/21/10   Jon Nyman   Initial Version
+&#39;
+Private Sub Class_Terminate()
+
+    If Not mrFilterLocation Is Nothing Then mrFilterLocation.ClearContents
+
+    &#39;Set mdicSearchTerms = Nothing
+    Set mrOriginal = Nothing: Set mrCopyTo = Nothing
+    Set mrFilterLocation = Nothing: Set mrFound = Nothing
+    &#39;Set mvAnd = Nothing: Set mvAndOr = Nothing: Set mvOr = Nothing: Set mvShuffle = Nothing
+    &#39;Set mvOffset = Nothing
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next time I’ll go over some of the commented out code, like the dictionary that I’ll use for my collection object.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Wrapping a Class Around the AdvancedFilter Method</title>
+      <link>http://localhost:1313/2012/02/10/wrapping_a_class_around_the_advancedfilter_method/</link>
+      <pubDate>Fri, 10 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/02/10/wrapping_a_class_around_the_advancedfilter_method/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.cpearson.com/excel/classes.aspx&#34;&gt;Classes&lt;/a&gt; are a tool in &lt;a href=&#34;http://en.wikipedia.org/wiki/Object-oriented_programming&#34;&gt;object-oriented programming&lt;/a&gt; that make programming much simpler. One class that I have developed in VBA is a class that makes using the &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa221800(v=office.11).aspx&#34;&gt;AdvancedFilter method&lt;/a&gt; extremely easy and useful. In fact, I like it so much that I stopped using the regular &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa195730(v=office.11).aspx&#34;&gt;find method&lt;/a&gt;. In the coming weeks I will demonstrate how this was done.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; This is how the AdvancedFilter method works&lt;/strong&gt;:
+&lt;ol&gt;
+    &lt;li&gt;  Use a predefined range to filter.&lt;/li&gt;
+    &lt;li&gt;Create a range that has the filter criteria.&lt;/li&gt;
+    &lt;li&gt;Have a range for copying the results (or filter in place).&lt;/li&gt;
+    &lt;li&gt;Filter for unique values only.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;Drawbacks of the AdvancedFilter method&lt;/strong&gt;:
+&lt;ol&gt;
+    &lt;li&gt;Mixed data in predefined range can give odd/incorrect results.&lt;/li&gt;
+    &lt;li&gt;Is slow compared to a database search or even a manual looped search.&lt;/li&gt;
+    &lt;li&gt;Need a special range to perform search.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;Advantages of the AdvancedFilter method&lt;/strong&gt;:
+&lt;ol&gt;
+    &lt;li&gt; Can use familiar Excel formulas in search terms.&lt;/li&gt;
+    &lt;li&gt;Great for searching database structured data in Excel.&lt;/li&gt;
+    &lt;li&gt;The copy method is pretty fast if you are planning on copying the data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;This is how the class will work&lt;/strong&gt; (Of course, you could use a function to wrap this code to make it even simpler for simple searches - which I have done):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Sub AdvancedFilterClassExample()
+    
+    Dim iIndex As Integer
+    Dim rResult As Range
+    Dim clsSearch As Search
+
+    &#39;clsSearch.ColumnUnique = 1
+    &#39;clsSearch.CopyUniqueTo = Range(&amp;quot;A101&amp;quot;)
+
+    clsSearch.IncludeHeaderInResults = True
+    clsSearch.RangeToFilter = Range(&amp;quot;A1:Y100&amp;quot;)
+    clsSearch.FilterLocation = Range(&amp;quot;Z1&amp;quot;)
+    iIndex = clsSearch.Add(&amp;quot;George&amp;quot;)
+    clsSearch(iIndex).Header = &amp;quot;First Name&amp;quot;
+    clsSearch(iIndex).match_type = BasicSearch
+    clsSearch(iIndex).Header_Operator = AndOperator
+
+    iIndex = clsSearch.Add(&amp;quot;*&amp;quot;)
+    clsSearch(iIndex).Header = &amp;quot;Last Name&amp;quot;
+    clsSearch(iIndex).match_type = WildCardOnly
+    clsSearch(iIndex).Header_Operator = OrOperator
+
+    Debug.Print clsSearch.Count
+
+    Set rResult = clsSearch.Filter
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Match Types&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;    MatchType.BasicSearch
+    MatchType.MatchCase
+    MatchType.MatchCase_MatchEntireCellContents
+    MatchType.MatchEntireCellContents
+    MatchType.WildCardOnly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Header Types&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;    HeaderOperator.AndOperator
+    HeaderOperator.OrOperator&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Range Address from Number to Letter</title>
+      <link>http://localhost:1313/2012/01/20/range_address_from_number_to_letter/</link>
+      <pubDate>Fri, 20 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/20/range_address_from_number_to_letter/</guid>
+      <description>&lt;p&gt;Sometimes, before I realize it (and, I’m sure, others too) I do a bunch of work, that turns out that I didn’t need to do before. The RangeAddress function that I created is a perfect example of this. This function goes from a column number to a letter and returns the whole string range address. I started off &lt;a href=&#34;http://www.excelforum.com/excel-programming/638861-vb-convert-column-letter-to-number.html&#34;&gt;with someones else’s code&lt;/a&gt;. I then made it work for me. Their code only worked for Excel 2003 and below. The code below will work for All Excel versions. But there is a better way! The better way is in the &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/01/12/get-range-from-row-and-column-numbers/&#34;&gt;RRange function&lt;/a&gt; I posted about before. Below this code I’ll show you the basic gist on how to go about it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;RangeAddress
+&#39; --------------------------------------------------------------
+&#39;Comments: This function returns the string address.
+&#39;
+&#39;Arguments: lRow Row number of first row.
+&#39; lColumn Column number of first column.
+&#39;
+&#39;Date Developer History
+&#39;--------------------------------------------------------------
+&#39;Feb 14, 2011 Jon Nyman Initial version
+&#39;
+Public Function RangeAddress(ByRef lRow As Long, ByRef lColumn As Long, _
+    Optional ByVal lRow2 As Long = 0, Optional ByVal lColumn2 As Long = 0 _
+    , Optional ByVal sAddress As String = vbNullString) As String
+    Dim i As Integer
+    Dim lColumnNumber As Long
+    Dim sColumn As String, sColumn2 As String, sColumnLetter As String
+
+    On Error GoTo RangeAddress_Error
+
+    For i = 0 To 1
+        If i = 0 Then
+            lColumnNumber = lColumn
+        Else
+            lColumnNumber = lColumn2
+        End If
+        sColumnLetter = vbNullString
+        If lColumnNumber &amp;lt; 27 Then
+            sColumnLetter = Chr(lColumnNumber + 64)
+        ElseIf lColumnNumber &amp;lt; 703 Then
+            sColumnLetter = Chr((lColumnNumber – 1) \ 26 + 64) &amp;amp; Chr(((lColumnNumber – 1) Mod 26) + 65)
+        Else
+            sColumnLetter = Chr((lColumnNumber – 27) \ 676 + 64) &amp;amp; Chr(((lColumnNumber – 27) Mod 676) \ 26 + 65) &amp;amp; _
+                Chr(((lColumnNumber – 1) Mod 26) + 65)
+        End If
+        If i = 1 Then
+            sColumn2 = sColumnLetter
+            Exit For
+        Else
+            sColumn = sColumnLetter
+            If lColumn2 = 0 Then Exit For
+        End If
+    Next i
+
+    If lRow2 &amp;gt; 0 And lColumn2 &amp;gt; 0 Then
+        RangeAddress = &amp;quot;$&amp;quot; &amp;amp; sColumn &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow &amp;amp; &amp;quot;:$&amp;quot; &amp;amp; sColumn2 &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow2
+    ElseIf LenB(sAddress) &amp;gt; 0 Then
+        If CountStringOccurance(sAddress, &amp;quot;:&amp;quot;) = 1 Then
+            i = InStr(1, sAddress, &amp;quot;:&amp;quot;)
+            sAddress = Right$(sAddress, Len(sAddress) – i + 1)
+            RangeAddress = &amp;quot;$&amp;quot; &amp;amp; sColumn &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow &amp;amp; sAddress
+        Else
+            RangeAddress = &amp;quot;$&amp;quot; &amp;amp; sColumn &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow
+        End If
+    Else
+        RangeAddress = &amp;quot;$&amp;quot; &amp;amp; sColumn &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow
+    End If
+
+RangeAddress_Exit:
+    On Error Resume Next
+
+    Exit Function
+
+    RangeAddress_Error:
+
+    GoTo RangeAddress_Exit
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A better way:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Sub Example()
+    
+    Dim iColumn As Integer
+    Dim rRng As Range
+    Dim sLetter As String
+    Dim wks As Worksheet
+
+    &#39;Initialize variables
+    iColumn = 35
+    Set wks = ActiveSheet
+
+    &#39;Return column letter
+    &#39;Note: it is important to work with the a worksheet,
+    &#39; since if the active sheet is a chart then the Cells function would throw an error.
+    sLetter = wks.Cells(1, iColumn).Address(False, False)
+    sLetter = Left$(sLetter, Len(sLetter) – 1)
+
+    &#39;Bypass even bothering to get the letter in the first place
+    With wks
+        Set rRng = .Range(.Cells(1, iColumn), .Cells(1, iColumn + 3))
+    End With
+
+    &#39;Results
+    Debug.Print &amp;quot;Column Letter: &amp;quot; &amp;amp; sLetter &amp;amp; vbNewLine &amp;amp; &amp;quot;Range Address: &amp;quot; &amp;amp; rRng.Address
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Results from Example test above:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Column Letter: AI
+Range Address: $AI$1:$AL$1
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Find Last Cell</title>
+      <link>http://localhost:1313/2012/01/13/find_last_cell/</link>
+      <pubDate>Fri, 13 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/13/find_last_cell/</guid>
+      <description>&lt;p&gt;Finding the last cell is a common thing people look for when they are coding in VBA. I made a function that does this automatically for me when I am looking for the last cell. In conjunction with the &lt;a href=&#34;2012/01/12/get-range-from-row-and-column-numbers/&#34;&gt;RRange function&lt;/a&gt; this simplifies the programming life for VBA significantly.&lt;/p&gt;
+
+&lt;p&gt;Heres some example code on how to use the function FindEnd.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Sub FindEndExamples() 
+    Dim l As Long 
+
+    &#39;Find last row in column 2 on current worksheet 
+    l = FindEnd(2)
+    Debug.Print l 
+
+    &#39;Find last column in row 5 on current worksheet 
+    l = FindEnd(5, 2)
+    Debug.Print l
+
+    &#39;Find very last row in current worksheet
+    l = FindEnd()
+    Debug.Print l
+
+    &#39;Find very last column in current worksheet 
+    l = FindEnd(, 2) 
+    Debug.Print l
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here&amp;rsquo;s the actual FindEnd Function.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;
+&#39; --------------------------------------------------------------
+&#39;Comments:  This function finds the last row or column in a
+&#39;           specified row or colum, if no row or column specified will find last
+&#39;           row or column in worksheet.
+&#39;
+&#39;Arguments: SearchColumnNumber    The row or column to be searched.
+&#39;           Row1Col2        1 will find the last row.
+&#39;                           2 will find the last column.
+&#39;           oRange             Worksheet to be operated on.
+&#39;           FindEnd         Returns long
+&#39;
+&#39;Original Source: http://www.mrexcel.com/forum/showthread.php?t=74317 4/22/2009
+&#39;Date           Developer   History
+&#39;--------------------------------------------------------------
+&#39;04/22/09       Jon Nyman   Initial Version
+&#39;03/09/10       Jon Nyman   Changed to returning long instead of integer.  Changed input variable names.
+&#39;06/23/10       Jon Nyman   Changed to using &amp;quot;Pivot Table Data Crunching Method&amp;quot; (pg. 202) method of find
+&#39;               the last cell in application end.  Added a check to see if last cell is filled.
+&#39;07/14/10       Jon Nyman   Added optional workbook.
+&#39;11/08/10       Jon Nyman   Added ability to get the last row/column without specifying row or column (using find).
+&#39;                           Changed byval to byref to increase speed.
+&#39;09/26/11       Jon Nyman   Changed so only need to add worksheet object.
+&#39;03/27/12       Jon Nyman   Added ability to find last column or row in a range.
+Public Function FindEnd(Optional ByVal SearchColumnNumber As Long = 0, Optional ByVal Row1Col2 As Integer = 1, _
+    Optional ByVal oRange As Object = Nothing) As Long
+    
+    Dim i As Long
+    Dim sAddress As String
+    
+    On Error GoTo ExitFindEnd
+    
+    If oRange Is Nothing Then
+        Set oRange = ActiveSheet
+    End If
+        
+    If Row1Col2 = 2 Then
+        If SearchColumnNumber = 0 Then
+            FindEnd = oRange.Cells.Find(&amp;quot;*&amp;quot;, oRange.Range(&amp;quot;A1&amp;quot;), xlFormulas, XlLookAt.xlWhole, xlByColumns, xlPrevious, False, False).Column
+        Else
+            If Mid$(oRange.Parent.Name, Len(oRange.Parent.Name) - 3, 1) = &amp;quot;.&amp;quot; Then
+                i = 256
+            Else
+                i = Application.Columns.Count
+            End If
+            If LenB(oRange.Cells.Item(SearchColumnNumber, i)) &amp;gt; 0 Then
+                FindEnd = i
+            Else
+                FindEnd = CLng(oRange.Range(RangeAddress(SearchColumnNumber, i)).End(xlToLeft).Column)
+            End If
+        End If
+    Else
+        If SearchColumnNumber = 0 Then
+            FindEnd = oRange.Cells.Find(&amp;quot;*&amp;quot;, oRange.Range(&amp;quot;A1&amp;quot;), xlFormulas, XlLookAt.xlWhole, xlByRows, xlPrevious, False, False).Row
+        Else
+            If Mid$(oRange.Parent.Name, Len(oRange.Parent.Name) - 3, 1) = &amp;quot;.&amp;quot; Then
+                i = 65536
+            Else
+                i = Application.Rows.Count
+            End If
+            If LenB(oRange.Cells.Item(i, SearchColumnNumber)) &amp;gt; 0 Then
+                FindEnd = i
+            Else
+                FindEnd = CLng(oRange.Range(RangeAddress(i, SearchColumnNumber)).End(xlUp).Row)
+            End If
+        End If
+    End If
+    
+ExitFindEnd:
+If Err.Number &amp;lt;&amp;gt; 0 Then
+    FindEnd = -1
+End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get Range from Row &amp; Column Numbers</title>
+      <link>http://localhost:1313/2012/01/12/get_range_from_row_and_column_numbers/</link>
+      <pubDate>Thu, 12 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/12/get_range_from_row_and_column_numbers/</guid>
+      <description>&lt;p&gt;Before I created a quite elaborate code to get the column letter from the column numbers. It turns out that it was much easier than I had thought before. So in the code below I’ve simplified it considerably by using the Cells method.&lt;/p&gt;
+
+&lt;p&gt;In the function below I use a &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/01/13/find-last-cell/&#34;&gt;function called FindEnd&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;RRAnge
+&#39; --------------------------------------------------------------
+&#39;Comments: This Function returns the desired range.
+&#39;
+&#39;Arguments: lRow First cell row number.
+&#39; lCol First cell column number.
+&#39; lRowEnd Last cell row number or column number (negative) to find last row in.
+&#39; lColEnd Last cell column number or row number (negative) to find last column in.
+&#39; wks Worksheet of range.
+&#39;
+&#39;Date Developer History
+&#39;--------------------------------------------------------------
+&#39;Jan 6, 2012 Jon Nyman Initial version
+&#39;
+Public Function RRAnge(ByVal lRow As Long, ByVal lCol As Long, Optional ByVal lRowEnd As Long = 0 _
+    , Optional ByVal lColEnd As Long = 0, Optional ByVal wks As Worksheet = Nothing) As Range
+&#39;Determine if worksheet exist, if it doesn’t then set to current location.
+    If wks Is Nothing Then Set wks = ActiveWorkbook.ActiveSheet
+
+    &#39;Determine if the last row was set, if it isn’t then get last row number in wks
+    If lRowEnd &amp;lt; 1 Then
+        If lRowEnd Then
+        &#39;If lRowEnd is negative then get the last row in column number lRowEnd
+            lRowEnd = FindEnd(Abs(lRowEnd), , wks)
+        Else
+            &#39;If lRowEnd is 0 then use the range find function to determine last row.
+            lRowEnd = FindEnd(, , wks)
+        End If
+    End If
+
+    &#39;Determine if the last column was set, if it isn’t then get last column number in wks
+    If lColEnd &amp;lt; 1 Then
+        If lColEnd Then
+            &#39;If lColEnd is negative then get the last column in row number lColEnd
+            lColEnd = FindEnd(Abs(lColEnd), 2, wks)
+        Else
+            &#39;If lColEnd is 0 then use the range find function to determine last column.
+            lColEnd = FindEnd(, 2, wks)
+        End If
+    End If
+
+    &#39;Return range, if there is an error then return nothing.
+    On Error Resume Next
+    With wks
+        Set RRAnge = .Range(.Cells(lRow, lCol), .Cells(lRowEnd, lColEnd))
+    End With
+
+    If Err.Number Then Set RRAnge = Nothing
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Import Data from Excel to VBA</title>
+      <link>http://localhost:1313/2012/01/04/import_data_from_excel_to_vba/</link>
+      <pubDate>Wed, 04 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/04/import_data_from_excel_to_vba/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve always wanted a function that can get me data from excel in a format that will always be the same. Sometimes I get the data and I expect a 2D variant array but instead get a string or double value. So I created a function to make it easy for myself, getting the same format that I expect.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;ImportExcelData
+&#39; --------------------------------------------------------------
+&#39;Comments:  This Function imports excel data in different formats (1D, 2D, or String).
+&#39;
+&#39;Arguments: rRng  Range to be imported.
+&#39;           i1D_2D_Str3 Type of import, 1=1D, 2=2D, and 3=String
+&#39;           iValueType  Import type .Value (Excel checks for different types)
+&#39;                       or .Value2 (Excel retrieves all values as string or double)
+&#39;           sDelimiter  Delimiter to use for string value that is returned.
+&#39;
+&#39;Notes:     This was created for use of Jon Nyman and can be distributed by Paciolan.
+&#39;Date           Developer   History
+&#39;--------------------------------------------------------------
+&#39;Dec 30, 2011   Jon Nyman   Initial version     www.SpreadsheetBudget.com
+&#39;
+Public Function ImportExcelData(ByRef rRng As Range, Optional ByVal i1D_2D_Str3 As Integer = 2 _
+        , Optional iValueType As Integer = 2, Optional ByVal sDelimiter As String = &amp;quot;`&amp;quot;) As Variant
+
+    Dim i As Long, j As Long
+    Dim saData() As String, sData As String
+    Dim vaData(1 To 1, 1 To 1) As Variant, va1D() As Variant
+    Dim vData As Variant
+    
+    &#39;Get data by Value or Value2
+    If iValueType = 2 Then
+        vData = rRng.Value2
+    Else
+        vData = rRng
+    End If
+    &#39;If data is single cell then put in 2D
+    If rRng.Cells.Count = 1 Then
+        vaData(1, 1) = vData
+        vData = vaData
+    End If
+    
+    If i1D_2D_Str3 = 2 Then
+        &#39;Return 2D results
+        ImportExcelData = vData
+    ElseIf i1D_2D_Str3 = 3 Then
+        &#39;Concatenate 2D results and return string.
+        If rRng.Columns.Count &amp;gt; 1 Then
+            sData = vbNullString
+            ReDim saData(1 To UBound(vData, 2))
+            For i = 1 To UBound(vData)
+                For j = 1 To UBound(vData, 2)
+                    saData(j) = CStr(vData(i, j))
+                Next j
+                sData = sData &amp;amp; Join(saData, sDelimiter) &amp;amp; vbNewLine
+            Next i
+            ImportExcelData = Left$(sData, Len(sData) - 1)
+        Else
+            &#39;Concatenate 1D results and return string
+            ReDim saData(1 To UBound(vData))
+            For i = 1 To UBound(vData)
+                saData(i) = vData(i, 1)
+            Next i
+            ImportExcelData = Join(saData, sDelimiter)
+        End If
+    Else
+        &#39;Dimension 1D result variant array.
+        ReDim va1D(1 To UBound(vData) * UBound(vData, 2))
+        &#39;Create 1D out of 2D
+        If rRng.Columns.Count &amp;gt; 1 Then
+            For i = 1 To UBound(vData)
+                For j = 1 To UBound(vData, 2)
+                    va1D((i - 1) * UBound(vData, 2) + j) = vData(i, j)
+                Next j
+            Next i
+        Else
+            For i = 1 To UBound(vData)
+                va1D(i) = vData(i, 1)
+            Next i
+        End If
+        ImportExcelData = va1D
+    End If
+  
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

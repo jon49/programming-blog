@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Settings on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/settings/</link>
+    <description>Recent content in Settings on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Feb 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/settings/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Creating a Settings Class in VBA</title>
+      <link>http://localhost:1313/2012/02/29/creating_a_settings_class_in_vba/</link>
+      <pubDate>Wed, 29 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/02/29/creating_a_settings_class_in_vba/</guid>
+      <description>&lt;p&gt;In .NET they have a nice settings class you can create using &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/system.configuration.applicationsettingsbase.aspx&#34;&gt;ApplicationSettingsBase base class&lt;/a&gt;. In VBA it takes a bit more work to get it working, but can be fairly elegant if done correctly.&lt;/p&gt;
+
+&lt;p&gt;Some criteria that is needed for a settings class in vba are:
+&lt;ul&gt;
+    &lt;li&gt;Well formed&lt;/li&gt;
+    &lt;li&gt;Fast lookup&lt;/li&gt;
+    &lt;li&gt;Default setting&lt;/li&gt;
+    &lt;li&gt;Single input/output procedures.&lt;/li&gt;
+&lt;/ul&gt;
+To make it well formed I used an &lt;a href=&#34;http://www.cpearson.com/excel/Enums.aspx&#34;&gt;enumeration variable type&lt;/a&gt; to create each setting. I think string constants could accomplish the same thing.&lt;/p&gt;
+
+&lt;p&gt;To have a fast look up I use the &lt;a href=&#34;http://support.microsoft.com/kb/187234&#34;&gt;dictionary object&lt;/a&gt;  which&lt;a href=&#34;http://www.dotnetperls.com/dictionary-vbnet&#34;&gt; can look up values much faster than&lt;/a&gt; the &lt;a href=&#34;http://support.microsoft.com/kb/198465&#34;&gt;collection object&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Doing default settings is interesting. It took me some time to figure out how to do that. But all that is needed is an optional boolean value for the Get and Let procedures.&lt;/p&gt;
+
+&lt;p&gt;A single point to output your values to makes it easy to trouble shoot if something isn&amp;rsquo;t working correctly. Also, the single input is just one procedure that grabs data from where ever you choose to store it and if it isn&amp;rsquo;t stored then it will just grabs the default value.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s an example on how a property would look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;In order to get default value an optional field is needed in the Get and Let procedures.
+Public Property Get _
+    Example(Optional ByVal bReturnDefault As Boolean = False) _
+    As Double
+    
+    &#39;Uses dictionary for look up of value (loads dictionary when creating new settings class.
+    &#39;SettingNames is the enumeration type.
+    If mdicSettings.Exists(SettingNames.Example) _
+        And Not bReturnDefault Then
+    
+        Example = CDbl(mdicSettings(SettingNames.Example))
+    Else
+        Example = 10
+    End If
+End Property
+
+Public Property Let _
+    Example(Optional ByVal bReturnDefault As Boolean = False _
+    , ByVal dValue As Double)
+    
+    &#39;Single point write (all values stored as string).
+    &#39;Note that the key is just the integer from the enumeration.
+    AddSetting SettingNames.Example, CStr(dValue)
+End Property
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

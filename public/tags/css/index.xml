@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Css on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/css/</link>
+    <description>Recent content in Css on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Dec 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>CSS Media Object</title>
+      <link>http://localhost:1313/2014/12/30/css_media_object/</link>
+      <pubDate>Tue, 30 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/12/30/css_media_object/</guid>
+      <description>&lt;p&gt;I just finished attending the RockIt Bootcamp (12 week program). It&amp;rsquo;s a program that teaches the LAMP full stack development (Linux, Apache, mySQL, PHP). In the next little while I will be going over some of the things which I learned.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;css media object&lt;/em&gt; was first coined by &lt;a href=&#34;http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/&#34;&gt;Nicole Sullivan&lt;/a&gt; in 2010. It is still one of the most basic constructs to learn and understand in created good CSS content.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;media object&lt;/em&gt; is basically a box with two other boxes side by side in the main box. Typically the box to the left is a picture and the box to the right is content, but can be anything.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div class=&amp;quot;media&amp;quot;&amp;gt;
+  &amp;lt;img src=&amp;quot;/images/my-cool-mug.png&amp;quot; alt=&amp;quot;A pic of me&amp;quot;&amp;gt;
+  &amp;lt;div&amp;gt;
+    &amp;lt;p&amp;gt;Some written content in the media object.&amp;lt;/p&amp;gt;
+    &amp;lt;p&amp;gt;Look, another paragraph in the media object!&amp;lt;/p&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;em&gt;media object&lt;/em&gt; css gives padding and margins to the objects that make them look nice and make the picture fit correctly. It also does a clearfix so the outside box doesn&amp;rsquo;t collapse to a smaller area than its content.&lt;/p&gt;
+
+&lt;p&gt;Some of the code I made specifically for this example, but in practice you would not put everything in the &lt;code&gt;media&lt;/code&gt; class. E.g., the &lt;code&gt;width&lt;/code&gt; of the media element would be decided somewhere else, make the &lt;code&gt;media&lt;/code&gt; class more reusable.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;/* Give the media object a shape. Add */
+/* padding just to make it look nice. */
+.media {
+  padding: 10px;
+  width: 300px;
+}
+/* clearfix */
+.media::after {
+  content: &#39;&#39;;
+  display: block;
+  clear: both;
+}
+.media &amp;gt; * {
+  padding: 0;
+  margin: 0;
+}
+.media &amp;gt; *:first-child {
+  float: left;
+}
+/* Make all content be past the picture. */
+.media &amp;gt; *:last-child {
+  margin-left: 110px;
+}
+/* The following is just to make */
+/* the paragraphs look nice. */
+.media &amp;gt; *:last-child &amp;gt; * {
+  margin: 0 0 10px 0;
+}
+.media &amp;gt; *:last-child &amp;gt; *:last-child {
+  margin-bottom: 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

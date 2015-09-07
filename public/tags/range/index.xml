@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Range on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/range/</link>
+    <description>Recent content in Range on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Jan 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/range/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Range Address from Number to Letter</title>
+      <link>http://localhost:1313/2012/01/20/range_address_from_number_to_letter/</link>
+      <pubDate>Fri, 20 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/20/range_address_from_number_to_letter/</guid>
+      <description>&lt;p&gt;Sometimes, before I realize it (and, I’m sure, others too) I do a bunch of work, that turns out that I didn’t need to do before. The RangeAddress function that I created is a perfect example of this. This function goes from a column number to a letter and returns the whole string range address. I started off &lt;a href=&#34;http://www.excelforum.com/excel-programming/638861-vb-convert-column-letter-to-number.html&#34;&gt;with someones else’s code&lt;/a&gt;. I then made it work for me. Their code only worked for Excel 2003 and below. The code below will work for All Excel versions. But there is a better way! The better way is in the &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/01/12/get-range-from-row-and-column-numbers/&#34;&gt;RRange function&lt;/a&gt; I posted about before. Below this code I’ll show you the basic gist on how to go about it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;RangeAddress
+&#39; --------------------------------------------------------------
+&#39;Comments: This function returns the string address.
+&#39;
+&#39;Arguments: lRow Row number of first row.
+&#39; lColumn Column number of first column.
+&#39;
+&#39;Date Developer History
+&#39;--------------------------------------------------------------
+&#39;Feb 14, 2011 Jon Nyman Initial version
+&#39;
+Public Function RangeAddress(ByRef lRow As Long, ByRef lColumn As Long, _
+    Optional ByVal lRow2 As Long = 0, Optional ByVal lColumn2 As Long = 0 _
+    , Optional ByVal sAddress As String = vbNullString) As String
+    Dim i As Integer
+    Dim lColumnNumber As Long
+    Dim sColumn As String, sColumn2 As String, sColumnLetter As String
+
+    On Error GoTo RangeAddress_Error
+
+    For i = 0 To 1
+        If i = 0 Then
+            lColumnNumber = lColumn
+        Else
+            lColumnNumber = lColumn2
+        End If
+        sColumnLetter = vbNullString
+        If lColumnNumber &amp;lt; 27 Then
+            sColumnLetter = Chr(lColumnNumber + 64)
+        ElseIf lColumnNumber &amp;lt; 703 Then
+            sColumnLetter = Chr((lColumnNumber – 1) \ 26 + 64) &amp;amp; Chr(((lColumnNumber – 1) Mod 26) + 65)
+        Else
+            sColumnLetter = Chr((lColumnNumber – 27) \ 676 + 64) &amp;amp; Chr(((lColumnNumber – 27) Mod 676) \ 26 + 65) &amp;amp; _
+                Chr(((lColumnNumber – 1) Mod 26) + 65)
+        End If
+        If i = 1 Then
+            sColumn2 = sColumnLetter
+            Exit For
+        Else
+            sColumn = sColumnLetter
+            If lColumn2 = 0 Then Exit For
+        End If
+    Next i
+
+    If lRow2 &amp;gt; 0 And lColumn2 &amp;gt; 0 Then
+        RangeAddress = &amp;quot;$&amp;quot; &amp;amp; sColumn &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow &amp;amp; &amp;quot;:$&amp;quot; &amp;amp; sColumn2 &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow2
+    ElseIf LenB(sAddress) &amp;gt; 0 Then
+        If CountStringOccurance(sAddress, &amp;quot;:&amp;quot;) = 1 Then
+            i = InStr(1, sAddress, &amp;quot;:&amp;quot;)
+            sAddress = Right$(sAddress, Len(sAddress) – i + 1)
+            RangeAddress = &amp;quot;$&amp;quot; &amp;amp; sColumn &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow &amp;amp; sAddress
+        Else
+            RangeAddress = &amp;quot;$&amp;quot; &amp;amp; sColumn &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow
+        End If
+    Else
+        RangeAddress = &amp;quot;$&amp;quot; &amp;amp; sColumn &amp;amp; &amp;quot;$&amp;quot; &amp;amp; lRow
+    End If
+
+RangeAddress_Exit:
+    On Error Resume Next
+
+    Exit Function
+
+    RangeAddress_Error:
+
+    GoTo RangeAddress_Exit
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A better way:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Sub Example()
+    
+    Dim iColumn As Integer
+    Dim rRng As Range
+    Dim sLetter As String
+    Dim wks As Worksheet
+
+    &#39;Initialize variables
+    iColumn = 35
+    Set wks = ActiveSheet
+
+    &#39;Return column letter
+    &#39;Note: it is important to work with the a worksheet,
+    &#39; since if the active sheet is a chart then the Cells function would throw an error.
+    sLetter = wks.Cells(1, iColumn).Address(False, False)
+    sLetter = Left$(sLetter, Len(sLetter) – 1)
+
+    &#39;Bypass even bothering to get the letter in the first place
+    With wks
+        Set rRng = .Range(.Cells(1, iColumn), .Cells(1, iColumn + 3))
+    End With
+
+    &#39;Results
+    Debug.Print &amp;quot;Column Letter: &amp;quot; &amp;amp; sLetter &amp;amp; vbNewLine &amp;amp; &amp;quot;Range Address: &amp;quot; &amp;amp; rRng.Address
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Results from Example test above:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Column Letter: AI
+Range Address: $AI$1:$AL$1
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get Range from Row &amp; Column Numbers</title>
+      <link>http://localhost:1313/2012/01/12/get_range_from_row_and_column_numbers/</link>
+      <pubDate>Thu, 12 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/12/get_range_from_row_and_column_numbers/</guid>
+      <description>&lt;p&gt;Before I created a quite elaborate code to get the column letter from the column numbers. It turns out that it was much easier than I had thought before. So in the code below I’ve simplified it considerably by using the Cells method.&lt;/p&gt;
+
+&lt;p&gt;In the function below I use a &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/01/13/find-last-cell/&#34;&gt;function called FindEnd&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;RRAnge
+&#39; --------------------------------------------------------------
+&#39;Comments: This Function returns the desired range.
+&#39;
+&#39;Arguments: lRow First cell row number.
+&#39; lCol First cell column number.
+&#39; lRowEnd Last cell row number or column number (negative) to find last row in.
+&#39; lColEnd Last cell column number or row number (negative) to find last column in.
+&#39; wks Worksheet of range.
+&#39;
+&#39;Date Developer History
+&#39;--------------------------------------------------------------
+&#39;Jan 6, 2012 Jon Nyman Initial version
+&#39;
+Public Function RRAnge(ByVal lRow As Long, ByVal lCol As Long, Optional ByVal lRowEnd As Long = 0 _
+    , Optional ByVal lColEnd As Long = 0, Optional ByVal wks As Worksheet = Nothing) As Range
+&#39;Determine if worksheet exist, if it doesn’t then set to current location.
+    If wks Is Nothing Then Set wks = ActiveWorkbook.ActiveSheet
+
+    &#39;Determine if the last row was set, if it isn’t then get last row number in wks
+    If lRowEnd &amp;lt; 1 Then
+        If lRowEnd Then
+        &#39;If lRowEnd is negative then get the last row in column number lRowEnd
+            lRowEnd = FindEnd(Abs(lRowEnd), , wks)
+        Else
+            &#39;If lRowEnd is 0 then use the range find function to determine last row.
+            lRowEnd = FindEnd(, , wks)
+        End If
+    End If
+
+    &#39;Determine if the last column was set, if it isn’t then get last column number in wks
+    If lColEnd &amp;lt; 1 Then
+        If lColEnd Then
+            &#39;If lColEnd is negative then get the last column in row number lColEnd
+            lColEnd = FindEnd(Abs(lColEnd), 2, wks)
+        Else
+            &#39;If lColEnd is 0 then use the range find function to determine last column.
+            lColEnd = FindEnd(, 2, wks)
+        End If
+    End If
+
+    &#39;Return range, if there is an error then return nothing.
+    On Error Resume Next
+    With wks
+        Set RRAnge = .Range(.Cells(lRow, lCol), .Cells(lRowEnd, lColEnd))
+    End With
+
+    If Err.Number Then Set RRAnge = Nothing
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

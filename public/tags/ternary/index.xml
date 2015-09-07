@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ternary on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/ternary/</link>
+    <description>Recent content in Ternary on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Jun 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ternary/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Match Expression for JavaScript?</title>
+      <link>http://localhost:1313/2014/06/20/match_expression_javascript/</link>
+      <pubDate>Fri, 20 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/06/20/match_expression_javascript/</guid>
+      <description>&lt;p&gt;Sometimes (or rather most of the time) it would be nice to have more concise code in JavaScript. I was working with a function that needed quite a bit of &lt;code&gt;if&lt;/code&gt; statements. &lt;code&gt;if&lt;/code&gt; was awfully cluttered. I had looked at &lt;a href=&#34;http://bilby.brianmckenna.org/examples/validation.htm&#34;&gt;bilby.js examples&lt;/a&gt; and hadn&amp;rsquo;t realized that you can do multiple &lt;code&gt;ternary expressions&lt;/code&gt; in a row.&lt;/p&gt;
+
+&lt;p&gt;So, instead of,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;if (0){
+  return 0
+}
+else if (1){
+   if (2) {
+     return 1
+   }
+   else if (3) {
+     return 2
+   }
+   else {
+     return 3
+   }
+}
+else {
+  return 4
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can do,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;(0) ? 0
+: (1) ?
+     (2) ? 1
+   : (3) ? 2
+   : 3
+: 4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which is much more concise and readable.&lt;/p&gt;
+
+&lt;p&gt;So where does &lt;code&gt;match expressions&lt;/code&gt; come into play? Glad you asked.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;ternary&lt;/code&gt; example above gives a similar &lt;a href=&#34;http://fsharpforfunandprofit.com/posts/match-expression/&#34;&gt;feel to &lt;code&gt;F#&lt;/code&gt;&amp;rsquo;s &lt;code&gt;match expressions&lt;/code&gt;&lt;/a&gt;. So, as an example here&amp;rsquo;s what a similary structured &lt;code&gt;match expression&lt;/code&gt; would look like.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;match [something] with 
+| pattern0 -&amp;gt; 0
+| pattern1 -&amp;gt; 
+   match [something else] with
+   | pattern2 -&amp;gt; 1
+   | pattern3 -&amp;gt; 2
+   | _ -&amp;gt; 3
+| _ -&amp;gt; 4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course, with &lt;code&gt;F#&lt;/code&gt; you could probably get away  without doing the second &lt;code&gt;match&lt;/code&gt; by using a &lt;code&gt;Tuple&lt;/code&gt; but that is beyond the scope of this post.&lt;/p&gt;
+
+&lt;p&gt;So, let&amp;rsquo;s look at the real function I made. First, let&amp;rsquo;s set up the bare parts of the function.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var addRollingArray = function (array, start, end, fraction) {
+  var floor = Math.floor
+  // Put code below here.
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we&amp;rsquo;ll map the array with some helper logic values.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;  return _.map(array, function (value, index) {
+    var isIndexStart = (floor(start) === index),
+        isIndexBetween = (floor(start) &amp;lt;= index &amp;amp;&amp;amp; index &amp;lt;= floor(end)),
+        isIndexEnd = (floor(end) === index)
+    // Code below goes here.
+  })
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the &lt;code&gt;if&lt;/code&gt; code,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;if (isIndexBetween) {
+  if (isIndexStart &amp;amp;&amp;amp; isIndexEnd)
+    return fraction * (end - start) + value
+  else if (isIndexStart)
+    return fraction * (1 + index - start) + value
+  else if (isIndexEnd)
+    return fraction * (end - index) + value
+  else
+    // Index is fully between start and end values
+    return fraction + value
+}
+// Index is out of bounds return original value
+return value
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here&amp;rsquo;s the refactored code,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;return   
+  isIndexBetween ? 
+      isIndexStart &amp;amp;&amp;amp; isIndexEnd ? fraction * (end - start) + value
+    : isIndexStart ? fraction * (1 + index - start) + value
+    : isIndexEnd   ? fraction * (end - index) + value
+    // Index is fully between start and end values
+    : fraction + value
+  // Index is out of bounds return original value
+  : value
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

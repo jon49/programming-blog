@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pivot Tables on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/pivot-tables/</link>
+    <description>Recent content in Pivot Tables on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Jun 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/pivot-tables/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Using Pivot Tables as a Staging Resource</title>
+      <link>http://localhost:1313/2012/06/19/using_pivot_tables_as_a_staging_resource/</link>
+      <pubDate>Tue, 19 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/06/19/using_pivot_tables_as_a_staging_resource/</guid>
+      <description>&lt;p&gt;When I originally created the &lt;a href=&#34;http://www.spreadsheetbudget.com/products/excel-time-card/&#34;&gt;Excel time card&lt;/a&gt; dashboard I didn&amp;rsquo;t want to back my data with any pivot tables. I soon found though that it slowed the calculations so much that I needed to use pivot tables just to make it bearable to work with the dashboard. The reason I didn&amp;rsquo;t want to use pivot tables was because they are prone to do wacky and unexpected things.&lt;/p&gt;
+
+&lt;p&gt;So, what I have done is I automated some of the code to fix errors (like make sure that the &amp;ldquo;wksPivotTable&amp;rdquo; has a column for months and years and that it is in order). Today I found another unexpected error. I found that when I entered data from the time card that all my dashboard charts data went to nothing. Apparently not all the data in the time card was formatted as date in column A. So I ended up having to format it correctly then delete the old pivot table and replace it.&lt;/p&gt;
+
+&lt;p&gt;So that is what I&amp;rsquo;ll be working on today. I&amp;rsquo;ll have to make sure that the cells are formatted correctly then automate fixes when the time card excel workbook is opened.&lt;/p&gt;
+
+&lt;p&gt;So how is everyone enjoying the time card? Have you found it useful? Have you found any bugs? Is there anything that I could do better for the dashboard.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linq on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/linq/</link>
+    <description>Recent content in Linq on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Dec 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/linq/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Excel Queries</title>
+      <link>http://localhost:1313/2012/12/03/excel_queries/</link>
+      <pubDate>Mon, 03 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/03/excel_queries/</guid>
+      <description>&lt;p&gt;I came across some nice libraries to use while programming to query
+Excel. Right now I’m am using the standard COM interface for my
+projects, which is fine for small ranges (which is true for most users –
+I would assume). But for large ranges I would need something more
+powerful.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/paulyoder/LinqToExcel#readme&#34;&gt;LinqToExcel&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;LinqToExcel appears to be a great project for using a Linq interface to
+query Excel (but not write to Excel). It uses ADO under the hood to do
+the actual queries. This is great if you are using Excel 2007 or newer,
+but for 2003 and older you run into the problem of &lt;a href=&#34;http://support.microsoft.com/kb/319998&#34;&gt;memory leaks when
+you query an open Excel
+document&lt;/a&gt; (which is what I
+usually do, I haven’t needed to get data from a closed document before)
+– &lt;a href=&#34;http://www.ozgrid.com/forum/showthread.php?t=37398&#34;&gt;see also&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Another problem I have found with this project is that if you need to
+interact with an Excel 64-bit install &lt;a href=&#34;https://github.com/paulyoder/LinqToExcel#x64-support&#34;&gt;you will need to download extra
+software on the users
+computer&lt;/a&gt;. Not a
+huge deal, just extra work. I would imagine that you would be able to
+find code online that would help you automate the build process for you
+code for the two versions you would need to do. Currently I just rebuild
+the installer for x86 and x64 (one installer installs to 64-bit program
+folder, the other to 32-bit program folder).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://epplus.codeplex.com/&#34;&gt;EPPlus&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;EPPlus is another method to query and write to Excel (&lt;a href=&#34;http://stackoverflow.com/a/9072296/632495&#34;&gt;and supposedly
+faster&lt;/a&gt;). It only works with
+xml based Excel files though. So, EPPlus might be a nice library to use
+in the future if I decide to drop support for Excel 2003 and lower. But
+one of the nice things about &lt;a href=&#34;http://netoffice.codeplex.com/&#34;&gt;NetOffice&lt;/a&gt;
+is that it is capable with working with older versions of excel.&lt;/p&gt;
+
+&lt;p&gt;LinqToExcel2D&lt;/p&gt;
+
+&lt;p&gt;This is a project I’m thinking about starting. I’ve done some work on it
+already. I would just need to clean it up and make it work as nice as
+LinqToExcel. It would be slower than both projects mentioned above, but,
+when you are working on small datasets it would come in handy.&lt;/p&gt;
+
+&lt;p&gt;I’ve read one of the best ways to learn how to code and improve your
+skills is by reading other people’s code. This would be a great
+opportunity for me to do just that!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linq: An Introduction</title>
+      <link>http://localhost:1313/2012/04/11/linq_an_introduction/</link>
+      <pubDate>Wed, 11 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/04/11/linq_an_introduction/</guid>
+      <description>&lt;p&gt;Another thing that I like about programming in VB.NET beyond &lt;a href=&#34;2012/04/05/extensions-in-vb-net/&#34;&gt;Extensions&lt;/a&gt; is &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/bb308959.aspx&#34;&gt;LINQ&lt;/a&gt;. LINQ is similar to &lt;a href=&#34;http://en.wikipedia.org/wiki/Sql&#34;&gt;SQL&lt;/a&gt; in structure - which is &amp;ldquo;a &lt;a href=&#34;http://en.wikipedia.org/wiki/Declarative_programming&#34;&gt;declarative programming&lt;/a&gt; paradigm that expresses the logic of a computation without describing its control flow.&amp;rdquo; So LINQ takes declarative paradigm and applies it to &lt;a href=&#34;http://en.wikipedia.org/wiki/Object-oriented_programming&#34;&gt;object oriented programming&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s so great about this? Well, it does slow the program down, but it speeds up the the programming process, puts the information in a form that is more descriptive (although that is no excuse not to thoroughly comment your code), and makes programming easier.&lt;/p&gt;
+
+&lt;p&gt;So, for the updating program for the time card I am working on, I put the updating version control document in an XML document.  The structure of the document is at the bottom of this post. To query this document using LINQ I have the following code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;Get version number string from specified item ID.
+Dim sNewVersion = _
+        (From oItem In mXML...
+        Where oItem.@id = sItemID).&amp;lt;Version&amp;gt;.Value
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How simple is that? You can imagine as more complex situations arise how simple the declarative language makes it. Yes, there is the learning hurdle, but once you get over it, it makes working with data much easier to work with. You can even use LINQ with classes, arrays, etc. I&amp;rsquo;m just scratching the surface of how powerful LINQ truly is.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

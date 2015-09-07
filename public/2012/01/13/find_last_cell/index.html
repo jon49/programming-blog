@@ -1,0 +1,262 @@
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>Find Last Cell</title>
+  <meta name="description" content="Find Last Cell">
+  <meta name="author" content="Jon Nyman">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.css">
+  
+  
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+  <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/highlight/styles/default.css">
+  
+  <script src="http://localhost:1313/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+
+<div class="header pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="/" class="site-title pure-menu-heading">Hamsters Byte</a>
+            <ul class="pure-menu-list">
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about/" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Hamsters Byte</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2012-01-13</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="http://localhost:1313/tags/vba">vba</a> <a href="http://localhost:1313/tags/excel">excel</a> <a href="http://localhost:1313/tags/code">code</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>Find Last Cell</h1>
+            </div>
+
+            <div class="post-content">
+                <p>Finding the last cell is a common thing people look for when they are coding in VBA. I made a function that does this automatically for me when I am looking for the last cell. In conjunction with the <a href="2012/01/12/get-range-from-row-and-column-numbers/">RRange function</a> this simplifies the programming life for VBA significantly.</p>
+
+<p>Heres some example code on how to use the function FindEnd.</p>
+
+<pre><code class="language-vbscript">Sub FindEndExamples() 
+    Dim l As Long 
+
+    'Find last row in column 2 on current worksheet 
+    l = FindEnd(2)
+    Debug.Print l 
+
+    'Find last column in row 5 on current worksheet 
+    l = FindEnd(5, 2)
+    Debug.Print l
+
+    'Find very last row in current worksheet
+    l = FindEnd()
+    Debug.Print l
+
+    'Find very last column in current worksheet 
+    l = FindEnd(, 2) 
+    Debug.Print l
+
+End Sub
+</code></pre>
+
+<p>And here&rsquo;s the actual FindEnd Function.</p>
+
+<pre><code class="language-vbscript">
+' --------------------------------------------------------------
+'Comments:  This function finds the last row or column in a
+'           specified row or colum, if no row or column specified will find last
+'           row or column in worksheet.
+'
+'Arguments: SearchColumnNumber    The row or column to be searched.
+'           Row1Col2        1 will find the last row.
+'                           2 will find the last column.
+'           oRange             Worksheet to be operated on.
+'           FindEnd         Returns long
+'
+'Original Source: http://www.mrexcel.com/forum/showthread.php?t=74317 4/22/2009
+'Date           Developer   History
+'--------------------------------------------------------------
+'04/22/09       Jon Nyman   Initial Version
+'03/09/10       Jon Nyman   Changed to returning long instead of integer.  Changed input variable names.
+'06/23/10       Jon Nyman   Changed to using &quot;Pivot Table Data Crunching Method&quot; (pg. 202) method of find
+'               the last cell in application end.  Added a check to see if last cell is filled.
+'07/14/10       Jon Nyman   Added optional workbook.
+'11/08/10       Jon Nyman   Added ability to get the last row/column without specifying row or column (using find).
+'                           Changed byval to byref to increase speed.
+'09/26/11       Jon Nyman   Changed so only need to add worksheet object.
+'03/27/12       Jon Nyman   Added ability to find last column or row in a range.
+Public Function FindEnd(Optional ByVal SearchColumnNumber As Long = 0, Optional ByVal Row1Col2 As Integer = 1, _
+    Optional ByVal oRange As Object = Nothing) As Long
+    
+    Dim i As Long
+    Dim sAddress As String
+    
+    On Error GoTo ExitFindEnd
+    
+    If oRange Is Nothing Then
+        Set oRange = ActiveSheet
+    End If
+        
+    If Row1Col2 = 2 Then
+        If SearchColumnNumber = 0 Then
+            FindEnd = oRange.Cells.Find(&quot;*&quot;, oRange.Range(&quot;A1&quot;), xlFormulas, XlLookAt.xlWhole, xlByColumns, xlPrevious, False, False).Column
+        Else
+            If Mid$(oRange.Parent.Name, Len(oRange.Parent.Name) - 3, 1) = &quot;.&quot; Then
+                i = 256
+            Else
+                i = Application.Columns.Count
+            End If
+            If LenB(oRange.Cells.Item(SearchColumnNumber, i)) &gt; 0 Then
+                FindEnd = i
+            Else
+                FindEnd = CLng(oRange.Range(RangeAddress(SearchColumnNumber, i)).End(xlToLeft).Column)
+            End If
+        End If
+    Else
+        If SearchColumnNumber = 0 Then
+            FindEnd = oRange.Cells.Find(&quot;*&quot;, oRange.Range(&quot;A1&quot;), xlFormulas, XlLookAt.xlWhole, xlByRows, xlPrevious, False, False).Row
+        Else
+            If Mid$(oRange.Parent.Name, Len(oRange.Parent.Name) - 3, 1) = &quot;.&quot; Then
+                i = 65536
+            Else
+                i = Application.Rows.Count
+            End If
+            If LenB(oRange.Cells.Item(i, SearchColumnNumber)) &gt; 0 Then
+                FindEnd = i
+            Else
+                FindEnd = CLng(oRange.Range(RangeAddress(i, SearchColumnNumber)).End(xlUp).Row)
+            End If
+        End If
+    End If
+    
+ExitFindEnd:
+If Err.Number &lt;&gt; 0 Then
+    FindEnd = -1
+End If
+
+End Function
+</code></pre>
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="pure-menu pure-menu-horizontal footer-content">
+            <ul>
+                <li class="pure-menu-heading" id="foot-name">Jon Nyman:</li>
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://github.com/jon49" class="pure-menu-link">GitHub</a>
+                </li>
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://www.linkedin.com/in/eenyman" class="pure-menu-link">LinkedIn</a>
+                </li>
+                
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://twitter.com/NymanJon" class="pure-menu-link">Twitter</a>
+                </li>
+                
+
+            </ul>
+            <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+        </div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="http://localhost:1313/js/jquery.min.js" type="text/javascript"></script>
+<script src="http://localhost:1313/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+

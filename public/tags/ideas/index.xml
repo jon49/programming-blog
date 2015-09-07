@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ideas on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/ideas/</link>
+    <description>Recent content in Ideas on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Jun 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ideas/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A Distributed &amp; Robust Feedly</title>
+      <link>http://localhost:1313/2014/06/12/distributed_robust_feedly/</link>
+      <pubDate>Thu, 12 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/06/12/distributed_robust_feedly/</guid>
+      <description>&lt;p&gt;In light of the recent attack on &lt;a href=&#34;http://feedly.com/&#34;&gt;Feedly.com&lt;/a&gt; I thought it might be interesting to see other ways we could propogate data accross the Interent without being succeptible to attacks, or, at least less accessible.&lt;/p&gt;
+
+&lt;p&gt;With the approach outlined below we need to use an actual app instead of being able to use a browser (there might be a way to use a browser also, not sure how it would work though).&lt;/p&gt;
+
+&lt;p&gt;I used BitTorrent Sync as the distribution model. The more people that follow a blog the more robust its feed will become.&lt;/p&gt;
+
+&lt;p&gt;On the back end all feedly would need to do is periodically update the feeds and user data - but the user data will only need to be updated if a user changes their password. If they have a read-write key for their data then it can be updated only locally and then propogated. The more devices a user uses the more robust their data will become.&lt;/p&gt;
+
+&lt;p&gt;It will be nice when the internet will catch up with the distributed model of doing things.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/images/FeedlyApp.png&#34;&gt;&lt;img src=&#34;http://localhost:1313/images/small/FeedlyApp.png&#34; alt=&#34;A Simple Outline of How to Set Up a Distributed Feedly&#34; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A Simple Outline of How to Set Up a Distributed Feedly&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

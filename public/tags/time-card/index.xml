@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Time Card on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/time-card/</link>
+    <description>Recent content in Time Card on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Mar 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/time-card/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>SUMIFS vs MATCH &amp; INDEX</title>
+      <link>http://localhost:1313/2013/03/14/sumifs_vs_match_index/</link>
+      <pubDate>Thu, 14 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/03/14/sumifs_vs_match_index/</guid>
+      <description>&lt;p&gt;I have one Time Card template setup with SUMIFS (used for Excel 2007 and
+above templates) and one set up with MATCH/INDEX (used for my 2003 and
+below templates). I tested the calculation speeds for each in Excel 2013
+(preview) on Windows 8.&lt;/p&gt;
+
+&lt;p&gt;Here’s the VBA test code:&lt;/p&gt;
+
+&lt;p&gt;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+| &lt;code&gt;{.vb style=&amp;quot;font-family:monospace;&amp;quot;}                                 |
+| Sub test()                                                               |
+|                                                                          |
+|     Dim dTimer As Double                                                 |
+|     Dim iLoops As Integer, iTotalIterations As Integer                   |
+|     Dim wksStage As Worksheet                                            |
+|                                                                          |
+|     Set wksStage = ThisWorkbook.Worksheets(&amp;quot;Staging Area&amp;quot;)               |
+|     iTotalIterations = 1                                                 |
+|     dTimer = Timer()                                                     |
+|                                                                          |
+|     For iLoops = 0 To iTotalIterations                                   |
+|         wksStage.Calculate                                               |
+|     Next iLoops                                                          |
+|                                                                          |
+|     Debug.Print Timer() - dTimer                                         |
+|                                                                          |
+| End Sub                                                                  |
+|&lt;/code&gt;                                                                      |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
+
+&lt;p&gt;And here’s the results (seconds):&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Iterations
+  SUMIFS
+  MATCH/INDEX&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;1                        50
+  0.20                     3.07
+  0.09                     1.30&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;So where do I go from here? I think I will keep the two separate
+templates for now, even though I could go to one. The reasons?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It is much easier to change SUMIFS than the complicated MATCH/INDEX
+functions.&lt;/li&gt;
+&lt;li&gt;I think I could introduce an error in the MATCH/INDEX functions more
+easily.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I will post the 2003 template for anyone that wishes faster calculation
+times, but it is pretty fast now, so I don’t know if that would be a
+huge issue.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Coming TimeCard Software Updates</title>
+      <link>http://localhost:1313/2013/03/13/coming_timecard_software_updates/</link>
+      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/03/13/coming_timecard_software_updates/</guid>
+      <description>&lt;p&gt;Just a quick update. I should be putting out the new Excel Time Card by the end of this week or early next week. This will be a big update. Including the following:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;Dashboard redesign (and Staging Area)
+&lt;ul&gt;
+    &lt;li&gt;easily change jobs on chart&lt;/li&gt;
+&lt;li&gt;easily change settings on dashboard&lt;/li&gt;
+    &lt;li&gt;filter jobs on chart, e.g., you have TimeCard and TimeCard:Marketing, you can just put TimeCard* to include both on the same screen&lt;/li&gt;
+
+
+&lt;/ul&gt;
+&lt;li&gt;The template is now included in the program, so no need to download it&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;I&#39;m testing out a new updater so you can have secure and smaller packaged updates.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I have more plans for the future of the time card - I&amp;rsquo;ll let you know when I get close to finishing them.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Excel Time Card Completed</title>
+      <link>http://localhost:1313/2012/05/16/excel_time_card_completed/</link>
+      <pubDate>Wed, 16 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/05/16/excel_time_card_completed/</guid>
+      <description>&lt;p&gt;The &lt;a href=&#34;products/excel-time-card/&#34;&gt;Excel time card&lt;/a&gt; I have been working on is completed. Feel free to have a look and tell me what you think! I still need to add more documentation, which I will role out in the future let me know if you have any questions or found any bugs!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;products/excel-time-card/&#34;&gt;Got to the download page to get it!&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A screen cast that shows some features of the time card stamp.
+&lt;iframe src=&#34;http://www.youtube.com/embed/LcryJ5epdv8&#34; frameborder=&#34;0&#34; width=&#34;420&#34; height=&#34;315&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Coming Soon...</title>
+      <link>http://localhost:1313/2012/01/04/coming_soon/</link>
+      <pubDate>Wed, 04 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/04/coming_soon/</guid>
+      <description>&lt;p&gt;I am currently working on a time card that will allow the user to track their time in Excel. This will allow the user to choose multiple projects at once and produce charts as a great visual to see how you are working.&lt;/p&gt;
+
+&lt;p&gt;After that I will work on my advanced find in VB.NET.&lt;/p&gt;
+
+&lt;p&gt;The long term project is the spreadsheet budget in Excel. This project is expected for first release in mid 2012.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

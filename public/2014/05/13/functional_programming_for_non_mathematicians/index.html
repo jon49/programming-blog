@@ -1,0 +1,268 @@
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>Notes On Functional Programming</title>
+  <meta name="description" content="Notes On Functional Programming">
+  <meta name="author" content="Jon Nyman">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.css">
+  
+  
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+  <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/highlight/styles/default.css">
+  
+  <script src="http://localhost:1313/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+
+<div class="header pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="/" class="site-title pure-menu-heading">Hamsters Byte</a>
+            <ul class="pure-menu-list">
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about/" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Hamsters Byte</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2014-05-13</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="http://localhost:1313/tags/functional-programming">functional programming</a> <a href="http://localhost:1313/tags/maybe">maybe</a> <a href="http://localhost:1313/tags/either">either</a> <a href="http://localhost:1313/tags/functor">functor</a> <a href="http://localhost:1313/tags/lenses">lenses</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>Notes On Functional Programming</h1>
+            </div>
+
+            <div class="post-content">
+                
+
+<h2 id="patterns-for-the-non-mathematician-with-brian-lonsdorf:84395a4544571503aa2619881045cc3a">Patterns for the Non-Mathematician with Brian Lonsdorf</h2>
+
+<h3 id="lenses:84395a4544571503aa2619881045cc3a">Lenses</h3>
+
+<p>Using lenses for composable/polymorphic model manipulation.</p>
+
+<p>E.g.,</p>
+
+<pre><code class="language-javascript">var user = {id:1, name:{first:'doris', last:'day'}}
+var L = makeLenses(['name', 'first'])
+var firstNameChar = compose(L.name, L.first, _1)
+over(firstNameChar, toUpperCase, user)
+//=&gt; {id:1, name:{first:'Doris', last:'day'}}
+</code></pre>
+
+<h3 id="maybe:84395a4544571503aa2619881045cc3a">Maybe</h3>
+
+<p>Use <code>Maybe</code> (Haskell) types (<code>Option</code> types in bilby.js / Scala style) to make composition easier. This works with <code>fmap</code> (functor maps). Returns resultant <code>option</code>.</p>
+
+<h3 id="error-handling-either:84395a4544571503aa2619881045cc3a">Error Handling (Either)</h3>
+
+<pre><code class="language-javascript">Either('need an int', 3)
+//=&gt; Right(3)
+
+Either('need an int', undefined)
+//=&gt; Left('need an int')
+
+fmap(function(x){return x+1;}, Right(2))
+//=&gt; Right(3)
+
+fmap(function(x){return x+1;}, Left('need an int'))
+//=&gt; Left('need an int')
+
+compose(fmap(f), Either(error))
+</code></pre>
+
+<h3 id="future-values:84395a4544571503aa2619881045cc3a">Future Values</h3>
+
+<p>I&rsquo;ll have to come back to this one later when I use it more.</p>
+
+<h3 id="functor:84395a4544571503aa2619881045cc3a">Functor</h3>
+
+<blockquote>
+<p>Something that implements <strong>map</strong></p>
+</blockquote>
+
+<p>Like Promise, Maybe, Either, etc.</p>
+
+<h3 id="nesting:84395a4544571503aa2619881045cc3a">Nesting</h3>
+
+<p>Use mjoin (flatMap &ndash; bilby.js) to flatten nesting.</p>
+
+<pre><code class="language-javascript">var getField = compose(Maybe, document.querySelector)
+var getValue = compose(Maybe, pluck('value'))
+
+var greet = compose(fmap(fmap(concat('hello')))
+                    , fmap(getValue), getField)
+greet('#name')
+//=&gt; Maybe(Maybe('hello chris'))
+
+var greet = compose(fmap(concat('hello'))
+                    , mjoin
+                    , fmap(getValue), getField)
+greet('#name')
+//=&gt; Maybe('hello chris')
+</code></pre>
+
+<h3 id="mutiple-values-lifta2:84395a4544571503aa2619881045cc3a">Mutiple Values (liftA2)</h3>
+
+<pre><code class="language-javascript">liftA2(f, A(x), A(y))
+
+liftA2(add, Maybe(3), Maybe(4))
+//=&gt; Maybe(7)
+
+liftA2(add, Maybe(null), Maybe(4))
+//=&gt; Maybe(null)
+</code></pre>
+
+<h3 id="examples:84395a4544571503aa2619881045cc3a">Examples</h3>
+
+<h4 id="lenses-1:84395a4544571503aa2619881045cc3a">Lenses</h4>
+
+<pre><code class="language-javascript">var L = makeLenses(['body', 'viewed'])
+var comment = {id:2, body: &quot;this is a *great* post&quot;, viewed: false}
+var showOnScreen = log
+var prog = compose(showOnScreen, set(L.viewed, true), over(L.body, markdown))
+prog(comment)
+//=&gt; {id:2, body: '&lt;p&gt;this is a &lt;em&gt;great&lt;/em&gt; post!&lt;/p&gt;', viewed: true}
+</code></pre>
+
+<h4 id="either-maybe:84395a4544571503aa2619881045cc3a">Either/Maybe</h4>
+
+<pre><code class="language-javascript">var getWords = compose(Either('you need some words')
+               , match(/\w+/g))
+var showCount = compose(concat('The count is: ')
+                , pluck('length'))
+var prog = compose(fmap(showCount), getWords)
+var result = progr(' blah ')
+log(result)
+//=&gt; Right('The count is: 1')
+</code></pre>
+
+<p><strong>These notes came from the video below:</strong></p>
+
+<p><a href="https://github.com/DrBoolean/patterns_talk">The full slides are also available.</a></p>
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/AvgwKjTPMmM" frameborder="0" allowfullscreen></iframe>
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="pure-menu pure-menu-horizontal footer-content">
+            <ul>
+                <li class="pure-menu-heading" id="foot-name">Jon Nyman:</li>
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://github.com/jon49" class="pure-menu-link">GitHub</a>
+                </li>
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://www.linkedin.com/in/eenyman" class="pure-menu-link">LinkedIn</a>
+                </li>
+                
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://twitter.com/NymanJon" class="pure-menu-link">Twitter</a>
+                </li>
+                
+
+            </ul>
+            <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+        </div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="http://localhost:1313/js/jquery.min.js" type="text/javascript"></script>
+<script src="http://localhost:1313/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Misc on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/misc/</link>
+    <description>Recent content in Misc on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Filler</title>
+      <link>http://localhost:1313/2014/04/15/filler/</link>
+      <pubDate>Tue, 15 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/04/15/filler/</guid>
+      <description>
+
+&lt;h3 id=&#34;filled:d2871fa57ae2d72b9a7571c6b7ddfa15&#34;&gt;Filled&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Already&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Welcome</title>
+      <link>http://localhost:1313/2012/01/04/0welcome/</link>
+      <pubDate>Wed, 04 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/04/0welcome/</guid>
+      <description>&lt;p&gt;I decided that using Drupal was more work than I wanted to put into my website, so here&amp;rsquo;s to WordPress! Hopefully I won&amp;rsquo;t regret it.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s my previous entry for this post:&lt;/p&gt;
+
+&lt;p&gt;Welcome to SpreadsheetBudget.com. This is my blog that will demonstrate ideas and learning material as I create a budget spreadsheet using Excel. Once I finish creating the software, or at least get closer, I will begin to publish how to articles on how to use the software. This is a journey for me as I learn how to program in VBA and VB.NET and eventually other languages. One step at a time!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

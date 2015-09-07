@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Array Functions on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/array-functions/</link>
+    <description>Recent content in Array Functions on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Mar 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/array-functions/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Why UDF Array Functions are Faster</title>
+      <link>http://localhost:1313/2012/03/29/why_udf_array_functions_are_faster/</link>
+      <pubDate>Thu, 29 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/03/29/why_udf_array_functions_are_faster/</guid>
+      <description>&lt;p&gt;Over at &lt;a href=&#34;http://fastexcel.wordpress.com&#34;&gt;FastExcel&lt;/a&gt; the answer was given &lt;a href=&#34;http://fastexcel.wordpress.com/2011/06/20/writing-efiicient-vba-udfs-part5-udf-array-formulas-go-faster/&#34;&gt;why UDF arrays go faster&lt;/a&gt; to the question I had on &lt;a href=&#34;2012/03/28/calculation-effeciency-array-formulas/&#34;&gt;why UDF array formulas are faster than regular formulas&lt;/a&gt;. I had forgotten about this post that he had written.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the answer that he gives. Check out his &lt;a href=&#34;2012/03/28/calculation-effeciency-array-formulas/&#34;&gt;blog post&lt;/a&gt; to see more of the details of why this is.
+&lt;blockquote&gt;&lt;span style=&#34;color: #3366ff;&#34;&gt;You can break down the time taken by a VBA UDF into these components:&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span style=&#34;color: #3366ff;&#34;&gt;Overhead time to call the UDF.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style=&#34;color: #3366ff;&#34;&gt;Time to fetch the data thats going to be used by the UDF.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style=&#34;color: #3366ff;&#34;&gt;Time to do the calculations.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style=&#34;color: #3366ff;&#34;&gt;Overhead time to return the answer(s).&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

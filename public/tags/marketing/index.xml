@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Marketing on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/marketing/</link>
+    <description>Recent content in Marketing on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Nov 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/marketing/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Scribble Filter Now Available and Other Muses</title>
+      <link>http://localhost:1313/2012/11/08/scribble_filter_now_available_and_other_muses/</link>
+      <pubDate>Thu, 08 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/11/08/scribble_filter_now_available_and_other_muses/</guid>
+      <description>&lt;p&gt;I got the sale software all installed so I can sell the &lt;a href=&#34;http://www.spreadsheetbudget.com/products/scribble-filter/&#34;&gt;Scribble
+Filter&lt;/a&gt;.
+There’s still a few changes I wanted to make with it. I wasn’t entirely
+thinking when I added the ability to filter ranges directly when I add
+(among others). I should have made it &lt;a href=&#34;http://office.microsoft.com/en-us/excel-help/using-structured-references-with-excel-tables-HA010155686.aspx#BMstructured_reference_syntax_rules&#34;&gt;more compliant to what Microsoft
+does&lt;/a&gt;.
+I’ll be working on changing that around now. It will probably be a
+little while before I incorporate all of that into the filter. If the
+sales do well then I’ll make it more powerful otherwise I won’t be able
+to justify the time.&lt;/p&gt;
+
+&lt;p&gt;On a side note. It is interesting how long this project took. I spent
+over 225 hours working on it. Of course, if I were to do it again I
+could probably slice that time down. So, that will take quite a bit of
+money to make this project worth it! For a programmer marketing can be
+the most difficult part and it is also the most important part. You can
+make the best program in the world, but if you can’t market it, it might
+as well not even exist!&lt;/p&gt;
+
+&lt;p&gt;I’ll try and get the trial version out in the next week or so. Wife is
+about to have a baby so it might take a little longer.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

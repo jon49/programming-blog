@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/javascript/</link>
+    <description>Recent content in Javascript on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Jul 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>bilby.js &amp; lenses</title>
+      <link>http://localhost:1313/2014/07/01/bilbyjs_lenses/</link>
+      <pubDate>Tue, 01 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/07/01/bilbyjs_lenses/</guid>
+      <description>&lt;p&gt;In JavaScript nearly everything is &lt;a href=&#34;http://en.wikipedia.org/wiki/Mutable&#34;&gt;mutable&lt;/a&gt;. This can cause problems
+in your code when you think you have a new object or variable but
+instead you are operating on the referenced object. So, we create
+patterns to alleviate this problem. Or we use libraries like
+&lt;a href=&#34;http://underscorejs.org/&#34;&gt;underscore.js&lt;/a&gt; or &lt;a href=&#34;http://lodash.com/docs&#34;&gt;lodash.js&lt;/a&gt; which incorporate the functional
+concepts. Unfortunately they don&amp;rsquo;t always use immutable objects either.&lt;/p&gt;
+
+&lt;p&gt;Bilby.js solves the mutability problem by using &lt;a href=&#34;http://bilby.brianmckenna.org/#lenses&#34;&gt;lenses&lt;/a&gt;. Using the
+&lt;a href=&#34;http://en.wikipedia.org/wiki/Bidirectional_transformation&#34;&gt;lenses&lt;/a&gt; pattern one can access and change one&amp;rsquo;s objects in a safe
+and immutable manner.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say we have the &lt;code&gt;Person&lt;/code&gt; object.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function Person(){
+   this.name = {first: &#39;George&#39;, last: &#39;Stanza&#39;}
+   this.id = 0
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We use bilby.js lenses by first creating lens objects.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var nameLens = bilby.objectLens(&#39;name&#39;)
+var firstLens = bilby.objectLens(&#39;first&#39;)
+var lastLens = bilby.objectLens(&#39;last&#39;)
+var idLens = bilby.objectLens(&#39;id&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We then can use getters to access the data.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var george = new Person()
+// Person {name: {first:&#39;George&#39;, last: &#39;Stanza&#39;}, id: 0}
+firstLens.compose(nameLens).run(george).getter
+//George
+lastLens.compose(nameLens).run(george).getter
+//Stanza
+idLens.run(george).getter
+//0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or you can create a get function.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var get = function(lens, obj){
+   return lens.run(obj).getter
+}
+// e.g.,
+get(firstLens.compose(nameLens), george)
+// George
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To create a new object with new values from another object.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var susan = firstLens.compose(nameLens).run(george).setter(&#39;Susan&#39;)
+// Object {name: {first:&#39;Susan&#39;, last: &#39;Stanza&#39;}, id: 0}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The below code is strongly discouraged by &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf&#34;&gt;Mozilla Developer Network&lt;/a&gt;.
+Also, the correct method would be &lt;code&gt;Object.getPrototypeOf(object)&lt;/code&gt; and
+&lt;code&gt;Object.setPrototypeOf(object)&lt;/code&gt; instead of &lt;code&gt;__proto__&lt;/code&gt;. I&amp;rsquo;ve since
+switched to using plain objects with commonjs modules instead.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;End Update&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Hhhhmmm&amp;hellip;there&amp;rsquo;s a problem there. &lt;code&gt;susan&lt;/code&gt; is no longer a &lt;code&gt;Person&lt;/code&gt; she&amp;rsquo;s
+only an &lt;code&gt;Object&lt;/code&gt;. We don&amp;rsquo;t want to objectify her do we? I worked around
+this problem by creating my own &lt;code&gt;set&lt;/code&gt; function.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var set = function(lens, object, value){
+   var newObject = lens.run(object).setter(value)
+   return _.isEqual(newObject.__proto__, object.__proto__) 
+      ? newObject 
+      : (newObject.__proto__ = object.__proto__, newObject)
+}
+//e.g.,
+var fred = set(firstLens.compose(nameLens), george, &#39;Fred&#39;)
+// Person {name: {first:&#39;Fred&#39;, last: &#39;Stanza&#39;}, id: 0}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we need to remember that these new objects are not deep clones, only
+shallow clones, which helps with performance but, if we leave our design
+pattern we could get in trouble, so be careful!&lt;/p&gt;
+
+&lt;p&gt;Note that in &lt;a href=&#34;https://github.com/fantasyland/fantasy-lenses&#34;&gt;Fantasy Land lenses&lt;/a&gt; the naming convetion is different
+&lt;code&gt;setter&lt;/code&gt; and &lt;code&gt;getter&lt;/code&gt; drop the &lt;code&gt;ter&lt;/code&gt; and &lt;code&gt;compose&lt;/code&gt; is dropped in favor
+of &lt;code&gt;andThen&lt;/code&gt; making it so you can switch the order of your lenses.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var deborah = nameLens.andThen(firstLens).run(george).set(&#39;Deborah&#39;)
+// Object {name: {first: &#39;Deborah&#39;, last: &#39;Stanza&#39;}, id: 0}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you want to play around with these concepts in jsFiddle you can use lodash.js&amp;rsquo; &lt;code&gt;_.assign&lt;/code&gt; method. I&amp;rsquo;ve set up the &lt;a href=&#34;http://jsfiddle.net/jon49/3xRNT/&#34;&gt;jsFiddle here.&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

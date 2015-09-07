@@ -1,0 +1,12 @@
+---
+date: 2012-01-04
+title: Welcome
+tags:
+    - misc
+---
+
+I decided that using Drupal was more work than I wanted to put into my website, so here's to WordPress! Hopefully I won't regret it.
+
+Here's my previous entry for this post:
+
+Welcome to SpreadsheetBudget.com. This is my blog that will demonstrate ideas and learning material as I create a budget spreadsheet using Excel. Once I finish creating the software, or at least get closer, I will begin to publish how to articles on how to use the software. This is a journey for me as I learn how to program in VBA and VB.NET and eventually other languages. One step at a time!

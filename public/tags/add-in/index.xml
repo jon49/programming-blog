@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Add In on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/add-in/</link>
+    <description>Recent content in Add In on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 Jan 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/add-in/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Distributing Add-ins via Installer</title>
+      <link>http://localhost:1313/2012/01/27/distributing_add_ins_via_installer/</link>
+      <pubDate>Fri, 27 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/27/distributing_add_ins_via_installer/</guid>
+      <description>&lt;p&gt;Recently I needed to create an installer for my add-ins using &lt;a href=&#34;http://www.jrsoftware.org/isinfo.php&#34;&gt;Inno Setup installer&lt;/a&gt;. Inno Setup is a free ware professional installer. It lets you use &lt;a href=&#34;http://en.wikipedia.org/wiki/Pascal_(programming_language&#34;&gt;Pascal&lt;/a&gt;) to create special code to help you install the add ins.&lt;/p&gt;
+
+&lt;p&gt;Luckily, over at &lt;a href=&#34;http://dutchgemini.wordpress.com/2012/01/04/install-and-uninstall-an-excel-add-in-with-innosetup&#34;&gt;Dutch Gemini’s website&lt;/a&gt; he has helped with plenty of the code to get there. Very well done, I might add.&lt;/p&gt;
+
+&lt;p&gt;It looks like he uses a single add-in file for Excel 2003 and below and Excel 2007 and above (for ribbon purposes). I prefer to have all my code in a single XLA file (if I’m not using &lt;a href=&#34;http://exceldna.codeplex.com/&#34;&gt;Excel DNA&lt;/a&gt;) for the main code and then a separate XLAM file for the ribbon. So I had to change some of his code to account for that.&lt;/p&gt;
+
+&lt;p&gt;I basically changed his functions &lt;a href=&#34;http://dutchgemini.wordpress.com/2012/01/02/install-and-uninstall-an-excel-add-in-with-innosetup-page-5/#CopyTheAddIn&#34;&gt;CopyTheAddIn&lt;/a&gt; and &lt;a href=&#34;http://dutchgemini.wordpress.com/2012/01/02/install-and-uninstall-an-excel-add-in-with-innosetup-page-5/#HookAddinToExcel&#34;&gt;HookAddinToExcel&lt;/a&gt; to account for the XLAM file when it is Excel 2007 and above. The functions &lt;a href=&#34;http://dutchgemini.wordpress.com/2012/01/02/install-and-uninstall-an-excel-add-in-with-innosetup-page-5/#UnhookAddinFromExcel&#34;&gt;UnhookAddinFromExcel&lt;/a&gt; and &lt;a href=&#34;http://dutchgemini.wordpress.com/2012/01/02/install-and-uninstall-an-excel-add-in-with-innosetup-page-5/#RemoveTheAddIn&#34;&gt;RemoveTheAddIn&lt;/a&gt; also need to be changed to uninstall the add-ins and delete all the add-in files.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

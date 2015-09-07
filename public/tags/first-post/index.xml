@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>First Post on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/first-post/</link>
+    <description>Recent content in First Post on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/first-post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Filler</title>
+      <link>http://localhost:1313/2014/04/15/filler/</link>
+      <pubDate>Tue, 15 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/04/15/filler/</guid>
+      <description>
+
+&lt;h3 id=&#34;filled:d2871fa57ae2d72b9a7571c6b7ddfa15&#34;&gt;Filled&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Already&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

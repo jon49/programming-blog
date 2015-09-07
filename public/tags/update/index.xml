@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Update on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/update/</link>
+    <description>Recent content in Update on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 13 Mar 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/update/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Coming TimeCard Software Updates</title>
+      <link>http://localhost:1313/2013/03/13/coming_timecard_software_updates/</link>
+      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/03/13/coming_timecard_software_updates/</guid>
+      <description>&lt;p&gt;Just a quick update. I should be putting out the new Excel Time Card by the end of this week or early next week. This will be a big update. Including the following:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;Dashboard redesign (and Staging Area)
+&lt;ul&gt;
+    &lt;li&gt;easily change jobs on chart&lt;/li&gt;
+&lt;li&gt;easily change settings on dashboard&lt;/li&gt;
+    &lt;li&gt;filter jobs on chart, e.g., you have TimeCard and TimeCard:Marketing, you can just put TimeCard* to include both on the same screen&lt;/li&gt;
+
+
+&lt;/ul&gt;
+&lt;li&gt;The template is now included in the program, so no need to download it&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;I&#39;m testing out a new updater so you can have secure and smaller packaged updates.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I have more plans for the future of the time card - I&amp;rsquo;ll let you know when I get close to finishing them.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Excel Time Card Completed</title>
+      <link>http://localhost:1313/2012/05/16/excel_time_card_completed/</link>
+      <pubDate>Wed, 16 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/05/16/excel_time_card_completed/</guid>
+      <description>&lt;p&gt;The &lt;a href=&#34;products/excel-time-card/&#34;&gt;Excel time card&lt;/a&gt; I have been working on is completed. Feel free to have a look and tell me what you think! I still need to add more documentation, which I will role out in the future let me know if you have any questions or found any bugs!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;products/excel-time-card/&#34;&gt;Got to the download page to get it!&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A screen cast that shows some features of the time card stamp.
+&lt;iframe src=&#34;http://www.youtube.com/embed/LcryJ5epdv8&#34; frameborder=&#34;0&#34; width=&#34;420&#34; height=&#34;315&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

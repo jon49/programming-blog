@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wrapper Engine on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/wrapper-engine/</link>
+    <description>Recent content in Wrapper Engine on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Dec 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/wrapper-engine/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>AdvancedFilter Wrapper Engine</title>
+      <link>http://localhost:1313/2012/12/18/advancedfilter_wrapper_engine_for_vba_enthusiasts/</link>
+      <pubDate>Tue, 18 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/18/advancedfilter_wrapper_engine_for_vba_enthusiasts/</guid>
+      <description>&lt;p&gt;A while back ago I promised to produce my engine for the advancedfilter wrapper. Well, at the prodding of &lt;a href=&#34;http://blog.contextures.com/archives/2011/03/02/excel-autofilter-or-advanced-filter/#comment-43397&#34;&gt;Hugo&lt;/a&gt; I finally put it together. I took the code from my VB.NET project and converted it to VBA. Man, that reminds of why I love .NET so much! If you ever get a chance to learn .NET of VBA definitely take the opportunity. At first it is difficult but then it gets to the point where you don&amp;rsquo;t want to go back.&lt;/p&gt;
+
+&lt;p&gt;In the next few weeks I&amp;rsquo;ll go over how to use the Search class and its particulars. For anyone that uses it all I ask is that you credit me and that you spread the word about &lt;a href=&#34;products/scribble-filter/&#34;&gt;Scribble Filter&lt;/a&gt;! If you find any bugs let me know and I&amp;rsquo;ll fix them.&lt;/p&gt;
+
+&lt;p&gt;Some things you should know:&lt;/p&gt;
+
+&lt;p&gt;4 files are needed:
+LogicRPNGenerator.bas
+Search.cls
+Stack.cls
+StandardCode.bas&lt;/p&gt;
+
+&lt;p&gt;The file &lt;strong&gt;SearchSample.bas&lt;/strong&gt; shows a few examples. If you don&amp;rsquo;t specify your own temp worksheet then it will create one and then delete it after the Search class terminates. &lt;strong&gt;Anything on the temp worksheet will be deleted&lt;/strong&gt;. Let me know what you think!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,201 @@
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>Generic Types</title>
+  <meta name="description" content="Generic Types">
+  <meta name="author" content="Jon Nyman">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.css">
+  
+  
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+  <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/highlight/styles/default.css">
+  
+  <script src="http://localhost:1313/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+
+<div class="header pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="/" class="site-title pure-menu-heading">Hamsters Byte</a>
+            <ul class="pure-menu-list">
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about/" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Hamsters Byte</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2012-06-18</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="http://localhost:1313/tags/vb.net">vb.net</a> <a href="http://localhost:1313/tags/code">code</a> <a href="http://localhost:1313/tags/generic-types">generic-types</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>Generic Types</h1>
+            </div>
+
+            <div class="post-content">
+                <p>Last time we went over <a href="2012/06/07/overloading-in-vb-net/">Overloading</a> function in .NET. Today we&rsquo;ll take a look at <a href="http://msdn.microsoft.com/en-us/library/w256ka79.aspx">generics</a>. I had been wondering how to do this for some time, seeing that I could do it with Microsoft&rsquo;s built in code. I have to say, it is pretty nice and really makes coding much easier and cleaner.</p>
+
+<blockquote>A generic type is a single programming element that adapts to perform the same functionality for a variety of data types. When you define a generic class or procedure, you do not have to define a separate version for each data type for which you might want to perform that functionality.</blockquote>
+
+<p>So take a look at this code where I parse data from Excel and put it into a class. I put it into any class I want to.</p>
+
+<pre><code class="language-vbscript">'Loop through items and send to action, e.g., put into a class, using function.
+&lt;Extension()&gt;
+Public Function Parse(Of TSource)(ByRef oArray(,) As Object, ByVal conversion As Func(Of Object(), TSource), ByVal iRowStart As Integer _
+                                    , ByVal iRowEnd As Integer, ByVal iColStart As Integer _
+                                    , ByVal iColEnd As Integer) As TSource()
+    Try
+        Dim tArray(iRowEnd - iRowStart) As TSource
+        Dim o1Array(iColEnd - iColStart) As Object
+
+        For i As Integer = iRowStart To iRowEnd
+            For j As Integer = iColStart To iColEnd
+                o1Array(j - iColStart) = oArray(i, j)
+            Next
+            tArray(i) = conversion(o1Array)
+        Next
+
+        Return tArray
+
+    Catch ex As System.IndexOutOfRangeException
+        Throw New System.IndexOutOfRangeException
+    End Try
+
+End Function&lt;/pre&gt;
+</code></pre>
+
+<p>And here&rsquo;s how I would call it. Here I get the date range in the time card and put that information in my class that organizes the time card date information. The enumeration <i>CSettings.BUTimeCardHeadings</i> tells me where the heading is located in Excel so I don&rsquo;t have to remember the actual column. When I grab the data, Excel-DNA puts it in zero-based two dimensional array, hence the minus 1.</p>
+
+<pre><code class="language-vbscript">Dim oaDates = moaJobs.FindAllSorted(mdteDate.ToOADate(), CSettings.BUTimeCardHeadings.tcDate - 1)
+    AddCItems(oaDates _
+                  .Parse(Of CItem)(Function(o) _
+                  New CItem( _
+                      CastOrDefault(Of Double)(o(CSettings.BUTimeCardHeadings.tcHours - 1), 0.0#) _
+                      , CastOrDefault(Of Double)(o(CSettings.BUTimeCardHeadings.tcClockIn - 1), 0.0#) _
+                      , If(Not IsNothing(o(CSettings.BUTimeCardHeadings.tcJob - 1)) Or TypeOf o(CSettings.BUTimeCardHeadings.tcJob - 1) Is ExcelError _
+                           , o(CSettings.BUTimeCardHeadings.tcJob - 1).ToString, vbNullString))))&lt;/pre&gt;
+</code></pre>
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="pure-menu pure-menu-horizontal footer-content">
+            <ul>
+                <li class="pure-menu-heading" id="foot-name">Jon Nyman:</li>
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://github.com/jon49" class="pure-menu-link">GitHub</a>
+                </li>
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://www.linkedin.com/in/eenyman" class="pure-menu-link">LinkedIn</a>
+                </li>
+                
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://twitter.com/NymanJon" class="pure-menu-link">Twitter</a>
+                </li>
+                
+
+            </ul>
+            <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+        </div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="http://localhost:1313/js/jquery.min.js" type="text/javascript"></script>
+<script src="http://localhost:1313/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+

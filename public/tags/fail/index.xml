@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fail on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/fail/</link>
+    <description>Recent content in Fail on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 19 Aug 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/fail/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Zipping Files with VBA and USB Drives</title>
+      <link>http://localhost:1313/2013/08/19/zipping_files_with_vba_and_usb_drives/</link>
+      <pubDate>Mon, 19 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/08/19/zipping_files_with_vba_and_usb_drives/</guid>
+      <description>&lt;p&gt;I used &lt;a href=&#34;http://www.rondebruin.nl/win/s7/win001.htm&#34;&gt;Ron de Bruin&amp;rsquo;s file zipping (and sending) code with Excel&lt;/a&gt;. It works great with a few tweaks. Unfortunately when someone is using a USB drive with their workbook on it it fails to work. So warning: Make sure the users are using it on the main computer when trouble shooting!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Attempted to Read or Write Protected Memory</title>
+      <link>http://localhost:1313/2013/02/12/attempted_to_read_or_write_protected_memory/</link>
+      <pubDate>Tue, 12 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/02/12/attempted_to_read_or_write_protected_memory/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been working on switching over to a &amp;ldquo;new&amp;rdquo; machine (more on that in a new post). In the process my time card program stopped working with the following error:&lt;/p&gt;
+
+&lt;blockquote&gt;System.AccessViolationException was unhandled
+Message: Attempted to read or write protected memory.
+This is often an indication that other memory is corrupt.&lt;/blockquote&gt;
+
+&lt;p&gt;Unfortunately this error doesn&amp;rsquo;t show up until well after it occurs. So you need to make some educated guesses as to where it is coming from. So what I did is I just commented out code one at a time in the procedure where it was originating from. The code that was shown to be problematic was called from two different places - so the error occurred only from one of the branches but not the other. So that was a bit confusing. It was also confusing because it didn&amp;rsquo;t happen on my Windows XP computer, just on the &amp;ldquo;new&amp;rdquo; Windows 8 computer.&lt;/p&gt;
+
+&lt;p&gt;Eventually I figured out (with help from &lt;a href=&#34;http://stackoverflow.com/q/8779557/632495&#34;&gt;StackOverflow&lt;/a&gt;) that it was caused by changing the values of my drop down list during the click event of the combo box.&lt;/p&gt;
+
+&lt;p&gt;To fix the problem, &lt;a href=&#34;http://support.microsoft.com/kb/952544&#34;&gt;Microsoft&lt;/a&gt; recommends that you don&amp;rsquo;t change the values of the combo box during the event. So, I added a &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/h1c2h276(v=vs.85).aspx&#34;&gt;timer component&lt;/a&gt; to the form. The timer allows you to call a function in the future after completing other operations. I also use a timer in the Scribble Filter preview box when someone selects multiple lines on the form - so Excel doesn&amp;rsquo;t go crazy will I&amp;rsquo;m selected the corresponding rows.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Problems Of Copy/Pasting Code</title>
+      <link>http://localhost:1313/2012/03/14/the_problems_of_copy_pasting_code/</link>
+      <pubDate>Wed, 14 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/03/14/the_problems_of_copy_pasting_code/</guid>
+      <description>&lt;p&gt;Copying and pasting is great for coding, but sometimes it can be pretty silly if you make a mistake in the code. Here’s a triple copy/paste fail (the values should be set to true):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Public Sub SheetActivate_Dashboard(ByVal sh As Object)
+
+    Try
+        gXLApp.EnableEvents = False
+        OpenTimeStamp()
+    Finally
+        gXLApp.EnableEvents = False
+    End Try
+
+End Sub
+
+Public Sub SheetDeActivate_Dashboard(ByVal sh As Object)
+
+    Try
+        gXLApp.EnableEvents = False
+        If Not gfTimeStamp Is Nothing Then
+            gfTimeStamp.Visible = False
+            gfTimeStamp.Close()
+            gfTimeStamp = Nothing
+        End If
+    Finally
+        gXLApp.EnableEvents = False
+    End Try
+
+End Sub
+
+Public Sub DoubleClick_Dashboard()
+
+    Try
+        gXLApp.EnableEvents = False
+        OpenTimeStamp()
+    Finally
+        gXLApp.EnableEvents = False
+    End Try
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

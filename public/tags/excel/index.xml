@@ -1,0 +1,1033 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Excel on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/excel/</link>
+    <description>Recent content in Excel on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 28 Oct 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/excel/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Site Ending</title>
+      <link>http://localhost:1313/2014/10/28/html/</link>
+      <pubDate>Tue, 28 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/10/28/html/</guid>
+      <description>&lt;p&gt;This site will be going the way of the ether come next week. You can
+still see the posts over
+at &lt;a href=&#34;http://spreadsheetbudget.com.s3-website-us-east-1.amazonaws.com/blog/&#34;&gt;http://spreadsheetbudget.com.s3-website-us-east-1.amazonaws.com/blog/&lt;/a&gt;.
+It’s been great. Check out my web development blog over
+at &lt;a href=&#34;http://jon.prescottprogrammers.com/&#34;&gt;http://jon.prescottprogrammers.com/&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Zipping Files with VBA and USB Drives</title>
+      <link>http://localhost:1313/2013/08/19/zipping_files_with_vba_and_usb_drives/</link>
+      <pubDate>Mon, 19 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/08/19/zipping_files_with_vba_and_usb_drives/</guid>
+      <description>&lt;p&gt;I used &lt;a href=&#34;http://www.rondebruin.nl/win/s7/win001.htm&#34;&gt;Ron de Bruin&amp;rsquo;s file zipping (and sending) code with Excel&lt;/a&gt;. It works great with a few tweaks. Unfortunately when someone is using a USB drive with their workbook on it it fails to work. So warning: Make sure the users are using it on the main computer when trouble shooting!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SUMIFS vs MATCH &amp; INDEX</title>
+      <link>http://localhost:1313/2013/03/14/sumifs_vs_match_index/</link>
+      <pubDate>Thu, 14 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/03/14/sumifs_vs_match_index/</guid>
+      <description>&lt;p&gt;I have one Time Card template setup with SUMIFS (used for Excel 2007 and
+above templates) and one set up with MATCH/INDEX (used for my 2003 and
+below templates). I tested the calculation speeds for each in Excel 2013
+(preview) on Windows 8.&lt;/p&gt;
+
+&lt;p&gt;Here’s the VBA test code:&lt;/p&gt;
+
+&lt;p&gt;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+| &lt;code&gt;{.vb style=&amp;quot;font-family:monospace;&amp;quot;}                                 |
+| Sub test()                                                               |
+|                                                                          |
+|     Dim dTimer As Double                                                 |
+|     Dim iLoops As Integer, iTotalIterations As Integer                   |
+|     Dim wksStage As Worksheet                                            |
+|                                                                          |
+|     Set wksStage = ThisWorkbook.Worksheets(&amp;quot;Staging Area&amp;quot;)               |
+|     iTotalIterations = 1                                                 |
+|     dTimer = Timer()                                                     |
+|                                                                          |
+|     For iLoops = 0 To iTotalIterations                                   |
+|         wksStage.Calculate                                               |
+|     Next iLoops                                                          |
+|                                                                          |
+|     Debug.Print Timer() - dTimer                                         |
+|                                                                          |
+| End Sub                                                                  |
+|&lt;/code&gt;                                                                      |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
+
+&lt;p&gt;And here’s the results (seconds):&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Iterations
+  SUMIFS
+  MATCH/INDEX&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;1                        50
+  0.20                     3.07
+  0.09                     1.30&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;So where do I go from here? I think I will keep the two separate
+templates for now, even though I could go to one. The reasons?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It is much easier to change SUMIFS than the complicated MATCH/INDEX
+functions.&lt;/li&gt;
+&lt;li&gt;I think I could introduce an error in the MATCH/INDEX functions more
+easily.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I will post the 2003 template for anyone that wishes faster calculation
+times, but it is pretty fast now, so I don’t know if that would be a
+huge issue.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Excel Extensions</title>
+      <link>http://localhost:1313/2013/02/25/excel_extensions/</link>
+      <pubDate>Mon, 25 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/02/25/excel_extensions/</guid>
+      <description>&lt;p&gt;Excel extensions extend the range object to use
+&lt;a href=&#34;http://www.spreadsheetbudget.com/2013/02/25/linqto2darray/&#34;&gt;LinqTo2dArray&lt;/a&gt;
+(see also &lt;a href=&#34;http://linqto2darray.codeplex.com/&#34;&gt;Codeplex&lt;/a&gt;). It also
+includes other extensions.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RowsCount: Count total rows in all areas.&lt;/li&gt;
+&lt;li&gt;Parse: Parse congruent range into an object by row-object arrays.
+
+&lt;ul&gt;
+&lt;li&gt;This doesn’t necessarily need to be congruent, in the future I
+may make it so it skips to different areas in the range.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ToArray: Copies the elements of the 2D object array row wise to a
+new array of the specified element type and length.&lt;/li&gt;
+&lt;li&gt;To2dArray: Import Data From Excel as 2D zero-based Object Array&lt;/li&gt;
+&lt;li&gt;ToExcel: Export Data to Excel
+
+&lt;ul&gt;
+&lt;li&gt;Returns: Range where data was exported to.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+| &lt;code&gt;{.csharp style=&amp;quot;font-family:monospace;&amp;quot;}                             |
+| using System;                                                            |
+| using System.Collections;                                                |
+| using System.Collections.Generic;                                        |
+| using System.Data;                                                       |
+| using System.Diagnostics;                                                |
+|                                                                          |
+| using System.Linq;                                                       |
+| using NetOffice.ExcelApi;                                                |
+| using NetOffice.OfficeApi;                                               |
+| using NetOffice.ExcelApi.Enums;                                          |
+| using LinqTo2dArray;                                                     |
+|                                                                          |
+| namespace ExcelExtensions                                                |
+| {                                                                        |
+|     public static class RangeExtenstions                                 |
+|     {                                                                    |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Count total rows in all areas                                |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Working Range&amp;lt;/param&amp;gt;                      |
+|         /// &amp;lt;returns&amp;gt;Total number of rows.&amp;lt;/returns&amp;gt;                     |
+|         /// &amp;lt;remarks&amp;gt;Jon Nyman 20120924&amp;lt;/remarks&amp;gt;                        |
+|         public static int RowsCount(this Range rng)                      |
+|         {                                                                |
+|                                                                          |
+|             if ((rng != null))                                           |
+|             {                                                            |
+|                 int iRowCount = 0;                                       |
+|                 foreach (Range rArea in rng.Areas)                       |
+|                 {                                                        |
+|                     iRowCount += rArea.Rows.Count;                       |
+|                 }                                                        |
+|                 return iRowCount;                                        |
+|             }                                                            |
+|             else                                                         |
+|             {                                                            |
+|                 return 0;                                                |
+|             }                                                            |
+|                                                                          |
+|         }                                                                |
+|                                                                          |
+|        /// &amp;lt;summary&amp;gt;                                                     |
+|         /// Parse congruent range into an object by row-object arrays.   |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;typeparam name=&amp;quot;TSource&amp;quot;&amp;gt;Source type.&amp;lt;/typeparam&amp;gt;           |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target range.&amp;lt;/param&amp;gt;                      |
+|         /// &amp;lt;param name=&amp;quot;conversion&amp;quot;&amp;gt;Function to convert&amp;lt;/param&amp;gt;         |
+|         /// &amp;lt;returns&amp;gt;&amp;lt;/returns&amp;gt;                                          |
+|         public static IEnumerable&amp;lt;TSource&amp;gt; Parse&amp;lt;TSource&amp;gt;(this Range rng |
+| , Func&amp;lt;object[], TSource&amp;gt; conversion)                                    |
+|         {                                                                |
+|             if (rng.Areas.Count&amp;gt;1)                                       |
+|                 throw new ArgumentException(&amp;quot;Congruent ranges only allow |
+| ed.&amp;quot;);                                                                   |
+|                                                                          |
+|             object[,] array = rng.Get2dArrayValue();                     |
+|                                                                          |
+|             IEnumerable&amp;lt;TSource&amp;gt; cls = array.Parse&amp;lt;TSource&amp;gt;(conversion); |
+|                                                                          |
+|             return cls;                                                  |
+|                                                                          |
+|         } //End Parse                                                    |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Copies the elements of the 2D object array row wise to a new |
+|  array of the specified element type and length.                         |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;typeparam name=&amp;quot;T&amp;quot;&amp;gt;New array type.&amp;lt;/typeparam&amp;gt;              |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target range.&amp;lt;/param&amp;gt;                      |
+|         /// &amp;lt;param name=&amp;quot;conversion&amp;quot;&amp;gt;Casting function of new type.&amp;lt;/para |
+| m&amp;gt;                                                                       |
+|         /// &amp;lt;param name=&amp;quot;rowStart&amp;quot;&amp;gt;First row index to start.&amp;lt;/param&amp;gt;     |
+|         /// &amp;lt;param name=&amp;quot;columnStart&amp;quot;&amp;gt;First column index to start.&amp;lt;/para |
+| m&amp;gt;                                                                       |
+|         /// &amp;lt;param name=&amp;quot;rowCount&amp;quot;&amp;gt;Number of rows.&amp;lt;/param&amp;gt;               |
+|         /// &amp;lt;param name=&amp;quot;columnCount&amp;quot;&amp;gt;Number of columns&amp;lt;/param&amp;gt;          |
+|         /// &amp;lt;returns&amp;gt;One-dimensional array of type TSource&amp;lt;/returns&amp;gt;     |
+|         /// &amp;lt;remarks&amp;gt; Jon Nyman 20130205                                 |
+|         /// Source http://msmvps.com/blogs/jon_skeet/archive/2011/01/02/ |
+| reimplementing-linq-to-objects-part-24-toarray.aspx &amp;lt;/remarks&amp;gt;           |
+|         public static T[] ToArray&amp;lt;T&amp;gt;(this Range rng, Func&amp;lt;object, T&amp;gt; con |
+| version                                                                  |
+|                                                 , int rowStart, int colu |
+| mnStart, int rowCount, int columnCount)                                  |
+|         {                                                                |
+|             rowStart += 1; columnStart += 1; rowCount += 1; columnCount  |
+| += 1;                                                                    |
+|             object[,] array = rng.Get2dArrayValue();                     |
+|                                                                          |
+|             //Make sure values are within range of array.                |
+|             if (rowStart &amp;lt; 0 || columnStart &amp;lt; 0 || rowStart &amp;gt; array.GetU |
+| pperBound(0) || columnStart &amp;gt; array.GetUpperBound(1) ||                  |
+|                 rowCount &amp;lt; 1 || rowCount + rowStart - 1 &amp;gt; array.GetUpper |
+| Bound(0) || columnCount &amp;lt; 1 || columnCount + columnStart - 1 &amp;gt; array.Get |
+| UpperBound(1))                                                           |
+|                 throw new System.IndexOutOfRangeException(&amp;quot;Start or end  |
+| values out of range (Parse)&amp;quot;);                                           |
+|                                                                          |
+|             return array.ToArray&amp;lt;T&amp;gt;(conversion, rowStart, columnStart, r |
+| owCount, columnCount);                                                   |
+|                                                                          |
+|         } //End ToArray                                                  |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Copies the elements of the 2D object array row wise to a new |
+|  array of the specified element type and length.                         |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;typeparam name=&amp;quot;T&amp;quot;&amp;gt;New array type.&amp;lt;/typeparam&amp;gt;              |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target range.&amp;lt;/param&amp;gt;                      |
+|         /// &amp;lt;param name=&amp;quot;conversion&amp;quot;&amp;gt;Casting function of new type.&amp;lt;/para |
+| m&amp;gt;                                                                       |
+|         /// &amp;lt;returns&amp;gt;One-dimensional array of type TSource&amp;lt;/returns&amp;gt;     |
+|         /// &amp;lt;remarks&amp;gt; Jon Nyman 20130205                                 |
+|         /// Source http://msmvps.com/blogs/jon_skeet/archive/2011/01/02/ |
+| reimplementing-linq-to-objects-part-24-toarray.aspx &amp;lt;/remarks&amp;gt;           |
+|         public static T[] ToArray&amp;lt;T&amp;gt;(this Range rng, Func&amp;lt;object, T&amp;gt; con |
+| version)                                                                 |
+|         {                                                                |
+|                                                                          |
+|             object[,] array = rng.Get2dArrayValue();                     |
+|             return array.ToArray&amp;lt;T&amp;gt;(conversion);                         |
+|                                                                          |
+|         } //End ToArray                                                  |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Import Data From Excel as 2D zero-based Object Array         |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target range.&amp;lt;/param&amp;gt;                      |
+|         /// &amp;lt;param name=&amp;quot;AsValue&amp;quot;&amp;gt;True -&amp;gt; .Value else .Value2 (Default)&amp;lt; |
+| /param&amp;gt;                                                                  |
+|         /// &amp;lt;returns&amp;gt;2D object zero-based array&amp;lt;/returns&amp;gt;                |
+|         /// &amp;lt;remarks&amp;gt;Jon Nyman 121023&amp;lt;/remarks&amp;gt;                          |
+|         public static object[,] To2dArray(this Range rng, bool AsValue)  |
+|         {                                                                |
+|                                                                          |
+|             if (rng.Areas.Count &amp;gt; 1)                                     |
+|                 return rng.ToArrayFromAreas(AsValue);                    |
+|                                                                          |
+|             object[,] oResult = rng.Get2dArrayValue(AsValue);            |
+|                                                                          |
+|             int iRowUpper = oResult.GetUpperBound(0);                    |
+|             int iColumnUpper = oResult.GetUpperBound(1);                 |
+|             int iRowLower = oResult.GetLowerBound(0);                    |
+|             int iColumnLower = oResult.GetLowerBound(1);                 |
+|             object[,] oaResult = new object[iRowUpper, iColumnUpper];    |
+|             for (int i = iRowLower; i &amp;lt;= iRowUpper; i++) {               |
+|                 for (int j = iColumnLower; j &amp;lt;= iColumnUpper; j++) {     |
+|                     oaResult[i - iRowLower, j - iColumnLower] = oResult[ |
+| i, j];                                                                   |
+|                 }                                                        |
+|             }                                                            |
+|             return oaResult;                                             |
+|                                                                          |
+|         } //End To2dArray                                                |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Import Data From Excel as 2D zero-based Object Array with Va |
+| lue2                                                                     |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target range.&amp;lt;/param&amp;gt;                      |
+|         /// &amp;lt;returns&amp;gt;2D object zero-based array&amp;lt;/returns&amp;gt;                |
+|         /// &amp;lt;remarks&amp;gt;Jon Nyman 121023&amp;lt;/remarks&amp;gt;                          |
+|         public static object[,] To2dArray(this Range rng)                |
+|         {                                                                |
+|                                                                          |
+|             return rng.To2dArray(false);                                 |
+|                                                                          |
+|         } //End To2dArray                                                |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Loop through areas of range and return single 2d zero-based  |
+| object array.                                                            |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target range.&amp;lt;/param&amp;gt;                      |
+|         /// &amp;lt;param name=&amp;quot;AsValue&amp;quot;&amp;gt;True -&amp;gt; .Value else .Value2 (Default)&amp;lt; |
+| /param&amp;gt;                                                                  |
+|         /// &amp;lt;returns&amp;gt;2D object zero-based array&amp;lt;/returns&amp;gt;                |
+|         private static object[,] ToArrayFromAreas(this Range rng, bool A |
+| sValue)                                                                  |
+|         {                                                                |
+|             Range rArea = null;                                          |
+|             int iColumnMax = 1;                                          |
+|             object[][,] Objects2D = new object[rng.Areas.Count - 1][,];  |
+|             int iAreaCount = 0;                                          |
+|             XlSheetVisibility xlVisible = rng.ShowWorksheet();           |
+|             foreach (Range rArea_loopVariable in rng.Areas)              |
+|             {                                                            |
+|                 rArea = rArea_loopVariable;                              |
+|                 Objects2D[iAreaCount] = rArea.Get2dArrayValue(AsValue);  |
+|                 iColumnMax = Math.Max(iColumnMax, Objects2D[iAreaCount]. |
+| GetUpperBound(1));                                                       |
+|                 iAreaCount += 1;                                         |
+|             }                                                            |
+|             object[,] oaAreaResult = new object[rng.RowsCount(), iColumn |
+| Max];                                                                    |
+|             int iRow = -1;                                               |
+|             for (int i2DArraysIndex = 0; i2DArraysIndex &amp;lt;= iAreaCount -  |
+| 1; i2DArraysIndex++)                                                     |
+|             {                                                            |
+|                 for (int iRowArea = 1; iRowArea &amp;lt;= Objects2D[i2DArraysIn |
+| dex].GetUpperBound(0); iRowArea++)                                       |
+|                 {                                                        |
+|                     iRow += 1;                                           |
+|                     for (int iColumnArea = 1; iColumnArea &amp;lt;= Objects2D[i |
+| 2DArraysIndex].GetUpperBound(1); iColumnArea++)                          |
+|                     {                                                    |
+|                         oaAreaResult[iRow, iColumnArea - 1] = Objects2D[ |
+| i2DArraysIndex][iRowArea, iColumnArea];                                  |
+|                     }                                                    |
+|                 }                                                        |
+|             }                                                            |
+|             rng.RevertWorksheetVisibility(xlVisible);                    |
+|             return oaAreaResult;                                         |
+|         } //End ToArrayFromAreas                                         |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Return 2d 0-based or 1-based object array from range         |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target range&amp;lt;/param&amp;gt;                       |
+|         /// &amp;lt;param name=&amp;quot;asValue&amp;quot;&amp;gt;True -&amp;gt; .Value else .Value2 (Default)&amp;lt; |
+| /param&amp;gt;                                                                  |
+|         /// &amp;lt;returns&amp;gt;2D object zero-based or one-based array&amp;lt;/returns&amp;gt;   |
+|         private static object[,] Get2dArrayValue(this Range rng, bool as |
+| Value)                                                                   |
+|         {                                                                |
+|                                                                          |
+|             XlSheetVisibility xlVisible = rng.ShowWorksheet();           |
+|             object resultValue = asValue ? rng.Value : rng.Value2;       |
+|             rng.RevertWorksheetVisibility(xlVisible);                    |
+|             if (resultValue != null &amp;amp;&amp;amp; resultValue.GetType().IsArray) {  |
+|                 return (object[,]) resultValue;                          |
+|             }else{                                                       |
+|                 return new object[,] { { resultValue } };                |
+|             }                                                            |
+|                                                                          |
+|         } //End GetValueOfRange                                          |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Return 2d 0-based or 1-based object array from range         |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target range&amp;lt;/param&amp;gt;                       |
+|         /// &amp;lt;returns&amp;gt;2D object zero-based or one-based array&amp;lt;/returns&amp;gt;   |
+|         private static object[,] Get2dArrayValue(this Range rng)         |
+|         {                                                                |
+|             return rng.Get2dArrayValue(false);                           |
+|         }                                                                |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Export Data to Excel                                         |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target Range&amp;lt;/param&amp;gt;                       |
+|         /// &amp;lt;param name=&amp;quot;data&amp;quot;&amp;gt;Data to export.&amp;lt;/param&amp;gt;                   |
+|         /// &amp;lt;returns&amp;gt;Range where data was exported to.&amp;lt;/returns&amp;gt;         |
+|         /// &amp;lt;remarks&amp;gt;Jon Nyman 121023                                    |
+|         /// 20130205 Convert to C#&amp;lt;/remarks&amp;gt;                             |
+|         public static Range ToExcel(this Range rng, object[,] data)      |
+|         {                                                                |
+|                                                                          |
+|             if ((rng != null)) {                                         |
+|                 //Make sure range and 2D object match in size            |
+|                 Range rNew = rng.Resize(data.GetUpperBound(0) + 1, data. |
+| GetUpperBound(1) + 1);                                                   |
+|                 //Send to Excel                                          |
+|                 XlSheetVisibility xlVisible = rNew.ShowWorksheet();      |
+|                 rNew.Value2 = data;                                      |
+|                 rNew.RevertWorksheetVisibility(xlVisible);               |
+|                 return rNew;                                             |
+|             }                                                            |
+|                                                                          |
+|             return null;                                                 |
+|                                                                          |
+|         } // End ToExcel                                                 |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Export Data to Excel                                         |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;param name=&amp;quot;rng&amp;quot;&amp;gt;Target Range&amp;lt;/param&amp;gt;                       |
+|         /// &amp;lt;param name=&amp;quot;data&amp;quot;&amp;gt;Data to export.&amp;lt;/param&amp;gt;                   |
+|         /// &amp;lt;returns&amp;gt;Range where data was exported to.&amp;lt;/returns&amp;gt;         |
+|         /// &amp;lt;remarks&amp;gt;Jon Nyman 121023                                    |
+|         /// 20130205 Convert to C#&amp;lt;/remarks&amp;gt;                             |
+|         public static Range ToExcel(this Range rng, object data)         |
+|         {                                                                |
+|                                                                          |
+|             if ((rng != null))                                           |
+|             {                                                            |
+|                 if (data.GetType().IsArray) {                            |
+|                     if (((Array)data).Rank == 1)                         |
+|                     {                                                    |
+|                         return rng.ToExcel((object[])data);              |
+|                     }                                                    |
+|                     else                                                 |
+|                     {                                                    |
+|                         return rng.ToExcel((object[,])data);             |
+|                     }                                                    |
+|                 } //End If IsArray                                       |
+|                                                                          |
+|                 //Make sure range and 2D object match in size            |
+|                 Range rNew = rng.Resize(1, 1);                           |
+|                 //Send to Excel                                          |
+|                 XlSheetVisibility xlVisible = rNew.ShowWorksheet();      |
+|                 rNew.Value2 = data;                                      |
+|                 rNew.RevertWorksheetVisibility(xlVisible);               |
+|                 return rNew;                                             |
+|             }                                                            |
+|                                                                          |
+|             return null;                                                 |
+|                                                                          |
+|         } // End ToExcel                                                 |
+|                                                                          |
+|     } //End class RangeExtenstions                                       |
+|                                                                          |
+| }                                                                        |
+|&lt;/code&gt;                                                                      |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>LinqTo2dArray</title>
+      <link>http://localhost:1313/2013/02/25/linqto2darray/</link>
+      <pubDate>Mon, 25 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/02/25/linqto2darray/</guid>
+      <description>&lt;p&gt;LinqTo2dArray written in C# (&lt;a href=&#34;http://msdn.microsoft.com/en-us/library/vstudio/9k7k7cf0(v=vs.100&#34;&gt;to allow iteration over the
+rows&lt;/a&gt;.aspx)).
+Also found on &lt;a href=&#34;http://linqto2darray.codeplex.com/&#34;&gt;CodePlex&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Parse will take a 2D Array (not necessarily zero based) and load it
+into a class. Parse 2D object array into a class row wise.&lt;/li&gt;
+&lt;li&gt;Compose will create 2D object array from enumerable type.&lt;/li&gt;
+&lt;li&gt;Copies the elements of the 2D object array row wise to a new array
+of the specified element type and length.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+| &lt;code&gt;{.csharp style=&amp;quot;font-family:monospace;&amp;quot;}                             |
+| using System;                                                            |
+| using System.Collections.Generic;                                        |
+| using System.Linq;                                                       |
+| using System.Text;                                                       |
+|                                                                          |
+| namespace LinqTo2dArray                                                  |
+| {                                                                        |
+|     public static class Array2dExtensions                                |
+|     {                                                                    |
+|                                                                          |
+|        /// &amp;lt;summary&amp;gt;                                                     |
+|        /// Parse 2D object array into a class row wise.                  |
+|        /// &amp;lt;/summary&amp;gt;                                                    |
+|         /// &amp;lt;typeparam name=&amp;quot;TSource&amp;quot;&amp;gt;New enumerable type.&amp;lt;/typeparam&amp;gt;   |
+|         /// &amp;lt;param name=&amp;quot;array&amp;quot;&amp;gt;The two-dimensional Array to loop throug |
+| h.&amp;lt;/param&amp;gt;                                                               |
+|         /// &amp;lt;param name=&amp;quot;conversion&amp;quot;&amp;gt;Conversion function to TSource type |
+| .&amp;lt;/param&amp;gt;                                                                |
+|         /// &amp;lt;param name=&amp;quot;rowStart&amp;quot;&amp;gt;First row index to start.&amp;lt;/param&amp;gt;     |
+|         /// &amp;lt;param name=&amp;quot;columnStart&amp;quot;&amp;gt;First column index to start.&amp;lt;/para |
+| m&amp;gt;                                                                       |
+|         /// &amp;lt;param name=&amp;quot;rowCount&amp;quot;&amp;gt;Number of rows.&amp;lt;/param&amp;gt;               |
+|         /// &amp;lt;param name=&amp;quot;columnCount&amp;quot;&amp;gt;Number of columns&amp;lt;/param&amp;gt;          |
+|         /// &amp;lt;example&amp;gt;                                                    |
+|         ///  array.Parse(Of SaleOrder)(Function(o As Object()) New SaleO |
+| rder( _                                                                  |
+|         ///                                     If(TypeOf o(0) Is Double |
+| , Date.FromOADate(o(0)), #1/1/1900#) _                                   |
+|         ///                                     , If(Not TypeOf o(1) Is  |
+| Integer, o(1).ToString, &amp;quot;&amp;quot;) _                                            |
+|         ///                                     , If(Not TypeOf o(2) Is  |
+| Integer, o(2).ToString, &amp;quot;&amp;quot;) _                                            |
+|         ///                                     , If(Not TypeOf o(3) Is  |
+| Integer, o(3).ToString, &amp;quot;&amp;quot;) _                                            |
+|         ///                                     , If(IsNumeric(o(4)) And |
+| Also Not TypeOf o(4) Is Integer, CInt(o(4)), 0) _                        |
+|         ///                                     , If(IsNumeric(o(5)) And |
+| Also Not TypeOf o(5) Is Integer, o(5), 0) _                              |
+|         ///                                     , o(6) + rowOffset _     |
+|         ///                                     ))                       |
+|         ///   Note: Last index returns row number.                       |
+|         /// &amp;lt;/example&amp;gt;                                                   |
+|         /// &amp;lt;exception cref=&amp;quot;IndexOutOfRangeException&amp;quot;&amp;gt;Parameters are ou |
+| t of range of 2D array object.&amp;lt;/exception&amp;gt;                               |
+|         /// &amp;lt;returns&amp;gt;Enumerable of TSource&amp;lt;/returns&amp;gt;                     |
+|         /// &amp;lt;remarks&amp;gt;Jon Nyman 130205&amp;lt;/remarks&amp;gt;                          |
+|         public static IEnumerable&amp;lt;TSource&amp;gt; Parse&amp;lt;TSource&amp;gt;(this object[,] |
+|  array, Func&amp;lt;object[], TSource&amp;gt; conversion                               |
+|             , int rowStart, int columnStart, int rowCount, int columnCou |
+| nt)                                                                      |
+|         {                                                                |
+|                                                                          |
+|             //Make sure values are within range of array.                |
+|             if (rowStart &amp;lt; 0 || columnStart &amp;lt; 0 || rowStart &amp;gt; array.GetU |
+| pperBound(0) || columnStart &amp;gt; array.GetUpperBound(1) ||                  |
+|                 rowCount &amp;lt; 1 || rowCount + rowStart - 1 &amp;gt; array.GetUpper |
+| Bound(0) || columnCount &amp;lt; 1 || columnCount + columnStart - 1 &amp;gt; array.Get |
+| UpperBound(1))                                                           |
+|                 throw new System.IndexOutOfRangeException(&amp;quot;Start or end  |
+| values out of range (Parse)&amp;quot;);                                           |
+|                                                                          |
+|             //Put 2D array values in a 1D array for conversion           |
+|             for (int row = rowStart; row &amp;lt; rowCount + rowStart; row++)   |
+|             {                                                            |
+|                 object[] array1d = new object[columnCount + 1];          |
+|                 for (int column = columnStart; column &amp;lt; columnCount + co |
+| lumnStart; column++)                                                     |
+|                 {                                                        |
+|                     array1d[column - columnStart] = array[row, column];  |
+|                 }                                                        |
+|                 //Add row number to the end of the 1D array.             |
+|                 array1d[columnCount] = row;                              |
+|                 yield return conversion(array1d);                        |
+|             }                                                            |
+|                                                                          |
+|         } //End Parse                                                    |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Parse 2D object array into a class row wise.                 |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;typeparam name=&amp;quot;TSource&amp;quot;&amp;gt;New enumerable type.&amp;lt;/typeparam&amp;gt;   |
+|         /// &amp;lt;param name=&amp;quot;array&amp;quot;&amp;gt;The two-dimensional Array to loop throug |
+| h.&amp;lt;/param&amp;gt;                                                               |
+|         /// &amp;lt;param name=&amp;quot;conversion&amp;quot;&amp;gt;Conversion function to TSource type |
+| .&amp;lt;/param&amp;gt;                                                                |
+|         /// &amp;lt;example&amp;gt;                                                    |
+|         ///  array.Parse(Of SaleOrder)(Function(o As Object()) New SaleO |
+| rder( _                                                                  |
+|         ///                                     If(TypeOf o(0) Is Double |
+| , Date.FromOADate(o(0)), #1/1/1900#) _                                   |
+|         ///                                     , If(Not TypeOf o(1) Is  |
+| Integer, o(1).ToString, &amp;quot;&amp;quot;) _                                            |
+|         ///                                     , If(Not TypeOf o(2) Is  |
+| Integer, o(2).ToString, &amp;quot;&amp;quot;) _                                            |
+|         ///                                     , If(Not TypeOf o(3) Is  |
+| Integer, o(3).ToString, &amp;quot;&amp;quot;) _                                            |
+|         ///                                     , If(IsNumeric(o(4)) And |
+| Also Not TypeOf o(4) Is Integer, CInt(o(4)), 0) _                        |
+|         ///                                     , If(IsNumeric(o(5)) And |
+| Also Not TypeOf o(5) Is Integer, o(5), 0) _                              |
+|         ///                                     , o(6) + rowOffset _     |
+|         ///                                     ))                       |
+|         ///   Note: Last index returns row number.                       |
+|         /// &amp;lt;/example&amp;gt;                                                   |
+|         /// &amp;lt;exception cref=&amp;quot;IndexOutOfRangeException&amp;quot;&amp;gt;Parameters are ou |
+| t of range of 2D array object.&amp;lt;/exception&amp;gt;                               |
+|         /// &amp;lt;returns&amp;gt;Enumerable of TSource&amp;lt;/returns&amp;gt;                     |
+|         /// &amp;lt;remarks&amp;gt;Jon Nyman 130205&amp;lt;/remarks&amp;gt;                          |
+|         public static IEnumerable&amp;lt;TSource&amp;gt; Parse&amp;lt;TSource&amp;gt;(this object[,] |
+|  array, Func&amp;lt;object[], TSource&amp;gt; conversion)                              |
+|         {                                                                |
+|                                                                          |
+|             int rowStart=array.GetLowerBound(0);                         |
+|             int colStart=array.GetLowerBound(1);                         |
+|             int rowCount=array.GetUpperBound(0)-rowStart+1;              |
+|             int colCount=array.GetUpperBound(1)-colStart+1;              |
+|                                                                          |
+|             return array.Parse&amp;lt;TSource&amp;gt;(conversion, rowStart, colStart,  |
+| rowCount, colCount);                                                     |
+|                                                                          |
+|         }                                                                |
+|                                                                          |
+|          /// &amp;lt;summary&amp;gt;                                                   |
+|         /// Copies the elements of the 2D object array row wise to a new |
+|  array of the specified element type and length.                         |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;typeparam name=&amp;quot;T&amp;quot;&amp;gt;New array type.&amp;lt;/typeparam&amp;gt;              |
+|         /// &amp;lt;param name=&amp;quot;array&amp;quot;&amp;gt;The two-dimensional object array.&amp;lt;/param |
+| &amp;gt;                                                                        |
+|         /// &amp;lt;param name=&amp;quot;conversion&amp;quot;&amp;gt;Casting function of new type.&amp;lt;/para |
+| m&amp;gt;                                                                       |
+|         /// &amp;lt;param name=&amp;quot;rowStart&amp;quot;&amp;gt;First row index to start.&amp;lt;/param&amp;gt;     |
+|         /// &amp;lt;param name=&amp;quot;columnStart&amp;quot;&amp;gt;First column index to start.&amp;lt;/para |
+| m&amp;gt;                                                                       |
+|         /// &amp;lt;param name=&amp;quot;rowCount&amp;quot;&amp;gt;Number of rows.&amp;lt;/param&amp;gt;               |
+|         /// &amp;lt;param name=&amp;quot;columnCount&amp;quot;&amp;gt;Number of columns&amp;lt;/param&amp;gt;          |
+|         /// &amp;lt;returns&amp;gt;One-dimensional array of type TSource&amp;lt;/returns&amp;gt;     |
+|         /// &amp;lt;remarks&amp;gt; Jon Nyman 20130205                                 |
+|         /// Source http://msmvps.com/blogs/jon_skeet/archive/2011/01/02/ |
+| reimplementing-linq-to-objects-part-24-toarray.aspx &amp;lt;/remarks&amp;gt;           |
+|         public static T[] ToArray&amp;lt;T&amp;gt;(this object[,] array, Func&amp;lt;object,  |
+| T&amp;gt; conversion                                                            |
+|                                                 , int rowStart, int colu |
+| mnStart, int rowCount, int columnCount)                                  |
+|         {                                                                |
+|             //Make sure values are within range of array.                |
+|             if (rowStart &amp;lt; 0 || columnStart &amp;lt; 0 || rowStart &amp;gt; array.GetU |
+| pperBound(0) || columnStart &amp;gt; array.GetUpperBound(1) ||                  |
+|                 rowCount &amp;lt; 1 || rowCount + rowStart - 1 &amp;gt; array.GetUpper |
+| Bound(0) || columnCount &amp;lt; 1 || columnCount + columnStart - 1 &amp;gt; array.Get |
+| UpperBound(1))                                                           |
+|                 throw new System.IndexOutOfRangeException(&amp;quot;Start or end  |
+| values out of range (ToArray)&amp;quot;);                                         |
+|                                                                          |
+|             //Put 2D array values in a 1D array                          |
+|             T[] array1d = new T[rowCount * columnCount];                 |
+|             int currentRow = -1;                                         |
+|             for (int row = rowStart; row &amp;lt; rowCount + rowStart; row++)   |
+|             {                                                            |
+|                 for (int column = columnStart; column &amp;lt; columnCount + co |
+| lumnStart; column++)                                                     |
+|                 {                                                        |
+|                     currentRow += 1;                                     |
+|                     array1d[currentRow] = conversion(array[row, column]) |
+| ;                                                                        |
+|                 }                                                        |
+|             }                                                            |
+|                                                                          |
+|             return array1d;                                              |
+|                                                                          |
+|         } //End ToArray                                                  |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Copies the elements of the 2D object array row wise to a new |
+|  array of the specified element type and length.                         |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;typeparam name=&amp;quot;T&amp;quot;&amp;gt;New array type.&amp;lt;/typeparam&amp;gt;              |
+|         /// &amp;lt;param name=&amp;quot;array&amp;quot;&amp;gt;The two-dimensional object array.&amp;lt;/param |
+| &amp;gt;                                                                        |
+|         /// &amp;lt;param name=&amp;quot;conversion&amp;quot;&amp;gt;Casting function of new type.&amp;lt;/para |
+| m&amp;gt;                                                                       |
+|         /// &amp;lt;returns&amp;gt;One-dimensional array of type TSource&amp;lt;/returns&amp;gt;     |
+|         /// &amp;lt;remarks&amp;gt; Jon Nyman 20130205                                 |
+|         /// Source http://msmvps.com/blogs/jon_skeet/archive/2011/01/02/ |
+| reimplementing-linq-to-objects-part-24-toarray.aspx &amp;lt;/remarks&amp;gt;           |
+|         public static T[] ToArray&amp;lt;T&amp;gt;(this object[,] array, Func&amp;lt;object,  |
+| T&amp;gt; conversion)                                                           |
+|         {                                                                |
+|             int rowStart=array.GetLowerBound(0);                         |
+|             int colStart=array.GetLowerBound(1);                         |
+|             int rowCount=array.GetUpperBound(0)-rowStart+1;              |
+|             int colCount=array.GetUpperBound(1)-colStart+1;              |
+|                                                                          |
+|             return array.ToArray&amp;lt;T&amp;gt;(conversion, rowStart, colStart, rowC |
+| ount, colCount);                                                         |
+|                                                                          |
+|         } //End ToArray                                                  |
+|                                                                          |
+|         /// &amp;lt;summary&amp;gt;                                                    |
+|         /// Create 2D object array from enumerable type.                 |
+|         /// &amp;lt;/summary&amp;gt;                                                   |
+|         /// &amp;lt;typeparam name=&amp;quot;TSource&amp;quot;&amp;gt;Enumerable type to convert.&amp;lt;/typep |
+| aram&amp;gt;                                                                    |
+|         /// &amp;lt;param name=&amp;quot;enumerator&amp;quot;&amp;gt;Enumerable to convert.&amp;lt;/param&amp;gt;      |
+|         /// &amp;lt;param name=&amp;quot;conversion&amp;quot;&amp;gt;Logic to convert to object array.&amp;lt;/ |
+| param&amp;gt;                                                                   |
+|         /// &amp;lt;param name=&amp;quot;startIndex&amp;quot;&amp;gt;First index to start.&amp;lt;/param&amp;gt;       |
+|         /// &amp;lt;param name=&amp;quot;count&amp;quot;&amp;gt;Number to convert.&amp;lt;/param&amp;gt;               |
+|         /// &amp;lt;param name=&amp;quot;columnCount&amp;quot;&amp;gt;Number of columns to create.&amp;lt;/para |
+| m&amp;gt;                                                                       |
+|         /// &amp;lt;example&amp;gt;If clsItems.Count &amp;gt; 0 Then                          |
+|         ///           oaTimes = clsItems.Compose(Function(cls) _         |
+|         ///                {CType(clsItems.DateUsed.ToOADate, Object) _  |
+|         ///                 , cls.Name _                                 |
+|         ///                 , cls.ItemHoursForDay _                      |
+|         ///                 , cls.ClockInTime}, 4)                       |
+|         ///End If&amp;lt;/example&amp;gt;                                              |
+|         /// &amp;lt;returns&amp;gt;2D Object Array&amp;lt;/returns&amp;gt;                           |
+|         /// &amp;lt;remarks&amp;gt;Jon Nyman 121109&amp;lt;/remarks&amp;gt;                          |
+|         public static object[,] Compose&amp;lt;TSource&amp;gt;(this IEnumerable&amp;lt;TSourc |
+| e&amp;gt; enumerator, Func&amp;lt;TSource, object[]&amp;gt; conversion                        |
+|                                                                          |
+| ,  int columnCount)                                                      |
+|         {                                                                |
+|             try                                                          |
+|             {                                                            |
+|                 int count = enumerator.Count();                          |
+|                 int row = -1;                                            |
+|                 object[,] array2d = new object[count, columnCount];      |
+|                                                                          |
+|                 foreach (TSource item in enumerator)                     |
+|                 {                                                        |
+|                     row += 1;                                            |
+|                     object[] array = new object[columnCount];            |
+|                     array = conversion(item);                            |
+|                     for (int j = 0; j &amp;lt;= columnCount - 1; j++)           |
+|                     {                                                    |
+|                         array2d[row, j] = array[j];                      |
+|                     }                                                    |
+|                 }                                                        |
+|                                                                          |
+|                 return array2d;                                          |
+|                                                                          |
+|             }                                                            |
+|             catch (System.IndexOutOfRangeException)                      |
+|             {                                                            |
+|                 throw new System.IndexOutOfRangeException(&amp;quot;Incorrect num |
+| ber of columns. Compose.&amp;quot;);                                              |
+|             }                                                            |
+|                                                                          |
+|         } //End Compose                                                  |
+|                                                                          |
+|     }                                                                    |
+| }                                                                        |
+|&lt;/code&gt;                                                                      |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Max Write to Excel (2003) in Array</title>
+      <link>http://localhost:1313/2013/01/01/max_write_to_excel_2003_in_array/</link>
+      <pubDate>Tue, 01 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/01/01/max_write_to_excel_2003_in_array/</guid>
+      <description>&lt;p&gt;I normally don’t deal with very long strings. But I’m working on a
+project that requires storing a text file in Excel that I can later
+access (it would be nice just to embed it but Excel doesn’t like viruses
+– which makes me have to just store it in a worksheet).&lt;/p&gt;
+
+&lt;p&gt;So what is the max string length in an array write to an Excel range?&lt;/p&gt;
+
+&lt;p&gt;911&lt;/p&gt;
+
+&lt;p&gt;Seems kind of random but that is the number. Raise that number to 912
+and you’ll get an error.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AdvancedFilter Wrapper Engine</title>
+      <link>http://localhost:1313/2012/12/18/advancedfilter_wrapper_engine_for_vba_enthusiasts/</link>
+      <pubDate>Tue, 18 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/18/advancedfilter_wrapper_engine_for_vba_enthusiasts/</guid>
+      <description>&lt;p&gt;A while back ago I promised to produce my engine for the advancedfilter wrapper. Well, at the prodding of &lt;a href=&#34;http://blog.contextures.com/archives/2011/03/02/excel-autofilter-or-advanced-filter/#comment-43397&#34;&gt;Hugo&lt;/a&gt; I finally put it together. I took the code from my VB.NET project and converted it to VBA. Man, that reminds of why I love .NET so much! If you ever get a chance to learn .NET of VBA definitely take the opportunity. At first it is difficult but then it gets to the point where you don&amp;rsquo;t want to go back.&lt;/p&gt;
+
+&lt;p&gt;In the next few weeks I&amp;rsquo;ll go over how to use the Search class and its particulars. For anyone that uses it all I ask is that you credit me and that you spread the word about &lt;a href=&#34;products/scribble-filter/&#34;&gt;Scribble Filter&lt;/a&gt;! If you find any bugs let me know and I&amp;rsquo;ll fix them.&lt;/p&gt;
+
+&lt;p&gt;Some things you should know:&lt;/p&gt;
+
+&lt;p&gt;4 files are needed:
+LogicRPNGenerator.bas
+Search.cls
+Stack.cls
+StandardCode.bas&lt;/p&gt;
+
+&lt;p&gt;The file &lt;strong&gt;SearchSample.bas&lt;/strong&gt; shows a few examples. If you don&amp;rsquo;t specify your own temp worksheet then it will create one and then delete it after the Search class terminates. &lt;strong&gt;Anything on the temp worksheet will be deleted&lt;/strong&gt;. Let me know what you think!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>List of Excel Functions - Code To Use List</title>
+      <link>http://localhost:1313/2012/12/05/list_of_excel_functions_code_to_use_list/</link>
+      <pubDate>Wed, 05 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/05/list_of_excel_functions_code_to_use_list/</guid>
+      <description>&lt;p&gt;I saw a few people were downloading &lt;a href=&#34;2012/08/27/list-of-excel-functions/&#34;&gt;my list of Excel functions that I created&lt;/a&gt;. I thought it might be useful show the code that I use to get that data to a manageable format. Although the code is written in VB.NET it should be easily converted to VBA.&lt;/p&gt;
+
+&lt;p&gt;[wpdm_file id=3]&lt;/p&gt;
+
+&lt;p&gt;I use a simple structure (type in VBA) for the data.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    Private Structure ExcelFunctionInfo
+        Dim Name As String
+        Dim Category As String
+        Dim ExcelVersion As Integer
+        Dim Description As String
+        Dim Syntax As String
+        Dim URL As String
+    End Structure
+&lt;/pre&gt;
+
+&lt;p&gt;I then just loop through the data in the string that was gotten from the text file.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    &#39;&#39;&#39; &lt;summary&gt;
+    &#39;&#39;&#39; Takes string of Excel functions and puts it into dictionary.
+    &#39;&#39;&#39; &lt;/summary&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;sExcelFunctions&#34;&gt;String of Excel functions&lt;/param&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;iExcelVersion_Descriptive&#34;&gt;Descriptive version of Excel&lt;/param&gt;
+    &#39;&#39;&#39; &lt;returns&gt;Dictionary of Excel functions.&lt;/returns&gt;
+    &#39;&#39;&#39; &lt;remarks&gt;Jon Nyman 20120920&lt;/remarks&gt;
+    Private Function GetExcelFunctionsFromTextToDictionary(ByVal sExcelFunctions As String _
+                    , ByVal iExcelVersion_Descriptive As Integer) As Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        Dim dicExcelFunctions As New Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        For Each sLine In sExcelFunctions.Split(CChar(vbLf))
+            Dim sEachTab = sLine.Split(CChar(vbTab))
+            Dim xlFuncs As ExcelFunctionInfo
+            If sEachTab.Length = 6 AndAlso CInt(sEachTab(0)) &lt;= iExcelVersion_Descriptive Then
+                xlFuncs.Name = sEachTab(1)
+                xlFuncs.ExcelVersion = CInt(sEachTab(0))
+                xlFuncs.URL = sEachTab(5)
+                xlFuncs.Syntax = sEachTab(4)
+                xlFuncs.Category = sEachTab(2)
+                xlFuncs.Description = sEachTab(3)
+                If Not dicExcelFunctions.ContainsKey(xlFuncs.Name) Then
+                    Dim lst = New List(Of ExcelFunctionInfo)
+                    lst.Add(xlFuncs)
+                    dicExcelFunctions.Add(xlFuncs.Name, lst)
+                Else
+                    Dim lst = dicExcelFunctions(xlFuncs.Name)
+                    lst.Add(xlFuncs)
+                    dicExcelFunctions(xlFuncs.Name) = lst
+                End If
+            End If
+        Next
+
+        Return dicExcelFunctions
+
+    End Function
+&lt;/pre&gt;
+
+&lt;p&gt;This is where I read the text file.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    &#39;&#39;&#39; &lt;summary&gt;
+    &#39;&#39;&#39; Gets excel functions from text document and put it in dictionary.
+    &#39;&#39;&#39; &lt;/summary&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;sxlAppVersion&#34;&gt;Excel app version.&lt;/param&gt;
+    &#39;&#39;&#39; &lt;returns&gt;Dictionary of excel functions list.&lt;/returns&gt;
+    &#39;&#39;&#39; &lt;remarks&gt;Jon Nyman 20120920&lt;/remarks&gt;
+    Private Function LoadExcelFunctions(ByVal sxlAppVersion As String) As Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        Dim sExcelFunctions = My.Resources.ExcelFunctionsListCleaned
+
+        &#39;Excel Functions
+        Return GetExcelFunctionsFromTextToDictionary(sExcelFunctions, CExcel.GetExcelVersion_Descriptive(sxlAppVersion, 11))
+
+    End Function
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Updatable Scribble Trial Version</title>
+      <link>http://localhost:1313/2012/12/03/updatable_scribble_trial_version/</link>
+      <pubDate>Mon, 03 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/03/updatable_scribble_trial_version/</guid>
+      <description>&lt;p&gt;The first version of the Scribble filter I thought I shouldn&amp;rsquo;t put out an updatable version. In retrospect that was a mistake, wouldn&amp;rsquo;t I want to update it for bugs? Well, yes I would. So, this newest version is updatable! That&amp;rsquo;s a new lesson for me when putting out applications.&lt;/p&gt;
+
+&lt;p&gt;Excel 32-bit (most users)
+[wpdm_file id=1]&lt;/p&gt;
+
+&lt;p&gt;Excel 64-bit
+[wpdm_file id=4]&lt;/p&gt;
+
+&lt;p&gt;How have you been liking the Scribble filter? Any questions/comments on its use?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Scribble Filter Trial Version Now Available</title>
+      <link>http://localhost:1313/2012/11/14/scribble_filter_trial_version_now_available/</link>
+      <pubDate>Wed, 14 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/11/14/scribble_filter_trial_version_now_available/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://wp.me/P26YjB-7Z&#34;&gt;The trial version of the scribble filter is now available.&lt;/a&gt; I also lowered the cost to $5. That means about 3,500 people need to purchase the product to make it worth it. Here&amp;rsquo;s to Scribble filter!&lt;/p&gt;
+
+&lt;p&gt;Let me know if you have any questions/suggestions.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Scribble Filter (For Excel)</title>
+      <link>http://localhost:1313/2012/11/01/scribble_filter_for_excel_overview_part_4/</link>
+      <pubDate>Thu, 01 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/11/01/scribble_filter_for_excel_overview_part_4/</guid>
+      <description>&lt;p&gt;Points discussed in video:&lt;/p&gt;
+
+&lt;p&gt;The scribble filter is a text wrapper for the Advanced Filter in Excel, making it easy to work with and adding new capabilities.
+&lt;ul&gt;
+&lt;li&gt;Use both {AVERAGE} function and Excel AVERAGE function &lt;a href=&#34;http://www.youtube.com/watch?feature=player_detailpage&amp;v=jIpIWbKHawk#t=4s&#34;&gt;@00:04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Click on Excel function with cursor to goto Excel&amp;rsquo;s function web page &lt;a href=&#34;http://www.youtube.com/watch?feature=player_detailpage&amp;v=jIpIWbKHawk#t=78s&#34;&gt;@01:18&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Using ranges as a formula. &lt;a href=&#34;http://www.youtube.com/watch?feature=player_detailpage&amp;v=jIpIWbKHawk#t=93s&#34;&gt;@01:33&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+
+&lt;iframe width=&#34;420&#34; height=&#34;315&#34; src=&#34;http://www.youtube.com/embed/jIpIWbKHawk&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wp.me/P26YjB-7Z&#34;&gt;Scribble Filter Home&lt;/a&gt;
+&lt;a href=&#34;http://wp.me/P26YjB-82&#34;&gt;Scribble Filter Help&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wp.me/p26YjB-85&#34;&gt;Overview Part 1&lt;/a&gt;
+&lt;a href=&#34;http://wp.me/p26YjB-8o&#34;&gt;Overview Part 2&lt;/a&gt;
+&lt;a href=&#34;http://wp.me/p26YjB-8s&#34;&gt;Overview Part 3&lt;/a&gt;
+&lt;a href=&#34;http://wp.me/p26YjB-8Y&#34;&gt;Overview Part 4&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Scribble Filter: Installation &amp; Opening</title>
+      <link>http://localhost:1313/2012/10/31/scribble_filter_installation_opening/</link>
+      <pubDate>Wed, 31 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/10/31/scribble_filter_installation_opening/</guid>
+      <description>&lt;p&gt;The scribble filter is a text wrapper for the Advanced Filter in Excel, making it easy to work with and adding new capabilities.&lt;/p&gt;
+
+&lt;p&gt;Points discussed in video:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Installing &lt;a href=&#34;http://www.youtube.com/watch?feature=player_detailpage&amp;v=tzP4RLMuGV4#t=6s&#34;&gt;@00:06&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Open Scribble Filter Dialog &lt;a href=&#34;http://www.youtube.com/watch?feature=player_detailpage&amp;v=tzP4RLMuGV4#t=30s&#34;&gt;@00:30&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;iframe width=&#34;420&#34; height=&#34;315&#34; src=&#34;http://www.youtube.com/embed/tzP4RLMuGV4&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wp.me/P26YjB-7Z&#34;&gt;Scribble Filter Home&lt;/a&gt;
+&lt;a href=&#34;http://wp.me/P26YjB-82&#34;&gt;Scribble Filter Help&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Scribble Filter (For Excel)</title>
+      <link>http://localhost:1313/2012/10/22/scribble_filter_for_excel_overview_part_2/</link>
+      <pubDate>Mon, 22 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/10/22/scribble_filter_for_excel_overview_part_2/</guid>
+      <description>&lt;p&gt;Points discussed in video:&lt;/p&gt;
+
+&lt;p&gt;The scribble filter is a text wrapper for the Advanced Filter in Excel, making it easy to work with and adding new capabilities.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Filter in place &lt;a href=&#34;http://www.youtube.com/watch?v=vB1xfKitdJQ&amp;feature=player_detailpage#t=8s&#34;&gt;@00:08&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Copy filtered data to different worksheet &lt;a href=&#34;http://www.youtube.com/watch?v=vB1xfKitdJQ&amp;feature=player_detailpage#t=32s&#34;&gt;@00:32&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Chaining filters &lt;a href=&#34;http://www.youtube.com/watch?v=vB1xfKitdJQ&amp;feature=player_detailpage#t=57s&#34;&gt;@00:57&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Special Report (Sum column by unique values in different column) &lt;a href=&#34;http://www.youtube.com/watch?v=vB1xfKitdJQ&amp;feature=player_detailpage#t=71s&#34;&gt;@1:11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Overwriting previous reports &lt;a href=&#34;http://www.youtube.com/watch?v=vB1xfKitdJQ&amp;feature=player_detailpage#t=97s&#34;&gt;@01:37&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;iframe width=&#34;420&#34; height=&#34;315&#34; src=&#34;http://www.youtube.com/embed/vB1xfKitdJQ&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wp.me/P26YjB-7Z&#34;&gt;Scribble Filter Home&lt;/a&gt;
+&lt;a href=&#34;http://wp.me/P26YjB-82&#34;&gt;Scribble Filter Help&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wp.me/p26YjB-85&#34;&gt;Overview Part 1&lt;/a&gt;
+&lt;a href=&#34;http://wp.me/p26YjB-8o&#34;&gt;Overview Part 2&lt;/a&gt;
+&lt;a href=&#34;http://wp.me/p26YjB-8s&#34;&gt;Overview Part 3&lt;/a&gt;
+&lt;a href=&#34;http://wp.me/p26YjB-8Y&#34;&gt;Overview Part 4&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Scribble Filter (For Excel) Overview Part 3</title>
+      <link>http://localhost:1313/2012/10/22/scribble_filter_for_excel_overview_part_3/</link>
+      <pubDate>Mon, 22 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/10/22/scribble_filter_for_excel_overview_part_3/</guid>
+      <description>&lt;p&gt;Points discussed in video:&lt;/p&gt;
+
+&lt;p&gt;The scribble filter is a text wrapper for the Advanced Filter in Excel,
+making it easy to work with and adding new capabilities.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Special Functions Defined
+&lt;a href=&#34;http://www.youtube.com/watch?v=pL6dWa25tV8&amp;amp;feature=player_detailpage#t=4s&#34;&gt;@00:04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Top or bottom (also purpose for chaining)
+&lt;a href=&#34;http://www.youtube.com/watch?v=pL6dWa25tV8&amp;amp;feature=player_detailpage#t=30s&#34;&gt;@00:30&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Top or bottom by percent
+&lt;a href=&#34;http://www.youtube.com/watch?v=pL6dWa25tV8&amp;amp;feature=player_detailpage#t=130s&#34;&gt;@02:10&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Above or below average
+&lt;a href=&#34;http://www.youtube.com/watch?v=pL6dWa25tV8&amp;amp;feature=player_detailpage#t=172s&#34;&gt;@02:52&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wp.me/P26YjB-7Z&#34;&gt;Scribble Filter Home&lt;/a&gt;\
+ &lt;a href=&#34;http://wp.me/P26YjB-82&#34;&gt;Scribble Filter Help&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wp.me/p26YjB-85&#34;&gt;Overview Part 1&lt;/a&gt;\
+ &lt;a href=&#34;http://wp.me/p26YjB-8o&#34;&gt;Overview Part 2&lt;/a&gt;\
+ &lt;a href=&#34;http://wp.me/p26YjB-8s&#34;&gt;Overview Part 3&lt;/a&gt;\
+ &lt;a href=&#34;http://wp.me/p26YjB-8Y&#34;&gt;Overview Part 4&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Scribble Filter Overview Part 1</title>
+      <link>http://localhost:1313/2012/10/15/scribble_filter_overview/</link>
+      <pubDate>Mon, 15 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/10/15/scribble_filter_overview/</guid>
+      <description>&lt;p&gt;Points discussed in video:&lt;/p&gt;
+
+&lt;p&gt;The scribble filter is a wrapper for the Advanced Filter in Excel,
+making it easy to work with and adding new capabilities.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To get the date spans right click on the left calendar button.&lt;/li&gt;
+&lt;li&gt;Use tab or enter to get the first line from the drop down menu.&lt;/li&gt;
+&lt;li&gt;Right click on buttons to get more options (e.g., right click on
+report button to set type of report to create: On separate sheet,
+preview, in place, chain).&lt;/li&gt;
+&lt;li&gt;Order of precedence is CHAIN, then AND, then OR. Use parentheses if
+you want something ORed first, otherwise it will be ANDed first.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wp.me/P26YjB-7Z&#34;&gt;Scribble Filter Home&lt;/a&gt;\
+ &lt;a href=&#34;http://wp.me/P26YjB-82&#34;&gt;Scribble Filter Help&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wp.me/p26YjB-85&#34;&gt;Overview Part 1&lt;/a&gt;\
+&lt;a href=&#34;http://wp.me/p26YjB-8o&#34;&gt;Overview Part 2&lt;/a&gt;\
+&lt;a href=&#34;http://wp.me/p26YjB-8s&#34;&gt;Overview Part 3&lt;/a&gt;\
+&lt;a href=&#34;http://wp.me/p26YjB-8Y&#34;&gt;Overview Part 4&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

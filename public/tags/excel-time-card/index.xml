@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Excel Time Card on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/excel-time-card/</link>
+    <description>Recent content in Excel Time Card on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Oct 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/excel-time-card/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>New Version (0.3.0) of Excel Time Card is Available</title>
+      <link>http://localhost:1313/2012/10/12/new_version_0_3_0_of_excel_time_card_is_available/</link>
+      <pubDate>Fri, 12 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/10/12/new_version_0_3_0_of_excel_time_card_is_available/</guid>
+      <description>&lt;p&gt;The promised new version of the Excel Time Card has been uploaded. Let me know if you encounter any problems and I will fix them ASAP!&lt;/p&gt;
+
+&lt;p&gt;products/excel-time-card/&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Time Card Alternatives</title>
+      <link>http://localhost:1313/2012/06/19/time_card_alternatives/</link>
+      <pubDate>Tue, 19 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/06/19/time_card_alternatives/</guid>
+      <description>&lt;p&gt;In addiction to the Excel Time Card you can use these:&lt;/p&gt;
+
+&lt;p&gt;The time card is my pilot program to learn how to do the &lt;a href=&#34;&#34;&gt;personal finance add-in&lt;/a&gt; better. I chose not to charge for the time card simply because there are already many time tracking things out there, like  &lt;a href=&#34;http://slimtimer.com/&#34;&gt;SlimTimer&lt;/a&gt; (if I needed one for on the go I would probably use this one, nice and clean and easy to use), &lt;a href=&#34;https://www.clicktime.com/&#34;&gt;ClickTime&lt;/a&gt;, &lt;a href=&#34;http://rescuetime.com/&#34;&gt;RescueTime&lt;/a&gt; (this one is an interesting concept where it tracts your time for you), and &lt;a href=&#34;https://www.timecard.com/&#34;&gt;TimeCard.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Eventually I would like to make it so you can import the data into the Excel time card, that way, when all you have is your phone you can still track your information.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2015-09-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/about/</loc>
+    <lastmod>2015-09-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/12/30/css_media_object/</loc>
+    <lastmod>2014-12-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/10/28/html/</loc>
+    <lastmod>2014-10-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/10/03/angular_vs_react_mithril/</loc>
+    <lastmod>2014-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/07/01/bilbyjs_lenses/</loc>
+    <lastmod>2014-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/06/20/match_expression_javascript/</loc>
+    <lastmod>2014-06-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/06/12/distributed_robust_feedly/</loc>
+    <lastmod>2014-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/06/04/prototypes_composition_with_objects/</loc>
+    <lastmod>2014-06-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/05/29/functional_immutability_in_javascript/</loc>
+    <lastmod>2014-05-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/05/29/functional_or_oo_javascript/</loc>
+    <lastmod>2014-05-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/05/15/monads_monoids_and_make_believe_brian_lonsdorf/</loc>
+    <lastmod>2014-05-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/05/13/bilby_functional_programming/</loc>
+    <lastmod>2014-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/05/13/functional_programming_for_non_mathematicians/</loc>
+    <lastmod>2014-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2014/04/15/filler/</loc>
+    <lastmod>2014-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/10/28/spreadsheet_budget_launched/</loc>
+    <lastmod>2013-10-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/09/30/bit_torrent_sync_updatinginsstalling_programs/</loc>
+    <lastmod>2013-09-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/08/19/zipping_files_with_vba_and_usb_drives/</loc>
+    <lastmod>2013-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/03/14/sumifs_vs_match_index/</loc>
+    <lastmod>2013-03-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/03/13/coming_timecard_software_updates/</loc>
+    <lastmod>2013-03-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/02/25/excel_extensions/</loc>
+    <lastmod>2013-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/02/25/linqto2darray/</loc>
+    <lastmod>2013-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/02/12/attempted_to_read_or_write_protected_memory/</loc>
+    <lastmod>2013-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/01/16/rss_for_old_blog_posts/</loc>
+    <lastmod>2013-01-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2013/01/01/max_write_to_excel_2003_in_array/</loc>
+    <lastmod>2013-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/12/18/advancedfilter_wrapper_engine_for_vba_enthusiasts/</loc>
+    <lastmod>2012-12-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/12/05/list_of_excel_functions_code_to_use_list/</loc>
+    <lastmod>2012-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/12/03/excel_queries/</loc>
+    <lastmod>2012-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/12/03/updatable_scribble_trial_version/</loc>
+    <lastmod>2012-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/11/14/scribble_filter_trial_version_now_available/</loc>
+    <lastmod>2012-11-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/11/08/scribble_filter_now_available_and_other_muses/</loc>
+    <lastmod>2012-11-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/11/01/scribble_filter_for_excel_overview_part_4/</loc>
+    <lastmod>2012-11-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/10/31/scribble_filter_installation_opening/</loc>
+    <lastmod>2012-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/10/22/scribble_filter_for_excel_overview_part_3/</loc>
+    <lastmod>2012-10-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/10/22/scribble_filter_for_excel_overview_part_2/</loc>
+    <lastmod>2012-10-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/10/15/scribble_filter_overview/</loc>
+    <lastmod>2012-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/10/12/new_version_0_3_0_of_excel_time_card_is_available/</loc>
+    <lastmod>2012-10-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/09/13/sheet_exists/</loc>
+    <lastmod>2012-09-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/08/27/list_of_excel_functions/</loc>
+    <lastmod>2012-08-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/08/27/xml_comments/</loc>
+    <lastmod>2012-08-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/08/06/advancedfilter_parsing/</loc>
+    <lastmod>2012-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/07/16/algorithm_resources/</loc>
+    <lastmod>2012-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/06/19/time_card_alternatives/</loc>
+    <lastmod>2012-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/06/19/using_pivot_tables_as_a_staging_resource/</loc>
+    <lastmod>2012-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/06/18/generic_types/</loc>
+    <lastmod>2012-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/06/07/overloading_in_vb_net/</loc>
+    <lastmod>2012-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/05/16/excel_time_card_completed/</loc>
+    <lastmod>2012-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/05/11/a_class_made_from_a_shaped_recordset/</loc>
+    <lastmod>2012-05-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/04/16/sc/</loc>
+    <lastmod>2012-04-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/04/14/lambda_expressions_an_introduction/</loc>
+    <lastmod>2012-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/04/11/linq_an_introduction/</loc>
+    <lastmod>2012-04-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/04/05/extensions_in_vb_net/</loc>
+    <lastmod>2012-04-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/03/29/why_udf_array_functions_are_faster/</loc>
+    <lastmod>2012-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/03/28/calculation_effeciency_array_formulas/</loc>
+    <lastmod>2012-03-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/03/23/updates/</loc>
+    <lastmod>2012-03-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/03/14/the_problems_of_copy_pasting_code/</loc>
+    <lastmod>2012-03-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/03/02/advancedfilter_class_part_3_creating_the_sub_class/</loc>
+    <lastmod>2012-03-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/02/29/creating_a_settings_class_in_vba/</loc>
+    <lastmod>2012-02-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/02/15/advancedfilter_class_part_2_determining_what_options_we_want/</loc>
+    <lastmod>2012-02-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/02/10/wrapping_a_class_around_the_advancedfilter_method/</loc>
+    <lastmod>2012-02-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/01/27/distributing_add_ins_via_installer/</loc>
+    <lastmod>2012-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/01/23/dot_net_and_modeless_forms_in_excel/</loc>
+    <lastmod>2012-01-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/01/20/range_address_from_number_to_letter/</loc>
+    <lastmod>2012-01-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/01/13/find_last_cell/</loc>
+    <lastmod>2012-01-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/01/12/get_range_from_row_and_column_numbers/</loc>
+    <lastmod>2012-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/01/04/coming_soon/</loc>
+    <lastmod>2012-01-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/01/04/0welcome/</loc>
+    <lastmod>2012-01-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2012/01/04/import_data_from_excel_to_vba/</loc>
+    <lastmod>2012-01-04T00:00:00+00:00</lastmod>
+  </url>
+  
+</urlset>

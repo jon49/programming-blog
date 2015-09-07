@@ -1,0 +1,278 @@
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>AdvancedFilter Class Part 2</title>
+  <meta name="description" content="AdvancedFilter Class Part 2">
+  <meta name="author" content="Jon Nyman">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.css">
+  
+  
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+  <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/highlight/styles/default.css">
+  
+  <script src="http://localhost:1313/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+
+<div class="header pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="/" class="site-title pure-menu-heading">Hamsters Byte</a>
+            <ul class="pure-menu-list">
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about/" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Hamsters Byte</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2012-02-15</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="http://localhost:1313/tags/excel">excel</a> <a href="http://localhost:1313/tags/code">code</a> <a href="http://localhost:1313/tags/vba">vba</a> <a href="http://localhost:1313/tags/advanced-filter">advanced-filter</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>AdvancedFilter Class Part 2</h1>
+            </div>
+
+            <div class="post-content">
+                <p>The first thing we’ll want to do is determine what macro options we would like in the class.</p>
+
+<p>The options I currently have are:</p>
+
+<ol>
+<li>Range to filter (optional – can use current range instead).</li>
+<li>Filter location (optional – if you are using an add-in then you can place in there, otherwise can put in temporary sheet).</li>
+<li>Filter action (copy to new range or filter in place (default)).</li>
+<li>Get unique items from a column (will need to use different method than AdvancedFilter).</li>
+<li>Copy unique to range.</li>
+<li>Return  filtered data in variant array.</li>
+<li>Return  filtered  data as range.</li>
+</ol>
+
+<p>So let’s get started. First we’ll need the properties in the class, I’ll call “Search.” Notice how I’ve left many of the properties as write only, since I’m not anticipating needing to retrieve that data later.</p>
+
+<pre><code class="language-vbscript">'—————————————————————
+'Class Property Procedures
+'—————————————————————
+Property Set RangeToFilter(ByVal rRangeToFilter As Range)
+
+    Dim iOffset As Integer
+    Dim i As Long
+    Dim vHeaders As Variant
+
+    Set mrOriginal = rRangeToFilter
+    iOffset = mrOriginal.Resize(1, 1).Column – 1
+    'Get headers
+    vHeaders = Application.Transpose(mrOriginal.Resize(1).Value2)
+
+   '    mdicHeaders.RemoveAll: Set mdicHeaders = Nothing
+'    Set mdicHeaders = New Dictionary
+
+    For i = LBound(vHeaders) To UBound(vHeaders)
+        If LenB(vHeaders(i)) &gt; 0 Then
+'            If Not mdicHeaders.Exists(CStr(vHeaders(i))) Then
+'                mdicHeaders.Add CStr(vHeaders(i)), Replace$(RangeAddress(2, i + iOffset), “$”, vbNullString)
+'            End If
+        End If
+    Next i
+
+End Property
+Property Set FilterLocation(ByRef rFilterLocation As Range)
+    Set mrFilterLocation = rFilterLocation
+End Property
+Property Let FilterAction(ByVal xFilterAction As XlFilterAction)
+    mxFilterAction = xFilterAction
+End Property
+Property Let ColumnUnique(ByVal iColumnForUniqueValuesSearch As Integer)
+    miColumnUnique = iColumnForUniqueValuesSearch
+End Property
+Property Get CopyUniqueTo() As Range
+    Set CopyUniqueTo = mrCopyTo
+End Property
+Property Set CopyUniqueTo(ByVal rCopyUniqueValuesToRange As Range)
+    Set mrCopyTo = rCopyUniqueValuesToRange
+End Property
+Property Get IncludeHeaderInResults() As Boolean
+    IncludeHeaderInResults = mbIncludeHeader
+End Property
+Property Let IncludeHeaderInResults(ByVal bHeaderInResults As Boolean)
+    mbIncludeHeader = bHeaderInResults
+End Property
+</code></pre>
+
+<p>We also need our module level variables:</p>
+
+<pre><code class="language-vbscript">Private mrOriginal As Range             'Range to be filtered.
+Private mrFound As Range                'Filtered Range.
+Private mrFilterLocation As Range       'Filter data location/Range.
+Private mxFilterAction As XlFilterAction    'Desired filter action – default xlFilterInPlace.
+Private miColumnUnique As Integer       'Get unique values of filtered data from single column.
+Private mrCopyTo As Range               'Place unique data in this location.
+Private mbIncludeHeader As Boolean      'Includes the header in the found range.
+</code></pre>
+
+<p>Finally, we’ll need to initialize and terminate some variables when creating and terminating a class:</p>
+
+<pre><code class="language-vbscript">'Class_Initialize
+' ————————————————————–
+'Comments:  This procedure initializes the class.
+'
+'Date           Developer   History
+'————————————————————–
+'10/21/2010     Jon Nyman   Initial Version
+'
+Private Sub Class_Initialize()
+
+'Set mdicSearchTerms = New Dictionary
+    Set mrOriginal = Selection.CurrentRegion
+    mxFilterAction = xlFilterInPlace
+    miColumnUnique = 0
+    mbIncludeHeader = False
+    'Set mvAndOr = Nothing
+
+End Sub
+
+'Class_Terminate
+' ——————————————————————————————————————
+'Comments:  This procedure closes down the class.
+'
+'Date       Developer   History
+' ——————————————————————————————————————
+'10/21/10   Jon Nyman   Initial Version
+'
+Private Sub Class_Terminate()
+
+    If Not mrFilterLocation Is Nothing Then mrFilterLocation.ClearContents
+
+    'Set mdicSearchTerms = Nothing
+    Set mrOriginal = Nothing: Set mrCopyTo = Nothing
+    Set mrFilterLocation = Nothing: Set mrFound = Nothing
+    'Set mvAnd = Nothing: Set mvAndOr = Nothing: Set mvOr = Nothing: Set mvShuffle = Nothing
+    'Set mvOffset = Nothing
+
+End Sub
+</code></pre>
+
+<p>Next time I’ll go over some of the commented out code, like the dictionary that I’ll use for my collection object.</p>
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="pure-menu pure-menu-horizontal footer-content">
+            <ul>
+                <li class="pure-menu-heading" id="foot-name">Jon Nyman:</li>
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://github.com/jon49" class="pure-menu-link">GitHub</a>
+                </li>
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://www.linkedin.com/in/eenyman" class="pure-menu-link">LinkedIn</a>
+                </li>
+                
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://twitter.com/NymanJon" class="pure-menu-link">Twitter</a>
+                </li>
+                
+
+            </ul>
+            <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+        </div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="http://localhost:1313/js/jquery.min.js" type="text/javascript"></script>
+<script src="http://localhost:1313/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+

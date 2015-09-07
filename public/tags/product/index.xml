@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Product on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/product/</link>
+    <description>Recent content in Product on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Oct 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/product/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Spreadsheet Budget Launched</title>
+      <link>http://localhost:1313/2013/10/28/spreadsheet_budget_launched/</link>
+      <pubDate>Mon, 28 Oct 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/10/28/spreadsheet_budget_launched/</guid>
+      <description>&lt;p&gt;This first version is pretty basic - yet powerful. It will import your financial data from &lt;a href=&#34;http://kmymoney2.sourceforge.net/index-home.html&#34;&gt;KMyMoney&lt;/a&gt; (I&amp;rsquo;ll add more financial programs later). Soon I will add report templates so you can easily view your finances - how you like it. It comes with an auto updater (&lt;a href=&#34;wyday.com/wyupdate/‎&#34;&gt;wyUpdate&lt;/a&gt;) so you can stay up to date with the latest version with small packages.&lt;/p&gt;
+
+&lt;p&gt;Let me know what financial program you use so I can add it to the list for future compatibility.
+&lt;div align=&#34;center&#34;&gt;[wpdm_file id=6]&lt;/div&gt;
+&lt;strong&gt;How to install the add-in.&lt;/strong&gt;
+&lt;div align=&#34;center&#34;&gt;&lt;iframe src=&#34;//www.youtube.com/embed/hJbNhsCR-Qk&#34; height=&#34;315&#34; width=&#34;420&#34; allowfullscreen=&#34;&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;strong&gt;How to get started with the add-in.&lt;/strong&gt;
+&lt;div align=&#34;center&#34;&gt;&lt;iframe src=&#34;//www.youtube.com/embed/OQFAi5MKwxk&#34; height=&#34;315&#34; width=&#34;420&#34; allowfullscreen=&#34;&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;div align=&#34;center&#34;&gt;
+&lt;table align=&#34;center&#34;&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[singlepic id=8 w=100 h=100]&lt;/td&gt;
+&lt;td&gt;[singlepic id=9 w=100 h=100]&lt;/td&gt;
+&lt;td&gt;[singlepic id=10 w=100 h=100]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Updatable Scribble Trial Version</title>
+      <link>http://localhost:1313/2012/12/03/updatable_scribble_trial_version/</link>
+      <pubDate>Mon, 03 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/03/updatable_scribble_trial_version/</guid>
+      <description>&lt;p&gt;The first version of the Scribble filter I thought I shouldn&amp;rsquo;t put out an updatable version. In retrospect that was a mistake, wouldn&amp;rsquo;t I want to update it for bugs? Well, yes I would. So, this newest version is updatable! That&amp;rsquo;s a new lesson for me when putting out applications.&lt;/p&gt;
+
+&lt;p&gt;Excel 32-bit (most users)
+[wpdm_file id=1]&lt;/p&gt;
+
+&lt;p&gt;Excel 64-bit
+[wpdm_file id=4]&lt;/p&gt;
+
+&lt;p&gt;How have you been liking the Scribble filter? Any questions/comments on its use?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

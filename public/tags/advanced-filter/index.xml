@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Advanced Filter on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/advanced-filter/</link>
+    <description>Recent content in Advanced Filter on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Dec 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/advanced-filter/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>AdvancedFilter Wrapper Engine</title>
+      <link>http://localhost:1313/2012/12/18/advancedfilter_wrapper_engine_for_vba_enthusiasts/</link>
+      <pubDate>Tue, 18 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/18/advancedfilter_wrapper_engine_for_vba_enthusiasts/</guid>
+      <description>&lt;p&gt;A while back ago I promised to produce my engine for the advancedfilter wrapper. Well, at the prodding of &lt;a href=&#34;http://blog.contextures.com/archives/2011/03/02/excel-autofilter-or-advanced-filter/#comment-43397&#34;&gt;Hugo&lt;/a&gt; I finally put it together. I took the code from my VB.NET project and converted it to VBA. Man, that reminds of why I love .NET so much! If you ever get a chance to learn .NET of VBA definitely take the opportunity. At first it is difficult but then it gets to the point where you don&amp;rsquo;t want to go back.&lt;/p&gt;
+
+&lt;p&gt;In the next few weeks I&amp;rsquo;ll go over how to use the Search class and its particulars. For anyone that uses it all I ask is that you credit me and that you spread the word about &lt;a href=&#34;products/scribble-filter/&#34;&gt;Scribble Filter&lt;/a&gt;! If you find any bugs let me know and I&amp;rsquo;ll fix them.&lt;/p&gt;
+
+&lt;p&gt;Some things you should know:&lt;/p&gt;
+
+&lt;p&gt;4 files are needed:
+LogicRPNGenerator.bas
+Search.cls
+Stack.cls
+StandardCode.bas&lt;/p&gt;
+
+&lt;p&gt;The file &lt;strong&gt;SearchSample.bas&lt;/strong&gt; shows a few examples. If you don&amp;rsquo;t specify your own temp worksheet then it will create one and then delete it after the Search class terminates. &lt;strong&gt;Anything on the temp worksheet will be deleted&lt;/strong&gt;. Let me know what you think!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Updates</title>
+      <link>http://localhost:1313/2012/03/23/updates/</link>
+      <pubDate>Fri, 23 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/03/23/updates/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;AdvancedFilter Class&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Just so everyone knows. I&amp;rsquo;m going to postpone the AdvancedFilter series until I start working on it in .NET, that way I&amp;rsquo;ll remember more about what I was doing before. I&amp;rsquo;ll start working on that when I finish up the Time Card application and the Chart Manipulator.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Time Card&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I probably won&amp;rsquo;t be finishing up the beta version of the time card until early April. I&amp;rsquo;m currently debugging the UDF function &amp;ldquo;SumDate&amp;rdquo; which is pretty central to the time card. For some reason it is outputting the correct results for all but one result in an array of results. I&amp;rsquo;ll probably get that figured out today.&lt;/p&gt;
+
+&lt;p&gt;Items that I have left before release:&lt;/p&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;Update version via internet.&lt;/li&gt;
+    &lt;li&gt;Time Card Template&lt;/li&gt;
+    &lt;li&gt;Change items directly on chart. (This item will only be partially complete for the beta version.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt; New Series&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll be starting a new series on a dll I developed for the time card that makes it easier to work with Excel, Excel DNA, and .NET.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AdvancedFilter Class Part 3</title>
+      <link>http://localhost:1313/2012/03/02/advancedfilter_class_part_3_creating_the_sub_class/</link>
+      <pubDate>Fri, 02 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/03/02/advancedfilter_class_part_3_creating_the_sub_class/</guid>
+      <description>&lt;p&gt;In order to get the nice drop down menu we&amp;rsquo;ll need a second class I&amp;rsquo;ll call &amp;ldquo;SearchTerms.&amp;rdquo; This class is also necessary to store each individual search term entered into the class. Included in this class will be:
+&lt;ol&gt;
+    &lt;li&gt;Search Term&lt;/li&gt;
+    &lt;li&gt;Header&lt;/li&gt;
+    &lt;li&gt;Header Operator&lt;/li&gt;
+    &lt;li&gt;Match Type&lt;/li&gt;
+&lt;/ol&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39; SearchTerms
+&#39; Description: This class contains the search information.
+&#39;
+&#39; Authors: Jon Nyman, www.spreadsheetbudget.com
+&#39;
+&#39; Change Overview
+&#39; Date Comment
+&#39; --------------------------------------------------------------
+&#39; 03/02/2012 Initial version
+&#39;
+Option Explicit
+&#39;---------------------------------------------------------------
+&#39;Class Variable Declarations
+&#39;---------------------------------------------------------------
+Private msSearchTerm As String
+Private msHeader As String
+Private meHeaderOperator As HeaderOperator
+Private meMatchType As MatchType
+
+&#39;---------------------------------------------------------------
+&#39;Class Property Procedures
+&#39;---------------------------------------------------------------
+
+Property Get SearchTerm() As String
+    SearchTerm = msSearchTerm
+End Property Property 
+
+Let SearchTerm(ByVal sItem As String)
+    msSearchTerm = sItem
+End Property
+
+Property Get Header() As String
+    Header = msHeader
+End Property 
+
+Property Let Header(ByVal sHeader As String)
+    msHeader = sHeader
+End Property
+
+Property Get Header_Operator() As HeaderOperator
+    Header_Operator = meHeaderOperator
+End Property
+
+Property Let Header_Operator(ByVal eHeaderOperator As HeaderOperator)
+    meHeaderOperator = eHeaderOperator
+End Property
+
+Property Get Match_Type() As MatchType
+    Match_Type = meMatchType
+End Property
+
+Property Let Match_Type(ByVal eMatchType As MatchType)
+    meMatchType = eMatchType
+End Property
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AdvancedFilter Class Part 2</title>
+      <link>http://localhost:1313/2012/02/15/advancedfilter_class_part_2_determining_what_options_we_want/</link>
+      <pubDate>Wed, 15 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/02/15/advancedfilter_class_part_2_determining_what_options_we_want/</guid>
+      <description>&lt;p&gt;The first thing we’ll want to do is determine what macro options we would like in the class.&lt;/p&gt;
+
+&lt;p&gt;The options I currently have are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Range to filter (optional – can use current range instead).&lt;/li&gt;
+&lt;li&gt;Filter location (optional – if you are using an add-in then you can place in there, otherwise can put in temporary sheet).&lt;/li&gt;
+&lt;li&gt;Filter action (copy to new range or filter in place (default)).&lt;/li&gt;
+&lt;li&gt;Get unique items from a column (will need to use different method than AdvancedFilter).&lt;/li&gt;
+&lt;li&gt;Copy unique to range.&lt;/li&gt;
+&lt;li&gt;Return  filtered data in variant array.&lt;/li&gt;
+&lt;li&gt;Return  filtered  data as range.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So let’s get started. First we’ll need the properties in the class, I’ll call “Search.” Notice how I’ve left many of the properties as write only, since I’m not anticipating needing to retrieve that data later.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;—————————————————————
+&#39;Class Property Procedures
+&#39;—————————————————————
+Property Set RangeToFilter(ByVal rRangeToFilter As Range)
+
+    Dim iOffset As Integer
+    Dim i As Long
+    Dim vHeaders As Variant
+
+    Set mrOriginal = rRangeToFilter
+    iOffset = mrOriginal.Resize(1, 1).Column – 1
+    &#39;Get headers
+    vHeaders = Application.Transpose(mrOriginal.Resize(1).Value2)
+
+   &#39;    mdicHeaders.RemoveAll: Set mdicHeaders = Nothing
+&#39;    Set mdicHeaders = New Dictionary
+
+    For i = LBound(vHeaders) To UBound(vHeaders)
+        If LenB(vHeaders(i)) &amp;gt; 0 Then
+&#39;            If Not mdicHeaders.Exists(CStr(vHeaders(i))) Then
+&#39;                mdicHeaders.Add CStr(vHeaders(i)), Replace$(RangeAddress(2, i + iOffset), “$”, vbNullString)
+&#39;            End If
+        End If
+    Next i
+
+End Property
+Property Set FilterLocation(ByRef rFilterLocation As Range)
+    Set mrFilterLocation = rFilterLocation
+End Property
+Property Let FilterAction(ByVal xFilterAction As XlFilterAction)
+    mxFilterAction = xFilterAction
+End Property
+Property Let ColumnUnique(ByVal iColumnForUniqueValuesSearch As Integer)
+    miColumnUnique = iColumnForUniqueValuesSearch
+End Property
+Property Get CopyUniqueTo() As Range
+    Set CopyUniqueTo = mrCopyTo
+End Property
+Property Set CopyUniqueTo(ByVal rCopyUniqueValuesToRange As Range)
+    Set mrCopyTo = rCopyUniqueValuesToRange
+End Property
+Property Get IncludeHeaderInResults() As Boolean
+    IncludeHeaderInResults = mbIncludeHeader
+End Property
+Property Let IncludeHeaderInResults(ByVal bHeaderInResults As Boolean)
+    mbIncludeHeader = bHeaderInResults
+End Property
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We also need our module level variables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private mrOriginal As Range             &#39;Range to be filtered.
+Private mrFound As Range                &#39;Filtered Range.
+Private mrFilterLocation As Range       &#39;Filter data location/Range.
+Private mxFilterAction As XlFilterAction    &#39;Desired filter action – default xlFilterInPlace.
+Private miColumnUnique As Integer       &#39;Get unique values of filtered data from single column.
+Private mrCopyTo As Range               &#39;Place unique data in this location.
+Private mbIncludeHeader As Boolean      &#39;Includes the header in the found range.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, we’ll need to initialize and terminate some variables when creating and terminating a class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;Class_Initialize
+&#39; ————————————————————–
+&#39;Comments:  This procedure initializes the class.
+&#39;
+&#39;Date           Developer   History
+&#39;————————————————————–
+&#39;10/21/2010     Jon Nyman   Initial Version
+&#39;
+Private Sub Class_Initialize()
+
+&#39;Set mdicSearchTerms = New Dictionary
+    Set mrOriginal = Selection.CurrentRegion
+    mxFilterAction = xlFilterInPlace
+    miColumnUnique = 0
+    mbIncludeHeader = False
+    &#39;Set mvAndOr = Nothing
+
+End Sub
+
+&#39;Class_Terminate
+&#39; ——————————————————————————————————————
+&#39;Comments:  This procedure closes down the class.
+&#39;
+&#39;Date       Developer   History
+&#39; ——————————————————————————————————————
+&#39;10/21/10   Jon Nyman   Initial Version
+&#39;
+Private Sub Class_Terminate()
+
+    If Not mrFilterLocation Is Nothing Then mrFilterLocation.ClearContents
+
+    &#39;Set mdicSearchTerms = Nothing
+    Set mrOriginal = Nothing: Set mrCopyTo = Nothing
+    Set mrFilterLocation = Nothing: Set mrFound = Nothing
+    &#39;Set mvAnd = Nothing: Set mvAndOr = Nothing: Set mvOr = Nothing: Set mvShuffle = Nothing
+    &#39;Set mvOffset = Nothing
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next time I’ll go over some of the commented out code, like the dictionary that I’ll use for my collection object.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Wrapping a Class Around the AdvancedFilter Method</title>
+      <link>http://localhost:1313/2012/02/10/wrapping_a_class_around_the_advancedfilter_method/</link>
+      <pubDate>Fri, 10 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/02/10/wrapping_a_class_around_the_advancedfilter_method/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.cpearson.com/excel/classes.aspx&#34;&gt;Classes&lt;/a&gt; are a tool in &lt;a href=&#34;http://en.wikipedia.org/wiki/Object-oriented_programming&#34;&gt;object-oriented programming&lt;/a&gt; that make programming much simpler. One class that I have developed in VBA is a class that makes using the &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa221800(v=office.11).aspx&#34;&gt;AdvancedFilter method&lt;/a&gt; extremely easy and useful. In fact, I like it so much that I stopped using the regular &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa195730(v=office.11).aspx&#34;&gt;find method&lt;/a&gt;. In the coming weeks I will demonstrate how this was done.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; This is how the AdvancedFilter method works&lt;/strong&gt;:
+&lt;ol&gt;
+    &lt;li&gt;  Use a predefined range to filter.&lt;/li&gt;
+    &lt;li&gt;Create a range that has the filter criteria.&lt;/li&gt;
+    &lt;li&gt;Have a range for copying the results (or filter in place).&lt;/li&gt;
+    &lt;li&gt;Filter for unique values only.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;Drawbacks of the AdvancedFilter method&lt;/strong&gt;:
+&lt;ol&gt;
+    &lt;li&gt;Mixed data in predefined range can give odd/incorrect results.&lt;/li&gt;
+    &lt;li&gt;Is slow compared to a database search or even a manual looped search.&lt;/li&gt;
+    &lt;li&gt;Need a special range to perform search.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;Advantages of the AdvancedFilter method&lt;/strong&gt;:
+&lt;ol&gt;
+    &lt;li&gt; Can use familiar Excel formulas in search terms.&lt;/li&gt;
+    &lt;li&gt;Great for searching database structured data in Excel.&lt;/li&gt;
+    &lt;li&gt;The copy method is pretty fast if you are planning on copying the data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;This is how the class will work&lt;/strong&gt; (Of course, you could use a function to wrap this code to make it even simpler for simple searches - which I have done):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Sub AdvancedFilterClassExample()
+    
+    Dim iIndex As Integer
+    Dim rResult As Range
+    Dim clsSearch As Search
+
+    &#39;clsSearch.ColumnUnique = 1
+    &#39;clsSearch.CopyUniqueTo = Range(&amp;quot;A101&amp;quot;)
+
+    clsSearch.IncludeHeaderInResults = True
+    clsSearch.RangeToFilter = Range(&amp;quot;A1:Y100&amp;quot;)
+    clsSearch.FilterLocation = Range(&amp;quot;Z1&amp;quot;)
+    iIndex = clsSearch.Add(&amp;quot;George&amp;quot;)
+    clsSearch(iIndex).Header = &amp;quot;First Name&amp;quot;
+    clsSearch(iIndex).match_type = BasicSearch
+    clsSearch(iIndex).Header_Operator = AndOperator
+
+    iIndex = clsSearch.Add(&amp;quot;*&amp;quot;)
+    clsSearch(iIndex).Header = &amp;quot;Last Name&amp;quot;
+    clsSearch(iIndex).match_type = WildCardOnly
+    clsSearch(iIndex).Header_Operator = OrOperator
+
+    Debug.Print clsSearch.Count
+
+    Set rResult = clsSearch.Filter
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Match Types&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;    MatchType.BasicSearch
+    MatchType.MatchCase
+    MatchType.MatchCase_MatchEntireCellContents
+    MatchType.MatchEntireCellContents
+    MatchType.WildCardOnly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Header Types&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;    HeaderOperator.AndOperator
+    HeaderOperator.OrOperator&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

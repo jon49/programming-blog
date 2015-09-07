@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overloading on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/overloading/</link>
+    <description>Recent content in Overloading on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 Jun 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/overloading/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Overloading in VB.NET</title>
+      <link>http://localhost:1313/2012/06/07/overloading_in_vb_net/</link>
+      <pubDate>Thu, 07 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/06/07/overloading_in_vb_net/</guid>
+      <description>&lt;p&gt;In previous posts I showed how you can use &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/&#34;&gt;Extensions&lt;/a&gt; and &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/14/lambda-expressions-an-introduction/&#34;&gt;Lambda Expressions&lt;/a&gt; to make some pretty versatile functions in .NET. Today I&amp;rsquo;ll show a method that really helps for the readability and organization of your code.&lt;/p&gt;
+
+&lt;p&gt;In the past we used optional parameters to make a function do multiple things. We even needed to make new functions that did pretty much the same thing in order to make it better organized. Well, now we can avoid using those by &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/ms973896.aspx&#34;&gt;overloading the functions&lt;/a&gt;. I still use optional parameters and even new functions but this has been greatly reduced by the ability to overload.&lt;/p&gt;
+
+&lt;p&gt;Overloading pretty much works just by writing the same procedure two or more times with different parameters or return values. If you put the procedure in a class you have to use the term &amp;ldquo;Overloads&amp;rdquo; in the declaration of the procedure.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s how it looks when you call it on your screen when typing out the function name:&lt;/p&gt;
+
+&lt;p&gt;[pic name=&amp;ldquo;Overload.png&amp;rdquo;]&lt;/p&gt;
+
+&lt;p&gt;So here&amp;rsquo;s some code that uses overloading:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Public Function FindIndexSorted(ByRef oaArray(,) As Object, ByVal IsEqual As Func(Of Object, Integer), ByVal iSearchIndex As Integer) As Integer
+
+    Dim iResult As Integer = 0, iTest As Integer, iNext As Integer
+    Dim iUpperSearch As Integer = oaArray.GetUpperBound(0)
+    Dim iLowerSearch As Integer = 0
+    Dim iPrevious As Integer = -1
+
+    Try
+        If IsEqual(oaArray(0, iSearchIndex)) &amp;amp;lt; 0 Then &#39;If value is the less than the first index then skip                 Return -1             ElseIf IsEqual(oaArray(iUpperSearch, iSearchIndex)) &amp;amp;gt; 0 Then &#39;If it is greater than the last index then skip
+            Return -(iUpperSearch + 1)
+        Else
+            iResult = -1
+        End If
+
+        &#39;Find start indexes
+        Do While iResult = -1
+            iNext = (iUpperSearch + iLowerSearch) \ 2 &#39;Get new search location
+            iTest = IsEqual(oaArray(iNext, iSearchIndex))
+            If iTest &amp;amp;gt; 0 Then &#39;Get new lower search location
+                iLowerSearch = iNext
+            ElseIf iTest &amp;amp;lt; 0 Then &#39;Get new upper search location                     iUpperSearch = iNext                 Else &#39;If equal find first instance of item                     iResult = iNext - 1                     If iResult &amp;amp;gt; -1 Then
+                    Do While IsEqual(oaArray(iResult, iSearchIndex)) = 0
+                        iResult -= 1
+                        If iResult = -1 Then Exit Do
+                    Loop
+                End If
+                iResult += 1
+            End If
+            If iPrevious = iNext Then &#39;Get first item
+                If IsEqual(oaArray(iLowerSearch, iSearchIndex)) &amp;amp;lt; 0 Then Return -(iLowerSearch - 1)
+                iTest = IsEqual(oaArray(iUpperSearch, iSearchIndex))
+                If iTest &amp;amp;lt; 0 Then
+                    Return -(iUpperSearch - 1)
+                ElseIf iTest = 0 Then
+                    Return iUpperSearch
+                End If
+            Else
+                iPrevious = iNext
+            End If
+        Loop
+    Catch ex As InvalidCastException
+        iResult = -1
+    End Try
+
+    Return iResult
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here&amp;rsquo;s some code that makes the previous function easier to use, but I still have the previous code exposed so, if I want some custom when I call the function I could use it, or I could just use the simplified version below, all with the same name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Public Function FindIndexSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer
+
+    If TypeOf oWhat Is Double Then  &#39;Use double type comparison.
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndexSorted(oaArray, Function(a As Object) If(CDbl(a) &amp;amp;gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)), iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  &#39;Use string type comparison.
+        Dim sWhat As String = oWhat.ToString
+        Return FindIndexSorted(oaArray, Function(a As Object) String.Compare(CStr(a), sWhat, eStringCompare), iSearchIndex)
+    ElseIf IsNumeric(oWhat) Then
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndexSorted(oaArray, Function(a As Object) If(CDbl(a) &amp;amp;gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)), iSearchIndex)
+    Else
+        &#39;Not set up for other types of data.
+        Return -1
+    End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

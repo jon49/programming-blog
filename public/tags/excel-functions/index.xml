@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Excel Functions on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/excel-functions/</link>
+    <description>Recent content in Excel Functions on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Mar 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/excel-functions/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>SUMIFS vs MATCH &amp; INDEX</title>
+      <link>http://localhost:1313/2013/03/14/sumifs_vs_match_index/</link>
+      <pubDate>Thu, 14 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/03/14/sumifs_vs_match_index/</guid>
+      <description>&lt;p&gt;I have one Time Card template setup with SUMIFS (used for Excel 2007 and
+above templates) and one set up with MATCH/INDEX (used for my 2003 and
+below templates). I tested the calculation speeds for each in Excel 2013
+(preview) on Windows 8.&lt;/p&gt;
+
+&lt;p&gt;Here’s the VBA test code:&lt;/p&gt;
+
+&lt;p&gt;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+| &lt;code&gt;{.vb style=&amp;quot;font-family:monospace;&amp;quot;}                                 |
+| Sub test()                                                               |
+|                                                                          |
+|     Dim dTimer As Double                                                 |
+|     Dim iLoops As Integer, iTotalIterations As Integer                   |
+|     Dim wksStage As Worksheet                                            |
+|                                                                          |
+|     Set wksStage = ThisWorkbook.Worksheets(&amp;quot;Staging Area&amp;quot;)               |
+|     iTotalIterations = 1                                                 |
+|     dTimer = Timer()                                                     |
+|                                                                          |
+|     For iLoops = 0 To iTotalIterations                                   |
+|         wksStage.Calculate                                               |
+|     Next iLoops                                                          |
+|                                                                          |
+|     Debug.Print Timer() - dTimer                                         |
+|                                                                          |
+| End Sub                                                                  |
+|&lt;/code&gt;                                                                      |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
+
+&lt;p&gt;And here’s the results (seconds):&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Iterations
+  SUMIFS
+  MATCH/INDEX&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;1                        50
+  0.20                     3.07
+  0.09                     1.30&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;So where do I go from here? I think I will keep the two separate
+templates for now, even though I could go to one. The reasons?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It is much easier to change SUMIFS than the complicated MATCH/INDEX
+functions.&lt;/li&gt;
+&lt;li&gt;I think I could introduce an error in the MATCH/INDEX functions more
+easily.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I will post the 2003 template for anyone that wishes faster calculation
+times, but it is pretty fast now, so I don’t know if that would be a
+huge issue.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>List of Excel Functions - Code To Use List</title>
+      <link>http://localhost:1313/2012/12/05/list_of_excel_functions_code_to_use_list/</link>
+      <pubDate>Wed, 05 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/05/list_of_excel_functions_code_to_use_list/</guid>
+      <description>&lt;p&gt;I saw a few people were downloading &lt;a href=&#34;2012/08/27/list-of-excel-functions/&#34;&gt;my list of Excel functions that I created&lt;/a&gt;. I thought it might be useful show the code that I use to get that data to a manageable format. Although the code is written in VB.NET it should be easily converted to VBA.&lt;/p&gt;
+
+&lt;p&gt;[wpdm_file id=3]&lt;/p&gt;
+
+&lt;p&gt;I use a simple structure (type in VBA) for the data.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    Private Structure ExcelFunctionInfo
+        Dim Name As String
+        Dim Category As String
+        Dim ExcelVersion As Integer
+        Dim Description As String
+        Dim Syntax As String
+        Dim URL As String
+    End Structure
+&lt;/pre&gt;
+
+&lt;p&gt;I then just loop through the data in the string that was gotten from the text file.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    &#39;&#39;&#39; &lt;summary&gt;
+    &#39;&#39;&#39; Takes string of Excel functions and puts it into dictionary.
+    &#39;&#39;&#39; &lt;/summary&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;sExcelFunctions&#34;&gt;String of Excel functions&lt;/param&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;iExcelVersion_Descriptive&#34;&gt;Descriptive version of Excel&lt;/param&gt;
+    &#39;&#39;&#39; &lt;returns&gt;Dictionary of Excel functions.&lt;/returns&gt;
+    &#39;&#39;&#39; &lt;remarks&gt;Jon Nyman 20120920&lt;/remarks&gt;
+    Private Function GetExcelFunctionsFromTextToDictionary(ByVal sExcelFunctions As String _
+                    , ByVal iExcelVersion_Descriptive As Integer) As Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        Dim dicExcelFunctions As New Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        For Each sLine In sExcelFunctions.Split(CChar(vbLf))
+            Dim sEachTab = sLine.Split(CChar(vbTab))
+            Dim xlFuncs As ExcelFunctionInfo
+            If sEachTab.Length = 6 AndAlso CInt(sEachTab(0)) &lt;= iExcelVersion_Descriptive Then
+                xlFuncs.Name = sEachTab(1)
+                xlFuncs.ExcelVersion = CInt(sEachTab(0))
+                xlFuncs.URL = sEachTab(5)
+                xlFuncs.Syntax = sEachTab(4)
+                xlFuncs.Category = sEachTab(2)
+                xlFuncs.Description = sEachTab(3)
+                If Not dicExcelFunctions.ContainsKey(xlFuncs.Name) Then
+                    Dim lst = New List(Of ExcelFunctionInfo)
+                    lst.Add(xlFuncs)
+                    dicExcelFunctions.Add(xlFuncs.Name, lst)
+                Else
+                    Dim lst = dicExcelFunctions(xlFuncs.Name)
+                    lst.Add(xlFuncs)
+                    dicExcelFunctions(xlFuncs.Name) = lst
+                End If
+            End If
+        Next
+
+        Return dicExcelFunctions
+
+    End Function
+&lt;/pre&gt;
+
+&lt;p&gt;This is where I read the text file.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    &#39;&#39;&#39; &lt;summary&gt;
+    &#39;&#39;&#39; Gets excel functions from text document and put it in dictionary.
+    &#39;&#39;&#39; &lt;/summary&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;sxlAppVersion&#34;&gt;Excel app version.&lt;/param&gt;
+    &#39;&#39;&#39; &lt;returns&gt;Dictionary of excel functions list.&lt;/returns&gt;
+    &#39;&#39;&#39; &lt;remarks&gt;Jon Nyman 20120920&lt;/remarks&gt;
+    Private Function LoadExcelFunctions(ByVal sxlAppVersion As String) As Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        Dim sExcelFunctions = My.Resources.ExcelFunctionsListCleaned
+
+        &#39;Excel Functions
+        Return GetExcelFunctionsFromTextToDictionary(sExcelFunctions, CExcel.GetExcelVersion_Descriptive(sxlAppVersion, 11))
+
+    End Function
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>List of Excel Functions</title>
+      <link>http://localhost:1313/2012/08/27/list_of_excel_functions/</link>
+      <pubDate>Mon, 27 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/08/27/list_of_excel_functions/</guid>
+      <description>&lt;p&gt;For the advanced filter I need a list of Excel functions. There are lists, unfortunately I needed the list with the function parameters (syntax). I also wanted it by date. I have lists of just the functions for Excel 2003, 2007, and 2010 without the syntax. So I did some screen scraping of &lt;a href=&#34;http://office.microsoft.com/en-us/excel-help/excel-functions-by-category-HA102752955.aspx?CTT=1#_Toc309306719&#34;&gt;Microsoft&amp;rsquo;s list of Excel functions&lt;/a&gt; where I was able to get the function name, category, description, syntax, and website URL for that function.&lt;/p&gt;
+
+&lt;p&gt;I thought others might be able to use this list also. Feel free to download it!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;#{site.download.XL_Functions.fullName}&#34; title=&#34;#{site.download.XL_Functions.title}&#34;&gt;&lt;i class=&#34;fa fa-download fa-large&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

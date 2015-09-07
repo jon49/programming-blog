@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/code/</link>
+    <description>Recent content in Code on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Dec 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>List of Excel Functions - Code To Use List</title>
+      <link>http://localhost:1313/2012/12/05/list_of_excel_functions_code_to_use_list/</link>
+      <pubDate>Wed, 05 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/05/list_of_excel_functions_code_to_use_list/</guid>
+      <description>&lt;p&gt;I saw a few people were downloading &lt;a href=&#34;2012/08/27/list-of-excel-functions/&#34;&gt;my list of Excel functions that I created&lt;/a&gt;. I thought it might be useful show the code that I use to get that data to a manageable format. Although the code is written in VB.NET it should be easily converted to VBA.&lt;/p&gt;
+
+&lt;p&gt;[wpdm_file id=3]&lt;/p&gt;
+
+&lt;p&gt;I use a simple structure (type in VBA) for the data.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    Private Structure ExcelFunctionInfo
+        Dim Name As String
+        Dim Category As String
+        Dim ExcelVersion As Integer
+        Dim Description As String
+        Dim Syntax As String
+        Dim URL As String
+    End Structure
+&lt;/pre&gt;
+
+&lt;p&gt;I then just loop through the data in the string that was gotten from the text file.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    &#39;&#39;&#39; &lt;summary&gt;
+    &#39;&#39;&#39; Takes string of Excel functions and puts it into dictionary.
+    &#39;&#39;&#39; &lt;/summary&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;sExcelFunctions&#34;&gt;String of Excel functions&lt;/param&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;iExcelVersion_Descriptive&#34;&gt;Descriptive version of Excel&lt;/param&gt;
+    &#39;&#39;&#39; &lt;returns&gt;Dictionary of Excel functions.&lt;/returns&gt;
+    &#39;&#39;&#39; &lt;remarks&gt;Jon Nyman 20120920&lt;/remarks&gt;
+    Private Function GetExcelFunctionsFromTextToDictionary(ByVal sExcelFunctions As String _
+                    , ByVal iExcelVersion_Descriptive As Integer) As Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        Dim dicExcelFunctions As New Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        For Each sLine In sExcelFunctions.Split(CChar(vbLf))
+            Dim sEachTab = sLine.Split(CChar(vbTab))
+            Dim xlFuncs As ExcelFunctionInfo
+            If sEachTab.Length = 6 AndAlso CInt(sEachTab(0)) &lt;= iExcelVersion_Descriptive Then
+                xlFuncs.Name = sEachTab(1)
+                xlFuncs.ExcelVersion = CInt(sEachTab(0))
+                xlFuncs.URL = sEachTab(5)
+                xlFuncs.Syntax = sEachTab(4)
+                xlFuncs.Category = sEachTab(2)
+                xlFuncs.Description = sEachTab(3)
+                If Not dicExcelFunctions.ContainsKey(xlFuncs.Name) Then
+                    Dim lst = New List(Of ExcelFunctionInfo)
+                    lst.Add(xlFuncs)
+                    dicExcelFunctions.Add(xlFuncs.Name, lst)
+                Else
+                    Dim lst = dicExcelFunctions(xlFuncs.Name)
+                    lst.Add(xlFuncs)
+                    dicExcelFunctions(xlFuncs.Name) = lst
+                End If
+            End If
+        Next
+
+        Return dicExcelFunctions
+
+    End Function
+&lt;/pre&gt;
+
+&lt;p&gt;This is where I read the text file.&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;
+    &#39;&#39;&#39; &lt;summary&gt;
+    &#39;&#39;&#39; Gets excel functions from text document and put it in dictionary.
+    &#39;&#39;&#39; &lt;/summary&gt;
+    &#39;&#39;&#39; &lt;param name=&#34;sxlAppVersion&#34;&gt;Excel app version.&lt;/param&gt;
+    &#39;&#39;&#39; &lt;returns&gt;Dictionary of excel functions list.&lt;/returns&gt;
+    &#39;&#39;&#39; &lt;remarks&gt;Jon Nyman 20120920&lt;/remarks&gt;
+    Private Function LoadExcelFunctions(ByVal sxlAppVersion As String) As Dictionary(Of String, List(Of ExcelFunctionInfo))
+
+        Dim sExcelFunctions = My.Resources.ExcelFunctionsListCleaned
+
+        &#39;Excel Functions
+        Return GetExcelFunctionsFromTextToDictionary(sExcelFunctions, CExcel.GetExcelVersion_Descriptive(sxlAppVersion, 11))
+
+    End Function
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sheet Exists</title>
+      <link>http://localhost:1313/2012/09/13/sheet_exists/</link>
+      <pubDate>Thu, 13 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/09/13/sheet_exists/</guid>
+      <description>&lt;p&gt;I was looking at &lt;a href=&#34;http://www.siddharthrout.com&#34;&gt;Siddharth Rout&amp;rsquo;s new blog&lt;/a&gt; (&lt;a href=&#34;http://www.siddharthrout.com/2012/09/10/addingdeleting-sheets-to-the-excel-file/&#34;&gt;Adding/Deleting Sheets to the Excel File&lt;/a&gt;) and realized that I haven&amp;rsquo;t posted my version of sheet exists. Mine probably does too much per &lt;a href=&#34;http://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670/ref=sr_1_1?ie=UTF8&amp;qid=1347565033&amp;sr=8-1&amp;keywords=code+complete&#34;&gt;Code Complete&lt;/a&gt; standards, but it is nice not to have to think of multiple.&lt;/p&gt;
+
+&lt;p&gt;If I were to &lt;a href=&#34;http://en.wikipedia.org/wiki/Refactor&#34;&gt;refactor&lt;/a&gt; this code I would take out the code for the charts and probably just make it work only for checking if the sheet exists and adding a new sheet if it doesn&amp;rsquo;t. I would create a separate function for deleting sheets. But once you have lot&amp;rsquo;s of code written it is difficult to refactor all your code just to change one function (and I use this function quite a bit).&lt;/p&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;&#39;SheetExists
+&#39; --------------------------------------------------------------
+&#39;Comments:  This function returns TRUE if the sheet exists in the
+&#39;           active workbook and adds new sheet if bAddSheet is true.
+&#39;
+&#39;Arguments: sSheetName  Name of sheet.
+&#39;           bAddSheet   If true adds new sheet, if false returns false.
+&#39;
+&#39;Return:    Returns true when sheet exists.
+&#39;
+&#39;Source:    http://www.exceltip.com/st/Determine_if_a_sheet_exists_in_a_workbook_using_VBA_in_Microsoft_Excel/485.html
+&#39;Notes:     This was created for use of Jon Nyman and can be distributed by Paciolan.
+&#39;           Tristates require reference to &#34;Microsoft Scripting Runtime&#34;
+&#39;Date           Developer   History
+&#39;--------------------------------------------------------------
+&#39;01/13/10       Jon Nyman   Initial version
+&#39;11/12/10       Jon Nyman   Changed to use ExistInCollection function, changed all to byref for increased speed.
+&#39;04/30/12       Jon Nyman   Added reference to worksheet, so no need to add it later!
+Public Function SheetExists(ByVal sSheetName As String, Optional ByVal bAddSheet As Boolean = False, _
+    Optional ByVal wkb As Workbook = Nothing, Optional ByVal bCreateChart As Boolean = False _
+    , Optional ByVal bDeleteSheet As Boolean = False, Optional ByRef wks As Object) As Tristate
+    
+    Dim bByRef As Boolean
+    
+    &#39;Get current workbook that function will be working on.
+    bByRef = True
+    If wkb Is Nothing Then
+        If Not ActiveWorkbook Is Nothing Then
+            Set wkb = ActiveWorkbook
+            bByRef = False
+        Else
+            SheetExists = TristateFalse
+            GoTo SheetExists_Exit
+        End If
+    End If
+    &#39;Determine if sheet exists
+    SheetExists = ExistsInCollection(wkb.Sheets, sSheetName)
+    &#39;If sheet exists and delet option is true then delete worksheet without
+    &#39;displaying an alert to the user.
+    If SheetExists And bDeleteSheet Then
+        Application.DisplayAlerts = False
+        With wkb.Sheets(sSheetName)
+            .Visible = True
+            .Delete
+        End With
+        Application.DisplayAlerts = True
+        SheetExists = TristateFalse
+    End If
+    &#39;If the sheet doesn&#39;t exist and the add sheet (or chart) option is checked then
+    &#39;add a new sheet with name given.
+    If Not SheetExists And bAddSheet Then
+        wkb.Activate
+        If Not bCreateChart Then
+            Set wks = wkb.Sheets.Add
+            wks.Name = sSheetName
+        Else
+            Set wks = wkb.Charts.Add
+            wks.Name = sSheetName
+        End If
+        SheetExists = TristateMixed
+    ElseIf SheetExists Then
+        Set wks = wkb.Sheets(sSheetName)
+    End If
+    
+SheetExists_Exit:
+    If Not bByRef Then Set wkb = Nothing
+    
+End Function&lt;/pre&gt;
+
+&lt;pre lang=&#34;VB&#34;&gt;&#39;ExistsInCollection
+&#39; --------------------------------------------------------------
+&#39;Comments:  This procedure deletes names in a workbook.
+&#39;
+&#39;Arguments: colObject   Collection object.
+&#39;           sItem       Item that could be in collection.
+&#39;
+&#39;Returns:   True when item is in the collection.
+&#39;
+&#39;Source: Excel 2010: Power Programming with VBA - John Walkenbach - pg. 367
+&#39;Notes: This was created by Jon Nyman and can be distributed by Paciolan.
+&#39;Date           Developer   History
+&#39;--------------------------------------------------------------
+&#39;11/12/2010     Jon Nyman   Initial Version
+&#39;
+Public Function ExistsInCollection(ByRef colObject As Object, ByRef sItem As String) As Boolean
+
+    Dim oObj As Object
+
+    On Error Resume Next
+    Set oObj = colObject(sItem)
+    ExistsInCollection = Not oObj Is Nothing
+
+    Set oObj = Nothing
+
+End Function&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Generic Types</title>
+      <link>http://localhost:1313/2012/06/18/generic_types/</link>
+      <pubDate>Mon, 18 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/06/18/generic_types/</guid>
+      <description>&lt;p&gt;Last time we went over &lt;a href=&#34;2012/06/07/overloading-in-vb-net/&#34;&gt;Overloading&lt;/a&gt; function in .NET. Today we&amp;rsquo;ll take a look at &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/w256ka79.aspx&#34;&gt;generics&lt;/a&gt;. I had been wondering how to do this for some time, seeing that I could do it with Microsoft&amp;rsquo;s built in code. I have to say, it is pretty nice and really makes coding much easier and cleaner.&lt;/p&gt;
+
+&lt;blockquote&gt;A generic type is a single programming element that adapts to perform the same functionality for a variety of data types. When you define a generic class or procedure, you do not have to define a separate version for each data type for which you might want to perform that functionality.&lt;/blockquote&gt;
+
+&lt;p&gt;So take a look at this code where I parse data from Excel and put it into a class. I put it into any class I want to.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;Loop through items and send to action, e.g., put into a class, using function.
+&amp;lt;Extension()&amp;gt;
+Public Function Parse(Of TSource)(ByRef oArray(,) As Object, ByVal conversion As Func(Of Object(), TSource), ByVal iRowStart As Integer _
+                                    , ByVal iRowEnd As Integer, ByVal iColStart As Integer _
+                                    , ByVal iColEnd As Integer) As TSource()
+    Try
+        Dim tArray(iRowEnd - iRowStart) As TSource
+        Dim o1Array(iColEnd - iColStart) As Object
+
+        For i As Integer = iRowStart To iRowEnd
+            For j As Integer = iColStart To iColEnd
+                o1Array(j - iColStart) = oArray(i, j)
+            Next
+            tArray(i) = conversion(o1Array)
+        Next
+
+        Return tArray
+
+    Catch ex As System.IndexOutOfRangeException
+        Throw New System.IndexOutOfRangeException
+    End Try
+
+End Function&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here&amp;rsquo;s how I would call it. Here I get the date range in the time card and put that information in my class that organizes the time card date information. The enumeration &lt;i&gt;CSettings.BUTimeCardHeadings&lt;/i&gt; tells me where the heading is located in Excel so I don&amp;rsquo;t have to remember the actual column. When I grab the data, Excel-DNA puts it in zero-based two dimensional array, hence the minus 1.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Dim oaDates = moaJobs.FindAllSorted(mdteDate.ToOADate(), CSettings.BUTimeCardHeadings.tcDate - 1)
+    AddCItems(oaDates _
+                  .Parse(Of CItem)(Function(o) _
+                  New CItem( _
+                      CastOrDefault(Of Double)(o(CSettings.BUTimeCardHeadings.tcHours - 1), 0.0#) _
+                      , CastOrDefault(Of Double)(o(CSettings.BUTimeCardHeadings.tcClockIn - 1), 0.0#) _
+                      , If(Not IsNothing(o(CSettings.BUTimeCardHeadings.tcJob - 1)) Or TypeOf o(CSettings.BUTimeCardHeadings.tcJob - 1) Is ExcelError _
+                           , o(CSettings.BUTimeCardHeadings.tcJob - 1).ToString, vbNullString))))&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overloading in VB.NET</title>
+      <link>http://localhost:1313/2012/06/07/overloading_in_vb_net/</link>
+      <pubDate>Thu, 07 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/06/07/overloading_in_vb_net/</guid>
+      <description>&lt;p&gt;In previous posts I showed how you can use &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/&#34;&gt;Extensions&lt;/a&gt; and &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/14/lambda-expressions-an-introduction/&#34;&gt;Lambda Expressions&lt;/a&gt; to make some pretty versatile functions in .NET. Today I&amp;rsquo;ll show a method that really helps for the readability and organization of your code.&lt;/p&gt;
+
+&lt;p&gt;In the past we used optional parameters to make a function do multiple things. We even needed to make new functions that did pretty much the same thing in order to make it better organized. Well, now we can avoid using those by &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/ms973896.aspx&#34;&gt;overloading the functions&lt;/a&gt;. I still use optional parameters and even new functions but this has been greatly reduced by the ability to overload.&lt;/p&gt;
+
+&lt;p&gt;Overloading pretty much works just by writing the same procedure two or more times with different parameters or return values. If you put the procedure in a class you have to use the term &amp;ldquo;Overloads&amp;rdquo; in the declaration of the procedure.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s how it looks when you call it on your screen when typing out the function name:&lt;/p&gt;
+
+&lt;p&gt;[pic name=&amp;ldquo;Overload.png&amp;rdquo;]&lt;/p&gt;
+
+&lt;p&gt;So here&amp;rsquo;s some code that uses overloading:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Public Function FindIndexSorted(ByRef oaArray(,) As Object, ByVal IsEqual As Func(Of Object, Integer), ByVal iSearchIndex As Integer) As Integer
+
+    Dim iResult As Integer = 0, iTest As Integer, iNext As Integer
+    Dim iUpperSearch As Integer = oaArray.GetUpperBound(0)
+    Dim iLowerSearch As Integer = 0
+    Dim iPrevious As Integer = -1
+
+    Try
+        If IsEqual(oaArray(0, iSearchIndex)) &amp;amp;lt; 0 Then &#39;If value is the less than the first index then skip                 Return -1             ElseIf IsEqual(oaArray(iUpperSearch, iSearchIndex)) &amp;amp;gt; 0 Then &#39;If it is greater than the last index then skip
+            Return -(iUpperSearch + 1)
+        Else
+            iResult = -1
+        End If
+
+        &#39;Find start indexes
+        Do While iResult = -1
+            iNext = (iUpperSearch + iLowerSearch) \ 2 &#39;Get new search location
+            iTest = IsEqual(oaArray(iNext, iSearchIndex))
+            If iTest &amp;amp;gt; 0 Then &#39;Get new lower search location
+                iLowerSearch = iNext
+            ElseIf iTest &amp;amp;lt; 0 Then &#39;Get new upper search location                     iUpperSearch = iNext                 Else &#39;If equal find first instance of item                     iResult = iNext - 1                     If iResult &amp;amp;gt; -1 Then
+                    Do While IsEqual(oaArray(iResult, iSearchIndex)) = 0
+                        iResult -= 1
+                        If iResult = -1 Then Exit Do
+                    Loop
+                End If
+                iResult += 1
+            End If
+            If iPrevious = iNext Then &#39;Get first item
+                If IsEqual(oaArray(iLowerSearch, iSearchIndex)) &amp;amp;lt; 0 Then Return -(iLowerSearch - 1)
+                iTest = IsEqual(oaArray(iUpperSearch, iSearchIndex))
+                If iTest &amp;amp;lt; 0 Then
+                    Return -(iUpperSearch - 1)
+                ElseIf iTest = 0 Then
+                    Return iUpperSearch
+                End If
+            Else
+                iPrevious = iNext
+            End If
+        Loop
+    Catch ex As InvalidCastException
+        iResult = -1
+    End Try
+
+    Return iResult
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here&amp;rsquo;s some code that makes the previous function easier to use, but I still have the previous code exposed so, if I want some custom when I call the function I could use it, or I could just use the simplified version below, all with the same name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Public Function FindIndexSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer
+
+    If TypeOf oWhat Is Double Then  &#39;Use double type comparison.
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndexSorted(oaArray, Function(a As Object) If(CDbl(a) &amp;amp;gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)), iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  &#39;Use string type comparison.
+        Dim sWhat As String = oWhat.ToString
+        Return FindIndexSorted(oaArray, Function(a As Object) String.Compare(CStr(a), sWhat, eStringCompare), iSearchIndex)
+    ElseIf IsNumeric(oWhat) Then
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndexSorted(oaArray, Function(a As Object) If(CDbl(a) &amp;amp;gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)), iSearchIndex)
+    Else
+        &#39;Not set up for other types of data.
+        Return -1
+    End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Class Made from a Shaped Recordset</title>
+      <link>http://localhost:1313/2012/05/11/a_class_made_from_a_shaped_recordset/</link>
+      <pubDate>Fri, 11 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/05/11/a_class_made_from_a_shaped_recordset/</guid>
+      <description>&lt;p&gt;Here&amp;rsquo;s some fun code that I worked on a while back. This disconnected record set is what you call a shaped record set, created on the fly. It is a pretty complex class all wrapped in one nice little bundle. Unfortunately it goes terribly slow. Creating a class with the &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa164502(v=office.10).aspx&#34;&gt;dictionary object&lt;/a&gt; in the &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa164509(v=office.10).aspx&#34;&gt;Scripting Runtime Object Library&lt;/a&gt; should be the fastest, if you&amp;rsquo;re looking for speed.&lt;/p&gt;
+
+&lt;p&gt;Pretty crazy looking code, but pretty elegant once you get used to looking at code like that, unfortunately it&amp;rsquo;s not very using for creating classes on the fly, or even instead of regular classes (It would make making classes a synch!).&lt;/p&gt;
+
+&lt;p&gt;For more information on this topic see:
+&lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa241635(v=vs.60).aspx&#34;&gt;http://msdn.microsoft.com/en-us/library/aa241635(v=vs.60).aspx&lt;/a&gt;&lt;br /&gt;&lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa260841(v=vs.60).aspx&#34;&gt;http://msdn.microsoft.com/en-us/library/aa260841(v=vs.60).aspx&lt;/a&gt;&lt;br /&gt;&lt;a href=&#34;http://www.4guysfromrolla.com/webtech/060301-1.shtml&#34;&gt;http://www.4guysfromrolla.com/webtech/060301-1.shtml&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;grsLSData.Open &amp;quot;SHAPE APPEND New adInteger AS LSID, New adVarChar(20) AS Name_LS, &amp;quot; &amp;amp; _
+            &amp;quot;SUM(RowData.RowSeatsFilled) AS LSSeatsFilled, SUM(RowData.RowSeatsCount) AS LSSeatsCount,&amp;quot; &amp;amp; _
+        &amp;quot;((SHAPE APPEND New adInteger AS LSID, New adInteger AS RowID, New adVarChar(10) AS Name_Row, &amp;quot; &amp;amp; _
+            &amp;quot;SUM(SeatData.EventsSeatFilled) AS RowSeatsFilled, SUM(SeatData.EventsSeatCount) AS RowSeatsCount, &amp;quot; &amp;amp; _
+        &amp;quot;((SHAPE APPEND New adInteger AS RowID, New adInteger AS SeatID, New adVarChar(10) AS Name_Seat, &amp;quot; &amp;amp; _
+            &amp;quot;SUM(EventSeatData.Filled) AS EventsSeatFilled, COUNT(EventSeatData.Name_EventCode) AS EventsSeatCount, &amp;quot; &amp;amp; _
+        &amp;quot;((SHAPE APPEND New adInteger AS SeatID, New adVarChar(10) AS Name_EventCode, &amp;quot; &amp;amp; _
+            &amp;quot;New adVarChar(2) AS Status, New adDouble AS Color, New adInteger AS Filled, New adInteger AS Custom) &amp;quot; &amp;amp; _
+        &amp;quot;RELATE SeatID to SeatID) AS EventSeatData) &amp;quot; &amp;amp; _
+        &amp;quot;RELATE RowID to RowID) AS SeatData) &amp;quot; &amp;amp; _
+        &amp;quot;RELATE LSID TO LSID) AS RowData &amp;quot;, , adOpenStatic, adLockOptimistic
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lambda Expressions</title>
+      <link>http://localhost:1313/2012/04/14/lambda_expressions_an_introduction/</link>
+      <pubDate>Sat, 14 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/04/14/lambda_expressions_an_introduction/</guid>
+      <description>&lt;p&gt;Another thing that I like about programming in .NET beyond &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/11/linq-an-introduction/&#34;&gt;LINQ&lt;/a&gt; and &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/&#34;&gt;Extensions&lt;/a&gt; is &lt;a href=&#34;http://msdn.microsoft.com/en-us/magazine/cc163362.aspx&#34;&gt;lambda expressions&lt;/a&gt;. (It should be noted that LINQ, Extensions, and lambda expressions are all related). Lambda expressions are &amp;ldquo;are callable entities that are defined within a function, you can return a lambda expression from a function and you can pass lambda expressions to other functions.&amp;rdquo; Lambda expressions come with the System.Core library, so no need to add a reference nor Imports at the top of your class.&lt;/p&gt;
+
+&lt;p&gt;Lambda expressions simplify your code by allowing you to call internal functions within functions, even create &amp;ldquo;function variables.&amp;rdquo; To get a full overview read the link on &lt;a href=&#34;http://msdn.microsoft.com/en-us/magazine/cc163362.aspx&#34;&gt;lambda expressions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take the &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/&#34;&gt;extension examples&lt;/a&gt; I used before, but simplify it with lambda expressions. Before I had to create multiple private functions to accommodate different comparison types (e.g., String, Double, Object, etc). But with lambda expressions I can create local functions that take care of this, which lessons the amount of code and makes the code cleaner.&lt;/p&gt;
+
+&lt;p&gt;So let’s dive into some code. First I needed to create a delegate function which accepts multiple types of input and returns an integer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Delegate Function MoreLessOrEqual(Of T)(ByVal element As T) As Integer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I then created a pointer function which determines which internal function I should use depending on what type of data is received. Notice the lambda expressions written as &lt;code&gt;Function(a As Object)….&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&amp;lt;Extension()&amp;gt;
+Public Function FindIndex2DSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer
+
+    If TypeOf oWhat Is Double Then  &#39;Use double type comparison.
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndex2DSortedLambda(oaArray, Function(a As Object) If(CDbl(a) &amp;gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)) _
+                                , iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  &#39;Use string type comparison.
+        Dim sWhat As String = oWhat.ToString
+        Return FindIndex2DSortedLambda(oaArray, Function(a As Object) String.Compare(CStr(a), sWhat, eStringCompare) _
+                                , iSearchIndex)
+    Else    &#39;Not set up for other types of data.
+        Return -1
+    End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this private function I call the lambda expressions as defined in the function parameters as &lt;code&gt;IsEqual.&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private Function FindIndex2DSortedLambda(ByVal oaArray As Object(,), ByVal IsEqual As MoreLessOrEqual(Of Object) _
+                            , ByVal iSearchIndex As Integer) As Integer                                                            
+
+    Dim i As Integer, lUpperSearch As Integer, lLowerSearch As Integer, lPrevious As Integer, lNext As Integer
+
+    lUpperSearch = oaArray.GetUpperBound(0) : lLowerSearch = 0 : lPrevious = -1
+
+    If IsEqual(oaArray(0, iSearchIndex)) &amp;lt; 0 Then &#39;If value is the less than the first index then skip
+        Return -1
+    ElseIf IsEqual(oaArray(lUpperSearch, iSearchIndex)) &amp;gt; 0 Then &#39;If it is greater than the last index then skip
+        Return -3
+    Else
+        i = -1
+    End If
+
+    &#39;Find start indexes
+    Dim iResult As Integer
+    Do While i = -1
+        lNext = (lUpperSearch + lLowerSearch) \ 2 &#39;Get new search location
+        iResult = IsEqual(oaArray(lNext, iSearchIndex))
+        If iResult &amp;gt; 0 Then &#39;Get new lower search location
+            lLowerSearch = lNext
+        ElseIf iResult &amp;lt; 0 Then &#39;Get new upper search location
+            lUpperSearch = lNext
+        Else &#39;If equal find first instance of item
+            i = lNext - 1
+            Do While IsEqual(oaArray(i, iSearchIndex)) = 0
+                i -= 1
+            Loop
+            i += 1
+        End If
+        If lPrevious = lNext Then &#39;Get first item
+            For i = lLowerSearch To lUpperSearch
+                If IsEqual(oaArray(i, iSearchIndex)) = 0 Then
+                    Return i
+                End If
+            Next
+            Return -2
+        Else
+            lPrevious = lNext
+        End If
+    Loop
+
+    Return i
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that I could make the private function the a public extension. By doing that I could then easily create more elaborate searches, e.g., I could search for the index of a string with the first three letters equal to “ABC” like below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Dim sWhat As String = oWhat.ToString.Substring(0, 3)
+Return FindIndex2DSortedLambda(oaArray, Function(a As Object) String.Compare(a.ToString.Substring(0, 3), sWhat, eStringCompare) _
+    , iSearchIndex)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linq: An Introduction</title>
+      <link>http://localhost:1313/2012/04/11/linq_an_introduction/</link>
+      <pubDate>Wed, 11 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/04/11/linq_an_introduction/</guid>
+      <description>&lt;p&gt;Another thing that I like about programming in VB.NET beyond &lt;a href=&#34;2012/04/05/extensions-in-vb-net/&#34;&gt;Extensions&lt;/a&gt; is &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/bb308959.aspx&#34;&gt;LINQ&lt;/a&gt;. LINQ is similar to &lt;a href=&#34;http://en.wikipedia.org/wiki/Sql&#34;&gt;SQL&lt;/a&gt; in structure - which is &amp;ldquo;a &lt;a href=&#34;http://en.wikipedia.org/wiki/Declarative_programming&#34;&gt;declarative programming&lt;/a&gt; paradigm that expresses the logic of a computation without describing its control flow.&amp;rdquo; So LINQ takes declarative paradigm and applies it to &lt;a href=&#34;http://en.wikipedia.org/wiki/Object-oriented_programming&#34;&gt;object oriented programming&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s so great about this? Well, it does slow the program down, but it speeds up the the programming process, puts the information in a form that is more descriptive (although that is no excuse not to thoroughly comment your code), and makes programming easier.&lt;/p&gt;
+
+&lt;p&gt;So, for the updating program for the time card I am working on, I put the updating version control document in an XML document.  The structure of the document is at the bottom of this post. To query this document using LINQ I have the following code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;Get version number string from specified item ID.
+Dim sNewVersion = _
+        (From oItem In mXML...
+        Where oItem.@id = sItemID).&amp;lt;Version&amp;gt;.Value
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How simple is that? You can imagine as more complex situations arise how simple the declarative language makes it. Yes, there is the learning hurdle, but once you get over it, it makes working with data much easier to work with. You can even use LINQ with classes, arrays, etc. I&amp;rsquo;m just scratching the surface of how powerful LINQ truly is.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Extensions in VB.NET</title>
+      <link>http://localhost:1313/2012/04/05/extensions_in_vb_net/</link>
+      <pubDate>Thu, 05 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/04/05/extensions_in_vb_net/</guid>
+      <description>&lt;p&gt;Learning how to use VB.NET can be quite the leap from VBA, but once you start learning VB.NET and have much more control it’s difficult to want to go back to VBA.&lt;/p&gt;
+
+&lt;p&gt;One of the things that I like about VB.NET is methods. Extensions allow you to extend data type methods. So, let’s say you have a String data type (Strings in VB.NET are like a class in and of themselves) and you want it to have the method of appending “]” at the end. So you would have an extension method like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&amp;lt;Extension()&amp;gt;
+Public Function AppendCloseBracket(ByRef sString As String) As String
+    Return sString &amp;amp; &amp;quot;]&amp;quot;
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then to use it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private Sub UseAppendMethod()
+
+    Dim sString As String = &amp;quot;Hello&amp;quot;
+
+    Debug.Print(sString.AppendCloseBracket)
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which would result in:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Hello]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to create extionsions you need to import the library:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Imports System.Runtime.CompilerServices
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So, how about a more practical example. Through Linq (which is like extensions but much more powerful) you have many more powerful things you can do, which will probably be the topic of a post in the future. But Linq doesn’t do everything and you need a 1D array. So, in the example below I could have created a 1D array instead and then done it with Linq.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&amp;lt;Extension()&amp;gt;
+Public Function FindIndex2DSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer                              
+
+    If TypeOf oWhat Is Double Then &#39;Find index for double type
+        Return FindIndex2DSortedDouble(oaArray, CDbl(oWhat), iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  &#39;Find index for string type
+        Return FindIndex2DSortedString(oaArray, CStr(oWhat), iSearchIndex, eStringCompare)
+    Else &#39;Find index for object type
+        Return FindIndex2DSortedObject(oaArray, oWhat, iSearchIndex)
+    End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private Function FindIndex2DSortedDouble(ByVal oaArray As Object(,), ByVal dWhat As Double _
+                                         , ByVal iSearchIndex As Integer) As Integer                                        
+
+    Dim i As Integer, lUpperSearch As Integer, lLowerSearch As Integer, lPrevious As Integer, lNext As Integer
+
+    lUpperSearch = oaArray.GetUpperBound(0) : lLowerSearch = 0 : lPrevious = -1
+    If dWhat &amp;lt; CDbl(oaArray(0, iSearchIndex)) Then &#39;If value is the less than the first index then skip
+        Return -1
+    ElseIf dWhat &amp;gt; CDbl(oaArray(lUpperSearch, iSearchIndex)) Then &#39;If it is greater than the last index then skip
+        Return -3
+    Else
+        i = -1
+    End If
+
+    &#39;Find start indexes
+    Do While i = -1
+        lNext = (lUpperSearch + lLowerSearch) \ 2 &#39;Get new search location
+        If CDbl(oaArray(lNext, iSearchIndex)) &amp;lt; dWhat Then &#39;Get new lower search location
+            lLowerSearch = lNext
+        ElseIf CDbl(oaArray(lNext, iSearchIndex)) &amp;gt; dWhat Then &#39;Get new upper search location
+            lUpperSearch = lNext
+        Else &#39;If equal find first instance of item
+            i = lNext - 1
+            Do While CDbl(oaArray(i, iSearchIndex)) = dWhat
+                i -= 1
+            Loop
+            i += 1
+        End If
+        If lPrevious = lNext Then &#39;Get first item
+            For i = lLowerSearch To lUpperSearch
+                If dWhat = CDbl(oaArray(i, iSearchIndex)) Then
+                    Return i
+                End If
+            Next
+            Return -2
+        Else
+            lPrevious = lNext
+        End If
+    Loop
+
+    Return i
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Problems Of Copy/Pasting Code</title>
+      <link>http://localhost:1313/2012/03/14/the_problems_of_copy_pasting_code/</link>
+      <pubDate>Wed, 14 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/03/14/the_problems_of_copy_pasting_code/</guid>
+      <description>&lt;p&gt;Copying and pasting is great for coding, but sometimes it can be pretty silly if you make a mistake in the code. Here’s a triple copy/paste fail (the values should be set to true):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Public Sub SheetActivate_Dashboard(ByVal sh As Object)
+
+    Try
+        gXLApp.EnableEvents = False
+        OpenTimeStamp()
+    Finally
+        gXLApp.EnableEvents = False
+    End Try
+
+End Sub
+
+Public Sub SheetDeActivate_Dashboard(ByVal sh As Object)
+
+    Try
+        gXLApp.EnableEvents = False
+        If Not gfTimeStamp Is Nothing Then
+            gfTimeStamp.Visible = False
+            gfTimeStamp.Close()
+            gfTimeStamp = Nothing
+        End If
+    Finally
+        gXLApp.EnableEvents = False
+    End Try
+
+End Sub
+
+Public Sub DoubleClick_Dashboard()
+
+    Try
+        gXLApp.EnableEvents = False
+        OpenTimeStamp()
+    Finally
+        gXLApp.EnableEvents = False
+    End Try
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AdvancedFilter Class Part 3</title>
+      <link>http://localhost:1313/2012/03/02/advancedfilter_class_part_3_creating_the_sub_class/</link>
+      <pubDate>Fri, 02 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/03/02/advancedfilter_class_part_3_creating_the_sub_class/</guid>
+      <description>&lt;p&gt;In order to get the nice drop down menu we&amp;rsquo;ll need a second class I&amp;rsquo;ll call &amp;ldquo;SearchTerms.&amp;rdquo; This class is also necessary to store each individual search term entered into the class. Included in this class will be:
+&lt;ol&gt;
+    &lt;li&gt;Search Term&lt;/li&gt;
+    &lt;li&gt;Header&lt;/li&gt;
+    &lt;li&gt;Header Operator&lt;/li&gt;
+    &lt;li&gt;Match Type&lt;/li&gt;
+&lt;/ol&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39; SearchTerms
+&#39; Description: This class contains the search information.
+&#39;
+&#39; Authors: Jon Nyman, www.spreadsheetbudget.com
+&#39;
+&#39; Change Overview
+&#39; Date Comment
+&#39; --------------------------------------------------------------
+&#39; 03/02/2012 Initial version
+&#39;
+Option Explicit
+&#39;---------------------------------------------------------------
+&#39;Class Variable Declarations
+&#39;---------------------------------------------------------------
+Private msSearchTerm As String
+Private msHeader As String
+Private meHeaderOperator As HeaderOperator
+Private meMatchType As MatchType
+
+&#39;---------------------------------------------------------------
+&#39;Class Property Procedures
+&#39;---------------------------------------------------------------
+
+Property Get SearchTerm() As String
+    SearchTerm = msSearchTerm
+End Property Property 
+
+Let SearchTerm(ByVal sItem As String)
+    msSearchTerm = sItem
+End Property
+
+Property Get Header() As String
+    Header = msHeader
+End Property 
+
+Property Let Header(ByVal sHeader As String)
+    msHeader = sHeader
+End Property
+
+Property Get Header_Operator() As HeaderOperator
+    Header_Operator = meHeaderOperator
+End Property
+
+Property Let Header_Operator(ByVal eHeaderOperator As HeaderOperator)
+    meHeaderOperator = eHeaderOperator
+End Property
+
+Property Get Match_Type() As MatchType
+    Match_Type = meMatchType
+End Property
+
+Property Let Match_Type(ByVal eMatchType As MatchType)
+    meMatchType = eMatchType
+End Property
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AdvancedFilter Class Part 2</title>
+      <link>http://localhost:1313/2012/02/15/advancedfilter_class_part_2_determining_what_options_we_want/</link>
+      <pubDate>Wed, 15 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/02/15/advancedfilter_class_part_2_determining_what_options_we_want/</guid>
+      <description>&lt;p&gt;The first thing we’ll want to do is determine what macro options we would like in the class.&lt;/p&gt;
+
+&lt;p&gt;The options I currently have are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Range to filter (optional – can use current range instead).&lt;/li&gt;
+&lt;li&gt;Filter location (optional – if you are using an add-in then you can place in there, otherwise can put in temporary sheet).&lt;/li&gt;
+&lt;li&gt;Filter action (copy to new range or filter in place (default)).&lt;/li&gt;
+&lt;li&gt;Get unique items from a column (will need to use different method than AdvancedFilter).&lt;/li&gt;
+&lt;li&gt;Copy unique to range.&lt;/li&gt;
+&lt;li&gt;Return  filtered data in variant array.&lt;/li&gt;
+&lt;li&gt;Return  filtered  data as range.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So let’s get started. First we’ll need the properties in the class, I’ll call “Search.” Notice how I’ve left many of the properties as write only, since I’m not anticipating needing to retrieve that data later.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;—————————————————————
+&#39;Class Property Procedures
+&#39;—————————————————————
+Property Set RangeToFilter(ByVal rRangeToFilter As Range)
+
+    Dim iOffset As Integer
+    Dim i As Long
+    Dim vHeaders As Variant
+
+    Set mrOriginal = rRangeToFilter
+    iOffset = mrOriginal.Resize(1, 1).Column – 1
+    &#39;Get headers
+    vHeaders = Application.Transpose(mrOriginal.Resize(1).Value2)
+
+   &#39;    mdicHeaders.RemoveAll: Set mdicHeaders = Nothing
+&#39;    Set mdicHeaders = New Dictionary
+
+    For i = LBound(vHeaders) To UBound(vHeaders)
+        If LenB(vHeaders(i)) &amp;gt; 0 Then
+&#39;            If Not mdicHeaders.Exists(CStr(vHeaders(i))) Then
+&#39;                mdicHeaders.Add CStr(vHeaders(i)), Replace$(RangeAddress(2, i + iOffset), “$”, vbNullString)
+&#39;            End If
+        End If
+    Next i
+
+End Property
+Property Set FilterLocation(ByRef rFilterLocation As Range)
+    Set mrFilterLocation = rFilterLocation
+End Property
+Property Let FilterAction(ByVal xFilterAction As XlFilterAction)
+    mxFilterAction = xFilterAction
+End Property
+Property Let ColumnUnique(ByVal iColumnForUniqueValuesSearch As Integer)
+    miColumnUnique = iColumnForUniqueValuesSearch
+End Property
+Property Get CopyUniqueTo() As Range
+    Set CopyUniqueTo = mrCopyTo
+End Property
+Property Set CopyUniqueTo(ByVal rCopyUniqueValuesToRange As Range)
+    Set mrCopyTo = rCopyUniqueValuesToRange
+End Property
+Property Get IncludeHeaderInResults() As Boolean
+    IncludeHeaderInResults = mbIncludeHeader
+End Property
+Property Let IncludeHeaderInResults(ByVal bHeaderInResults As Boolean)
+    mbIncludeHeader = bHeaderInResults
+End Property
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We also need our module level variables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private mrOriginal As Range             &#39;Range to be filtered.
+Private mrFound As Range                &#39;Filtered Range.
+Private mrFilterLocation As Range       &#39;Filter data location/Range.
+Private mxFilterAction As XlFilterAction    &#39;Desired filter action – default xlFilterInPlace.
+Private miColumnUnique As Integer       &#39;Get unique values of filtered data from single column.
+Private mrCopyTo As Range               &#39;Place unique data in this location.
+Private mbIncludeHeader As Boolean      &#39;Includes the header in the found range.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, we’ll need to initialize and terminate some variables when creating and terminating a class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;Class_Initialize
+&#39; ————————————————————–
+&#39;Comments:  This procedure initializes the class.
+&#39;
+&#39;Date           Developer   History
+&#39;————————————————————–
+&#39;10/21/2010     Jon Nyman   Initial Version
+&#39;
+Private Sub Class_Initialize()
+
+&#39;Set mdicSearchTerms = New Dictionary
+    Set mrOriginal = Selection.CurrentRegion
+    mxFilterAction = xlFilterInPlace
+    miColumnUnique = 0
+    mbIncludeHeader = False
+    &#39;Set mvAndOr = Nothing
+
+End Sub
+
+&#39;Class_Terminate
+&#39; ——————————————————————————————————————
+&#39;Comments:  This procedure closes down the class.
+&#39;
+&#39;Date       Developer   History
+&#39; ——————————————————————————————————————
+&#39;10/21/10   Jon Nyman   Initial Version
+&#39;
+Private Sub Class_Terminate()
+
+    If Not mrFilterLocation Is Nothing Then mrFilterLocation.ClearContents
+
+    &#39;Set mdicSearchTerms = Nothing
+    Set mrOriginal = Nothing: Set mrCopyTo = Nothing
+    Set mrFilterLocation = Nothing: Set mrFound = Nothing
+    &#39;Set mvAnd = Nothing: Set mvAndOr = Nothing: Set mvOr = Nothing: Set mvShuffle = Nothing
+    &#39;Set mvOffset = Nothing
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next time I’ll go over some of the commented out code, like the dictionary that I’ll use for my collection object.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Wrapping a Class Around the AdvancedFilter Method</title>
+      <link>http://localhost:1313/2012/02/10/wrapping_a_class_around_the_advancedfilter_method/</link>
+      <pubDate>Fri, 10 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/02/10/wrapping_a_class_around_the_advancedfilter_method/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.cpearson.com/excel/classes.aspx&#34;&gt;Classes&lt;/a&gt; are a tool in &lt;a href=&#34;http://en.wikipedia.org/wiki/Object-oriented_programming&#34;&gt;object-oriented programming&lt;/a&gt; that make programming much simpler. One class that I have developed in VBA is a class that makes using the &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa221800(v=office.11).aspx&#34;&gt;AdvancedFilter method&lt;/a&gt; extremely easy and useful. In fact, I like it so much that I stopped using the regular &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/aa195730(v=office.11).aspx&#34;&gt;find method&lt;/a&gt;. In the coming weeks I will demonstrate how this was done.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; This is how the AdvancedFilter method works&lt;/strong&gt;:
+&lt;ol&gt;
+    &lt;li&gt;  Use a predefined range to filter.&lt;/li&gt;
+    &lt;li&gt;Create a range that has the filter criteria.&lt;/li&gt;
+    &lt;li&gt;Have a range for copying the results (or filter in place).&lt;/li&gt;
+    &lt;li&gt;Filter for unique values only.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;Drawbacks of the AdvancedFilter method&lt;/strong&gt;:
+&lt;ol&gt;
+    &lt;li&gt;Mixed data in predefined range can give odd/incorrect results.&lt;/li&gt;
+    &lt;li&gt;Is slow compared to a database search or even a manual looped search.&lt;/li&gt;
+    &lt;li&gt;Need a special range to perform search.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;Advantages of the AdvancedFilter method&lt;/strong&gt;:
+&lt;ol&gt;
+    &lt;li&gt; Can use familiar Excel formulas in search terms.&lt;/li&gt;
+    &lt;li&gt;Great for searching database structured data in Excel.&lt;/li&gt;
+    &lt;li&gt;The copy method is pretty fast if you are planning on copying the data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;This is how the class will work&lt;/strong&gt; (Of course, you could use a function to wrap this code to make it even simpler for simple searches - which I have done):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Sub AdvancedFilterClassExample()
+    
+    Dim iIndex As Integer
+    Dim rResult As Range
+    Dim clsSearch As Search
+
+    &#39;clsSearch.ColumnUnique = 1
+    &#39;clsSearch.CopyUniqueTo = Range(&amp;quot;A101&amp;quot;)
+
+    clsSearch.IncludeHeaderInResults = True
+    clsSearch.RangeToFilter = Range(&amp;quot;A1:Y100&amp;quot;)
+    clsSearch.FilterLocation = Range(&amp;quot;Z1&amp;quot;)
+    iIndex = clsSearch.Add(&amp;quot;George&amp;quot;)
+    clsSearch(iIndex).Header = &amp;quot;First Name&amp;quot;
+    clsSearch(iIndex).match_type = BasicSearch
+    clsSearch(iIndex).Header_Operator = AndOperator
+
+    iIndex = clsSearch.Add(&amp;quot;*&amp;quot;)
+    clsSearch(iIndex).Header = &amp;quot;Last Name&amp;quot;
+    clsSearch(iIndex).match_type = WildCardOnly
+    clsSearch(iIndex).Header_Operator = OrOperator
+
+    Debug.Print clsSearch.Count
+
+    Set rResult = clsSearch.Filter
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Match Types&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;    MatchType.BasicSearch
+    MatchType.MatchCase
+    MatchType.MatchCase_MatchEntireCellContents
+    MatchType.MatchEntireCellContents
+    MatchType.WildCardOnly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Header Types&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;    HeaderOperator.AndOperator
+    HeaderOperator.OrOperator&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Find Last Cell</title>
+      <link>http://localhost:1313/2012/01/13/find_last_cell/</link>
+      <pubDate>Fri, 13 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/13/find_last_cell/</guid>
+      <description>&lt;p&gt;Finding the last cell is a common thing people look for when they are coding in VBA. I made a function that does this automatically for me when I am looking for the last cell. In conjunction with the &lt;a href=&#34;2012/01/12/get-range-from-row-and-column-numbers/&#34;&gt;RRange function&lt;/a&gt; this simplifies the programming life for VBA significantly.&lt;/p&gt;
+
+&lt;p&gt;Heres some example code on how to use the function FindEnd.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Sub FindEndExamples() 
+    Dim l As Long 
+
+    &#39;Find last row in column 2 on current worksheet 
+    l = FindEnd(2)
+    Debug.Print l 
+
+    &#39;Find last column in row 5 on current worksheet 
+    l = FindEnd(5, 2)
+    Debug.Print l
+
+    &#39;Find very last row in current worksheet
+    l = FindEnd()
+    Debug.Print l
+
+    &#39;Find very last column in current worksheet 
+    l = FindEnd(, 2) 
+    Debug.Print l
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here&amp;rsquo;s the actual FindEnd Function.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;
+&#39; --------------------------------------------------------------
+&#39;Comments:  This function finds the last row or column in a
+&#39;           specified row or colum, if no row or column specified will find last
+&#39;           row or column in worksheet.
+&#39;
+&#39;Arguments: SearchColumnNumber    The row or column to be searched.
+&#39;           Row1Col2        1 will find the last row.
+&#39;                           2 will find the last column.
+&#39;           oRange             Worksheet to be operated on.
+&#39;           FindEnd         Returns long
+&#39;
+&#39;Original Source: http://www.mrexcel.com/forum/showthread.php?t=74317 4/22/2009
+&#39;Date           Developer   History
+&#39;--------------------------------------------------------------
+&#39;04/22/09       Jon Nyman   Initial Version
+&#39;03/09/10       Jon Nyman   Changed to returning long instead of integer.  Changed input variable names.
+&#39;06/23/10       Jon Nyman   Changed to using &amp;quot;Pivot Table Data Crunching Method&amp;quot; (pg. 202) method of find
+&#39;               the last cell in application end.  Added a check to see if last cell is filled.
+&#39;07/14/10       Jon Nyman   Added optional workbook.
+&#39;11/08/10       Jon Nyman   Added ability to get the last row/column without specifying row or column (using find).
+&#39;                           Changed byval to byref to increase speed.
+&#39;09/26/11       Jon Nyman   Changed so only need to add worksheet object.
+&#39;03/27/12       Jon Nyman   Added ability to find last column or row in a range.
+Public Function FindEnd(Optional ByVal SearchColumnNumber As Long = 0, Optional ByVal Row1Col2 As Integer = 1, _
+    Optional ByVal oRange As Object = Nothing) As Long
+    
+    Dim i As Long
+    Dim sAddress As String
+    
+    On Error GoTo ExitFindEnd
+    
+    If oRange Is Nothing Then
+        Set oRange = ActiveSheet
+    End If
+        
+    If Row1Col2 = 2 Then
+        If SearchColumnNumber = 0 Then
+            FindEnd = oRange.Cells.Find(&amp;quot;*&amp;quot;, oRange.Range(&amp;quot;A1&amp;quot;), xlFormulas, XlLookAt.xlWhole, xlByColumns, xlPrevious, False, False).Column
+        Else
+            If Mid$(oRange.Parent.Name, Len(oRange.Parent.Name) - 3, 1) = &amp;quot;.&amp;quot; Then
+                i = 256
+            Else
+                i = Application.Columns.Count
+            End If
+            If LenB(oRange.Cells.Item(SearchColumnNumber, i)) &amp;gt; 0 Then
+                FindEnd = i
+            Else
+                FindEnd = CLng(oRange.Range(RangeAddress(SearchColumnNumber, i)).End(xlToLeft).Column)
+            End If
+        End If
+    Else
+        If SearchColumnNumber = 0 Then
+            FindEnd = oRange.Cells.Find(&amp;quot;*&amp;quot;, oRange.Range(&amp;quot;A1&amp;quot;), xlFormulas, XlLookAt.xlWhole, xlByRows, xlPrevious, False, False).Row
+        Else
+            If Mid$(oRange.Parent.Name, Len(oRange.Parent.Name) - 3, 1) = &amp;quot;.&amp;quot; Then
+                i = 65536
+            Else
+                i = Application.Rows.Count
+            End If
+            If LenB(oRange.Cells.Item(i, SearchColumnNumber)) &amp;gt; 0 Then
+                FindEnd = i
+            Else
+                FindEnd = CLng(oRange.Range(RangeAddress(i, SearchColumnNumber)).End(xlUp).Row)
+            End If
+        End If
+    End If
+    
+ExitFindEnd:
+If Err.Number &amp;lt;&amp;gt; 0 Then
+    FindEnd = -1
+End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Import Data from Excel to VBA</title>
+      <link>http://localhost:1313/2012/01/04/import_data_from_excel_to_vba/</link>
+      <pubDate>Wed, 04 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/01/04/import_data_from_excel_to_vba/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve always wanted a function that can get me data from excel in a format that will always be the same. Sometimes I get the data and I expect a 2D variant array but instead get a string or double value. So I created a function to make it easy for myself, getting the same format that I expect.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;ImportExcelData
+&#39; --------------------------------------------------------------
+&#39;Comments:  This Function imports excel data in different formats (1D, 2D, or String).
+&#39;
+&#39;Arguments: rRng  Range to be imported.
+&#39;           i1D_2D_Str3 Type of import, 1=1D, 2=2D, and 3=String
+&#39;           iValueType  Import type .Value (Excel checks for different types)
+&#39;                       or .Value2 (Excel retrieves all values as string or double)
+&#39;           sDelimiter  Delimiter to use for string value that is returned.
+&#39;
+&#39;Notes:     This was created for use of Jon Nyman and can be distributed by Paciolan.
+&#39;Date           Developer   History
+&#39;--------------------------------------------------------------
+&#39;Dec 30, 2011   Jon Nyman   Initial version     www.SpreadsheetBudget.com
+&#39;
+Public Function ImportExcelData(ByRef rRng As Range, Optional ByVal i1D_2D_Str3 As Integer = 2 _
+        , Optional iValueType As Integer = 2, Optional ByVal sDelimiter As String = &amp;quot;`&amp;quot;) As Variant
+
+    Dim i As Long, j As Long
+    Dim saData() As String, sData As String
+    Dim vaData(1 To 1, 1 To 1) As Variant, va1D() As Variant
+    Dim vData As Variant
+    
+    &#39;Get data by Value or Value2
+    If iValueType = 2 Then
+        vData = rRng.Value2
+    Else
+        vData = rRng
+    End If
+    &#39;If data is single cell then put in 2D
+    If rRng.Cells.Count = 1 Then
+        vaData(1, 1) = vData
+        vData = vaData
+    End If
+    
+    If i1D_2D_Str3 = 2 Then
+        &#39;Return 2D results
+        ImportExcelData = vData
+    ElseIf i1D_2D_Str3 = 3 Then
+        &#39;Concatenate 2D results and return string.
+        If rRng.Columns.Count &amp;gt; 1 Then
+            sData = vbNullString
+            ReDim saData(1 To UBound(vData, 2))
+            For i = 1 To UBound(vData)
+                For j = 1 To UBound(vData, 2)
+                    saData(j) = CStr(vData(i, j))
+                Next j
+                sData = sData &amp;amp; Join(saData, sDelimiter) &amp;amp; vbNewLine
+            Next i
+            ImportExcelData = Left$(sData, Len(sData) - 1)
+        Else
+            &#39;Concatenate 1D results and return string
+            ReDim saData(1 To UBound(vData))
+            For i = 1 To UBound(vData)
+                saData(i) = vData(i, 1)
+            Next i
+            ImportExcelData = Join(saData, sDelimiter)
+        End If
+    Else
+        &#39;Dimension 1D result variant array.
+        ReDim va1D(1 To UBound(vData) * UBound(vData, 2))
+        &#39;Create 1D out of 2D
+        If rRng.Columns.Count &amp;gt; 1 Then
+            For i = 1 To UBound(vData)
+                For j = 1 To UBound(vData, 2)
+                    va1D((i - 1) * UBound(vData, 2) + j) = vData(i, j)
+                Next j
+            Next i
+        Else
+            For i = 1 To UBound(vData)
+                va1D(i) = vData(i, 1)
+            Next i
+        End If
+        ImportExcelData = va1D
+    End If
+  
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

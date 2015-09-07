@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/algorithm/</link>
+    <description>Recent content in Algorithm on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 Jul 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Algorithm Resources</title>
+      <link>http://localhost:1313/2012/07/16/algorithm_resources/</link>
+      <pubDate>Mon, 16 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/07/16/algorithm_resources/</guid>
+      <description>&lt;p&gt;&lt;h3&gt;Introduction&lt;/h3&gt;
+I was reading through Code Complete a classic coding book &lt;a href=&#34;http://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670/ref=sr_1_1?ie=UTF8&amp;amp;qid=1342466735&amp;amp;sr=8-1&amp;amp;keywords=code+complete&#34;&gt;&lt;em&gt;that is widely considered one of the best practical guides to programming, Steve McConnell’s original CODE COMPLETE has been helping developers write better software for more than a decade&lt;/em&gt;&lt;/a&gt;. And he mentioned algorithm books. What, there exists algorithm books? You mean I don&amp;rsquo;t need to come up with this code all by myself? Combined with the internet to figure out what exactly these algorithms are called, they could be a huge help.
+&lt;h3&gt;Resources&lt;/h3&gt;
+So here is a list of &lt;a href=&#34;http://stackoverflow.com/questions/366418/resources-and-tutorials-to-get-started-on-algorithms&#34;&gt;resources for algorithms is over at StackOverflow&lt;/a&gt;. You can also &lt;a href=&#34;http://www.freetechbooks.com/algorithms-and-data-structures-f11.html&#34;&gt;find free books online&lt;/a&gt;. &lt;a href=&#34;http://en.wikipedia.org/wiki/List_of_algorithms&#34;&gt;Wikipedia even has a list of algorithms&lt;/a&gt;. &lt;a href=&#34;http://en.wikibooks.org/wiki/Algorithms&#34;&gt;And wikibooks has a well formed book on the subject&lt;/a&gt;.
+&lt;h3&gt;Application&lt;/h3&gt;
+So let&amp;rsquo;s see some old code compared to the cleaner new code I grabbed from an algorithm:
+&lt;h4&gt;Old code&lt;/h4&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;    Public Function FindIndexSorted(ByRef oaArray(,) As Object, ByVal IsEqual As Func(Of Object, Integer), ByVal iSearchIndex As Integer) As Integer
+
+        Dim iResult As Integer = 0, iTest As Integer, iNext As Integer
+        Dim iUpperSearch As Integer = oaArray.GetUpperBound(0)
+        Dim iLowerSearch As Integer = 0
+        Dim iPrevious As Integer = -1
+
+        Try
+            If IsEqual(oaArray(0, iSearchIndex)) &amp;amp;lt; 0 Then &#39;If value is the less than the first index then skip                 Return -1             ElseIf IsEqual(oaArray(iUpperSearch, iSearchIndex)) &amp;amp;gt; 0 Then &#39;If it is greater than the last index then skip
+                Return -(iUpperSearch + 1)
+            Else
+                iResult = -1
+            End If
+
+            &#39;Find start indexes
+            Do While iResult = -1
+                iNext = (iUpperSearch + iLowerSearch) \ 2 &#39;Get new search location
+                iTest = IsEqual(oaArray(iNext, iSearchIndex))
+                If iTest &amp;amp;gt; 0 Then &#39;Get new lower search location
+                    iLowerSearch = iNext
+                ElseIf iTest &amp;amp;lt; 0 Then &#39;Get new upper search location                     iUpperSearch = iNext                 Else &#39;If equal find first instance of item                     iResult = iNext - 1                     If iResult &amp;amp;gt; -1 Then
+                        Do While IsEqual(oaArray(iResult, iSearchIndex)) = 0
+                            iResult -= 1
+                            If iResult = -1 Then Exit Do
+                        Loop
+                    End If
+                    iResult += 1
+                End If
+                If iPrevious = iNext Then &#39;Get first item
+                    If IsEqual(oaArray(iLowerSearch, iSearchIndex)) &amp;amp;lt; 0 Then Return -(iLowerSearch - 1)
+                    iTest = IsEqual(oaArray(iUpperSearch, iSearchIndex))
+                    If iTest &amp;amp;lt; 0 Then
+                        Return -(iUpperSearch - 1)
+                    ElseIf iTest = 0 Then
+                        Return iUpperSearch
+                    End If
+                Else
+                    iPrevious = iNext
+                End If
+            Loop
+        Catch ex As InvalidCastException
+            iResult = -1
+        End Try
+
+        Return iResult
+
+    End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;New Cleaner Code&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;https://en.wikipedia.org/wiki/Binary_search_algorithm#Deferred_detection_of_equality
+
+    Public Function BinarySearch(ByRef oaArray(,) As Object, ByVal IsEqual As Func(Of Object, Integer) _
+                                , ByVal iSearchColumnIndex As Integer) As Integer
+
+        Dim iMin = 0, iMax = oaArray.GetUpperBound(0)
+
+        &#39;// continually narrow search until just one element remains
+        Do While iMin &amp;amp;lt; iMax
+            Dim iMid = CInt(Math.Floor((iMin + iMax) / 2))
+
+            &#39;// code must guarantee the interval is reduced at each iteration
+            Debug.Assert(iMid &amp;amp;lt; iMax)
+            &#39;// note: 0  0 Then
+                    iMin += 1
+                End If
+            End If
+            Return -iMin
+        End If
+
+    End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

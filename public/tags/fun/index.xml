@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fun on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/fun/</link>
+    <description>Recent content in Fun on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 May 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/fun/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Functional or Object Oriented JavaScript?</title>
+      <link>http://localhost:1313/2014/05/29/functional_or_oo_javascript/</link>
+      <pubDate>Thu, 29 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/05/29/functional_or_oo_javascript/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;When people are first exposed to JavaScript and its minimal set of tools (functions, objects, prototypes, and arrays), many are underwhelmed. Therefore, in order to “modify” JavaScript to conform to their idea of what it takes to model software solutions, they very often seek out or re-create class-based systems using the primordial ooze.&lt;/p&gt;
+
+&lt;p&gt;- Michael Fogus &lt;em&gt;Functional Programming&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Of course, the next sentence he softens that quote, I just enjoyed the first part though.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This desire is completely understandable given that in general people will often seek the familiar.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And the big problem is&amp;hellip;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The big problem with class hierarchies is that they are created under the assumption that we know the set of needed behaviors from the start. That is, object-oriented techniques prescribe that we start with a hierarchy of behaviors and fit our classes into that determination.&lt;/p&gt;
+
+&lt;p&gt;- Michael Fogus &lt;em&gt;Functional Programming&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

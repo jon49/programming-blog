@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xml Comments on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/xml-comments/</link>
+    <description>Recent content in Xml Comments on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Aug 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/xml-comments/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>XML Comments</title>
+      <link>http://localhost:1313/2012/08/27/xml_comments/</link>
+      <pubDate>Mon, 27 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/08/27/xml_comments/</guid>
+      <description>&lt;p&gt;Comment headers above procedures can be convenient when you want to know
+what a function does and what the parameters are for – especially if
+they weren’t named with enough description. Luckily Visual Studio
+provides a way to do these comments easily and it gives you intellisense
+for your own functions! They are called &lt;a href=&#34;http://msdn.microsoft.com/en-us/magazine/dd722812.aspx&#34;&gt;XML
+comments&lt;/a&gt;. All
+you need to do is put in three comment markers (‘) and then it will fill
+in everything for you (if you already have the procedure/parameters
+filled in).&lt;/p&gt;
+
+&lt;p&gt;Here’s an example:&lt;/p&gt;
+
+&lt;p&gt;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+| &lt;code&gt;{.vbnet style=&amp;quot;font-family:monospace;&amp;quot;}                              |
+|     &#39;&#39;&#39; &amp;lt;summary&amp;gt;                                                        |
+|     &#39;&#39;&#39; Search sorted 2D array.                                          |
+|     &#39;&#39;&#39; &amp;lt;/summary&amp;gt;                                                       |
+|     &#39;&#39;&#39; &amp;lt;param name=&amp;quot;oaArray&amp;quot;&amp;gt;Array to search.&amp;lt;/param&amp;gt;                   |
+|     &#39;&#39;&#39; &amp;lt;param name=&amp;quot;IsEqual&amp;quot;&amp;gt;Predicate determining equality (-1 - less  |
+| than, 0 - equal, 1 - greater than)&amp;lt;/param&amp;gt;                               |
+|     &#39;&#39;&#39; &amp;lt;param name=&amp;quot;iSearchColumnIndex&amp;quot;&amp;gt;Sorted column to search.&amp;lt;/param |
+| &amp;gt;                                                                        |
+|     &#39;&#39;&#39; &amp;lt;returns&amp;gt;First index of item or negative value before where the  |
+| value would be located.&amp;lt;/returns&amp;gt;                                        |
+|     &#39;&#39;&#39; &amp;lt;remarks&amp;gt;Jon Nyman @ www.SpreadsheetBudget.com 120507            |
+|     &#39;&#39;&#39; Source:https://en.wikipedia.org/wiki/Binary_search_algorithm#Def |
+| erred_detection_of_equality &amp;lt;/remarks&amp;gt;                                   |
+|     &amp;lt;Extension()&amp;gt;                                                        |
+|     Public Function BinarySearch(ByRef oaArray(,) As Object _            |
+|                                  , ByVal IsEqual As Func(Of Object, Inte |
+| ger) _                                                                   |
+|                                  , ByVal iSearchColumnIndex As Integer)  |
+| As Integer                                                               |
+|&lt;/code&gt;                                                                      |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Here’s how the intellisense would look:&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.spreadsheetbudget.com/wp-content/uploads/2012/08/XMLCommentPopUp.jpg&#34;&gt;&lt;img src=&#34;http://www.spreadsheetbudget.com/wp-content/uploads/2012/08/XMLCommentPopUp.jpg&#34; alt=&#34;&#34; title=&#34;XML Comment Intellisense&#34; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;XML Comment Intellisense&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

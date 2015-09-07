@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Generic Types on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/generic-types/</link>
+    <description>Recent content in Generic Types on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Jun 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/generic-types/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Generic Types</title>
+      <link>http://localhost:1313/2012/06/18/generic_types/</link>
+      <pubDate>Mon, 18 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/06/18/generic_types/</guid>
+      <description>&lt;p&gt;Last time we went over &lt;a href=&#34;2012/06/07/overloading-in-vb-net/&#34;&gt;Overloading&lt;/a&gt; function in .NET. Today we&amp;rsquo;ll take a look at &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/w256ka79.aspx&#34;&gt;generics&lt;/a&gt;. I had been wondering how to do this for some time, seeing that I could do it with Microsoft&amp;rsquo;s built in code. I have to say, it is pretty nice and really makes coding much easier and cleaner.&lt;/p&gt;
+
+&lt;blockquote&gt;A generic type is a single programming element that adapts to perform the same functionality for a variety of data types. When you define a generic class or procedure, you do not have to define a separate version for each data type for which you might want to perform that functionality.&lt;/blockquote&gt;
+
+&lt;p&gt;So take a look at this code where I parse data from Excel and put it into a class. I put it into any class I want to.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;Loop through items and send to action, e.g., put into a class, using function.
+&amp;lt;Extension()&amp;gt;
+Public Function Parse(Of TSource)(ByRef oArray(,) As Object, ByVal conversion As Func(Of Object(), TSource), ByVal iRowStart As Integer _
+                                    , ByVal iRowEnd As Integer, ByVal iColStart As Integer _
+                                    , ByVal iColEnd As Integer) As TSource()
+    Try
+        Dim tArray(iRowEnd - iRowStart) As TSource
+        Dim o1Array(iColEnd - iColStart) As Object
+
+        For i As Integer = iRowStart To iRowEnd
+            For j As Integer = iColStart To iColEnd
+                o1Array(j - iColStart) = oArray(i, j)
+            Next
+            tArray(i) = conversion(o1Array)
+        Next
+
+        Return tArray
+
+    Catch ex As System.IndexOutOfRangeException
+        Throw New System.IndexOutOfRangeException
+    End Try
+
+End Function&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here&amp;rsquo;s how I would call it. Here I get the date range in the time card and put that information in my class that organizes the time card date information. The enumeration &lt;i&gt;CSettings.BUTimeCardHeadings&lt;/i&gt; tells me where the heading is located in Excel so I don&amp;rsquo;t have to remember the actual column. When I grab the data, Excel-DNA puts it in zero-based two dimensional array, hence the minus 1.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Dim oaDates = moaJobs.FindAllSorted(mdteDate.ToOADate(), CSettings.BUTimeCardHeadings.tcDate - 1)
+    AddCItems(oaDates _
+                  .Parse(Of CItem)(Function(o) _
+                  New CItem( _
+                      CastOrDefault(Of Double)(o(CSettings.BUTimeCardHeadings.tcHours - 1), 0.0#) _
+                      , CastOrDefault(Of Double)(o(CSettings.BUTimeCardHeadings.tcClockIn - 1), 0.0#) _
+                      , If(Not IsNothing(o(CSettings.BUTimeCardHeadings.tcJob - 1)) Or TypeOf o(CSettings.BUTimeCardHeadings.tcJob - 1) Is ExcelError _
+                           , o(CSettings.BUTimeCardHeadings.tcJob - 1).ToString, vbNullString))))&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

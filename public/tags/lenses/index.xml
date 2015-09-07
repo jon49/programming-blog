@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lenses on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/lenses/</link>
+    <description>Recent content in Lenses on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 Jun 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/lenses/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Prototypes &amp; Compositions with Objects</title>
+      <link>http://localhost:1313/2014/06/04/prototypes_composition_with_objects/</link>
+      <pubDate>Wed, 04 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/06/04/prototypes_composition_with_objects/</guid>
+      <description>&lt;p&gt;I was trying to figure out the best way to have functions be both compatible with an object oriented paradigm and a functional oriented paradigm when working on objects. My implementations are probably naive, but instructive nevertheless. It seems that &lt;a href=&#34;http://lodash.com/&#34;&gt;lo-dash&lt;/a&gt; and other libraries have done a good job bridging those worlds.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say you have an object &lt;code&gt;O&lt;/code&gt; such that&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function O(a, b){
+  this.a = a
+  this.b = b
+}
+
+var o = function(a, b){
+  return new O(a, b)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, you want to &lt;code&gt;extend&lt;/code&gt; the object but you also want the option to use the object in a more fuctional way with &lt;code&gt;compose&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s start with a simple &lt;code&gt;display&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var display = function(thisArg){
+  var o_ = thisArg || this
+  console.log(o_)
+  return o_
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then a method to change a property.*&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var change = function(property){
+  return function(value, thisArg){
+  	var o_ = _.cloneDeep(thisArg || this)
+    o_[property] = value
+    return o_
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can set property to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var changeA = change(&#39;a&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we can add &lt;code&gt;changeA&lt;/code&gt; to the &lt;code&gt;O&lt;/code&gt; object and use it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;O.prototype.changeA = changeA
+var o_ = o(1, 2)
+o_.changeA(3).display()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or we can use a functional approach.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var o_ = o(1, 2)
+_.compose(display, _.curry(changeA)(3))(o_)
+//OR
+_.compose(display, _.partialRight(changeA, o_))(3)
+//OR
+_.compose(display, changeA)(3, o_)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I think I like the functional approach for the more abstract functions and the OO approach as your code becomes more specific. The functional evangelists say the functional style is better because it leads to more reusable code. Which I would agree with, since you are not tying your code up with an object you can then easily extend your model to various other objects, without the use of &lt;code&gt;inheritance&lt;/code&gt; and other OO monsters. I think I will use a hybrid approach with &lt;code&gt;bilby.js&lt;/code&gt; library which uses polymorphism.&lt;/p&gt;
+
+&lt;p&gt;By the way, what I just did with &lt;code&gt;change&lt;/code&gt; is similar to &lt;a href=&#34;https://github.com/fantasyland/fantasy-lenses&#34;&gt;&lt;code&gt;lenses&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;* An alternative to this would be using a partial function, which would make the original function more flexible.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var change = function(property, value, thisArg){
+  	var o_ = _.cloneDeep(thisArg || this)
+    o_[property] = value
+    return o_
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can set property to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var changeA = _.partial(change, &#39;a&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or using combinators (not strict).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var set = function(property, value){
+  this[property] = value
+  return this
+}
+
+var change = function(f, value, thisArg){
+  	var o_ = _.cloneDeep(thisArg || this)
+    o_ = f.apply(o_, [value])
+    return o_
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can set property to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var changeA = _.partial(change
+              , _.partial(set, &#39;a&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Notes On Functional Programming</title>
+      <link>http://localhost:1313/2014/05/13/functional_programming_for_non_mathematicians/</link>
+      <pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2014/05/13/functional_programming_for_non_mathematicians/</guid>
+      <description>
+
+&lt;h2 id=&#34;patterns-for-the-non-mathematician-with-brian-lonsdorf:84395a4544571503aa2619881045cc3a&#34;&gt;Patterns for the Non-Mathematician with Brian Lonsdorf&lt;/h2&gt;
+
+&lt;h3 id=&#34;lenses:84395a4544571503aa2619881045cc3a&#34;&gt;Lenses&lt;/h3&gt;
+
+&lt;p&gt;Using lenses for composable/polymorphic model manipulation.&lt;/p&gt;
+
+&lt;p&gt;E.g.,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var user = {id:1, name:{first:&#39;doris&#39;, last:&#39;day&#39;}}
+var L = makeLenses([&#39;name&#39;, &#39;first&#39;])
+var firstNameChar = compose(L.name, L.first, _1)
+over(firstNameChar, toUpperCase, user)
+//=&amp;gt; {id:1, name:{first:&#39;Doris&#39;, last:&#39;day&#39;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;maybe:84395a4544571503aa2619881045cc3a&#34;&gt;Maybe&lt;/h3&gt;
+
+&lt;p&gt;Use &lt;code&gt;Maybe&lt;/code&gt; (Haskell) types (&lt;code&gt;Option&lt;/code&gt; types in bilby.js / Scala style) to make composition easier. This works with &lt;code&gt;fmap&lt;/code&gt; (functor maps). Returns resultant &lt;code&gt;option&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;error-handling-either:84395a4544571503aa2619881045cc3a&#34;&gt;Error Handling (Either)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;Either(&#39;need an int&#39;, 3)
+//=&amp;gt; Right(3)
+
+Either(&#39;need an int&#39;, undefined)
+//=&amp;gt; Left(&#39;need an int&#39;)
+
+fmap(function(x){return x+1;}, Right(2))
+//=&amp;gt; Right(3)
+
+fmap(function(x){return x+1;}, Left(&#39;need an int&#39;))
+//=&amp;gt; Left(&#39;need an int&#39;)
+
+compose(fmap(f), Either(error))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;future-values:84395a4544571503aa2619881045cc3a&#34;&gt;Future Values&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;ll have to come back to this one later when I use it more.&lt;/p&gt;
+
+&lt;h3 id=&#34;functor:84395a4544571503aa2619881045cc3a&#34;&gt;Functor&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Something that implements &lt;strong&gt;map&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Like Promise, Maybe, Either, etc.&lt;/p&gt;
+
+&lt;h3 id=&#34;nesting:84395a4544571503aa2619881045cc3a&#34;&gt;Nesting&lt;/h3&gt;
+
+&lt;p&gt;Use mjoin (flatMap &amp;ndash; bilby.js) to flatten nesting.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var getField = compose(Maybe, document.querySelector)
+var getValue = compose(Maybe, pluck(&#39;value&#39;))
+
+var greet = compose(fmap(fmap(concat(&#39;hello&#39;)))
+                    , fmap(getValue), getField)
+greet(&#39;#name&#39;)
+//=&amp;gt; Maybe(Maybe(&#39;hello chris&#39;))
+
+var greet = compose(fmap(concat(&#39;hello&#39;))
+                    , mjoin
+                    , fmap(getValue), getField)
+greet(&#39;#name&#39;)
+//=&amp;gt; Maybe(&#39;hello chris&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;mutiple-values-lifta2:84395a4544571503aa2619881045cc3a&#34;&gt;Mutiple Values (liftA2)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;liftA2(f, A(x), A(y))
+
+liftA2(add, Maybe(3), Maybe(4))
+//=&amp;gt; Maybe(7)
+
+liftA2(add, Maybe(null), Maybe(4))
+//=&amp;gt; Maybe(null)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;examples:84395a4544571503aa2619881045cc3a&#34;&gt;Examples&lt;/h3&gt;
+
+&lt;h4 id=&#34;lenses-1:84395a4544571503aa2619881045cc3a&#34;&gt;Lenses&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var L = makeLenses([&#39;body&#39;, &#39;viewed&#39;])
+var comment = {id:2, body: &amp;quot;this is a *great* post&amp;quot;, viewed: false}
+var showOnScreen = log
+var prog = compose(showOnScreen, set(L.viewed, true), over(L.body, markdown))
+prog(comment)
+//=&amp;gt; {id:2, body: &#39;&amp;lt;p&amp;gt;this is a &amp;lt;em&amp;gt;great&amp;lt;/em&amp;gt; post!&amp;lt;/p&amp;gt;&#39;, viewed: true}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;either-maybe:84395a4544571503aa2619881045cc3a&#34;&gt;Either/Maybe&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var getWords = compose(Either(&#39;you need some words&#39;)
+               , match(/\w+/g))
+var showCount = compose(concat(&#39;The count is: &#39;)
+                , pluck(&#39;length&#39;))
+var prog = compose(fmap(showCount), getWords)
+var result = progr(&#39; blah &#39;)
+log(result)
+//=&amp;gt; Right(&#39;The count is: 1&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;These notes came from the video below:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/DrBoolean/patterns_talk&#34;&gt;The full slides are also available.&lt;/a&gt;&lt;/p&gt;
+
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;//www.youtube.com/embed/AvgwKjTPMmM&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

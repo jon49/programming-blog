@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vb.Net on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/vb/index.net/</link>
+    <description>Recent content in Vb.Net on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Feb 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/vb.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Attempted to Read or Write Protected Memory</title>
+      <link>http://localhost:1313/2013/02/12/attempted_to_read_or_write_protected_memory/</link>
+      <pubDate>Tue, 12 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/02/12/attempted_to_read_or_write_protected_memory/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been working on switching over to a &amp;ldquo;new&amp;rdquo; machine (more on that in a new post). In the process my time card program stopped working with the following error:&lt;/p&gt;
+
+&lt;blockquote&gt;System.AccessViolationException was unhandled
+Message: Attempted to read or write protected memory.
+This is often an indication that other memory is corrupt.&lt;/blockquote&gt;
+
+&lt;p&gt;Unfortunately this error doesn&amp;rsquo;t show up until well after it occurs. So you need to make some educated guesses as to where it is coming from. So what I did is I just commented out code one at a time in the procedure where it was originating from. The code that was shown to be problematic was called from two different places - so the error occurred only from one of the branches but not the other. So that was a bit confusing. It was also confusing because it didn&amp;rsquo;t happen on my Windows XP computer, just on the &amp;ldquo;new&amp;rdquo; Windows 8 computer.&lt;/p&gt;
+
+&lt;p&gt;Eventually I figured out (with help from &lt;a href=&#34;http://stackoverflow.com/q/8779557/632495&#34;&gt;StackOverflow&lt;/a&gt;) that it was caused by changing the values of my drop down list during the click event of the combo box.&lt;/p&gt;
+
+&lt;p&gt;To fix the problem, &lt;a href=&#34;http://support.microsoft.com/kb/952544&#34;&gt;Microsoft&lt;/a&gt; recommends that you don&amp;rsquo;t change the values of the combo box during the event. So, I added a &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/h1c2h276(v=vs.85).aspx&#34;&gt;timer component&lt;/a&gt; to the form. The timer allows you to call a function in the future after completing other operations. I also use a timer in the Scribble Filter preview box when someone selects multiple lines on the form - so Excel doesn&amp;rsquo;t go crazy will I&amp;rsquo;m selected the corresponding rows.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Excel Queries</title>
+      <link>http://localhost:1313/2012/12/03/excel_queries/</link>
+      <pubDate>Mon, 03 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/03/excel_queries/</guid>
+      <description>&lt;p&gt;I came across some nice libraries to use while programming to query
+Excel. Right now I’m am using the standard COM interface for my
+projects, which is fine for small ranges (which is true for most users –
+I would assume). But for large ranges I would need something more
+powerful.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/paulyoder/LinqToExcel#readme&#34;&gt;LinqToExcel&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;LinqToExcel appears to be a great project for using a Linq interface to
+query Excel (but not write to Excel). It uses ADO under the hood to do
+the actual queries. This is great if you are using Excel 2007 or newer,
+but for 2003 and older you run into the problem of &lt;a href=&#34;http://support.microsoft.com/kb/319998&#34;&gt;memory leaks when
+you query an open Excel
+document&lt;/a&gt; (which is what I
+usually do, I haven’t needed to get data from a closed document before)
+– &lt;a href=&#34;http://www.ozgrid.com/forum/showthread.php?t=37398&#34;&gt;see also&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Another problem I have found with this project is that if you need to
+interact with an Excel 64-bit install &lt;a href=&#34;https://github.com/paulyoder/LinqToExcel#x64-support&#34;&gt;you will need to download extra
+software on the users
+computer&lt;/a&gt;. Not a
+huge deal, just extra work. I would imagine that you would be able to
+find code online that would help you automate the build process for you
+code for the two versions you would need to do. Currently I just rebuild
+the installer for x86 and x64 (one installer installs to 64-bit program
+folder, the other to 32-bit program folder).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://epplus.codeplex.com/&#34;&gt;EPPlus&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;EPPlus is another method to query and write to Excel (&lt;a href=&#34;http://stackoverflow.com/a/9072296/632495&#34;&gt;and supposedly
+faster&lt;/a&gt;). It only works with
+xml based Excel files though. So, EPPlus might be a nice library to use
+in the future if I decide to drop support for Excel 2003 and lower. But
+one of the nice things about &lt;a href=&#34;http://netoffice.codeplex.com/&#34;&gt;NetOffice&lt;/a&gt;
+is that it is capable with working with older versions of excel.&lt;/p&gt;
+
+&lt;p&gt;LinqToExcel2D&lt;/p&gt;
+
+&lt;p&gt;This is a project I’m thinking about starting. I’ve done some work on it
+already. I would just need to clean it up and make it work as nice as
+LinqToExcel. It would be slower than both projects mentioned above, but,
+when you are working on small datasets it would come in handy.&lt;/p&gt;
+
+&lt;p&gt;I’ve read one of the best ways to learn how to code and improve your
+skills is by reading other people’s code. This would be a great
+opportunity for me to do just that!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>XML Comments</title>
+      <link>http://localhost:1313/2012/08/27/xml_comments/</link>
+      <pubDate>Mon, 27 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/08/27/xml_comments/</guid>
+      <description>&lt;p&gt;Comment headers above procedures can be convenient when you want to know
+what a function does and what the parameters are for – especially if
+they weren’t named with enough description. Luckily Visual Studio
+provides a way to do these comments easily and it gives you intellisense
+for your own functions! They are called &lt;a href=&#34;http://msdn.microsoft.com/en-us/magazine/dd722812.aspx&#34;&gt;XML
+comments&lt;/a&gt;. All
+you need to do is put in three comment markers (‘) and then it will fill
+in everything for you (if you already have the procedure/parameters
+filled in).&lt;/p&gt;
+
+&lt;p&gt;Here’s an example:&lt;/p&gt;
+
+&lt;p&gt;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+| &lt;code&gt;{.vbnet style=&amp;quot;font-family:monospace;&amp;quot;}                              |
+|     &#39;&#39;&#39; &amp;lt;summary&amp;gt;                                                        |
+|     &#39;&#39;&#39; Search sorted 2D array.                                          |
+|     &#39;&#39;&#39; &amp;lt;/summary&amp;gt;                                                       |
+|     &#39;&#39;&#39; &amp;lt;param name=&amp;quot;oaArray&amp;quot;&amp;gt;Array to search.&amp;lt;/param&amp;gt;                   |
+|     &#39;&#39;&#39; &amp;lt;param name=&amp;quot;IsEqual&amp;quot;&amp;gt;Predicate determining equality (-1 - less  |
+| than, 0 - equal, 1 - greater than)&amp;lt;/param&amp;gt;                               |
+|     &#39;&#39;&#39; &amp;lt;param name=&amp;quot;iSearchColumnIndex&amp;quot;&amp;gt;Sorted column to search.&amp;lt;/param |
+| &amp;gt;                                                                        |
+|     &#39;&#39;&#39; &amp;lt;returns&amp;gt;First index of item or negative value before where the  |
+| value would be located.&amp;lt;/returns&amp;gt;                                        |
+|     &#39;&#39;&#39; &amp;lt;remarks&amp;gt;Jon Nyman @ www.SpreadsheetBudget.com 120507            |
+|     &#39;&#39;&#39; Source:https://en.wikipedia.org/wiki/Binary_search_algorithm#Def |
+| erred_detection_of_equality &amp;lt;/remarks&amp;gt;                                   |
+|     &amp;lt;Extension()&amp;gt;                                                        |
+|     Public Function BinarySearch(ByRef oaArray(,) As Object _            |
+|                                  , ByVal IsEqual As Func(Of Object, Inte |
+| ger) _                                                                   |
+|                                  , ByVal iSearchColumnIndex As Integer)  |
+| As Integer                                                               |
+|&lt;/code&gt;                                                                      |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Here’s how the intellisense would look:&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.spreadsheetbudget.com/wp-content/uploads/2012/08/XMLCommentPopUp.jpg&#34;&gt;&lt;img src=&#34;http://www.spreadsheetbudget.com/wp-content/uploads/2012/08/XMLCommentPopUp.jpg&#34; alt=&#34;&#34; title=&#34;XML Comment Intellisense&#34; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;XML Comment Intellisense&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Algorithm Resources</title>
+      <link>http://localhost:1313/2012/07/16/algorithm_resources/</link>
+      <pubDate>Mon, 16 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/07/16/algorithm_resources/</guid>
+      <description>&lt;p&gt;&lt;h3&gt;Introduction&lt;/h3&gt;
+I was reading through Code Complete a classic coding book &lt;a href=&#34;http://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670/ref=sr_1_1?ie=UTF8&amp;amp;qid=1342466735&amp;amp;sr=8-1&amp;amp;keywords=code+complete&#34;&gt;&lt;em&gt;that is widely considered one of the best practical guides to programming, Steve McConnell’s original CODE COMPLETE has been helping developers write better software for more than a decade&lt;/em&gt;&lt;/a&gt;. And he mentioned algorithm books. What, there exists algorithm books? You mean I don&amp;rsquo;t need to come up with this code all by myself? Combined with the internet to figure out what exactly these algorithms are called, they could be a huge help.
+&lt;h3&gt;Resources&lt;/h3&gt;
+So here is a list of &lt;a href=&#34;http://stackoverflow.com/questions/366418/resources-and-tutorials-to-get-started-on-algorithms&#34;&gt;resources for algorithms is over at StackOverflow&lt;/a&gt;. You can also &lt;a href=&#34;http://www.freetechbooks.com/algorithms-and-data-structures-f11.html&#34;&gt;find free books online&lt;/a&gt;. &lt;a href=&#34;http://en.wikipedia.org/wiki/List_of_algorithms&#34;&gt;Wikipedia even has a list of algorithms&lt;/a&gt;. &lt;a href=&#34;http://en.wikibooks.org/wiki/Algorithms&#34;&gt;And wikibooks has a well formed book on the subject&lt;/a&gt;.
+&lt;h3&gt;Application&lt;/h3&gt;
+So let&amp;rsquo;s see some old code compared to the cleaner new code I grabbed from an algorithm:
+&lt;h4&gt;Old code&lt;/h4&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;    Public Function FindIndexSorted(ByRef oaArray(,) As Object, ByVal IsEqual As Func(Of Object, Integer), ByVal iSearchIndex As Integer) As Integer
+
+        Dim iResult As Integer = 0, iTest As Integer, iNext As Integer
+        Dim iUpperSearch As Integer = oaArray.GetUpperBound(0)
+        Dim iLowerSearch As Integer = 0
+        Dim iPrevious As Integer = -1
+
+        Try
+            If IsEqual(oaArray(0, iSearchIndex)) &amp;amp;lt; 0 Then &#39;If value is the less than the first index then skip                 Return -1             ElseIf IsEqual(oaArray(iUpperSearch, iSearchIndex)) &amp;amp;gt; 0 Then &#39;If it is greater than the last index then skip
+                Return -(iUpperSearch + 1)
+            Else
+                iResult = -1
+            End If
+
+            &#39;Find start indexes
+            Do While iResult = -1
+                iNext = (iUpperSearch + iLowerSearch) \ 2 &#39;Get new search location
+                iTest = IsEqual(oaArray(iNext, iSearchIndex))
+                If iTest &amp;amp;gt; 0 Then &#39;Get new lower search location
+                    iLowerSearch = iNext
+                ElseIf iTest &amp;amp;lt; 0 Then &#39;Get new upper search location                     iUpperSearch = iNext                 Else &#39;If equal find first instance of item                     iResult = iNext - 1                     If iResult &amp;amp;gt; -1 Then
+                        Do While IsEqual(oaArray(iResult, iSearchIndex)) = 0
+                            iResult -= 1
+                            If iResult = -1 Then Exit Do
+                        Loop
+                    End If
+                    iResult += 1
+                End If
+                If iPrevious = iNext Then &#39;Get first item
+                    If IsEqual(oaArray(iLowerSearch, iSearchIndex)) &amp;amp;lt; 0 Then Return -(iLowerSearch - 1)
+                    iTest = IsEqual(oaArray(iUpperSearch, iSearchIndex))
+                    If iTest &amp;amp;lt; 0 Then
+                        Return -(iUpperSearch - 1)
+                    ElseIf iTest = 0 Then
+                        Return iUpperSearch
+                    End If
+                Else
+                    iPrevious = iNext
+                End If
+            Loop
+        Catch ex As InvalidCastException
+            iResult = -1
+        End Try
+
+        Return iResult
+
+    End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;New Cleaner Code&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;https://en.wikipedia.org/wiki/Binary_search_algorithm#Deferred_detection_of_equality
+
+    Public Function BinarySearch(ByRef oaArray(,) As Object, ByVal IsEqual As Func(Of Object, Integer) _
+                                , ByVal iSearchColumnIndex As Integer) As Integer
+
+        Dim iMin = 0, iMax = oaArray.GetUpperBound(0)
+
+        &#39;// continually narrow search until just one element remains
+        Do While iMin &amp;amp;lt; iMax
+            Dim iMid = CInt(Math.Floor((iMin + iMax) / 2))
+
+            &#39;// code must guarantee the interval is reduced at each iteration
+            Debug.Assert(iMid &amp;amp;lt; iMax)
+            &#39;// note: 0  0 Then
+                    iMin += 1
+                End If
+            End If
+            Return -iMin
+        End If
+
+    End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Generic Types</title>
+      <link>http://localhost:1313/2012/06/18/generic_types/</link>
+      <pubDate>Mon, 18 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/06/18/generic_types/</guid>
+      <description>&lt;p&gt;Last time we went over &lt;a href=&#34;2012/06/07/overloading-in-vb-net/&#34;&gt;Overloading&lt;/a&gt; function in .NET. Today we&amp;rsquo;ll take a look at &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/w256ka79.aspx&#34;&gt;generics&lt;/a&gt;. I had been wondering how to do this for some time, seeing that I could do it with Microsoft&amp;rsquo;s built in code. I have to say, it is pretty nice and really makes coding much easier and cleaner.&lt;/p&gt;
+
+&lt;blockquote&gt;A generic type is a single programming element that adapts to perform the same functionality for a variety of data types. When you define a generic class or procedure, you do not have to define a separate version for each data type for which you might want to perform that functionality.&lt;/blockquote&gt;
+
+&lt;p&gt;So take a look at this code where I parse data from Excel and put it into a class. I put it into any class I want to.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;Loop through items and send to action, e.g., put into a class, using function.
+&amp;lt;Extension()&amp;gt;
+Public Function Parse(Of TSource)(ByRef oArray(,) As Object, ByVal conversion As Func(Of Object(), TSource), ByVal iRowStart As Integer _
+                                    , ByVal iRowEnd As Integer, ByVal iColStart As Integer _
+                                    , ByVal iColEnd As Integer) As TSource()
+    Try
+        Dim tArray(iRowEnd - iRowStart) As TSource
+        Dim o1Array(iColEnd - iColStart) As Object
+
+        For i As Integer = iRowStart To iRowEnd
+            For j As Integer = iColStart To iColEnd
+                o1Array(j - iColStart) = oArray(i, j)
+            Next
+            tArray(i) = conversion(o1Array)
+        Next
+
+        Return tArray
+
+    Catch ex As System.IndexOutOfRangeException
+        Throw New System.IndexOutOfRangeException
+    End Try
+
+End Function&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here&amp;rsquo;s how I would call it. Here I get the date range in the time card and put that information in my class that organizes the time card date information. The enumeration &lt;i&gt;CSettings.BUTimeCardHeadings&lt;/i&gt; tells me where the heading is located in Excel so I don&amp;rsquo;t have to remember the actual column. When I grab the data, Excel-DNA puts it in zero-based two dimensional array, hence the minus 1.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Dim oaDates = moaJobs.FindAllSorted(mdteDate.ToOADate(), CSettings.BUTimeCardHeadings.tcDate - 1)
+    AddCItems(oaDates _
+                  .Parse(Of CItem)(Function(o) _
+                  New CItem( _
+                      CastOrDefault(Of Double)(o(CSettings.BUTimeCardHeadings.tcHours - 1), 0.0#) _
+                      , CastOrDefault(Of Double)(o(CSettings.BUTimeCardHeadings.tcClockIn - 1), 0.0#) _
+                      , If(Not IsNothing(o(CSettings.BUTimeCardHeadings.tcJob - 1)) Or TypeOf o(CSettings.BUTimeCardHeadings.tcJob - 1) Is ExcelError _
+                           , o(CSettings.BUTimeCardHeadings.tcJob - 1).ToString, vbNullString))))&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overloading in VB.NET</title>
+      <link>http://localhost:1313/2012/06/07/overloading_in_vb_net/</link>
+      <pubDate>Thu, 07 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/06/07/overloading_in_vb_net/</guid>
+      <description>&lt;p&gt;In previous posts I showed how you can use &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/&#34;&gt;Extensions&lt;/a&gt; and &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/14/lambda-expressions-an-introduction/&#34;&gt;Lambda Expressions&lt;/a&gt; to make some pretty versatile functions in .NET. Today I&amp;rsquo;ll show a method that really helps for the readability and organization of your code.&lt;/p&gt;
+
+&lt;p&gt;In the past we used optional parameters to make a function do multiple things. We even needed to make new functions that did pretty much the same thing in order to make it better organized. Well, now we can avoid using those by &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/ms973896.aspx&#34;&gt;overloading the functions&lt;/a&gt;. I still use optional parameters and even new functions but this has been greatly reduced by the ability to overload.&lt;/p&gt;
+
+&lt;p&gt;Overloading pretty much works just by writing the same procedure two or more times with different parameters or return values. If you put the procedure in a class you have to use the term &amp;ldquo;Overloads&amp;rdquo; in the declaration of the procedure.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s how it looks when you call it on your screen when typing out the function name:&lt;/p&gt;
+
+&lt;p&gt;[pic name=&amp;ldquo;Overload.png&amp;rdquo;]&lt;/p&gt;
+
+&lt;p&gt;So here&amp;rsquo;s some code that uses overloading:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Public Function FindIndexSorted(ByRef oaArray(,) As Object, ByVal IsEqual As Func(Of Object, Integer), ByVal iSearchIndex As Integer) As Integer
+
+    Dim iResult As Integer = 0, iTest As Integer, iNext As Integer
+    Dim iUpperSearch As Integer = oaArray.GetUpperBound(0)
+    Dim iLowerSearch As Integer = 0
+    Dim iPrevious As Integer = -1
+
+    Try
+        If IsEqual(oaArray(0, iSearchIndex)) &amp;amp;lt; 0 Then &#39;If value is the less than the first index then skip                 Return -1             ElseIf IsEqual(oaArray(iUpperSearch, iSearchIndex)) &amp;amp;gt; 0 Then &#39;If it is greater than the last index then skip
+            Return -(iUpperSearch + 1)
+        Else
+            iResult = -1
+        End If
+
+        &#39;Find start indexes
+        Do While iResult = -1
+            iNext = (iUpperSearch + iLowerSearch) \ 2 &#39;Get new search location
+            iTest = IsEqual(oaArray(iNext, iSearchIndex))
+            If iTest &amp;amp;gt; 0 Then &#39;Get new lower search location
+                iLowerSearch = iNext
+            ElseIf iTest &amp;amp;lt; 0 Then &#39;Get new upper search location                     iUpperSearch = iNext                 Else &#39;If equal find first instance of item                     iResult = iNext - 1                     If iResult &amp;amp;gt; -1 Then
+                    Do While IsEqual(oaArray(iResult, iSearchIndex)) = 0
+                        iResult -= 1
+                        If iResult = -1 Then Exit Do
+                    Loop
+                End If
+                iResult += 1
+            End If
+            If iPrevious = iNext Then &#39;Get first item
+                If IsEqual(oaArray(iLowerSearch, iSearchIndex)) &amp;amp;lt; 0 Then Return -(iLowerSearch - 1)
+                iTest = IsEqual(oaArray(iUpperSearch, iSearchIndex))
+                If iTest &amp;amp;lt; 0 Then
+                    Return -(iUpperSearch - 1)
+                ElseIf iTest = 0 Then
+                    Return iUpperSearch
+                End If
+            Else
+                iPrevious = iNext
+            End If
+        Loop
+    Catch ex As InvalidCastException
+        iResult = -1
+    End Try
+
+    Return iResult
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here&amp;rsquo;s some code that makes the previous function easier to use, but I still have the previous code exposed so, if I want some custom when I call the function I could use it, or I could just use the simplified version below, all with the same name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Public Function FindIndexSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer
+
+    If TypeOf oWhat Is Double Then  &#39;Use double type comparison.
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndexSorted(oaArray, Function(a As Object) If(CDbl(a) &amp;amp;gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)), iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  &#39;Use string type comparison.
+        Dim sWhat As String = oWhat.ToString
+        Return FindIndexSorted(oaArray, Function(a As Object) String.Compare(CStr(a), sWhat, eStringCompare), iSearchIndex)
+    ElseIf IsNumeric(oWhat) Then
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndexSorted(oaArray, Function(a As Object) If(CDbl(a) &amp;amp;gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)), iSearchIndex)
+    Else
+        &#39;Not set up for other types of data.
+        Return -1
+    End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lambda Expressions</title>
+      <link>http://localhost:1313/2012/04/14/lambda_expressions_an_introduction/</link>
+      <pubDate>Sat, 14 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/04/14/lambda_expressions_an_introduction/</guid>
+      <description>&lt;p&gt;Another thing that I like about programming in .NET beyond &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/11/linq-an-introduction/&#34;&gt;LINQ&lt;/a&gt; and &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/&#34;&gt;Extensions&lt;/a&gt; is &lt;a href=&#34;http://msdn.microsoft.com/en-us/magazine/cc163362.aspx&#34;&gt;lambda expressions&lt;/a&gt;. (It should be noted that LINQ, Extensions, and lambda expressions are all related). Lambda expressions are &amp;ldquo;are callable entities that are defined within a function, you can return a lambda expression from a function and you can pass lambda expressions to other functions.&amp;rdquo; Lambda expressions come with the System.Core library, so no need to add a reference nor Imports at the top of your class.&lt;/p&gt;
+
+&lt;p&gt;Lambda expressions simplify your code by allowing you to call internal functions within functions, even create &amp;ldquo;function variables.&amp;rdquo; To get a full overview read the link on &lt;a href=&#34;http://msdn.microsoft.com/en-us/magazine/cc163362.aspx&#34;&gt;lambda expressions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take the &lt;a href=&#34;http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/&#34;&gt;extension examples&lt;/a&gt; I used before, but simplify it with lambda expressions. Before I had to create multiple private functions to accommodate different comparison types (e.g., String, Double, Object, etc). But with lambda expressions I can create local functions that take care of this, which lessons the amount of code and makes the code cleaner.&lt;/p&gt;
+
+&lt;p&gt;So let’s dive into some code. First I needed to create a delegate function which accepts multiple types of input and returns an integer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Delegate Function MoreLessOrEqual(Of T)(ByVal element As T) As Integer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I then created a pointer function which determines which internal function I should use depending on what type of data is received. Notice the lambda expressions written as &lt;code&gt;Function(a As Object)….&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&amp;lt;Extension()&amp;gt;
+Public Function FindIndex2DSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer
+
+    If TypeOf oWhat Is Double Then  &#39;Use double type comparison.
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndex2DSortedLambda(oaArray, Function(a As Object) If(CDbl(a) &amp;gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)) _
+                                , iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  &#39;Use string type comparison.
+        Dim sWhat As String = oWhat.ToString
+        Return FindIndex2DSortedLambda(oaArray, Function(a As Object) String.Compare(CStr(a), sWhat, eStringCompare) _
+                                , iSearchIndex)
+    Else    &#39;Not set up for other types of data.
+        Return -1
+    End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this private function I call the lambda expressions as defined in the function parameters as &lt;code&gt;IsEqual.&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private Function FindIndex2DSortedLambda(ByVal oaArray As Object(,), ByVal IsEqual As MoreLessOrEqual(Of Object) _
+                            , ByVal iSearchIndex As Integer) As Integer                                                            
+
+    Dim i As Integer, lUpperSearch As Integer, lLowerSearch As Integer, lPrevious As Integer, lNext As Integer
+
+    lUpperSearch = oaArray.GetUpperBound(0) : lLowerSearch = 0 : lPrevious = -1
+
+    If IsEqual(oaArray(0, iSearchIndex)) &amp;lt; 0 Then &#39;If value is the less than the first index then skip
+        Return -1
+    ElseIf IsEqual(oaArray(lUpperSearch, iSearchIndex)) &amp;gt; 0 Then &#39;If it is greater than the last index then skip
+        Return -3
+    Else
+        i = -1
+    End If
+
+    &#39;Find start indexes
+    Dim iResult As Integer
+    Do While i = -1
+        lNext = (lUpperSearch + lLowerSearch) \ 2 &#39;Get new search location
+        iResult = IsEqual(oaArray(lNext, iSearchIndex))
+        If iResult &amp;gt; 0 Then &#39;Get new lower search location
+            lLowerSearch = lNext
+        ElseIf iResult &amp;lt; 0 Then &#39;Get new upper search location
+            lUpperSearch = lNext
+        Else &#39;If equal find first instance of item
+            i = lNext - 1
+            Do While IsEqual(oaArray(i, iSearchIndex)) = 0
+                i -= 1
+            Loop
+            i += 1
+        End If
+        If lPrevious = lNext Then &#39;Get first item
+            For i = lLowerSearch To lUpperSearch
+                If IsEqual(oaArray(i, iSearchIndex)) = 0 Then
+                    Return i
+                End If
+            Next
+            Return -2
+        Else
+            lPrevious = lNext
+        End If
+    Loop
+
+    Return i
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that I could make the private function the a public extension. By doing that I could then easily create more elaborate searches, e.g., I could search for the index of a string with the first three letters equal to “ABC” like below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Dim sWhat As String = oWhat.ToString.Substring(0, 3)
+Return FindIndex2DSortedLambda(oaArray, Function(a As Object) String.Compare(a.ToString.Substring(0, 3), sWhat, eStringCompare) _
+    , iSearchIndex)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linq: An Introduction</title>
+      <link>http://localhost:1313/2012/04/11/linq_an_introduction/</link>
+      <pubDate>Wed, 11 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/04/11/linq_an_introduction/</guid>
+      <description>&lt;p&gt;Another thing that I like about programming in VB.NET beyond &lt;a href=&#34;2012/04/05/extensions-in-vb-net/&#34;&gt;Extensions&lt;/a&gt; is &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/bb308959.aspx&#34;&gt;LINQ&lt;/a&gt;. LINQ is similar to &lt;a href=&#34;http://en.wikipedia.org/wiki/Sql&#34;&gt;SQL&lt;/a&gt; in structure - which is &amp;ldquo;a &lt;a href=&#34;http://en.wikipedia.org/wiki/Declarative_programming&#34;&gt;declarative programming&lt;/a&gt; paradigm that expresses the logic of a computation without describing its control flow.&amp;rdquo; So LINQ takes declarative paradigm and applies it to &lt;a href=&#34;http://en.wikipedia.org/wiki/Object-oriented_programming&#34;&gt;object oriented programming&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s so great about this? Well, it does slow the program down, but it speeds up the the programming process, puts the information in a form that is more descriptive (although that is no excuse not to thoroughly comment your code), and makes programming easier.&lt;/p&gt;
+
+&lt;p&gt;So, for the updating program for the time card I am working on, I put the updating version control document in an XML document.  The structure of the document is at the bottom of this post. To query this document using LINQ I have the following code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&#39;Get version number string from specified item ID.
+Dim sNewVersion = _
+        (From oItem In mXML...
+        Where oItem.@id = sItemID).&amp;lt;Version&amp;gt;.Value
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How simple is that? You can imagine as more complex situations arise how simple the declarative language makes it. Yes, there is the learning hurdle, but once you get over it, it makes working with data much easier to work with. You can even use LINQ with classes, arrays, etc. I&amp;rsquo;m just scratching the surface of how powerful LINQ truly is.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Extensions in VB.NET</title>
+      <link>http://localhost:1313/2012/04/05/extensions_in_vb_net/</link>
+      <pubDate>Thu, 05 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/04/05/extensions_in_vb_net/</guid>
+      <description>&lt;p&gt;Learning how to use VB.NET can be quite the leap from VBA, but once you start learning VB.NET and have much more control it’s difficult to want to go back to VBA.&lt;/p&gt;
+
+&lt;p&gt;One of the things that I like about VB.NET is methods. Extensions allow you to extend data type methods. So, let’s say you have a String data type (Strings in VB.NET are like a class in and of themselves) and you want it to have the method of appending “]” at the end. So you would have an extension method like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&amp;lt;Extension()&amp;gt;
+Public Function AppendCloseBracket(ByRef sString As String) As String
+    Return sString &amp;amp; &amp;quot;]&amp;quot;
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then to use it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private Sub UseAppendMethod()
+
+    Dim sString As String = &amp;quot;Hello&amp;quot;
+
+    Debug.Print(sString.AppendCloseBracket)
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which would result in:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Hello]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to create extionsions you need to import the library:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Imports System.Runtime.CompilerServices
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So, how about a more practical example. Through Linq (which is like extensions but much more powerful) you have many more powerful things you can do, which will probably be the topic of a post in the future. But Linq doesn’t do everything and you need a 1D array. So, in the example below I could have created a 1D array instead and then done it with Linq.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;&amp;lt;Extension()&amp;gt;
+Public Function FindIndex2DSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer                              
+
+    If TypeOf oWhat Is Double Then &#39;Find index for double type
+        Return FindIndex2DSortedDouble(oaArray, CDbl(oWhat), iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  &#39;Find index for string type
+        Return FindIndex2DSortedString(oaArray, CStr(oWhat), iSearchIndex, eStringCompare)
+    Else &#39;Find index for object type
+        Return FindIndex2DSortedObject(oaArray, oWhat, iSearchIndex)
+    End If
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vbscript&#34;&gt;Private Function FindIndex2DSortedDouble(ByVal oaArray As Object(,), ByVal dWhat As Double _
+                                         , ByVal iSearchIndex As Integer) As Integer                                        
+
+    Dim i As Integer, lUpperSearch As Integer, lLowerSearch As Integer, lPrevious As Integer, lNext As Integer
+
+    lUpperSearch = oaArray.GetUpperBound(0) : lLowerSearch = 0 : lPrevious = -1
+    If dWhat &amp;lt; CDbl(oaArray(0, iSearchIndex)) Then &#39;If value is the less than the first index then skip
+        Return -1
+    ElseIf dWhat &amp;gt; CDbl(oaArray(lUpperSearch, iSearchIndex)) Then &#39;If it is greater than the last index then skip
+        Return -3
+    Else
+        i = -1
+    End If
+
+    &#39;Find start indexes
+    Do While i = -1
+        lNext = (lUpperSearch + lLowerSearch) \ 2 &#39;Get new search location
+        If CDbl(oaArray(lNext, iSearchIndex)) &amp;lt; dWhat Then &#39;Get new lower search location
+            lLowerSearch = lNext
+        ElseIf CDbl(oaArray(lNext, iSearchIndex)) &amp;gt; dWhat Then &#39;Get new upper search location
+            lUpperSearch = lNext
+        Else &#39;If equal find first instance of item
+            i = lNext - 1
+            Do While CDbl(oaArray(i, iSearchIndex)) = dWhat
+                i -= 1
+            Loop
+            i += 1
+        End If
+        If lPrevious = lNext Then &#39;Get first item
+            For i = lLowerSearch To lUpperSearch
+                If dWhat = CDbl(oaArray(i, iSearchIndex)) Then
+                    Return i
+                End If
+            Next
+            Return -2
+        Else
+            lPrevious = lNext
+        End If
+    Loop
+
+    Return i
+
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,178 @@
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>A Class Made from a Shaped Recordset</title>
+  <meta name="description" content="A Class Made from a Shaped Recordset">
+  <meta name="author" content="Jon Nyman">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.css">
+  
+  
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+  <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/highlight/styles/default.css">
+  
+  <script src="http://localhost:1313/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+
+<div class="header pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="/" class="site-title pure-menu-heading">Hamsters Byte</a>
+            <ul class="pure-menu-list">
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about/" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Hamsters Byte</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2012-05-11</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="http://localhost:1313/tags/code">code</a> <a href="http://localhost:1313/tags/shaped-recordset">shaped-recordset</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>A Class Made from a Shaped Recordset</h1>
+            </div>
+
+            <div class="post-content">
+                <p>Here&rsquo;s some fun code that I worked on a while back. This disconnected record set is what you call a shaped record set, created on the fly. It is a pretty complex class all wrapped in one nice little bundle. Unfortunately it goes terribly slow. Creating a class with the <a href="http://msdn.microsoft.com/en-us/library/aa164502(v=office.10).aspx">dictionary object</a> in the <a href="http://msdn.microsoft.com/en-us/library/aa164509(v=office.10).aspx">Scripting Runtime Object Library</a> should be the fastest, if you&rsquo;re looking for speed.</p>
+
+<p>Pretty crazy looking code, but pretty elegant once you get used to looking at code like that, unfortunately it&rsquo;s not very using for creating classes on the fly, or even instead of regular classes (It would make making classes a synch!).</p>
+
+<p>For more information on this topic see:
+<a href="http://msdn.microsoft.com/en-us/library/aa241635(v=vs.60).aspx">http://msdn.microsoft.com/en-us/library/aa241635(v=vs.60).aspx</a><br /><a href="http://msdn.microsoft.com/en-us/library/aa260841(v=vs.60).aspx">http://msdn.microsoft.com/en-us/library/aa260841(v=vs.60).aspx</a><br /><a href="http://www.4guysfromrolla.com/webtech/060301-1.shtml">http://www.4guysfromrolla.com/webtech/060301-1.shtml</a></p>
+
+<pre><code class="language-vbscript">grsLSData.Open &quot;SHAPE APPEND New adInteger AS LSID, New adVarChar(20) AS Name_LS, &quot; &amp; _
+            &quot;SUM(RowData.RowSeatsFilled) AS LSSeatsFilled, SUM(RowData.RowSeatsCount) AS LSSeatsCount,&quot; &amp; _
+        &quot;((SHAPE APPEND New adInteger AS LSID, New adInteger AS RowID, New adVarChar(10) AS Name_Row, &quot; &amp; _
+            &quot;SUM(SeatData.EventsSeatFilled) AS RowSeatsFilled, SUM(SeatData.EventsSeatCount) AS RowSeatsCount, &quot; &amp; _
+        &quot;((SHAPE APPEND New adInteger AS RowID, New adInteger AS SeatID, New adVarChar(10) AS Name_Seat, &quot; &amp; _
+            &quot;SUM(EventSeatData.Filled) AS EventsSeatFilled, COUNT(EventSeatData.Name_EventCode) AS EventsSeatCount, &quot; &amp; _
+        &quot;((SHAPE APPEND New adInteger AS SeatID, New adVarChar(10) AS Name_EventCode, &quot; &amp; _
+            &quot;New adVarChar(2) AS Status, New adDouble AS Color, New adInteger AS Filled, New adInteger AS Custom) &quot; &amp; _
+        &quot;RELATE SeatID to SeatID) AS EventSeatData) &quot; &amp; _
+        &quot;RELATE RowID to RowID) AS SeatData) &quot; &amp; _
+        &quot;RELATE LSID TO LSID) AS RowData &quot;, , adOpenStatic, adLockOptimistic
+</code></pre>
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="pure-menu pure-menu-horizontal footer-content">
+            <ul>
+                <li class="pure-menu-heading" id="foot-name">Jon Nyman:</li>
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://github.com/jon49" class="pure-menu-link">GitHub</a>
+                </li>
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://www.linkedin.com/in/eenyman" class="pure-menu-link">LinkedIn</a>
+                </li>
+                
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://twitter.com/NymanJon" class="pure-menu-link">Twitter</a>
+                </li>
+                
+
+            </ul>
+            <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+        </div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="http://localhost:1313/js/jquery.min.js" type="text/javascript"></script>
+<script src="http://localhost:1313/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+

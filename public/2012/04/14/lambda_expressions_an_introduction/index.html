@@ -1,0 +1,249 @@
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>Lambda Expressions</title>
+  <meta name="description" content="Lambda Expressions">
+  <meta name="author" content="Jon Nyman">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.css">
+  
+  
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+  <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/highlight/styles/default.css">
+  
+  <script src="http://localhost:1313/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+
+<div class="header pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="/" class="site-title pure-menu-heading">Hamsters Byte</a>
+            <ul class="pure-menu-list">
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about/" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Hamsters Byte</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                
+                
+                <li class="pure-menu-item">
+                    <a href="http://localhost:1313/about" class="pure-menu-link">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2012-04-14</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="http://localhost:1313/tags/vb.net">vb.net</a> <a href="http://localhost:1313/tags/extensions">extensions</a> <a href="http://localhost:1313/tags/code">code</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>Lambda Expressions</h1>
+            </div>
+
+            <div class="post-content">
+                <p>Another thing that I like about programming in .NET beyond <a href="http://www.spreadsheetbudget.com/2012/04/11/linq-an-introduction/">LINQ</a> and <a href="http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/">Extensions</a> is <a href="http://msdn.microsoft.com/en-us/magazine/cc163362.aspx">lambda expressions</a>. (It should be noted that LINQ, Extensions, and lambda expressions are all related). Lambda expressions are &ldquo;are callable entities that are defined within a function, you can return a lambda expression from a function and you can pass lambda expressions to other functions.&rdquo; Lambda expressions come with the System.Core library, so no need to add a reference nor Imports at the top of your class.</p>
+
+<p>Lambda expressions simplify your code by allowing you to call internal functions within functions, even create &ldquo;function variables.&rdquo; To get a full overview read the link on <a href="http://msdn.microsoft.com/en-us/magazine/cc163362.aspx">lambda expressions</a>.</p>
+
+<p>Let&rsquo;s take the <a href="http://www.spreadsheetbudget.com/2012/04/05/extensions-in-vb-net/">extension examples</a> I used before, but simplify it with lambda expressions. Before I had to create multiple private functions to accommodate different comparison types (e.g., String, Double, Object, etc). But with lambda expressions I can create local functions that take care of this, which lessons the amount of code and makes the code cleaner.</p>
+
+<p>So let’s dive into some code. First I needed to create a delegate function which accepts multiple types of input and returns an integer.</p>
+
+<pre><code>Delegate Function MoreLessOrEqual(Of T)(ByVal element As T) As Integer
+</code></pre>
+
+<p>I then created a pointer function which determines which internal function I should use depending on what type of data is received. Notice the lambda expressions written as <code>Function(a As Object)….</code></p>
+
+<pre><code class="language-vbscript">&lt;Extension()&gt;
+Public Function FindIndex2DSorted(ByRef oaArray(,) As Object, ByVal oWhat As Object _
+                                  , Optional ByVal iSearchIndex As Integer = 0 _
+                                  , Optional ByVal eStringCompare _
+                                  As StringComparison = StringComparison.CurrentCulture) As Integer
+
+    If TypeOf oWhat Is Double Then  'Use double type comparison.
+        Dim dWhat As Double = CDbl(oWhat)
+        Return FindIndex2DSortedLambda(oaArray, Function(a As Object) If(CDbl(a) &gt; dWhat, -1, If(CDbl(a) = dWhat, 0, 1)) _
+                                , iSearchIndex)
+    ElseIf TypeOf oWhat Is String Then  'Use string type comparison.
+        Dim sWhat As String = oWhat.ToString
+        Return FindIndex2DSortedLambda(oaArray, Function(a As Object) String.Compare(CStr(a), sWhat, eStringCompare) _
+                                , iSearchIndex)
+    Else    'Not set up for other types of data.
+        Return -1
+    End If
+
+End Function
+</code></pre>
+
+<p>In this private function I call the lambda expressions as defined in the function parameters as <code>IsEqual.</code></p>
+
+<pre><code class="language-vbscript">Private Function FindIndex2DSortedLambda(ByVal oaArray As Object(,), ByVal IsEqual As MoreLessOrEqual(Of Object) _
+                            , ByVal iSearchIndex As Integer) As Integer                                                            
+
+    Dim i As Integer, lUpperSearch As Integer, lLowerSearch As Integer, lPrevious As Integer, lNext As Integer
+
+    lUpperSearch = oaArray.GetUpperBound(0) : lLowerSearch = 0 : lPrevious = -1
+
+    If IsEqual(oaArray(0, iSearchIndex)) &lt; 0 Then 'If value is the less than the first index then skip
+        Return -1
+    ElseIf IsEqual(oaArray(lUpperSearch, iSearchIndex)) &gt; 0 Then 'If it is greater than the last index then skip
+        Return -3
+    Else
+        i = -1
+    End If
+
+    'Find start indexes
+    Dim iResult As Integer
+    Do While i = -1
+        lNext = (lUpperSearch + lLowerSearch) \ 2 'Get new search location
+        iResult = IsEqual(oaArray(lNext, iSearchIndex))
+        If iResult &gt; 0 Then 'Get new lower search location
+            lLowerSearch = lNext
+        ElseIf iResult &lt; 0 Then 'Get new upper search location
+            lUpperSearch = lNext
+        Else 'If equal find first instance of item
+            i = lNext - 1
+            Do While IsEqual(oaArray(i, iSearchIndex)) = 0
+                i -= 1
+            Loop
+            i += 1
+        End If
+        If lPrevious = lNext Then 'Get first item
+            For i = lLowerSearch To lUpperSearch
+                If IsEqual(oaArray(i, iSearchIndex)) = 0 Then
+                    Return i
+                End If
+            Next
+            Return -2
+        Else
+            lPrevious = lNext
+        End If
+    Loop
+
+    Return i
+
+End Function
+</code></pre>
+
+<p>Note that I could make the private function the a public extension. By doing that I could then easily create more elaborate searches, e.g., I could search for the index of a string with the first three letters equal to “ABC” like below.</p>
+
+<pre><code class="language-vbscript">Dim sWhat As String = oWhat.ToString.Substring(0, 3)
+Return FindIndex2DSortedLambda(oaArray, Function(a As Object) String.Compare(a.ToString.Substring(0, 3), sWhat, eStringCompare) _
+    , iSearchIndex)
+</code></pre>
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="pure-menu pure-menu-horizontal footer-content">
+            <ul>
+                <li class="pure-menu-heading" id="foot-name">Jon Nyman:</li>
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://github.com/jon49" class="pure-menu-link">GitHub</a>
+                </li>
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://www.linkedin.com/in/eenyman" class="pure-menu-link">LinkedIn</a>
+                </li>
+                
+
+                
+
+                
+                <li class="pure-menu-item">
+                    <a href="https://twitter.com/NymanJon" class="pure-menu-link">Twitter</a>
+                </li>
+                
+
+            </ul>
+            <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+        </div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="http://localhost:1313/js/jquery.min.js" type="text/javascript"></script>
+<script src="http://localhost:1313/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+

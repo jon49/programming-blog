@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cool Code on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/cool-code/</link>
+    <description>Recent content in Cool Code on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Dec 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/cool-code/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Excel Queries</title>
+      <link>http://localhost:1313/2012/12/03/excel_queries/</link>
+      <pubDate>Mon, 03 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2012/12/03/excel_queries/</guid>
+      <description>&lt;p&gt;I came across some nice libraries to use while programming to query
+Excel. Right now I’m am using the standard COM interface for my
+projects, which is fine for small ranges (which is true for most users –
+I would assume). But for large ranges I would need something more
+powerful.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/paulyoder/LinqToExcel#readme&#34;&gt;LinqToExcel&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;LinqToExcel appears to be a great project for using a Linq interface to
+query Excel (but not write to Excel). It uses ADO under the hood to do
+the actual queries. This is great if you are using Excel 2007 or newer,
+but for 2003 and older you run into the problem of &lt;a href=&#34;http://support.microsoft.com/kb/319998&#34;&gt;memory leaks when
+you query an open Excel
+document&lt;/a&gt; (which is what I
+usually do, I haven’t needed to get data from a closed document before)
+– &lt;a href=&#34;http://www.ozgrid.com/forum/showthread.php?t=37398&#34;&gt;see also&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Another problem I have found with this project is that if you need to
+interact with an Excel 64-bit install &lt;a href=&#34;https://github.com/paulyoder/LinqToExcel#x64-support&#34;&gt;you will need to download extra
+software on the users
+computer&lt;/a&gt;. Not a
+huge deal, just extra work. I would imagine that you would be able to
+find code online that would help you automate the build process for you
+code for the two versions you would need to do. Currently I just rebuild
+the installer for x86 and x64 (one installer installs to 64-bit program
+folder, the other to 32-bit program folder).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://epplus.codeplex.com/&#34;&gt;EPPlus&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;EPPlus is another method to query and write to Excel (&lt;a href=&#34;http://stackoverflow.com/a/9072296/632495&#34;&gt;and supposedly
+faster&lt;/a&gt;). It only works with
+xml based Excel files though. So, EPPlus might be a nice library to use
+in the future if I decide to drop support for Excel 2003 and lower. But
+one of the nice things about &lt;a href=&#34;http://netoffice.codeplex.com/&#34;&gt;NetOffice&lt;/a&gt;
+is that it is capable with working with older versions of excel.&lt;/p&gt;
+
+&lt;p&gt;LinqToExcel2D&lt;/p&gt;
+
+&lt;p&gt;This is a project I’m thinking about starting. I’ve done some work on it
+already. I would just need to clean it up and make it work as nice as
+LinqToExcel. It would be slower than both projects mentioned above, but,
+when you are working on small datasets it would come in handy.&lt;/p&gt;
+
+&lt;p&gt;I’ve read one of the best ways to learn how to code and improve your
+skills is by reading other people’s code. This would be a great
+opportunity for me to do just that!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

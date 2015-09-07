@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Education on Hamsters Byte</title>
+    <link>http://localhost:1313/tags/education/</link>
+    <description>Recent content in Education on Hamsters Byte</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 16 Jan 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/education/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>RSS for Old Blog Posts</title>
+      <link>http://localhost:1313/2013/01/16/rss_for_old_blog_posts/</link>
+      <pubDate>Wed, 16 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2013/01/16/rss_for_old_blog_posts/</guid>
+      <description>&lt;p&gt;One of the nice to haves on my list is a way to read old blog posts via RSS. I&amp;rsquo;ve found that it is really easy to read someone&amp;rsquo;s old material on their blog if it is drip fed to me. Well, after a little searching on the internet I found &lt;a href=&#34;http://www.streamspigot.com/feed-playback/&#34;&gt;Stream Spigot&amp;rsquo;s Feed Playback&lt;/a&gt;. Now I can enjoy someone&amp;rsquo;s old posts without having to remember to go back every other day or once every week.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
